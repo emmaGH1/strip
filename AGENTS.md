@@ -23,3 +23,6 @@ User instruction (2026-11-08): always use GPT-6.1 Terra with high reasoning for 
 
 ## Verification
 Run domain tests, typecheck, formatter/lint, framework doctor and production build. Inspect real rendered UI with local Playwright/Chromium (do not use preview tools unasked). Never call tests/build proof of humour or usability. Save evidence and failures in docs/CURRENT_STATE.md. Commit only task files; do not push, merge or deploy. Stop at the end of the assigned task and report.
+
+## Serving the app (since 2026-11-08 ~17:00 UTC)
+The production app runs in the Docker container `strip-app` (node:22, host network, port 8080, restart unless-stopped, env from .env), next to the `strip-pg` Postgres container. Agent-session processes were being killed, so the old /tmp supervisor is obsolete. After `pnpm build`, run `docker restart strip-app`. Logs: `docker logs strip-app`. Never print .env values.
