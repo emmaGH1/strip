@@ -1,4 +1,29 @@
-# Current state — 2026-11-08 · design-probe browser verification
+# Current state — 2026-11-08 · M1 implementation and bounded browser verification
+
+## Built on `build/app`
+
+- Signed-in `/home` is now the minimal Library: owner/workspace-scoped `list-strips`, rendered comic thumbnails and New strip. `/home?new=1` is compose, reached from the landing CTA (including auth continuation), Studio and Library. The existing shell/real AgentSidebar stays mounted.
+- Compose has the large What shipped? source field, illustrative-input disclosure, editable Ari/Sam names and traits, and Pencil it. Optional validated `draft.cast` persists the requested names/traits; historical strips retain default cast. New composition still uses the real `sendToAgentChat` → agent → `create-strip` path; without AI it honestly opens setup/prefill, never submits or substitutes an example.
+- Genuine submitted draft requests are correlated to their framework thread; only an actually working thread displays the empty 2×2 halftone/sketch page. Revision working treatment is similarly tied to the real selected panel/thread. These live AI states remain unverified: no AI generation request was authorized or made.
+- Studio page now scales to available height (observed **720×720 CSS px at 1440×900**, exceeding the 640px target). Context actions track the selected SVG object and flip below near the top. Ask opens an anchored primitive popover with chips + free text and sends the selection, panel and `expectedRevision` through the existing real handoff. Desktop and phone open state is separate to avoid duplicate portals.
+- Ending alternatives use the actual renderer with an exact panel-4 viewport **and explicit SVG clipping**; viewport-only cropping initially leaked neighbouring art under aspect-ratio letterboxing and was fixed after inspecting screenshots. Labels are preserved; phone options are 260px horizontal scrolling panels.
+- Facts → panels groups only exact, non-empty source excerpts with depicting panel buttons; fictional set-up is one quiet separate sentence. Names/traits appear in Script. This is source attribution, not external verification of claims.
+- Agent changes now appears in the framework desk's supported footer slots with linked element labels and Ink / Erase. Existing durable pencils/review mutation, protection, trusted actor and atomic compare-and-swap paths remain intact. New draft items have no prior value and cannot be erased. Phone panel taps open a cropped, enlarged single-panel view with Edit / Agent / Script below and a panel pager/full-page return.
+
+## Verification / honest limits
+
+- **PASS:** `pnpm test` **40 tests**, `pnpm typecheck`, changed-task-file oxfmt check, `pnpm agent-native:doctor`, and `pnpm build`. No standalone lint script exists. Existing vendor/source-map/chunk warnings remain. The existing Docker `strip-app` was restarted after each build; no push or public production deployment.
+- Two bounded Terra/high local Playwright Chromium runs used two fresh disposable accounts and only their own illustrative/seeded records. No other accounts, credentials, provider connection or AI turn. Viewports 1440×900 / 390×844, not physical phones.
+- **Browser PASS:** landing/auth → compose; Studio/Library New strip links; cast input and setup-only compose handoff (`submit:false`, `openSidebar:true`); selection-aware handoff including expectedRevision; settled desktop balloon Ask with one visible portal; direct edit, protect/unprotect and reload persistence; second-ending selection persistence; focused phone panel with sheet; 260px ending scroller (scrollLeft 0 → 442); 390px document width/no page overflow on observed compose, Studio and Library. No observed JavaScript page errors.
+- **Scripted, not model-driven:** one ordinary authenticated HTTP action on the test account's own unprotected item produced durable blue-pencil state, Agent changes 1 and visible Ink / Erase. Those buttons were observed, not clicked in this run; engine review accept/revert semantics remain covered by unit tests. No new claim of model-driven protection or stale-write integration verification.
+- **Evidence gaps:** phone inline Ask remains unverified/no `selection-ask-phone.png`: automation targeted a panel-1 balloon while panel 2 was focused. Final `endings-desktop.png` catches the heading but not the thumbnails, so final desktop crop visual QA is incomplete (clip paths structurally checked; phone crop visually inspected and clean). Two sessions were inadvertently closed before recovering those captures. These are test failures, not proof of product defects. No fabricated in-flight screenshot: skipped because no real AI request ran.
+- **Remaining product/acceptance limits:** full real-AI draft/revise/protected-line/export demo is still blocked on an approved connected test account; human humour/usability and physical-phone review remain open. Phone Agent uses the existing framework overlay, not an embedded in-sheet conversation. The context bar may overlap page title/art above the selected object. No new PNG export smoke was run in M1; shared renderer/export path is retained.
+- Inspected evidence: `docs/evidence/m1/{compose-desktop,compose-phone,studio-desktop,selection-ask-desktop,review-desktop,studio-phone,phone-focused-panel,endings-phone,library-desktop,library-phone}.png`. `endings-desktop.png` is incomplete framing, not final tray proof. Full observations/errors: `docs/evidence/m1/verification.md`.
+- Preserved pre-staged `README.md`, `assets/icon.svg`, untracked `.env.example`, existing research and all other accounts/data.
+
+---
+
+# Prior state — 2026-11-08 · design-probe browser verification
 
 ## Terra/high browser lane — design probe
 

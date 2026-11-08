@@ -62,7 +62,7 @@ export default function Poster() {
             Pencilled by your agent. Inked by you.
           </p>
           <Button className="print-button" asChild>
-            <a href="/sign-in">
+            <a href="/home?new=1">
               Make a strip <ArrowRight size={20} />
             </a>
           </Button>

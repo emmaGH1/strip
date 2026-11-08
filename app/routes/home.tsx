@@ -28,9 +28,13 @@ import {
   Smile,
   PersonStanding,
   Eraser,
+  Plus,
+  LibraryBig,
+  X,
 } from "lucide-react";
 import {
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -39,6 +43,7 @@ import {
 } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 
+import { Library } from "@/components/home/Library";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -60,6 +65,12 @@ import {
   type Edit,
   type Strip,
 } from "../../shared/strip";
+import {
+  cropPanel,
+  draftRequest,
+  selectionAnchor,
+  sourceCoverage,
+} from "../../shared/studio";
 
 export function meta() {
   return [
@@ -95,6 +106,15 @@ export default function Home() {
   const [exporting, setExporting] = useState(false);
   const [source, setSource] = useState("");
   const [illustrative, setIllustrative] = useState(false);
+  const [castDraft, setCastDraft] = useState({
+    ari: { name: cast.ari.name as string, role: cast.ari.role as string },
+    sam: { name: cast.sam.name as string, role: cast.sam.role as string },
+  });
+  const [askText, setAskText] = useState("");
+  const [askOpen, setAskOpen] = useState(false);
+  const [phoneAskOpen, setPhoneAskOpen] = useState(false);
+  const [phoneFocus, setPhoneFocus] = useState(false);
+  const [anchor, setAnchor] = useState({ left: 200, top: 100, flip: true });
   const [editing, setEditing] = useState(false);
   const [line, setLine] = useState("");
   const [phoneTab, setPhoneTab] = useState("edit");
@@ -105,6 +125,12 @@ export default function Home() {
     threadId?: string;
   }>();
   const { workingThreadIds } = useAgentChatRunningThreads();
+  const drafting =
+    !id &&
+    agentRequest?.stripId === "" &&
+    Boolean(
+      agentRequest.threadId && workingThreadIds.has(agentRequest.threadId),
+    );
   const workingPanelId =
     agentRequest?.stripId === id &&
     agentRequest.threadId &&
@@ -187,21 +213,48 @@ export default function Home() {
             const preview = structuredClone(strip);
             preview.draft.panels[3]!.balloons.slice(-1)[0]!.text = text;
             // Same renderer, cropped to the actual alternative fourth panel.
-            return renderStripSvg(preview, assets, measure).svg.replace(
-              'viewBox="0 0 1200 1200"',
-              'viewBox="600 640 570 510"',
-            );
+            return cropPanel(renderStripSvg(preview, assets, measure).svg, 3);
           })
         : [],
     [strip, assets, measure],
   );
   const panelNumber = strip.draft.panels.indexOf(selectedPanel) + 1;
   const selectionLabel = selectedBalloon
-    ? `${cast[selectedBalloon.speaker].name}'s line`
+    ? `${(strip.draft.cast ?? cast)[selectedBalloon.speaker].name}'s line`
     : selectedActor
-      ? cast[selectedActor.character].name
+      ? (strip.draft.cast ?? cast)[selectedActor.character].name
       : `Panel ${panelNumber}`;
   const pencils = Object.entries(strip.pencils ?? {});
+  const coverage = sourceCoverage(strip.draft);
+  const people = strip.draft.cast ?? cast;
+  const focusedSvg = rendered ? cropPanel(rendered.svg, panelNumber - 1) : "";
+  useLayoutEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas || !isSaved) return;
+    const position = () => {
+      const element = Array.from(
+        canvas.querySelectorAll<SVGGraphicsElement>("[data-object]"),
+      ).find((el) => el.getAttribute("data-object") === selectedId);
+      if (!element) return;
+      const rect = element.getBoundingClientRect();
+      const page = canvas.getBoundingClientRect();
+      setAnchor(
+        selectionAnchor(
+          {
+            x: rect.x - page.x,
+            y: rect.y - page.y,
+            width: rect.width,
+            height: rect.height,
+          },
+          page.width,
+        ),
+      );
+    };
+    position();
+    const observer = new ResizeObserver(position);
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, [selectedId, rendered?.svg, isSaved]);
   useEffect(() => {
     loadSceneAssets()
       .then(setAssets)
@@ -278,6 +331,7 @@ export default function Home() {
     if (objectId) {
       e.preventDefault();
       select(objectId);
+      if (window.matchMedia("(max-width: 700px)").matches) setPhoneFocus(true);
     }
   }
   async function edit(edits: Edit[]) {
@@ -311,11 +365,11 @@ export default function Home() {
   function askAgent(request: string) {
     setPhoneTab("agent");
     const submitId = crypto.randomUUID();
-    if (isSaved && engine.canChat)
+    if (engine.canChat)
       setAgentRequest({
         submitId,
-        stripId: strip.id,
-        panelId: selectedPanel.id,
+        stripId: isSaved ? strip.id : "",
+        panelId: isSaved ? selectedPanel.id : "",
       });
     sendToAgentChat({
       submitMessageId: submitId,
@@ -413,18 +467,31 @@ export default function Home() {
       <div className="rail-rule" />
       <p className="eyebrow">FACTS → PANELS</p>
       <ol className="claims-list">
-        {strip.draft.panels.map((p, i) => (
-          <li key={p.id}>
-            <button onClick={() => select(p.id)}>
-              <span className="panel-number">0{i + 1}</span>
-              <span>{p.sourceQuote || "Fictional dialogue / visual beat"}</span>
-            </button>
+        {coverage.facts.map((fact) => (
+          <li key={fact.quote}>
+            <p>{fact.quote}</p>
+            <div className="fact-panels">
+              {fact.panels.map((number) => (
+                <button
+                  key={number}
+                  onClick={() => select(strip.draft.panels[number - 1]!.id)}
+                  className="panel-number"
+                >
+                  Panel {number}
+                </button>
+              ))}
+            </div>
           </li>
         ))}
       </ol>
+      {coverage.fictional.length > 0 && (
+        <p className="fiction-note">
+          Panels {coverage.fictional.join(", ")} are fictional set-up.
+        </p>
+      )}
       <div className="rail-rule" />
       <p className="eyebrow">THE CAST</p>
-      {Object.entries(cast).map(([key, person]) => (
+      {Object.entries(people).map(([key, person]) => (
         <div className="cast-person" key={key}>
           <img src={`/peeps/${key}-happy-standing.svg`} alt="" />
           <div>
@@ -440,7 +507,7 @@ export default function Home() {
       </p>
     </section>
   );
-  const contextBar = (
+  const contextBar = (phone = false) => (
     <div className="context-bar" aria-label="Selection actions">
       <span className="selection-label">{selectionLabel}</span>
       <Button
@@ -516,14 +583,22 @@ export default function Home() {
         <Shield size={16} />
         {directProtection ? "Unprotect" : "Protect"}
       </Button>
-      <Popover>
+      <Popover
+        open={phone ? phoneAskOpen : askOpen}
+        onOpenChange={phone ? setPhoneAskOpen : setAskOpen}
+      >
         <PopoverTrigger asChild>
           <Button variant="ghost" size="sm" className="agent-action">
             <MessageSquare size={16} />
             Ask agent
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="ask-popover">
+        <PopoverContent
+          className="ask-popover"
+          side={anchor.flip ? "bottom" : "top"}
+          align="center"
+          sideOffset={10}
+        >
           <p className="eyebrow">A NOTE FOR THE AGENT</p>
           <div className="option-list">
             {["Funnier", "Shorter", "More innocent", "Show the feature"].map(
@@ -531,31 +606,47 @@ export default function Home() {
                 <Button
                   variant="outline"
                   key={chip}
-                  onClick={() => revise(chip)}
+                  onClick={() => setAskText(chip)}
                 >
                   {chip}
                 </Button>
               ),
             )}
           </div>
-          <Button
-            variant="ghost"
-            onClick={() => {
-              setPhoneTab("agent");
-              sendToAgentChat({
-                message: `Revise ${selectionLabel}: `,
-                context: JSON.stringify({
-                  stripId: strip.id,
-                  selectedId,
-                  expectedRevision: strip.revision,
-                }),
-                submit: false,
-                openSidebar: true,
-              });
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!askText.trim()) return;
+              revise(askText.trim());
+              setAskOpen(false);
+              setPhoneAskOpen(false);
             }}
           >
-            Write your own note <ArrowRight size={16} />
-          </Button>
+            <label htmlFor={phone ? "phone-selection-ask" : "selection-ask"}>
+              About {selectionLabel}
+            </label>
+            <Textarea
+              id={phone ? "phone-selection-ask" : "selection-ask"}
+              value={askText}
+              onChange={(e) => setAskText(e.target.value)}
+              maxLength={600}
+              placeholder="Keep my line, but make the reaction drier…"
+              rows={3}
+              required
+            />
+            <Button
+              type="submit"
+              disabled={!askText.trim() || Boolean(workingPanelId)}
+            >
+              Send to agent <ArrowRight size={16} />
+            </Button>
+            {!engine.canChat && (
+              <p className="setup-note">
+                No AI connected. Opens your note in the real desk without
+                submitting.
+              </p>
+            )}
+          </form>
         </PopoverContent>
       </Popover>
     </div>
@@ -675,6 +766,7 @@ export default function Home() {
         <Link to="/home">Back to Strip</Link>
       </main>
     );
+  if (!isSaved && !params.has("new")) return <Library assets={assets} />;
   if (!isSaved)
     return (
       <main className="new-strip">
@@ -682,27 +774,54 @@ export default function Home() {
           <Link className="strip-wordmark" to="/">
             Strip<span>.</span>
           </Link>
-          <span>THE DRAWING BOARD</span>
+          <span>NEW STRIP</span>
+          <Button variant="ghost" asChild>
+            <Link to="/home">
+              <LibraryBig size={16} /> Library
+            </Link>
+          </Button>
           <Button variant="ghost" onClick={requestAgentSidebarOpen}>
             <MessageSquare size={16} />
             Agent
           </Button>
         </header>
-        <section className="new-strip-body">
+        {drafting && (
+          <section
+            className="drafting-page"
+            role="status"
+            aria-label="Agent pencilling your strip"
+          >
+            <p>
+              <PencilLine size={20} /> The agent is pencilling your page…
+            </p>
+            <div className="pencil-page">
+              {[1, 2, 3, 4].map((n) => (
+                <div className="pencil-panel" key={n}>
+                  <span>0{n}</span>
+                  <svg viewBox="0 0 300 240" aria-hidden="true">
+                    <path d="M24 32h180m-180 12h150M45 185q12-100 60-18l18 40m35-6q-18-90 45-95M30 220h240" />
+                  </svg>
+                </div>
+              ))}
+            </div>
+            <p>The real request is running in the agent’s desk.</p>
+          </section>
+        )}
+        <section className="new-strip-body" hidden={drafting}>
           <p className="eyebrow">START WITH SOMETHING REAL.</p>
-          <h1>What’s the update?</h1>
+          <h1>What shipped?</h1>
           <p>
             Bring one small product change. We’ll give it a little character.
           </p>
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              askAgent(
-                `Make a four-panel comic from this ${illustrative ? "illustrative" : "user-provided"} product update. Use create-strip, then show it in Studio. Keep claims within this source, distinguish fictional dialogue, include a wordless visual beat.\nSOURCE:\n${source}`,
-              );
+              askAgent(draftRequest(source, illustrative, castDraft));
             }}
           >
-            <label htmlFor="new-source">Product update</label>
+            <label htmlFor="new-source">
+              What shipped? · The source update
+            </label>
             <Textarea
               id="new-source"
               value={source}
@@ -720,12 +839,51 @@ export default function Home() {
               />
               This is an illustrative update
             </label>
+            <fieldset className="compose-cast">
+              <legend>The cast</legend>
+              <p>Two fictional characters. Give them your kind of chemistry.</p>
+              <div className="compose-cast-grid">
+                {(["ari", "sam"] as const).map((key) => (
+                  <div className="compose-person" key={key}>
+                    <img src={`/peeps/${key}-happy-standing.svg`} alt="" />
+                    <div>
+                      <label htmlFor={`${key}-name`}>Name</label>
+                      <Input
+                        id={`${key}-name`}
+                        value={castDraft[key].name}
+                        maxLength={30}
+                        required
+                        onChange={(e) =>
+                          setCastDraft({
+                            ...castDraft,
+                            [key]: { ...castDraft[key], name: e.target.value },
+                          })
+                        }
+                      />
+                      <label htmlFor={`${key}-trait`}>Trait</label>
+                      <Input
+                        id={`${key}-trait`}
+                        value={castDraft[key].role}
+                        maxLength={120}
+                        required
+                        onChange={(e) =>
+                          setCastDraft({
+                            ...castDraft,
+                            [key]: { ...castDraft[key], role: e.target.value },
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </fieldset>
             <Button
               className="print-button"
-              disabled={!source.trim()}
+              disabled={source.trim().length < 5 || drafting}
               type="submit"
             >
-              Let’s pencil it <ArrowRight size={18} />
+              Pencil it <PencilLine size={18} />
             </Button>
           </form>
           {engine.missing && (
@@ -746,7 +904,7 @@ export default function Home() {
       </main>
     );
   return (
-    <main className="studio">
+    <main className="studio" data-phone-focus={phoneFocus ? "true" : undefined}>
       <header className="studio-topbar">
         <Link className="strip-wordmark" to="/home">
           Strip<span>.</span>
@@ -773,6 +931,18 @@ export default function Home() {
           </span>
         </div>
         <div className="topbar-actions">
+          <Button variant="ghost" size="sm" asChild aria-label="Library">
+            <Link to="/home">
+              <LibraryBig size={16} />
+              <span className="nav-label">Library</span>
+            </Link>
+          </Button>
+          <Button variant="ghost" size="sm" asChild aria-label="New strip">
+            <Link to="/home?new=1">
+              <Plus size={16} />
+              <span className="nav-label">New strip</span>
+            </Link>
+          </Button>
           <Button
             variant="ghost"
             className="caption-button"
@@ -801,6 +971,39 @@ export default function Home() {
           {error || notice}
         </div>
       )}
+      {phoneFocus && (
+        <section className="phone-focus">
+          <div className="focus-heading">
+            <span>Panel {panelNumber} of 4</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setPhoneFocus(false)}
+            >
+              <X size={16} /> Full page
+            </Button>
+          </div>
+          <div
+            className="strip-canvas focused-canvas"
+            onClick={canvasClick}
+            onKeyDown={canvasClick}
+            dangerouslySetInnerHTML={{ __html: focusedSvg }}
+          />
+          <div className="focus-pager">
+            {strip.draft.panels.map((panel, index) => (
+              <Button
+                key={panel.id}
+                variant={index === panelNumber - 1 ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => select(panel.id)}
+                aria-label={`Focus panel ${index + 1}`}
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </div>
+        </section>
+      )}
       <div className="studio-grid">
         <aside className="script-rail">{script}</aside>
         <section className="drawing-desk">
@@ -811,8 +1014,17 @@ export default function Home() {
               <span className="pencil-key">┄ Agent pencil</span>
             </div>
           </div>
-          <div className="desktop-context">{contextBar}</div>
           <div className="artboard-wrap">
+            <div
+              className="desktop-context"
+              style={{
+                left: anchor.left,
+                top: anchor.top,
+                transform: `translate(-50%, ${anchor.flip ? "0" : "-100%"})`,
+              }}
+            >
+              {contextBar()}
+            </div>
             <div
               className="strip-canvas artboard"
               ref={canvasRef}
@@ -918,7 +1130,7 @@ export default function Home() {
             <TabsTrigger value="script">Script</TabsTrigger>
           </TabsList>
           <TabsContent value="edit">
-            {contextBar}
+            {contextBar(true)}
             {editControls}
           </TabsContent>
           <TabsContent value="agent">
@@ -930,7 +1142,7 @@ export default function Home() {
         </Tabs>
       </section>
       <section className="agent-change-log">
-        <h2>From the agent’s pencil</h2>
+        <h2>Agent changes</h2>
         {pencils.length ? (
           pencils.map(([key, proposal]) => (
             <div className="change-entry" key={key}>

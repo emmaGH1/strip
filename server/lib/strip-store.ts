@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 
 import { fail, type ActionRunContext } from "@agent-native/core/action";
-import { and, eq, isNull } from "drizzle-orm";
+import { and, desc, eq, isNull } from "drizzle-orm";
 
 import {
   StripError,
@@ -37,6 +37,19 @@ function scope(id: string, ctx?: ActionRunContext) {
     eq(strips.ownerEmail, owner(ctx)),
     ctx?.orgId ? eq(strips.orgId, ctx.orgId) : isNull(strips.orgId),
   );
+}
+export async function listStrips(ctx?: ActionRunContext): Promise<Strip[]> {
+  const rows = await getDb()
+    .select({ scene: strips.scene })
+    .from(strips)
+    .where(
+      and(
+        eq(strips.ownerEmail, owner(ctx)),
+        ctx?.orgId ? eq(strips.orgId, ctx.orgId) : isNull(strips.orgId),
+      ),
+    )
+    .orderBy(desc(strips.updatedAt));
+  return rows.map((row) => stripSchema.parse(row.scene));
 }
 export async function getStrip(
   id: string,

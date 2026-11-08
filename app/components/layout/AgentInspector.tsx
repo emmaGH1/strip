@@ -8,6 +8,7 @@ import { useEffect, type ReactNode } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 import { ChatComposerContextProvider } from "@/components/ChatComposerContext";
+import { AgentChanges } from "@/components/home/AgentChanges";
 import { chatThreadPath } from "@/lib/chat-paths";
 import { TAB_ID } from "@/lib/tab-id";
 
@@ -39,6 +40,8 @@ export function AgentInspector({
   return (
     <AgentSidebar
       composerContextProvider={ChatComposerContextProvider}
+      threadFooterSlot={pathname === "/home" ? <AgentChanges /> : undefined}
+      emptyStateFooter={pathname === "/home" ? <AgentChanges /> : undefined}
       position="right"
       defaultSidebarWidth={320}
       chatViewTransition

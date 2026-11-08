@@ -4,7 +4,13 @@ import { describe, expect, it, vi } from "vitest";
 
 import { preparedExamples } from "../../shared/examples.js";
 import type { Strip } from "../../shared/strip.js";
-import { callerActor, getStrip, owner, saveStrip } from "./strip-store.js";
+import {
+  callerActor,
+  getStrip,
+  listStrips,
+  owner,
+  saveStrip,
+} from "./strip-store.js";
 
 const mocks = vi.hoisted(() => ({ where: vi.fn(), rows: [] as unknown[] }));
 vi.mock("../db/index.js", () => ({
@@ -13,7 +19,10 @@ vi.mock("../db/index.js", () => ({
       from: () => ({
         where: (sql: unknown) => {
           mocks.where(sql);
-          return { limit: async () => mocks.rows };
+          return {
+            limit: async () => mocks.rows,
+            orderBy: async () => mocks.rows,
+          };
         },
       }),
     }),
@@ -100,6 +109,16 @@ describe("trusted caller and scoped store boundary", () => {
     await getStrip("one", { caller: "tool", userEmail: "one@example.test" });
     const sql = new PgDialect().sqlToQuery(mocks.where.mock.lastCall![0]);
     expect(sql.sql).toContain('"org_id" is null');
+  });
+  it("scopes the library to the authenticated owner and current workspace", async () => {
+    mocks.rows = [{ scene }];
+    expect(await listStrips(context)).toEqual([scene]);
+    let sql = new PgDialect().sqlToQuery(mocks.where.mock.lastCall![0]);
+    expect(sql.params).toEqual(["one@example.test", "org-one"]);
+    await listStrips({ caller: "frontend", userEmail: "one@example.test" });
+    sql = new PgDialect().sqlToQuery(mocks.where.mock.lastCall![0]);
+    expect(sql.sql).toContain('"org_id" is null');
+    await expect(listStrips()).rejects.toThrow("Sign in");
   });
   it("rejects a lost compare-and-swap and includes the revision predicate", async () => {
     await expect(

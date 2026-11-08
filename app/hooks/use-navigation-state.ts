@@ -31,6 +31,11 @@ export function useNavigationState() {
       ...navigationStateForPath(pathname),
       ...(pathname === HOME_PATH
         ? {
+            view: searchParams.has("id")
+              ? "studio"
+              : searchParams.has("new")
+                ? "compose"
+                : "library",
             stripId: searchParams.get("id") ?? undefined,
             selectedPanelId: searchParams.get("panel") ?? undefined,
             selectedObjectId: searchParams.get("object") ?? undefined,
@@ -103,6 +108,10 @@ function pathForView(view?: string): string {
     case "chat":
     case "ask":
       return NEW_CHAT_PATH;
+    case "compose":
+      return `${HOME_PATH}?new=1`;
+    case "library":
+    case "studio":
     case "home":
       return HOME_PATH;
     case "database":

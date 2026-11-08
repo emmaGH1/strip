@@ -81,6 +81,21 @@ export const draftSchema = z
       .union([z.url().refine((v) => /^https?:\/\//u.test(v)), z.literal("")])
       .default(""),
     inputKind: z.enum(["illustrative", "user-provided"]),
+    cast: z
+      .object({
+        ari: z.object({
+          name: z.string().trim().min(1).max(30),
+          role: z.string().trim().min(1).max(120),
+        }),
+        sam: z.object({
+          name: z.string().trim().min(1).max(30),
+          role: z.string().trim().min(1).max(120),
+        }),
+      })
+      .optional()
+      .describe(
+        "Optional names and fictional traits for the two stable character ids; preserve the user's supplied cast.",
+      ),
     panels: z.array(panelSchema).length(4),
     endings: z.array(dialogueSchema).length(3),
   })
