@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { textMeasurer } from "@/lib/strip-canvas";
 
 import { renderStripSvg, type SceneAssets } from "../../../shared/render-strip";
-import { posterSpecimen } from "./Poster";
+import { posterSpecimen } from "./specimen";
 
 export function Library({ assets }: { assets: SceneAssets | undefined }) {
   const query = useActionQuery("list-strips", {});
