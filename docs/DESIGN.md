@@ -1,19 +1,76 @@
-# Strip visual probe — PROVISIONAL, NOT APPROVED
+# Strip — design direction v1 (owner: Claude Opus, delegated by the human 2026-11-08)
 
-Profile: playful but controlled editorial workbench; warm, tactile, expressive; medium interaction density. Must not feel like an AI chat dashboard or a stock portrait slideshow.
+The proof UI was a 3-hour feasibility test, not a design. This document replaces it. The engine stays (data model, shared actions, protection, compare-and-swap revisions, PNG export). Every surface people see is redesigned.
 
-Motif: inked panel borders and quiet editorial margin notes; the comic itself is the visual evidence. No gradients, glows, fake status dots, decorative metrics or unsolicited social proof.
+## 1. Profile
+- **Product:** a web studio where a person and an agent co-make a 4-panel comic from one product update, for a launch post. Desktop first for the demo; must work well on a phone.
+- **Feeling:** "a comics studio desk": playful but controlled, tactile, confident. Ink on paper, not glass and gradients.
+- **Density:** medium. The comic is always the hero and the controls stay out of its way.
+- **Must not feel like:** an AI chat app with a picture attached, a kids' comic maker, a dark neon dev tool, or a generic SaaS template.
 
-Candidate palette: warm paper #F5F1E9, ink #24211F, tomato #D34B35, pale butter #F1DA91. These are proposal tokens, not approved brand assets. Original two-family proposal superseded by the human-approved lettering fix: DM Sans for app/product UI, Bangers for titles, and Comic Neue Bold for balloon text only. Use real bundled assets/fonts, not runtime CDN dependencies.
+## 2. Signature motif: pencils vs inks
+This comes from real comics production: an artist **pencils** in non-photo blue, then the inker commits in black. Our mapping:
+- **Agent = blue pencil.** Anything the agent proposed or changed renders with a blue-pencil treatment (blue `#3B6FD8` sketch outline, slight hand-drawn dash, a small ✎ mark).
+- **Human = ink.** Anything the person wrote or confirmed is solid black ink.
+- **Protected = a red "MINE" stamp.** A small rotated stamp on the protected element, the agent cannot touch it, and it's enforced in code.
+- **Agent working = panel being pencilled.** While a request runs, the target panel(s) show blue sketch lines over a light halftone fill. This is real state, not decoration: it shows only while a real agent request is in flight.
+- **Review = "ink it or erase it."** After an agent revision, each changed item keeps its blue-pencil look with two small actions, **Ink** (accept) and **Erase** (revert to before). Once inked, it turns black.
 
-Interaction: canvas primary, selection/inspector secondary, compact context-aware agent area. Explicit per-element protection and honest pending/error states. Touch targets >=44px, labels and keyboard accessible controls, clear focus. Desktop 2x2 panel composition; narrow screens may scroll through panels, export remains square. Check phone display of whole exported strip, not only zoomed editor.
+Attribution data already exists (`lastEditedBy`, actor from framework context). The motif simply shows it.
 
-Reference search directions (no reference falsely claimed as approved): newspaper Sunday comic page layout (staging/negative space); comic lettering speech balloon placement (reading order); editorial print proof margin annotations (editor controls). Borrow principles only.
+## 3. Visual system
+- **Palette (tokens):**
+  - paper `#F4EFE6`; paper-2 `#EAE3D6`;
+  - ink `#1A1714`;
+  - signal red `#D2432F` (primary action, MINE stamp);
+  - pencil blue `#3B6FD8` (agent);
+  - butter `#E7B85A` (feature moments, highlights);
+  - muted `#6E665C`.
+  - No gradients. Shadows are hard, offset print shadows only (`3px 3px 0 ink`) on primary interactive surfaces.
+- **Type, two families plus lettering:**
+  - UI and display: **Bricolage Grotesque** (OFL, @fontsource). Display uses tight tracking and heavy weight.
+  - Comic lettering: **Comic Neue Bold**, inside balloons and artwork only.
+  - Drop Bangers and DM Sans.
+- **Scale:** 12/14/16/20/28/44/72. Spacing on a 4px base. Radius 4px on controls; panels and balloons follow comic geometry.
+- **Lines:** 2px ink borders on panels and primary surfaces; 1px muted rules elsewhere. Not everything gets a card.
+- **Icons:** lucide at 1.75 stroke, no rounded-square icon tiles.
 
-Gate: only entry/workspace probes are authorized; do not propagate this visual system before human review. No final logo yet; Strip is a working title, not a selected brand mark.
+## 4. Surfaces (build in this order)
+### A. Landing / entry (the poster)
+- Left: the headline ("Release notes nobody reads? **Ship a strip.**"), one line of support copy, and a primary CTA, **Make a strip**.
+- Right: a **real rendered strip** in a mixed state: one panel still in blue pencil, one balloon with a MINE stamp. That is the product promise at a glance.
+- Below, a single row explaining the loop: *Paste an update → the agent pencils it → you ink it.*
+- Nothing else. It must pass the X-screenshot test.
 
-Probe built on 2026-11-08, revised in the approved follow-up: DM Sans controls/product UI, Comic Neue Bold dialogue, Bangers titles, warm paper and tomato accent. Structured Open Peeps expressions and poses, ink borders, on-screen feature moments, one wordless visual beat. Actual desktop/phone captures and exported artwork are in docs/evidence/proof/. This single provisional execution is NOT an approved brand direction or proof of creative quality. No logo commissioning or wider rollout performed. Human acceptance of art, phone readability and overall taste is pending.
+### B. Studio (the main workspace)
+- **Center: the page.** The strip on an artboard, large. Selection happens directly on the canvas (balloon, character or panel).
+- **Floating context bar** above the selection, with the most common actions:
+  - **Edit** (inline text editing in the balloon);
+  - **Face** (expression picker);
+  - **Pose**;
+  - **Protect / Unprotect** (MINE);
+  - **Ask agent**: opens an inline prompt anchored to the selection, with quick chips (*Funnier · Shorter · More innocent · Show the feature*) plus free text. It sends through the real agent with the selection and revision context.
+- **Left rail, "Script":** the source update (the facts), a claims list showing which panel covers which fact, and the cast (2–3 characters with a name and trait).
+- **Right: the agent's desk.** The real Agent-Native sidebar, restyled to the palette. It shows the conversation, plus a compact log of what the agent changed (each entry links to the element).
+- **Endings tray (after a draft):** three alternative panel-4 thumbnails side by side. Tap one to swap it in.
+- **Top bar:** strip title (editable), Export (PNG + "post caption" copy), library link.
+- **Phone:** the strip on top, a bottom sheet with tabs **Edit · Agent · Script**, and the context bar as a bottom action row.
 
-## Approved follow-up, not broad brand approval
+### C. Library (later, M2)
+A grid of saved strips as small comic thumbnails, with "New strip".
 
-The human approved seven bounded art/UX fixes: a visible feature moment on the laptop; varied editable body poses; smaller rounded balloons with speaker-directed tails; licensed comic dialogue lettering; early introduction of the final speaker; captions off by default; and the real contextual Agent-Native sidebar visible beside the desktop canvas (phone toggle). The prepared Undo example retains “Now add Undo to ‘Sure, Friday works.’” This authorizes these fixes only, not a logo, broad rollout, or a claim of validated humour.
+## 5. States to design for real
+- empty (no strip yet);
+- drafting (panels pencil in as the agent's draft lands; no fake streaming);
+- agent revising (target panel pencilled);
+- review (blue items with Ink / Erase);
+- conflict (a stale write: a calm notice, "Someone changed this, reloaded", with the latest state shown);
+- protected-rejection (the agent tried to change MINE: show the item untouched plus a small note in the agent log);
+- no AI connected (honest setup prompt);
+- export.
+
+## 6. Anti-slop checks
+No gradient, glow, glass, fake status dots, fake metrics, emoji icons or endless cards. Every color has a role: red = act / mine, blue = agent, butter = feature.
+
+## 7. Gate
+The design probe (A + B at desktop and phone) is reviewed by Claude Opus. The human is shown the screenshots but is not blocked on them. Assets stay licensed and bundled: Open Peeps CC0, OFL fonts.
