@@ -1,3 +1,9 @@
+# Final regression attempt — 2026-11-08 · incomplete
+
+- Public landing interactive prepared states were clicked at 1440×900 and tapped at 390×844; a single fresh disposable account reached Library and compose. The automation used the wrong example button selector and closed its ephemeral browser session before recovery; no second account was created. Studio, export, history, filled compose handoff and phone Studio remain **untested**, not product failures. Evidence and exact limitations: `docs/evidence/regression-final/verification.md`.
+
+---
+
 # Final brand + landing rollout — 2026-11-08 · implemented and visually inspected
 
 - **Human-final direction shipped:** round-3 V2 Balloon / cut redrawn as an upright, baseline-aligned custom S **inside** the word `Strip.`; no separate symbol beside the word and no diamond. Bricolage Grotesque 800 `trip` and period are outlined paths; rounded upper sweep and sharp lower guillotine cut, optical 13–16-unit weight and S–t spacing. Retained signal-red period because it reads clearly at header sizes. Paper/ink reversed wordmark and compact S included. Construction/colors/provenance are recorded in `docs/DESIGN.md` §8; offline reproducible export script is `scripts/build-brand-final.mjs` (temporary tooling only).
