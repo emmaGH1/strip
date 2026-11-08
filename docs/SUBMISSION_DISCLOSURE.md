@@ -13,7 +13,7 @@ git log --format='%h %ad %s' --date=iso
 git log --reverse --format='%h' | xargs -n1 git show --stat --oneline
 ```
 
-The timestamps below are git author dates, not independent proof of when work occurred. `docs/PROJECT.md` records a Strip proof start of 2026-11-08 09:53 UTC; git only establishes the first recorded save at 11:19:09 UTC. The scaffold was created before the Strip work, but this history has no separate scaffold-creation commit/date. We do not claim that the framework, its template or bundled libraries were authored for this event.
+The timestamps below are git author dates, not independent proof of when work occurred. `docs/PROJECT.md` records a Strip proof start of 2026-11-08 09:53 UTC; git only establishes the first recorded save at 11:19:09 UTC. **Human statement (2026-11-08):** the Agent-Native scaffold instance and all Strip work were created on **2026-11-08, during the event, after brainstorming began that day**. `assets/icon.svg` was user-staged and is being replaced by a new mark made during the event; three path-only logo concepts are available for the human to choose from, not yet applied to the app. This is the human’s provenance statement, not a creation date independently established by the bulk-save commit. We do not claim that the upstream framework, its template or bundled libraries were authored for this event.
 
 ## Pre-existing material and reused foundation
 
@@ -60,7 +60,7 @@ This documentation task adds the README product/setup/credits, this disclosure, 
 
 **Additional bundled scaffold font:** Geist by the Geist Project Authors is supplied transitively by `@agent-native/toolkit` through `@fontsource-variable/geist@5.3.0` and appears in the production build. Its installed `LICENSE` is SIL OFL 1.1 (copyright 2024 The Geist Project Authors); it is not an original Strip asset.
 
-Simple scene props and prepared illustrative stories are Strip-authored SVG/data in `shared/render-strip.ts` and `shared/examples.ts`. No remote image service or generated-image model supplies comic artwork. Original Strip source has **no declared root project license**; dependency licenses are not a blanket license for it.
+Simple scene props and prepared illustrative stories are Strip-authored SVG/data in `shared/render-strip.ts` and `shared/examples.ts`. No remote image service or generated-image model supplies comic artwork. Original Strip source is licensed under the [MIT License](../LICENSE), copyright 2026 the Strip authors; third-party assets and dependencies retain their own licenses. The new `assets/brand/concept-{a,b,c}/` logo proposals were made during the event from bundled Bricolage Grotesque 800 (OFL), with original stamp/pencil/gutter details and font outlines converted to SVG paths. They do not replace the user-staged icon until the human selects a mark.
 
 ## Direct library inventory
 
@@ -167,7 +167,7 @@ Every direct dependency/devDependency named in the current `package.json` is lis
 
 ## Uncertainties requiring human review
 
-- Git starts with a bulk save; it cannot independently date template creation, original research, the supplied icon/README, or every individual file. Within-window commit dates are reported, not used to conceal pre-existing foundations.
-- The supplied icon's redistribution rights and any separate branding/trademark permissions are not established. No original-project license has been selected.
+- Git starts with a bulk save; it cannot independently date template instantiation, original research, the supplied icon/README, or every individual file. The human’s explicit November 8 event-day creation statement is recorded above; within-window commit dates corroborate saved work but do not independently date each file.
+- The supplied icon's redistribution rights and any separate branding/trademark permissions are not established. The human requested its replacement by a new event-made mark. The MIT root license does not imply rights to third-party trademarks or alter third-party asset licenses.
 - Official requirements are summarized in [JUDGING.md](JUDGING.md) and research in [IDEATION.md](IDEATION.md); section 14 is the agreed proof scope, not a verbatim official rules copy. Recheck the [official rules](https://www.builder.io/hackathon/rules) before submitting; no eligibility ruling is implied here.
 - No genuine model-driven draft/revision or Claude Code model session has been verified. Do not turn scripted fixture evidence into generation claims or imply that technical tests prove humour/usability.

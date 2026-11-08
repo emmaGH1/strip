@@ -34,6 +34,7 @@ import {
 } from "@/lib/chat-paths";
 import { TAB_ID } from "@/lib/tab-id";
 
+import { isPublicEntry } from "../shared/public-entry";
 import { i18nCatalog } from "./i18n";
 
 import stylesheet from "./global.css?url";
@@ -178,7 +179,7 @@ function AppContent() {
           <ThemeToggleItem />
         </CommandMenu.Group>
       </CommandMenu>
-      {location.pathname === "/" ? (
+      {isPublicEntry(location.pathname) ? (
         <Outlet />
       ) : (
         <AppLayout>
@@ -198,12 +199,12 @@ export default function Root() {
     <AppToolkitProvider>
       <AppProviders
         queryClient={queryClient}
-        isPublicPath={pathname === "/"}
+        isPublicPath={isPublicEntry(pathname)}
         defaultTheme="light"
         skeletonLayout={skeletonLayoutForPath(pathname)}
         i18n={{ catalog: i18nCatalog }}
       >
-        {pathname !== "/" ? <DbSyncSetup /> : null}
+        {!isPublicEntry(pathname) ? <DbSyncSetup /> : null}
         <AppContent />
       </AppProviders>
     </AppToolkitProvider>

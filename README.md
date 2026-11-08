@@ -63,7 +63,7 @@ Follow [`docs/MCP_DEMO.md`](docs/MCP_DEMO.md) for the OAuth connection and direc
 - **Inter** remains an installed scaffold font dependency, and the toolkit bundles **Geist** transitively: both OFL-1.1. **DM Sans** and **Bangers** were used in the proof and removed from current dependencies/imports; their [DM Sans](public/licenses/DM-Sans-OFL.txt) and [Bangers](public/licenses/Bangers-OFL.txt) OFL notices remain for provenance.
 - Framework branding assets remain from the scaffold. The user-supplied header icon is preserved, not claimed as an original/approved Strip mark; its provenance/license has not been established.
 
-See [`docs/ASSETS.md`](docs/ASSETS.md) and [`docs/SUBMISSION_DISCLOSURE.md`](docs/SUBMISSION_DISCLOSURE.md) for asset provenance, library licenses and the git-based event-work disclosure. Third-party license notices do not establish a license for original Strip code; no root project license has been declared.
+See [`docs/ASSETS.md`](docs/ASSETS.md) and [`docs/SUBMISSION_DISCLOSURE.md`](docs/SUBMISSION_DISCLOSURE.md) for asset provenance, library licenses and the git-based event-work disclosure. Original Strip source is licensed under the [MIT License](LICENSE), copyright 2026 the Strip authors. Third-party assets and libraries retain their own licenses and notices.
 
 ### Submission preparation
 
