@@ -9,9 +9,9 @@ Strip's **existing framework MCP server** exposes the same validated SQL-backed 
    `https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/mcp`
 3. In your terminal, add the remote OAuth MCP server (no static token or headers):
    ```sh
-   claude mcp add --transport http strip https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/mcp
+   claude mcp add --scope project --transport http strip https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/mcp
    ```
-4. Start/restart Claude Code, run `/mcp`, choose **strip → Authenticate**, sign in as the same Strip user and approve the intended workspace and scopes. `mcp:read` permits reads; `mcp:write` is necessary to create/edit; `offline_access` permits refresh. `mcp:apps` is only needed for inline app resources. Do not grant a different account/workspace to work around a permission denial.
+4. Start Claude Code in that project, trust the project and approve the project MCP server. Run `/mcp`, choose **strip → Authenticate**, sign in as the same Strip user and approve the intended workspace and scopes. In the tested Claude Code 2.1.319 flow the client requests `mcp:read`, `mcp:write`, `mcp:apps`, and `offline_access`: read permits reads, write permits create/edit, apps enables inline app resources, and offline access permits refresh. Do not grant a different account/workspace to work around a permission denial. For a headless terminal, `claude mcp login --no-browser strip` still requires a TTY and gives an authorization URL; use the same signed-in browser session to approve it.
 5. Confirm the Strip tools are enabled. Ask:
    > Strip this update: We added Undo. Deleted files can now be restored. Compose the actual four-panel draft yourself and save it in Strip; don't call ask-agent. Include a wordless visual beat and three endings. This update is illustrative.
 6. Claude Code should call the direct creation tool with a **complete structured draft**, not send a chat request back to the app. Follow the action's runtime JSON schema: four ordered beats, unique object IDs, actors with explicit poses, at most two 12-word balloons per panel, three distinct endings and exact source excerpts only where depicting a literal claim. Fictional dialogue is not evidence of a shipped feature.
@@ -29,4 +29,4 @@ Strip's **existing framework MCP server** exposes the same validated SQL-backed 
 
 ## Local evidence
 
-See `docs/evidence/m3/verification.md` for the actual scripted MCP/browser observations and limitations. A scripted illustrative transport test is **not** evidence of model creativity or a real Claude Code generation session. No Builder.io AI request is needed for this direct action path.
+See `docs/evidence/claude-code-mcp/verification.md` for the real Claude Code OAuth, model-authored draft, live Library, attribution and protected-edit test; `docs/evidence/m3/verification.md` records earlier scripted transport observations. These are bounded tests, not proof of humour or general usability. No Builder.io AI request is needed for this direct action path; Claude Code's own account and billing remain separate.

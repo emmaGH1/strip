@@ -1,0 +1,42 @@
+Claude Code 2.1.319 — redacted stream summary. Credentials, session metadata, tool payloads and thinking omitted.
+
+=== Creation ===
+Tool: mcp__strip__create-strip
+Tool: mcp__strip__get-strip
+Result:
+I wrote a four-panel strip called **"The Undo That Saved Friday"** and saved it in Strip. I read it back afterwards and it saved correctly. It's marked as illustrative.
+
+[Open strip in Studio →]([Studio link redacted])
+
+| Panel | Laptop screen | What happens |
+|---|---|---|
+| 1. Setup | Files | Ari: "Time to tidy up these old project files." / Sam: "Careful. The final report is in there." |
+| 2. Trouble | Deleted | Ari, panicking: "I deleted the final report!" / Sam, arms crossed: "Breathe. Look at the screen." |
+| 3. Turn | Undo | No dialogue: Ari leans in, thinking, while Sam smiles. |
+| 4. Payoff | Restored | Ari, relieved: "It's back! Every single page." / Sam: "Now maybe tidy a little slower." |
+
+**Ending choices for the last line:**
+1. "Now maybe tidy a little slower." (the one in use now)
+2. "Undo: the best coworker you never thanked."
+3. "Fine. Delete my Monday meetings next."
+
+All the dialogue is made up. Only panels 3 and 4 are linked to the feature itself, using the exact line "Deleted files can now be restored with Undo." Nothing has captions. Every item is still a draft until you approve or remove it in Studio.
+
+=== Protected edit ===
+Tool: mcp__strip__get-strip
+Tool: mcp__strip__update-strip
+Tool result: Error: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)
+Result:
+The server blocked the edit, so the protection works. Nothing was changed.
+
+**Before the edit:** I read the strip at revision 1. Balloon `p2-b1` (Ari: "I deleted the final report!") is in `protectedIds`, and the latest revision was a human edit labelled "Protection."
+
+**The call:** I sent `update-strip` with `expectedRevision: 1` and one edit: `{"kind": "balloon", "id": "p2-b1", "text": "I deleted the moon!"}`.
+
+**Exact result:**
+```
+Error: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)
+```
+
+I didn't try any workaround, and I didn't touch any other part of the strip. Panel 2 still reads "I deleted the final report!"
+
