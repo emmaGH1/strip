@@ -18,6 +18,7 @@ import {
   ScrollRestoration,
   useLocation,
   useNavigate,
+  useRouteLoaderData,
 } from "react-router";
 import type { LinksFunction } from "react-router";
 
@@ -51,10 +52,19 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
 ];
 
+// Only the public image URL crosses the server/client boundary, never environment data.
+export function loader({ request }: { request: Request }) {
+  return {
+    ogImage: new URL(appPath("/og.png"), process.env.APP_URL || request.url)
+      .href,
+  };
+}
+
 const THEME_INIT_SCRIPT = getThemeInitScript();
 const LOCALE_INIT_SCRIPT = getLocaleInitScript();
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const brand = useRouteLoaderData<typeof loader>("root");
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -72,15 +82,52 @@ export function Layout({ children }: { children: React.ReactNode }) {
           suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: LOCALE_INIT_SCRIPT }}
         />
-        <meta name="theme-color" content="#18181B" />
+        <meta name="theme-color" content="#F4EFE6" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
         <meta name="apple-mobile-web-app-title" content={APP_TITLE} />
+        <link
+          rel="icon"
+          type="image/x-icon"
+          sizes="16x16 32x32 48x48"
+          href={appPath("/favicon.ico")}
+        />
         <link rel="icon" type="image/svg+xml" href={appPath("/favicon.svg")} />
-        <link rel="apple-touch-icon" href={appPath("/icon-180.svg")} />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href={appPath("/apple-touch-icon.png")}
+        />
+        <link rel="manifest" href={appPath("/manifest.json")} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Strip" />
+        <meta
+          property="og:title"
+          content="Release notes nobody reads? Ship a strip."
+        />
+        <meta
+          property="og:image"
+          content={brand?.ogImage ?? appPath("/og.png")}
+        />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image:alt"
+          content="Strip — Release notes nobody reads? Ship a strip. Illustrative comic, fictional dialogue."
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:image"
+          content={brand?.ogImage ?? appPath("/og.png")}
+        />
+        <meta
+          name="twitter:image:alt"
+          content="Strip — Release notes nobody reads? Ship a strip. Illustrative comic, fictional dialogue."
+        />
         <Meta />
         <Links />
       </head>

@@ -14,7 +14,7 @@ export function Library({ assets }: { assets: SceneAssets | undefined }) {
     <main className="strip-library">
       <header className="studio-topbar">
         <Link className="strip-wordmark" to="/">
-          Strip<span>.</span>
+          <img src="/logo.svg" width="253" height="95" alt="Strip" />
         </Link>
         <h1>Your strips</h1>
         <Button asChild className="print-button">

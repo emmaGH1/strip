@@ -88,11 +88,11 @@ function Comic({
   );
 }
 
-/** The single swap point for the header logo. Replace the contents when the new mark lands. */
+/** Approved path-only wordmark: the custom upright S is the first letter. */
 export function HeaderLogo() {
   return (
     <a className="landing-wordmark" href="/" aria-label="Strip home">
-      Strip.
+      <img src="/logo.svg" width="253" height="95" alt="Strip" />
     </a>
   );
 }

@@ -818,7 +818,7 @@ export default function Home() {
       <main className="new-strip">
         <header className="studio-topbar">
           <Link className="strip-wordmark" to="/">
-            Strip<span>.</span>
+            <img src="/logo.svg" width="253" height="95" alt="Strip" />
           </Link>
           <span>NEW STRIP</span>
           <Button variant="ghost" asChild>
@@ -953,7 +953,7 @@ export default function Home() {
     <main className="studio" data-phone-focus={phoneFocus ? "true" : undefined}>
       <header className="studio-topbar">
         <Link className="strip-wordmark" to="/home">
-          Strip<span>.</span>
+          <img src="/logo.svg" width="253" height="95" alt="Strip" />
         </Link>
         <div className="title-field">
           <Input

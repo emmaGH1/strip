@@ -74,8 +74,13 @@ svg.lucide {
   color: var(--ink);
   text-decoration: none;
 }
-.strip-wordmark span {
-  color: var(--signal);
+.strip-wordmark {
+  flex-shrink: 0;
+}
+.strip-wordmark img {
+  display: block;
+  height: 1em;
+  width: auto;
 }
 .eyebrow {
   font-size: 11px;
@@ -96,140 +101,6 @@ svg.lucide {
 .print-button:hover {
   transform: translate(-1px, -1px);
   box-shadow: 4px 4px 0 var(--ink);
-}
-.poster {
-  min-height: 100dvh;
-  padding: 38px 6.25% 32px;
-  max-width: 1600px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-}
-.poster-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid var(--ink);
-  padding-bottom: 22px;
-}
-.poster-header > span {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.8px;
-}
-.poster-body {
-  display: grid;
-  grid-template-columns: 1fr 1.07fr;
-  gap: 60px;
-  align-items: center;
-  flex: 1;
-  padding: 36px 0 30px;
-}
-.poster-copy h1 {
-  font-size: clamp(44px, 5vw, 76px);
-  font-weight: 800;
-  line-height: 0.99;
-  letter-spacing: -4px;
-  margin: 25px 0;
-}
-.poster-copy h1 em {
-  font-style: normal;
-  color: var(--signal);
-}
-.poster-deck {
-  color: var(--quiet);
-  font-size: 20px;
-  line-height: 1.5;
-  margin-bottom: 28px;
-}
-.poster-copy .print-button {
-  font-size: 16px;
-  gap: 32px;
-  min-height: 52px;
-  padding: 12px 22px;
-}
-.poster-proof {
-  min-width: 0;
-  position: relative;
-}
-.proof-note {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  gap: 8px;
-  color: var(--pencil);
-  font-size: 14px;
-  margin: 0 12px 15px;
-  transform: rotate(-2deg);
-}
-.poster-art {
-  border: 2px solid var(--ink);
-  box-shadow: 8px 8px 0 var(--ink);
-  transform: rotate(2deg);
-  background: var(--paper);
-}
-.poster-art svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.specimen-label {
-  text-align: center;
-  margin-top: 24px;
-  font-size: 10px;
-  color: var(--quiet);
-  letter-spacing: 1px;
-}
-.poster-loop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 2px solid var(--ink);
-  padding-top: 26px;
-  gap: 24px;
-}
-.loop-step > span {
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.poster-loop b {
-  color: var(--signal);
-  font-size: 12px;
-}
-.loop-step {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex: 1;
-  min-width: 0;
-}
-.loop-crop {
-  width: 84px;
-  height: 84px;
-  flex: 0 0 84px;
-  border: 2px solid var(--ink);
-  overflow: hidden;
-}
-.loop-crop svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.loop-step > span {
-  line-height: 1.25;
-}
-.loop-arrow {
-  margin-left: auto;
-  color: var(--quiet);
-}
-.poster-credits {
-  margin-top: 32px;
-  border-top: 1px solid hsl(var(--border));
-  padding-top: 16px;
-  font-size: 12px;
-  color: var(--quiet);
 }
 .studio {
   min-height: 100%;
@@ -1084,76 +955,6 @@ svg.lucide {
   }
 }
 @media (max-width: 700px) {
-  .poster {
-    padding: 22px 24px 24px;
-  }
-  .poster-header {
-    padding-bottom: 16px;
-  }
-  .poster-header .strip-wordmark {
-    font-size: 32px;
-  }
-  .poster-header > span {
-    font-size: 7px;
-    letter-spacing: 0.7px;
-  }
-  .poster-body {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding: 30px 0 22px;
-  }
-  .poster-copy .eyebrow {
-    font-size: 8px;
-    letter-spacing: 1px;
-  }
-  .poster-copy h1 {
-    font-size: 44px;
-    letter-spacing: -2.5px;
-    line-height: 1.02;
-    margin: 14px 0;
-  }
-  .poster-deck {
-    font-size: 14px;
-    margin-bottom: 18px;
-  }
-  .poster-copy .print-button {
-    min-height: 44px;
-    font-size: 14px;
-    padding: 8px 18px;
-    gap: 28px;
-  }
-  .proof-note {
-    font-size: 10px;
-    margin-bottom: 10px;
-  }
-  .poster-art {
-    width: 91%;
-    margin: auto;
-    box-shadow: 5px 5px 0 var(--ink);
-  }
-  .specimen-label {
-    font-size: 7px;
-    margin-top: 16px;
-  }
-  .poster-loop {
-    padding-top: 16px;
-    gap: 6px;
-    align-items: flex-start;
-  }
-  .poster-loop > span {
-    font-size: 10px;
-    gap: 5px;
-    flex: 1;
-    line-height: 1.3;
-  }
-  .poster-loop b {
-    font-size: 8px;
-  }
-  .poster-loop > svg {
-    width: 12px;
-    height: 12px;
-    margin-top: 2px;
-  }
   .studio-topbar {
     min-height: 74px;
     gap: 12px;
@@ -1404,30 +1205,6 @@ svg.lucide {
   margin: 0;
 }
 @media (max-width: 700px) {
-  .poster-loop {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .loop-step {
-    flex: none;
-    width: 100%;
-    gap: 16px;
-  }
-  .loop-crop {
-    width: 76px;
-    height: 76px;
-    flex-basis: 76px;
-  }
-  .loop-step > span {
-    font-size: 16px;
-  }
-  .loop-arrow {
-    transform: rotate(90deg);
-  }
-  .poster-credits {
-    line-height: 1.6;
-  }
   .launch-export {
     padding: 20px;
   }

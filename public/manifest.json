@@ -1,20 +1,23 @@
 {
-  "name": "Strip Proof Scaffold",
-  "short_name": "Strip Proof Scaffold",
-  "description": "Workspace app for Strip Proof Scaffold.",
-  "start_url": "./home",
-  "background_color": "#111111",
-  "theme_color": "#18181B",
+  "name": "Strip",
+  "short_name": "Strip",
+  "description": "One product update. Four panels. A comic you and your agent make together.",
+  "start_url": "/home",
+  "display": "standalone",
+  "background_color": "#F4EFE6",
+  "theme_color": "#F4EFE6",
   "icons": [
     {
-      "src": "icon-192.svg",
+      "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "icon-512.svg",
+      "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
