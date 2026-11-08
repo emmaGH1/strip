@@ -176,7 +176,11 @@ export default function Home() {
   const selectedBalloon = selectedPanel.balloons.find(
     (b) => b.id === selectedId,
   );
+  const selectedActor = selectedPanel.actors.find((a) => a.id === selectedId);
   const directProtection = strip.protectedIds.includes(selectedId);
+  const inheritedProtection =
+    selectedId !== selectedPanel.id &&
+    strip.protectedIds.includes(selectedPanel.id);
   const busy = create.isPending || update.isPending || protect.isPending;
   const measure = useMemo(
     () =>
@@ -200,7 +204,9 @@ export default function Home() {
       ? `Panel ${strip.draft.panels.indexOf(selectedPanel) + 1}`
       : selectedBalloon
         ? `${cast[selectedBalloon.speaker].name}'s line`
-        : "Character";
+        : selectedActor
+          ? `${cast[selectedActor.character].name}'s character`
+          : "Character";
 
   useEffect(() => {
     loadSceneAssets()
@@ -320,7 +326,7 @@ export default function Home() {
   }
   function revise() {
     sendToAgentChat({
-      message: `Improve the comic's selected ${selectedBalloon ? "balloon" : "panel"}: ${selectedId}, in strip ${strip.id}. Make it clearer and more charming. Read get-strip for the current revision. Preserve all protected human contributions and use focused update-strip edits, not a replacement comic.`,
+      message: `Improve the comic's selected ${selectedBalloon ? "line" : selectedActor ? "character" : "panel"}: ${selectedId}, in strip ${strip.id}. Make it clearer and more charming. Read get-strip for the current revision. Preserve all protected human contributions and use focused update-strip edits, not a replacement comic.`,
       openSidebar: true,
       context: JSON.stringify({
         stripId: strip.id,
@@ -476,11 +482,12 @@ export default function Home() {
                 disabled={!source.trim()}
               >
                 <MessageSquare size={17} />
-                Draft with agent
+                Ask agent for a new comic
                 <ArrowUpRight size={17} />
               </button>
               <p className="strip-fine">
-                Requires a connected model. No model output is shown here yet.
+                Opens the agent for a new comic from your update. The example
+                below will not change.
               </p>
             </form>
             <div className="strip-how">
@@ -491,8 +498,8 @@ export default function Home() {
           </section>
           <section className="strip-example">
             <div className="strip-preview-label">
-              <span>THE DRAWING BOARD</span>
-              <span>HAND-AUTHORED EXAMPLE</span>
+              <span>PREPARED EXAMPLE</span>
+              <span>HAND-AUTHORED · NOT YOUR RESULT</span>
             </div>
             <div
               className="strip-canvas"
@@ -508,8 +515,6 @@ export default function Home() {
                   aria-pressed={sample === i}
                   onClick={() => {
                     setSample(i);
-                    setSource(preparedExamples[i]!.source);
-                    setIllustrative(true);
                   }}
                 >
                   {name}
@@ -517,11 +522,7 @@ export default function Home() {
               ))}
             </div>
             <div className="strip-preview-foot">
-              <p>
-                Real scene objects.
-                <br />
-                Not one uneditable image.
-              </p>
+              <p>This illustrative example is separate from your new comic.</p>
               <button
                 className="strip-text-button"
                 onClick={openExample}
@@ -574,8 +575,7 @@ export default function Home() {
                 dangerouslySetInnerHTML={{ __html: rendered?.svg ?? "" }}
               />
               <p className="strip-canvas-note">
-                Click a line, character or panel. Your changes are real scene
-                edits.
+                Tap or click a line, character or panel to select it.
               </p>
               {rendered?.overflow.length ? (
                 <p role="alert" className="strip-error">
@@ -600,7 +600,10 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-              <h2>{label(selectedId)}</h2>
+              <h2>
+                Editing panel {strip.draft.panels.indexOf(selectedPanel) + 1} →{" "}
+                {label(selectedId)}
+              </h2>
               <p className="strip-muted">
                 {selectedBalloon
                   ? "Keep the good line. Change the rest."
@@ -633,92 +636,109 @@ export default function Home() {
                   }
                 />
               ) : null}
-              <div className="strip-characters">
-                {selectedPanel.actors.map((actor) => (
-                  <div key={actor.id}>
-                    <label
-                      className="strip-field-label"
-                      htmlFor={`${actor.id}-expression`}
-                    >
-                      {cast[actor.character].name}'s expression
-                    </label>
-                    <select
-                      id={`${actor.id}-expression`}
-                      value={actor.expression}
-                      disabled={busy}
-                      onChange={(e) => {
-                        void edit([
-                          {
-                            kind: "expression",
-                            id: actor.id,
-                            expression: expressionSchema.parse(e.target.value),
-                          },
-                        ]).catch(() => {});
-                      }}
-                    >
-                      {expressionSchema.options.map((expression) => (
-                        <option key={expression} value={expression}>
-                          {expression}
-                        </option>
-                      ))}
-                    </select>
-                    <label
-                      className="strip-field-label"
-                      htmlFor={`${actor.id}-pose`}
-                    >
-                      {cast[actor.character].name}'s pose
-                    </label>
-                    <select
-                      id={`${actor.id}-pose`}
-                      value={
-                        actor.pose ??
-                        (actor.character === "ari"
-                          ? "standing"
-                          : "arms-crossed")
-                      }
-                      disabled={busy}
-                      onChange={(e) => {
-                        void edit([
-                          {
-                            kind: "pose",
-                            id: actor.id,
-                            pose: poseSchema.parse(e.target.value),
-                          },
-                        ]).catch(() => {});
-                      }}
-                    >
-                      {poseSchema.options.map((pose) => (
-                        <option key={pose} value={pose}>
-                          {pose}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ))}
-              </div>
-              <label className="strip-field-label">
-                On-screen feature moment
-                <select
-                  value={selectedPanel.screenState}
-                  disabled={busy}
-                  onChange={(e) => {
-                    void edit([
-                      {
-                        kind: "screen-state",
-                        id: selectedPanel.id,
-                        screenState: screenStateSchema.parse(e.target.value),
-                      },
-                      { kind: "prop", id: selectedPanel.id, prop: "laptop" },
-                    ]).catch(() => {});
-                  }}
-                >
-                  {screenStateSchema.options.map((state) => (
-                    <option key={state} value={state}>
-                      {state}
-                    </option>
+              {!selectedBalloon && !selectedActor ? (
+                <div className="strip-lines" aria-label="Select a character">
+                  {selectedPanel.actors.map((actor) => (
+                    <button key={actor.id} onClick={() => select(actor.id)}>
+                      Edit {cast[actor.character].name}'s expression or pose
+                    </button>
                   ))}
-                </select>
-              </label>
+                </div>
+              ) : null}
+              {selectedActor ? (
+                <div className="strip-characters">
+                  {selectedPanel.actors
+                    .filter((actor) => actor.id === selectedActor.id)
+                    .map((actor) => (
+                      <div key={actor.id}>
+                        <label
+                          className="strip-field-label"
+                          htmlFor={`${actor.id}-expression`}
+                        >
+                          {cast[actor.character].name}'s expression
+                        </label>
+                        <select
+                          id={`${actor.id}-expression`}
+                          value={actor.expression}
+                          disabled={busy}
+                          onChange={(e) => {
+                            void edit([
+                              {
+                                kind: "expression",
+                                id: actor.id,
+                                expression: expressionSchema.parse(
+                                  e.target.value,
+                                ),
+                              },
+                            ]).catch(() => {});
+                          }}
+                        >
+                          {expressionSchema.options.map((expression) => (
+                            <option key={expression} value={expression}>
+                              {expression}
+                            </option>
+                          ))}
+                        </select>
+                        <label
+                          className="strip-field-label"
+                          htmlFor={`${actor.id}-pose`}
+                        >
+                          {cast[actor.character].name}'s pose
+                        </label>
+                        <select
+                          id={`${actor.id}-pose`}
+                          value={
+                            actor.pose ??
+                            (actor.character === "ari"
+                              ? "standing"
+                              : "arms-crossed")
+                          }
+                          disabled={busy}
+                          onChange={(e) => {
+                            void edit([
+                              {
+                                kind: "pose",
+                                id: actor.id,
+                                pose: poseSchema.parse(e.target.value),
+                              },
+                            ]).catch(() => {});
+                          }}
+                        >
+                          {poseSchema.options.map((pose) => (
+                            <option key={pose} value={pose}>
+                              {pose}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ))}
+                </div>
+              ) : null}
+              {!selectedBalloon && !selectedActor ? (
+                <label className="strip-field-label">
+                  What appears on the laptop
+                  <select
+                    value={selectedPanel.screenState}
+                    disabled={busy}
+                    onChange={(e) => {
+                      void edit([
+                        {
+                          kind: "screen-state",
+                          id: selectedPanel.id,
+                          screenState: screenStateSchema.parse(e.target.value),
+                        },
+                        { kind: "prop", id: selectedPanel.id, prop: "laptop" },
+                      ]).catch(() => {});
+                    }}
+                  >
+                    {screenStateSchema.options.map((state) => (
+                      <option key={state} value={state}>
+                        {state}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ) : null}
               <button
                 className={`strip-protection ${directProtection ? "is-protected" : ""}`}
                 onClick={toggleProtection}
@@ -731,12 +751,16 @@ export default function Home() {
                 )}
                 <span>
                   {directProtection
-                    ? "Protected from the agent"
-                    : `Protect this ${selectedBalloon ? "line" : "selection"}`}
+                    ? "Remove protection from this selection"
+                    : inheritedProtection
+                      ? "Protected by the panel · protect this item separately"
+                      : `Protect this ${selectedBalloon ? "line" : selectedActor ? "character" : "panel"}`}
                   <small>
-                    {directProtection
-                      ? "You can still edit. Only you can release it."
-                      : "Your contribution stays yours."}
+                    {inheritedProtection
+                      ? "This panel is protected too; removing this item's protection will not unprotect the panel."
+                      : directProtection
+                        ? "You can still edit. Only you can remove protection."
+                        : "Stops agent edits; you can still edit."}
                   </small>
                 </span>
               </button>
@@ -746,11 +770,12 @@ export default function Home() {
                 disabled={busy}
               >
                 <MessageSquare size={16} />
-                Revise this selection
+                Ask agent about this selection
                 <ArrowUpRight size={16} />
               </button>
               <p className="strip-fine">
-                Protected edits and version checks are enforced by the app.
+                Opens the agent with this selection. Protected work stays
+                unchanged.
               </p>
               <details className="strip-endings">
                 <summary>Three ways to end it</summary>

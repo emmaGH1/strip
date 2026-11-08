@@ -12,6 +12,7 @@
   --strip-red: #c84430;
   --strip-line: #d7cfc1;
   box-sizing: border-box;
+  container-type: inline-size;
   min-height: 100%;
   padding: 0 42px;
   color: var(--strip-ink);
@@ -180,7 +181,7 @@
   background: #e9e2d7;
 }
 .strip-button-small {
-  min-height: 32px;
+  min-height: 44px;
   padding: 6px 9px;
   font-size: 11px;
 }
@@ -367,6 +368,7 @@
   margin: 18px 0;
 }
 .strip-panel-tabs button {
+  min-height: 44px;
   background: transparent;
   border: 1px solid var(--strip-line);
   border-radius: 2px;
@@ -397,6 +399,7 @@
   margin: 0 0 17px;
 }
 .strip-lines button {
+  min-height: 44px;
   text-align: left;
   border: 1px solid var(--strip-line);
   padding: 10px 12px;
@@ -595,6 +598,19 @@
     font-size: 21px;
   }
 }
+@container (max-width: 800px) {
+  .strip-workspace-grid {
+    grid-template-columns: 1fr;
+  }
+  .strip-workspace-grid > section {
+    max-width: none;
+  }
+  .strip-inspector {
+    position: static;
+    padding-top: 20px;
+    border-top: 1px solid var(--strip-ink);
+  }
+}
 @media (pointer: coarse) {
   .strip-page button,
   .strip-check {
@@ -654,7 +670,7 @@
     padding: 10px;
     font-size: 10px;
     flex-shrink: 0;
-    min-height: 37px;
+    min-height: 44px;
   }
   .strip-workspace-heading > .strip-button svg {
     width: 13px;

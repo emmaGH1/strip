@@ -8,6 +8,8 @@ const agentNativePlugins = agentNative as unknown as (
 ) => any[];
 export default defineConfig({
   optimizeDeps: {
+    // The authenticated home imports lucide; prebundle its large icon barrel in dev.
+    include: ["lucide-react"],
     entries: [
       "app/entry.client.tsx",
       "app/root.tsx",
