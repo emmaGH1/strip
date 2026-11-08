@@ -1,0 +1,36 @@
+{
+  "protectedWrite": {
+    "status": 400,
+    "body": "{\"error\":\"This contribution is protected by the human. Leave it unchanged and revise other objects.\",\"errorCode\":\"protected_element\"}"
+  },
+  "protectedPose": {
+    "status": 400,
+    "body": "{\"error\":\"This contribution is protected by the human. Leave it unchanged and revise other objects.\",\"errorCode\":\"protected_element\"}"
+  },
+  "protectedScreen": {
+    "status": 400,
+    "body": "{\"error\":\"This contribution is protected by the human. Leave it unchanged and revise other objects.\",\"errorCode\":\"protected_element\"}"
+  },
+  "unlock": {
+    "status": 403,
+    "body": "{\"error\":\"Only a person in the editor may change protection.\",\"errorCode\":\"human_only\"}"
+  },
+  "stale": {
+    "status": 409,
+    "body": "{\"error\":\"This strip changed. Read the latest revision before applying your edit.\",\"errorCode\":\"stale_revision\"}"
+  },
+  "contenders": [
+    {
+      "status": 409,
+      "body": "{\"error\":\"A newer edit arrived while this change was being saved. Read the strip and try again.\",\"errorCode\":\"stale_revision\"}"
+    },
+    {
+      "status": 200,
+      "body": "{\"id\":\"8112d5bd-d9b5-43fe-b18b-5ff332ac7080\",\"revision\":8,\"draft\":{\"title\":\"A small undo. A large relief.\",\"source\":\"Deleted files can now be restored with Undo.\",\"sourceUrl\":\"\",\"inputKind\":\"illustrative\",\"panels\":[{\"id\":\"panel-1\",\"beat\":\"setup\",\"caption\":\"\",\"screenState\":\"files\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-1\",\"character\":\"ari\",\"expression\":\"happy\",\"pose\":\"leaning\",\"side\":\"left\"},{\"id\":\"sam-intro\",\"character\":\"sam\",\"expression\":\"neutral\",\"pose\":\"standing\",\"side\":\"right\"}],\"balloons\":[{\"id\":\"balloon-1\",\"speaker\":\"ari\",\"text\":\"I meant to delete literally anything else.\"}],\"sourceQuote\":\"\"},{\"id\":\"panel-2\",\"beat\":\"trouble\",\"caption\":\"\",\"screenState\":\"deleted\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-2\",\"character\":\"ari\",\"expression\":\"panic\",\"pose\":\"panic\",\"side\":\"left\"}],\"balloons\":[{\"id\":\"balloon-2\",\"speaker\":\"ari\",\"text\":\"That was the launch plan.\"}],\"sourceQuote\":\"\"},{\"id\":\"panel-3\",\"beat\":\"turn\",\"caption\":\"\",\"screenState\":\"restored\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-3\",\"character\":\"ari\",\"expression\":\"happy\",\"pose\":\"relieved\",\"side\":\"left\"}],\"balloons\":[],\"sourceQuote\":\"Deleted files can now be restored with Undo.\"},{\"id\":\"panel-4\",\"beat\":\"payoff\",\"caption\":\"\",\"screenState\":\"restored\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-4\",\"character\":\"sam\",\"expression\":\"thinking\",\"pose\":\"arms-crossed\",\"side\":\"left\"}],\"balloons\":[{\"id\":\"balloon-4\",\"speaker\":\"sam\",\"text\":\"Now add Undo to ‘Sure, Friday works.’\"}],\"sourceQuote\":\"\"}],\"endings\":[\"Now add Undo to ‘Sure, Friday works.’\",\"Great. Can it restore my weekend?\",\"Finally, a feature for my decision-making process.\"]},\"protectedIds\":[\"balloon-1\",\"panel-3\"],\"origin\":\"prepared-example\",\"lastEditedBy\":\"agent\",\"updatedAt\":\"2026-11-08T14:30:51.423Z\"}"
+    }
+  ],
+  "beforeRevision": 7,
+  "afterRevision": 8,
+  "protectedText": "I meant to delete literally anything else.",
+  "lastEditedBy": "agent"
+}

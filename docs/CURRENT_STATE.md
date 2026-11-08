@@ -63,3 +63,18 @@ Local server: `127.0.0.1:8080`; `pnpm test:proof` writes to `/tmp/strip-proof/` 
 ## Stop / remaining gates
 
 **No real LLM generation or model-driven revision has run.** All stories remain hand-authored fixtures; scripted HTTP action calls do not count as agent creativity or instruction-following. Connect/authorize a provider and bounded calls, then run three genuinely fresh ordinary drafts, a real selection-aware revision around protected human work, and unfamiliar-reader understanding/unprompted-smile checks. Review the art and phone export with the human. The full proof is not declared passed. No new features, push, deploy or submission started.
+
+
+## Production go-live test — 2026-11-08 14:30 UTC
+
+Local headless Chromium, a newly registered disposable account and the existing production server/Postgres were used; no human account or credentials were accessed. The fresh account displayed **Connect AI / Use Builder.io**, so the human's connection is not available globally to this account. This establishes that it is not app-wide for all accounts, but does not distinguish personal from organization-scoped connection. No provider connection or generation was attempted. Human must test the requested scheduled-message draft and selection-aware revision with a protected line using their connected account (at most three generation requests); preserve and compare the protected bytes. Real phone/network behaviour also remains to be checked by the human.
+
+- PASS: Opened prepared Undo example, edited and saved a balloon, reloaded and confirmed persistence.
+- PASS: Protected balloon rejected a scripted agent-attributed HTTP edit with 400 `protected_element`; non-frontend action transport derives agent identity in framework context, not an actor input. Agent unlock returned 403. Protected pose and screen edits also rejected. This was not a model turn.
+- PASS: Two concurrent writes with the same expected revision returned one 200 and one 409; earlier stale write returned 409.
+- PASS: Exported 1200×1200 PNG opened and visually compared with the corresponding canvas: scene layout, text, characters and feature states match; canvas selection highlighting is editor-only. At phone width the rendered comic is small; real-world legibility requires human review.
+- PASS: 390×844 emulated mobile editor saved a line and retained it after reload, with no horizontal page overflow. Not a physical phone test.
+- PASS: Removed stale unconditional connected-model claim under revision. Existing setup/readiness messaging remains.
+- PASS: `pnpm test` (27), `pnpm typecheck`, changed-file formatter, `pnpm agent-native:doctor`, `pnpm build`. No standalone lint script. No JS page errors in the browser smoke. Build has existing vendor warnings.
+- Production child was restarted after build under the existing supervisor. Graceful SIGTERM closed the listener but left the child alive, preventing restart; SIGKILL to that child allowed the supervisor to restart it, and local HTTP returned 200. No dev-mode switch.
+- Evidence: `docs/evidence/golive/` includes canvas/screenshots, `protected-strip-comic.png`, `strip-comic.png`, phone export and save views, and `http-boundary.json`. The smoke's initial signup selector failed due to two matching buttons; corrected and reran successfully. The first phone run did not actually exercise save, so a subsequent run added and passed that check.

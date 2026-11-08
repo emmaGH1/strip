@@ -750,8 +750,7 @@ export default function Home() {
                 <ArrowUpRight size={16} />
               </button>
               <p className="strip-fine">
-                Agent revision needs a connected model. Protected edits and
-                version checks are enforced by the app.
+                Protected edits and version checks are enforced by the app.
               </p>
               <details className="strip-endings">
                 <summary>Three ways to end it</summary>
