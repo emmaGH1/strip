@@ -1,3 +1,11 @@
+# Claude Code MCP retry — 2026-11-08 · verified, bounded
+
+- **Signup release gate PASS:** fresh disposable signup reached the rendered public Library in headless Chromium; `strip-app` was up over one minute before the run and was not restarted by this lane. The earlier signup failure remains unexplained, not fixed.
+- **Real Claude Code MCP PASS:** OAuth consent granted the four requested scopes; one model creation prompt called the Strip tools, authored and saved an illustrative four-panel draft, and its thumbnail appeared in the already-open Library without refresh. Studio displayed blue pencil; History showed External agent. After a human UI MINE stamp, one further model prompt called `update-strip` against that line and received `protected_element`; the unchanged line and live rejection notice remained visible.
+- Evidence and limits: `docs/evidence/claude-code-mcp/verification.md`, redacted CLI output and screenshots in the same directory. This is not proof of humour, general usability, physical-phone behavior or every safety path. Temporary isolated config and credentials removed; local OAuth logout performed, server-side grant revocation not independently verified. No app code change, push or deployment.
+
+---
+
 # Signup incident investigation — 2026-11-08 22:34 UTC · unresolved
 
 - **No root cause or fix claimed:** the reported 19:30–20:00 signup failure could not be reproduced. Docker logs in the surrounding 19:20–20:10 window contain no entries. The recent `server/plugins/auth.ts` change only removed the three landing-option public paths; no signup hook changed. Installed framework password registration uses direct `auth.api.signUpEmail` (which skips Better Auth IP rate limiting); the five/minute setting found belongs to magic links. No evidence justified changing auth protection, origins, credentials or DB state.
@@ -238,3 +246,7 @@ Local headless Chromium, a newly registered disposable account and the existing 
 - PASS: `pnpm test` (27), `pnpm typecheck`, changed-file formatter, `pnpm agent-native:doctor`, `pnpm build`. No standalone lint script. No JS page errors in the browser smoke. Build has existing vendor warnings.
 - Production child was restarted after build under the existing supervisor. Graceful SIGTERM closed the listener but left the child alive, preventing restart; SIGKILL to that child allowed the supervisor to restart it, and local HTTP returned 200. No dev-mode switch.
 - Evidence: `docs/evidence/golive/` includes canvas/screenshots, `protected-strip-comic.png`, `strip-comic.png`, phone export and save views, and `http-boundary.json`. The smoke's initial signup selector failed due to two matching buttons; corrected and reran successfully. The first phone run did not actually exercise save, so a subsequent run added and passed that check.
+
+## AI testing decision (human, 2026-11-08 ~19:00 UTC)
+
+Option A: no automated AI tests. The Team page has no invite UI, so the test account cannot share the human's Builder.io connection. Real AI was already exercised from the human's own account: an agent-drafted Undo comic and a revision request, with Builder.io token usage recorded. The new-design AI path (pencil in-flight state, draft landing, revision with MINE) is verified by the human during the demo rehearsal/recording. Lanes must NOT claim AI-path verification before then.
