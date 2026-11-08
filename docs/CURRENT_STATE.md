@@ -1,4 +1,18 @@
-# Current state — 2026-11-08 · design-probe implementation; browser verification blocked
+# Current state — 2026-11-08 · design-probe browser verification
+
+## Terra/high browser lane — design probe
+
+- Rebuilt the source (the existing `.output` predated the probe commit) and restarted the existing Docker `strip-app`; local HTTP and the public HTTPS landing returned 200. Headless local Chromium, 1440×900 and 390×844; public URL loaded once in Chromium. Viewport emulation is not a physical phone. One new disposable account and its own illustrative Undo strip were used; no other account, AI connection, generation, push or deployment.
+- **PASS:** poster CTA → signup → `/home` → prepared strip; direct balloon, character and panel selection (panel background target is small); edited a line and verified it after reload; protected/unprotected it and saw MINE; swapped the second ending; copied and read the actual clipboard caption; downloaded and opened the real 1200×1200 PNG. Ask agent → Write your own note opened the actual framework desk, with `submit: false`, `openSidebar: true`, and selected balloon/revision context. No agent turn submitted.
+- **PASS / qualified visual QA:** paper/ink/red/blue/butter palette and hard-offset primary shadows visible; Bricolage UI and Comic Neue lettering in rendered comic. Computed visible landing/studio backgrounds had no gradients. Both 390px pages had 390px document width; no page errors in the final smoke. Two console 401 resource errors occurred during signup; URLs were not retained, so their cause is unconfirmed. No console/page errors in the subsequent authenticated check. The current export was opened and inspected; test screenshots are viewport captures, not physical-phone usability evidence.
+- **Small fix:** removed a mobile-only hidden line break that joined the poster headline into “notesnobody”. Rebuilt and restarted the existing container; recaptured signed-out landing.
+- **Review issues:** phone comic lettering and three ending thumbnails are very small; meaningful readability needs human review. The phone Agent tab opens a framework overlay obscuring the other tabs until dismissed with its close button, rather than an in-sheet desk. Panel selection can be hard when artwork covers most of the target. The contextual action bar sits above the whole artboard rather than above the selected element. The framework composer retains soft shadows, and the agent popover uses a soft shadow rather than exclusively hard print shadows. The pending log placement and non-draggable phone sheet remain known design deviations. No redesign attempted.
+- Evidence: `docs/evidence/design-probe/{landing-desktop,landing-phone,studio-desktop,studio-phone,balloon-selected,protected-balloon,endings-tray,phone-edit,phone-agent,phone-script,agent-context,export}.png`. `export.png` is the actual download. The former `VERIFICATION_BLOCKED.md` is historical and superseded by this run.
+- Checks after the CSS change: `pnpm test` 34 passed; `pnpm typecheck`, changed-file oxfmt, `pnpm agent-native:doctor`, and `pnpm build` passed. No separate lint script. Build warnings remain inherited. The real AI path and human judgement of usability/humour remain unverified.
+
+---
+
+# Prior state — 2026-11-08 · design-probe implementation; browser verification blocked
 
 ## Design probe — landing + Studio (build/app)
 
