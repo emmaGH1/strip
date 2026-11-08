@@ -1,16 +1,27 @@
 import { describe, expect, it } from "vitest";
 
 import { preparedExamples } from "./examples.js";
-import { cast, composedDraftSchema } from "./strip.js";
+import { composedDraftSchema } from "./strip.js";
 import {
   cropPanel,
   draftRequest,
   panelBounds,
+  objectLabel,
   selectionAnchor,
   sourceCoverage,
 } from "./studio.js";
 
 describe("M1 studio presentation and handoff", () => {
+  it("uses only human-readable context chip labels", () => {
+    const draft = preparedExamples[0]!;
+    const panel = draft.panels[0]!;
+    expect(objectLabel(draft, panel.id)).toBe("Panel 1");
+    expect(objectLabel(draft, panel.balloons[0]!.id)).toBe(
+      "Panel 1 · Ari's line",
+    );
+    expect(objectLabel(draft, panel.actors[0]!.id)).toBe("Panel 1 · Ari");
+    expect(objectLabel(draft, "missing-id")).toBe("Comic selection");
+  });
   it("deduplicates literal facts and associates every depicting panel", () => {
     const draft = structuredClone(preparedExamples[0]!);
     draft.panels[0]!.sourceQuote = draft.panels[2]!.sourceQuote;
@@ -63,13 +74,8 @@ describe("M1 studio presentation and handoff", () => {
     });
     expect(draft.cast).toEqual(people);
     expect(composedDraftSchema.parse(preparedExamples[0]).cast).toBeUndefined();
-    const prompt = draftRequest("Undo restores deleted files.", false, people);
-    expect(prompt).toContain("create-strip");
-    expect(prompt).toContain('"name":"Jo"');
-    expect(prompt).toContain("inputKind user-provided");
-    expect(prompt).toContain("SOURCE:\nUndo restores deleted files.");
-    expect(draftRequest("Fictional feature", true, cast)).toContain(
-      "inputKind illustrative",
+    expect(draftRequest("  Undo restores deleted files.  ")).toBe(
+      "Pencil a strip from: Undo restores deleted files.",
     );
   });
 });

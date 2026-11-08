@@ -1,4 +1,24 @@
-import type { Draft } from "./strip.js";
+import { cast, type Draft } from "./strip.js";
+
+/** Human labels for context chips; machine ids belong only in hidden context. */
+export function objectLabel(draft: Draft, objectId: string) {
+  const panel = draft.panels.find(
+    (p) =>
+      p.id === objectId ||
+      p.actors.some((a) => a.id === objectId) ||
+      p.balloons.some((b) => b.id === objectId),
+  );
+  if (!panel) return "Comic selection";
+  const prefix = `Panel ${draft.panels.indexOf(panel) + 1}`;
+  const balloon = panel.balloons.find((b) => b.id === objectId);
+  const actor = panel.actors.find((a) => a.id === objectId);
+  const people = draft.cast ?? cast;
+  return balloon
+    ? `${prefix} · ${people[balloon.speaker].name}'s line`
+    : actor
+      ? `${prefix} · ${people[actor.character].name}`
+      : prefix;
+}
 
 /** Only literal excerpts are fact rows; never promote fictional dialogue to a source claim. */
 export function sourceCoverage(draft: Draft) {
@@ -47,12 +67,8 @@ export function cropPanel(svg: string, index: number) {
     );
 }
 
-export function draftRequest(
-  source: string,
-  illustrative: boolean,
-  cast: NonNullable<Draft["cast"]>,
-) {
-  return `Make a four-panel comic from this ${illustrative ? "illustrative" : "user-provided"} product update. Use create-strip with inputKind ${illustrative ? "illustrative" : "user-provided"}, then show it in Studio. Keep literal claims within this source, distinguish fictional dialogue, include a wordless visual beat and three endings. Preserve these names and traits in draft.cast, using stable character ids ari/sam.\nCAST:\n${JSON.stringify(cast)}\nSOURCE:\n${source}`;
+export function draftRequest(source: string) {
+  return `Pencil a strip from: ${source.trim()}`;
 }
 
 export function selectionAnchor(

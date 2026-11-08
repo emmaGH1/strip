@@ -36,6 +36,19 @@ Run domain tests, typecheck, formatter/lint, framework doctor and production bui
 - `update-strip` is the shared focused edit/review path (`expectedRevision` required); `set-strip-protection` remains human-only. Source coverage is derived only from exact non-empty source excerpts, never from fictional balloons.
 - Domain compose/selection notes hand off through `sendToAgentChat`, with `openSidebar: true`; the real framework readiness gate decides whether to submit or preserve a setup prefill. Pencil-working presentation requires a correlated genuinely working thread, not a click or timer.
 
+## Shared action index (UI, in-app agent and external MCP)
+
+| Action                     | Contract                                                                                                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `list-strips`              | Read only the authenticated owner's current workspace Library.                                                                             |
+| `get-strip`                | Read one scoped scene, revision, protection and retained history.                                                                          |
+| `create-strip`             | Persist a complete validated composition; MCP callers author it themselves and receive a Studio open link.                                 |
+| `update-strip`             | Required `expectedRevision`; either focused `edits` or `restoreRevision`. Restore appends a new revision and preserves current protection. |
+| `set-strip-protection`     | Human editor only; never available to the agent tool surface.                                                                              |
+| `view-screen` / `navigate` | Tab-scoped context and navigation for the in-app workflow.                                                                                 |
+
+MCP connection/demo: `docs/MCP_DEMO.md`. Revisions attribute trusted MCP/WebMCP/A2A calls as external agent; no client attribution override. History is retained in the SQL scene alongside each atomic revision save, not in browser state. Historical records start at their first retained save; never invent older events.
+
 ## Serving the app (since 2026-11-08 ~17:00 UTC)
 
 The production app runs in the Docker container `strip-app` (node:22, host network, port 8080, restart unless-stopped, env from .env), next to the `strip-pg` Postgres container. Agent-session processes were being killed, so the old /tmp supervisor is obsolete. After `pnpm build`, run `docker restart strip-app`. Logs: `docker logs strip-app`. Never print .env values.

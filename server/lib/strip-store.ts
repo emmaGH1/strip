@@ -3,6 +3,7 @@ import { randomUUID } from "node:crypto";
 import { fail, type ActionRunContext } from "@agent-native/core/action";
 import { and, desc, eq, isNull } from "drizzle-orm";
 
+import { changedSummary } from "../../shared/history.js";
 import {
   StripError,
   stripSchema,
@@ -30,6 +31,18 @@ export function callerActor(ctx?: ActionRunContext): Actor {
     !ctx.mcpDirectoryWidgetReadOnly
     ? "human"
     : "agent";
+}
+export function revisionWho(
+  ctx?: ActionRunContext,
+): "human" | "agent" | "external-agent" {
+  return callerActor(ctx) === "human"
+    ? "human"
+    : ctx?.caller === "mcp" ||
+        ctx?.networkProtocol === "mcp" ||
+        ctx?.caller === "webmcp" ||
+        ctx?.caller === "a2a"
+      ? "external-agent"
+      : "agent";
 }
 function scope(id: string, ctx?: ActionRunContext) {
   return and(
@@ -102,6 +115,15 @@ export async function createStrip(
       : {}),
     updatedAt: new Date().toISOString(),
   };
+  scene.history = [
+    {
+      revision: 0,
+      draft: structuredClone(draft),
+      who: revisionWho(ctx),
+      summary: "Created strip",
+      at: scene.updatedAt,
+    },
+  ];
   await getDb()
     .insert(strips)
     .values({
@@ -116,7 +138,30 @@ export async function saveStrip(
   previous: Strip,
   next: Strip,
   ctx?: ActionRunContext,
+  summary?: string,
 ): Promise<Strip> {
+  // Snapshots and scene share the same compare-and-swap statement: no orphan history on conflict.
+  next = {
+    ...next,
+    history: [
+      ...(previous.history ?? [
+        {
+          revision: previous.revision,
+          draft: structuredClone(previous.draft),
+          who: previous.lastEditedBy,
+          summary: "First retained revision (older history unavailable)",
+          at: previous.updatedAt,
+        },
+      ]),
+      {
+        revision: next.revision,
+        draft: structuredClone(next.draft),
+        who: revisionWho(ctx),
+        summary: summary ?? changedSummary(previous, next),
+        at: next.updatedAt,
+      },
+    ],
+  };
   const changed = await getDb()
     .update(strips)
     .set({ scene: next, revision: next.revision, updatedAt: new Date() })

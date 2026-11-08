@@ -2,7 +2,6 @@ import {
   useActionMutation,
   useActionQuery,
 } from "@agent-native/core/client/hooks";
-import { PencilLine } from "lucide-react";
 import { useState } from "react";
 import { useSearchParams } from "react-router";
 
@@ -12,6 +11,7 @@ export function AgentChanges() {
   const [params, setParams] = useSearchParams();
   const id = params.get("id") ?? "";
   const [error, setError] = useState("");
+  const [historyOpen, setHistoryOpen] = useState(false);
   const query = useActionQuery("get-strip", { id }, { enabled: Boolean(id) });
   const update = useActionMutation("update-strip");
   const strip = query.data;
@@ -36,10 +36,73 @@ export function AgentChanges() {
   }
   return (
     <section className="agent-change-log" aria-label="Agent changes">
-      <h2>
-        <PencilLine size={15} /> Agent changes <span>{pencils.length}</span>
-      </h2>
-      {pencils.length ? (
+      <div className="desk-log-tabs" role="group" aria-label="Desk views">
+        <Button
+          variant={historyOpen ? "ghost" : "secondary"}
+          size="sm"
+          onClick={() => setHistoryOpen(false)}
+        >
+          Agent changes · {pencils.length}
+        </Button>
+        <Button
+          variant={historyOpen ? "secondary" : "ghost"}
+          size="sm"
+          onClick={() => setHistoryOpen(true)}
+        >
+          History
+        </Button>
+      </div>
+      {historyOpen ? (
+        <div className="history-list" aria-label="Revision history">
+          {[...(strip.history ?? [])].reverse().map((entry) => (
+            <div className="history-entry" key={entry.revision}>
+              <div>
+                <b>
+                  Rev {entry.revision} ·{" "}
+                  {entry.who === "human"
+                    ? "You"
+                    : entry.who === "external-agent"
+                      ? "External agent"
+                      : "Agent"}
+                </b>
+                <p>{entry.summary}</p>
+                <time dateTime={entry.at}>
+                  {new Date(entry.at).toLocaleString()}
+                </time>
+              </div>
+              <Button
+                size="sm"
+                variant="outline"
+                disabled={update.isPending || entry.revision === strip.revision}
+                onClick={async () => {
+                  setError("");
+                  try {
+                    await update.mutateAsync({
+                      id,
+                      expectedRevision: strip.revision,
+                      restoreRevision: entry.revision,
+                    });
+                  } catch (e) {
+                    setError(
+                      e instanceof Error
+                        ? e.message
+                        : "Restore failed. Reloading.",
+                    );
+                    await query.refetch();
+                  }
+                }}
+              >
+                {entry.revision === strip.revision ? "Current" : "Restore"}
+              </Button>
+            </div>
+          ))}
+          {!strip.history?.length && (
+            <p>
+              Earlier revisions were not retained. The next save starts history.
+            </p>
+          )}
+        </div>
+      ) : pencils.length ? (
         <div className="change-list">
           {pencils.map(([key, proposal]) => {
             const panel = strip.draft.panels.find(

@@ -32,7 +32,18 @@ export default createAgentChatPlugin({
     await validateConversationReferences(references);
   },
   actions: loadActionsFromStaticRegistry(actionsRegistry),
-  mcp: { connectorCatalog: [], appApprovalPage: true },
+  mcp: {
+    connectorCatalog: [
+      "create-strip",
+      "get-strip",
+      "list-strips",
+      "update-strip",
+    ],
+    appApprovalPage: true,
+    keyToolNames: ["create-strip", "get-strip", "list-strips", "update-strip"],
+    instructions:
+      "Strip stores four-panel structured comics. Compose the actual draft yourself from the user's update and persist it directly; do not delegate generation to ask-agent. Preserve supplied cast names/traits. Distinguish source facts from fictional dialogue; illustrative inputs must remain illustrative. Read the current revision before edits, target only the requested objects, preserve MINE contributions and never attempt unlocks or replacements to evade protection. A stale revision requires a fresh read and reconsideration. Return the Studio open link. History restore is a new revision, never a history rewrite.",
+  },
   initialToolNames: INITIAL_TOOL_NAMES,
   // Initial visibility is not an authorization boundary: keep generic SQL,
   // code execution and unlock tools out of the entire runtime surface too.

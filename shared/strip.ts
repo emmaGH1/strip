@@ -244,6 +244,13 @@ export const editSchema = z.union([
     decision: z.enum(["ink", "erase"]),
   }),
 ]);
+export const revisionSnapshotSchema = z.object({
+  revision: z.number().int().nonnegative(),
+  draft: draftSchema,
+  who: z.enum(["human", "agent", "external-agent"]),
+  summary: z.string(),
+  at: z.string(),
+});
 export const stripSchema = z.object({
   id: z.string(),
   revision: z.number().int().nonnegative(),
@@ -252,6 +259,7 @@ export const stripSchema = z.object({
   origin: z.enum(["prepared-example", "human-authored", "agent-draft"]),
   lastEditedBy: z.enum(["human", "agent"]),
   updatedAt: z.string(),
+  history: z.array(revisionSnapshotSchema).optional(),
   // Optional for historical records. Inverses are server-derived, never supplied by the agent.
   pencils: z
     .record(

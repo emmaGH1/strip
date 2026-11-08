@@ -9,10 +9,12 @@ import {
 import {
   useActionMutation,
   useActionQuery,
+  useReconciledState,
 } from "@agent-native/core/client/hooks";
 import { buildSettingsRoute } from "@agent-native/core/client/navigation";
 import {
   selectAgentSelectable,
+  deselectAgentSelectable,
   useAgentSelectable,
   useAgentSelectableSource,
 } from "@agent-native/toolkit/app/agent-select";
@@ -34,7 +36,6 @@ import {
 } from "lucide-react";
 import {
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -48,6 +49,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Popover,
+  PopoverAnchor,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
@@ -68,7 +70,7 @@ import {
 import {
   cropPanel,
   draftRequest,
-  selectionAnchor,
+  objectLabel,
   sourceCoverage,
 } from "../../shared/studio";
 
@@ -114,9 +116,9 @@ export default function Home() {
   const [askOpen, setAskOpen] = useState(false);
   const [phoneAskOpen, setPhoneAskOpen] = useState(false);
   const [phoneFocus, setPhoneFocus] = useState(false);
-  const [anchor, setAnchor] = useState({ left: 200, top: 100, flip: true });
   const [editing, setEditing] = useState(false);
-  const [line, setLine] = useState("");
+  const [lineDirty, setLineDirty] = useState(false);
+  const lineRevision = useRef(0);
   const [phoneTab, setPhoneTab] = useState("edit");
   const [agentRequest, setAgentRequest] = useState<{
     submitId: string;
@@ -183,6 +185,22 @@ export default function Home() {
     (b) => b.id === selectedId,
   );
   const selectedActor = selectedPanel.actors.find((a) => a.id === selectedId);
+  const [line, setLine] = useReconciledState(selectedBalloon?.text ?? "", {
+    active: lineDirty,
+  });
+  function changeLine(text: string) {
+    if (!lineDirty) lineRevision.current = strip.revision;
+    setLineDirty(true);
+    setLine(text);
+  }
+  async function saveLine() {
+    await edit(
+      [{ kind: "balloon", id: selectedId, text: line }],
+      lineDirty ? lineRevision.current : strip.revision,
+    );
+    setLineDirty(false);
+    setEditing(false);
+  }
   const directProtection = strip.protectedIds.includes(selectedId);
   const inheritedProtection =
     selectedId !== selectedPanel.id &&
@@ -228,33 +246,6 @@ export default function Home() {
   const coverage = sourceCoverage(strip.draft);
   const people = strip.draft.cast ?? cast;
   const focusedSvg = rendered ? cropPanel(rendered.svg, panelNumber - 1) : "";
-  useLayoutEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas || !isSaved) return;
-    const position = () => {
-      const element = Array.from(
-        canvas.querySelectorAll<SVGGraphicsElement>("[data-object]"),
-      ).find((el) => el.getAttribute("data-object") === selectedId);
-      if (!element) return;
-      const rect = element.getBoundingClientRect();
-      const page = canvas.getBoundingClientRect();
-      setAnchor(
-        selectionAnchor(
-          {
-            x: rect.x - page.x,
-            y: rect.y - page.y,
-            width: rect.width,
-            height: rect.height,
-          },
-          page.width,
-        ),
-      );
-    };
-    position();
-    const observer = new ResizeObserver(position);
-    observer.observe(canvas);
-    return () => observer.disconnect();
-  }, [selectedId, rendered?.svg, isSaved]);
   useEffect(() => {
     loadSceneAssets()
       .then(setAssets)
@@ -263,7 +254,8 @@ export default function Home() {
   useEffect(() => {
     setEditing(false);
     setLine(selectedBalloon?.text ?? "");
-  }, [selectedId, selectedBalloon?.text]);
+    setLineDirty(false);
+  }, [selectedId, strip.id]);
   useAgentSelectable(
     isSaved
       ? {
@@ -285,7 +277,7 @@ export default function Home() {
           return {
             kind: "comic-object",
             id: objectId,
-            title: `Comic object: ${objectId}`,
+            title: objectLabel(strip.draft, objectId),
             getContext: () =>
               `Object ${objectId} in strip ${strip.id}. Read current revision; use focused update-strip.`,
             getElement: () =>
@@ -298,6 +290,11 @@ export default function Home() {
         }
       : null,
   );
+  // Plain-click chips are not source-registered objects; release them when their screen/selection leaves.
+  useEffect(() => {
+    if (!isSaved) return;
+    return () => deselectAgentSelectable("comic-object", selectedId);
+  }, [isSaved, strip.id, selectedId]);
   function select(objectId: string) {
     const panel = strip.draft.panels.find(
       (p) =>
@@ -314,7 +311,7 @@ export default function Home() {
       {
         kind: "comic-object",
         id: objectId,
-        title: `Panel ${strip.draft.panels.indexOf(panel) + 1}: ${objectId}`,
+        title: objectLabel(strip.draft, objectId),
         getContext: () =>
           `Selected ${objectId}, panel ${panel.id}, strip ${strip.id}. Read get-strip and update only this selection.`,
       },
@@ -334,13 +331,13 @@ export default function Home() {
       if (window.matchMedia("(max-width: 700px)").matches) setPhoneFocus(true);
     }
   }
-  async function edit(edits: Edit[]) {
+  async function edit(edits: Edit[], expectedRevision = strip.revision) {
     setError("");
     setNotice("");
     try {
       await update.mutateAsync({
         id: strip.id,
-        expectedRevision: strip.revision,
+        expectedRevision,
         edits,
       });
       setNotice("Saved in ink.");
@@ -374,6 +371,7 @@ export default function Home() {
     sendToAgentChat({
       submitMessageId: submitId,
       message: request,
+      contextLabel: isSaved ? selectionLabel : "Cast & source type",
       context: isSaved
         ? JSON.stringify({
             stripId: strip.id,
@@ -381,7 +379,10 @@ export default function Home() {
             panelId: selectedPanel.id,
             expectedRevision: strip.revision,
           })
-        : "New strip",
+        : JSON.stringify({
+            inputKind: illustrative ? "illustrative" : "user-provided",
+            cast: castDraft,
+          }),
       openSidebar: true,
       submit: engine.canChat,
     });
@@ -389,9 +390,7 @@ export default function Home() {
   function revise(
     instruction = "Make this selection clearer and more charming.",
   ) {
-    askAgent(
-      `${instruction} Selected ${selectionLabel}: ${selectedId}, strip ${strip.id}. Read get-strip for the current revision, preserve protected contributions and use focused update-strip edits. Do not replace the comic.`,
-    );
+    askAgent(instruction);
   }
   async function toggleProtection() {
     setError("");
@@ -587,6 +586,28 @@ export default function Home() {
         open={phone ? phoneAskOpen : askOpen}
         onOpenChange={phone ? setPhoneAskOpen : setAskOpen}
       >
+        {!phone && (
+          <PopoverAnchor
+            virtualRef={{
+              current: {
+                getBoundingClientRect: () => {
+                  const panel = Array.from(
+                    canvasRef.current?.querySelectorAll<SVGGraphicsElement>(
+                      "[data-object]",
+                    ) ?? [],
+                  ).find(
+                    (el) => el.getAttribute("data-object") === selectedPanel.id,
+                  );
+                  return (
+                    panel?.getBoundingClientRect() ??
+                    canvasRef.current?.getBoundingClientRect() ??
+                    new DOMRect()
+                  );
+                },
+              },
+            }}
+          />
+        )}
         <PopoverTrigger asChild>
           <Button variant="ghost" size="sm" className="agent-action">
             <MessageSquare size={16} />
@@ -595,8 +616,8 @@ export default function Home() {
         </PopoverTrigger>
         <PopoverContent
           className="ask-popover"
-          side={anchor.flip ? "bottom" : "top"}
-          align="center"
+          side={phone ? "top" : panelNumber % 2 ? "right" : "left"}
+          align={phone ? "center" : "start"}
           sideOffset={10}
         >
           <p className="eyebrow">A NOTE FOR THE AGENT</p>
@@ -668,16 +689,14 @@ export default function Home() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            void edit([{ kind: "balloon", id: selectedId, text: line }])
-              .then(() => setEditing(false))
-              .catch(() => {});
+            void saveLine().catch(() => {});
           }}
         >
           <label htmlFor="phone-line">Lettering · 12 words max</label>
           <Textarea
             id="phone-line"
             value={line}
-            onChange={(e) => setLine(e.target.value)}
+            onChange={(e) => changeLine(e.target.value)}
             maxLength={120}
           />
           <Button type="submit" disabled={busy || !line.trim()}>
@@ -816,7 +835,7 @@ export default function Home() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              askAgent(draftRequest(source, illustrative, castDraft));
+              askAgent(draftRequest(source));
             }}
           >
             <label htmlFor="new-source">
@@ -1015,16 +1034,7 @@ export default function Home() {
             </div>
           </div>
           <div className="artboard-wrap">
-            <div
-              className="desktop-context"
-              style={{
-                left: anchor.left,
-                top: anchor.top,
-                transform: `translate(-50%, ${anchor.flip ? "0" : "-100%"})`,
-              }}
-            >
-              {contextBar()}
-            </div>
+            <div className="desktop-context">{contextBar()}</div>
             <div
               className="strip-canvas artboard"
               ref={canvasRef}
@@ -1038,9 +1048,7 @@ export default function Home() {
                 className="inline-lettering"
                 onSubmit={(e) => {
                   e.preventDefault();
-                  void edit([{ kind: "balloon", id: selectedId, text: line }])
-                    .then(() => setEditing(false))
-                    .catch(() => {});
+                  void saveLine().catch(() => {});
                 }}
                 style={{
                   top: panelNumber < 3 ? "14%" : "57%",
@@ -1052,7 +1060,7 @@ export default function Home() {
                   autoFocus
                   value={line}
                   maxLength={120}
-                  onChange={(e) => setLine(e.target.value)}
+                  onChange={(e) => changeLine(e.target.value)}
                 />
                 <Button size="sm" disabled={busy} type="submit">
                   <Check size={14} />

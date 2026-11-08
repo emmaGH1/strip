@@ -684,13 +684,15 @@ svg.lucide {
 }
 /* The page fits height rather than shrinking on taller desktops. */
 .desktop-context {
-  position: absolute;
+  position: relative;
   z-index: 5;
-  width: max-content;
+  width: fit-content;
   max-width: 100%;
+  margin: 0 auto 12px;
 }
 .desktop-context .context-bar {
   margin: 0;
+  flex-wrap: wrap;
 }
 .ask-popover {
   background: var(--paper);
@@ -698,6 +700,31 @@ svg.lucide {
   box-shadow: 3px 3px 0 var(--ink);
   width: 350px;
   max-width: calc(100vw - 24px);
+}
+.desk-log-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.history-list {
+  max-height: 340px;
+  overflow-y: auto;
+}
+.history-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--quiet);
+  font-size: 12px;
+}
+.history-entry p {
+  margin: 4px 0;
+}
+.history-entry time {
+  color: var(--quiet);
+  font-size: 12px;
 }
 .ask-popover textarea {
   margin: 8px 0;

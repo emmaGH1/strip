@@ -10,9 +10,14 @@ import {
   listStrips,
   owner,
   saveStrip,
+  revisionWho,
 } from "./strip-store.js";
 
-const mocks = vi.hoisted(() => ({ where: vi.fn(), rows: [] as unknown[] }));
+const mocks = vi.hoisted(() => ({
+  where: vi.fn(),
+  set: vi.fn(),
+  rows: [] as unknown[],
+}));
 vi.mock("../db/index.js", () => ({
   getDb: () => ({
     select: () => ({
@@ -27,12 +32,15 @@ vi.mock("../db/index.js", () => ({
       }),
     }),
     update: () => ({
-      set: () => ({
-        where: (sql: unknown) => {
-          mocks.where(sql);
-          return { returning: async () => [] };
-        },
-      }),
+      set: (value: unknown) => {
+        mocks.set(value);
+        return {
+          where: (sql: unknown) => {
+            mocks.where(sql);
+            return { returning: async () => [] };
+          },
+        };
+      },
     }),
   }),
 }));
@@ -93,6 +101,14 @@ describe("trusted caller and scoped store boundary", () => {
       }),
     ).toBe("agent");
   });
+  it("derives external history attribution from trusted protocol context", () => {
+    expect(revisionWho({ caller: "frontend" })).toBe("human");
+    expect(revisionWho({ caller: "tool" })).toBe("agent");
+    expect(revisionWho({ caller: "mcp" })).toBe("external-agent");
+    expect(revisionWho({ caller: "frontend", networkProtocol: "mcp" })).toBe(
+      "external-agent",
+    );
+  });
   it("requires authenticated ownership", () => {
     expect(() => owner()).toThrow("Sign in");
     expect(owner(context)).toBe("one@example.test");
@@ -127,5 +143,9 @@ describe("trusted caller and scoped store boundary", () => {
     const sql = new PgDialect().sqlToQuery(mocks.where.mock.lastCall![0]);
     expect(sql.sql).toContain("revision");
     expect(sql.params).toEqual(["one", "one@example.test", "org-one", 2]);
+    const written = mocks.set.mock.lastCall![0].scene as Strip;
+    expect(written.history?.map((entry) => entry.revision)).toEqual([2, 3]);
+    expect(written.history?.[1]?.who).toBe("agent");
+    expect(scene.history).toBeUndefined();
   });
 });

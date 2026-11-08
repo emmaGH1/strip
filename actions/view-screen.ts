@@ -27,8 +27,28 @@ export default defineAction({
     const selection = await readAppStateForCurrentTab(
       AGENT_SELECTION_STATE_KEY,
     );
-    const comic = navigation?.stripId
+    const current = navigation?.stripId
       ? await getStrip(navigation.stripId, ctx)
+      : null;
+    // Current-screen is injected every turn; never multiply it by full historical drafts.
+    const comic = current
+      ? {
+          id: current.id,
+          revision: current.revision,
+          title: current.draft.title,
+          protectedIds: current.protectedIds,
+          panels: current.draft.panels.map((panel) => ({
+            id: panel.id,
+            beat: panel.beat,
+            actors: panel.actors.map((actor) => actor.id),
+            balloons: panel.balloons.map((balloon) => ({
+              id: balloon.id,
+              text: balloon.text,
+            })),
+          })),
+          nextAction:
+            "get-strip for the current complete scene before update-strip",
+        }
       : null;
     return {
       navigation: navigation ?? null,

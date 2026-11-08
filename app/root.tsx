@@ -94,10 +94,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 function DbSyncSetup() {
   const qc = useQueryClient();
+  const location = useLocation();
   useNavigationState();
   useDbSync({
     queryClient: qc,
     ignoreSource: TAB_ID,
+    ...(location.pathname === "/home"
+      ? {
+          realtime: {
+            reason:
+              "External MCP agents and other tabs can change this owner's Library or open Studio",
+          },
+        }
+      : {}),
+    pauseWhenHidden: true,
   });
   return null;
 }
