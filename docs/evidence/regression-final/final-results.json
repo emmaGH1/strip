@@ -1,0 +1,333 @@
+{
+  "base": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+  "results": [
+    {
+      "step": "01-landing-brand-meta",
+      "status": "PASS"
+    },
+    {
+      "step": "02-landing-pencil-click",
+      "status": "PASS"
+    },
+    {
+      "step": "03-landing-mine-click",
+      "status": "PASS"
+    },
+    {
+      "step": "04-landing-revise-click",
+      "status": "PASS"
+    },
+    {
+      "step": "05-signup-library",
+      "status": "PASS"
+    },
+    {
+      "step": "06-prepared-example-studio",
+      "status": "PASS"
+    },
+    {
+      "step": "07-balloon-inline-save-reload",
+      "status": "PASS"
+    },
+    {
+      "step": "08-protect-mine",
+      "status": "PASS"
+    },
+    {
+      "step": "09-swap-ending",
+      "status": "PASS"
+    },
+    {
+      "step": "10-export-sheet",
+      "status": "PASS"
+    },
+    {
+      "step": "10.1-download-compare-png",
+      "status": "PASS"
+    },
+    {
+      "step": "10.2-copy-caption",
+      "status": "PASS"
+    },
+    {
+      "step": "11-open-downloaded-png",
+      "status": "PASS"
+    },
+    {
+      "step": "12-history-restore-reload",
+      "status": "PASS"
+    },
+    {
+      "step": "13-compose-fill",
+      "status": "PASS"
+    },
+    {
+      "step": "13.1-pencil-prefill",
+      "status": "PASS"
+    },
+    {
+      "step": "14-phone-landing",
+      "status": "PASS"
+    },
+    {
+      "step": "14.1-phone-tap-pencil",
+      "status": "PASS"
+    },
+    {
+      "step": "14.2-phone-tap-stamp",
+      "status": "PASS"
+    },
+    {
+      "step": "14.3-phone-tap-revise",
+      "status": "PASS"
+    },
+    {
+      "step": "15-phone-focused-panel",
+      "status": "PASS"
+    },
+    {
+      "step": "16-phone-edit-script-tabs",
+      "status": "PASS"
+    },
+    {
+      "step": "17-phone-inline-ask",
+      "status": "PASS"
+    },
+    {
+      "step": "18-phone-agent-tab",
+      "status": "PASS"
+    },
+    {
+      "step": "18.1-phone-inline-ask-handoff",
+      "status": "PASS"
+    },
+    {
+      "step": "19-phone-endings-scroller",
+      "status": "PASS"
+    },
+    {
+      "step": "20-keyboard-focus-landing",
+      "status": "PASS"
+    },
+    {
+      "step": "21-keyboard-focus-studio",
+      "status": "PASS"
+    },
+    {
+      "step": "22-keyboard-focus-export",
+      "status": "PASS"
+    }
+  ],
+  "diagnostics": [
+    {
+      "label": "desktop landing",
+      "viewport": 1440,
+      "document": 1440,
+      "body": 1440,
+      "brokenImages": [],
+      "visibleImages": 2
+    },
+    {
+      "label": "desktop library",
+      "viewport": 1440,
+      "document": 1440,
+      "body": 1440,
+      "brokenImages": [],
+      "visibleImages": 1
+    },
+    {
+      "label": "desktop studio",
+      "viewport": 1440,
+      "document": 1440,
+      "body": 1440,
+      "brokenImages": [],
+      "visibleImages": 3
+    },
+    {
+      "label": "desktop export sheet",
+      "viewport": 1440,
+      "document": 1440,
+      "body": 1440,
+      "brokenImages": [],
+      "visibleImages": 4
+    },
+    {
+      "label": "desktop compose",
+      "viewport": 1440,
+      "document": 1440,
+      "body": 1440,
+      "brokenImages": [],
+      "visibleImages": 3
+    },
+    {
+      "label": "phone landing",
+      "viewport": 390,
+      "document": 390,
+      "body": 390,
+      "brokenImages": [],
+      "visibleImages": 2
+    },
+    {
+      "label": "phone focused studio",
+      "viewport": 390,
+      "document": 390,
+      "body": 390,
+      "brokenImages": [],
+      "visibleImages": 1
+    },
+    {
+      "label": "phone endings",
+      "viewport": 390,
+      "document": 390,
+      "body": 390,
+      "brokenImages": [],
+      "visibleImages": 1
+    }
+  ],
+  "httpErrors": [
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "phone-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "phone-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "keyboard-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "phone-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    },
+    {
+      "page": "keyboard-signed-out",
+      "signedOut": true,
+      "status": 401,
+      "method": "GET",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status"
+    }
+  ],
+  "consoleErrors": [
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "phone-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "phone-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "keyboard-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "phone-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "landing-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    },
+    {
+      "page": "keyboard-signed-out",
+      "signedOut": true,
+      "text": "Failed to load resource: the server responded with a status of 401 ()",
+      "url": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech/_agent-native/agent-engine/status",
+      "line": 0
+    }
+  ],
+  "pageErrors": [],
+  "modelRequests": []
+}
