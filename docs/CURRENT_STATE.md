@@ -1,4 +1,19 @@
-# Current state — 2026-11-08 · approved fixes complete; Builder.io connection gate
+# Current state — 2026-11-08 · design-probe implementation; browser verification blocked
+
+## Design probe — landing + Studio (build/app)
+
+- Replaced the proof-facing landing and workspace with DESIGN.md v1's paper/ink direction: Bricolage Grotesque UI/display, Comic Neue lettering only, palette tokens, hard print shadows and red MINE stamps. Removed DM Sans/Bangers dependencies/imports; added the bundled Bricolage OFL and updated ASSETS.md. The user's staged README.md and assets/icon.svg remain untouched.
+- Public `/` is now the poster: one framework sign-in CTA, a real shared-renderer illustrative comic with a blue-pencil panel and MINE balloon, and the one-row loop. Root auth interception is disabled while `/` remains explicitly public; authenticated domain actions and `/home` retain framework auth. Auth continuation is configured to `/home`, but is not browser-verified on this build.
+- Studio has an editable title, PNG export and caption copy, Script/facts/cast rail, direct SVG panel/balloon/character selection, contextual Edit/Face/Pose/Protect/Ask-agent controls, inline balloon editor and actual panel-4 ending thumbnails. Phone layout has Edit/Agent/Script tabs in a lower sheet-like panel. Agent and free-text handoffs use the existing real AgentSidebar/composer, not another chat runtime. Free text opens the framework composer rather than a duplicate prompt box.
+- New server-derived durable `pencils` metadata captures the exact prior field value of real agent edits, including legacy absent poses. Ink accepts and Erase restores through `update-strip`, with the same expected revision, owner scope, trusted caller and atomic compare-and-swap. Repeated agent proposals preserve the original prior value; direct human edits accept only their field. Agent no-ops do not acquire pencil attribution. New agent-created draft items are blue and can be inked, but Erase is disabled because there is no prior value to restore. Historical records without per-object metadata are not retroactively assigned fictional provenance.
+- Working halftone/dashes are tied to the framework's actual working-thread state and correlated submission target; merely opening the composer or lacking a provider does not show a working state. No live provider/model turn was attempted. This correlation and initial-draft display are unit/typechecked, not end-to-end verified.
+- Known design gaps: the compact pending-change log currently follows the artboard rather than being inserted inside the framework-owned right desk; the phone lower panel is an in-flow sheet-like surface, not a draggable modal sheet. Library remains out of scope; the wordmark link returns to the new-strip entry. No claim of final visual quality, usability, humour or phone readability is made without rendered review.
+- Checks: `pnpm test` **34 passing**, `pnpm typecheck`, changed-file oxfmt, `pnpm agent-native:doctor` clean and `pnpm build` passed. No standalone lint script exists; build retains inherited vendor/chunk warnings. These checks do not substitute for a browser smoke.
+- **Verification blocker:** at 16:46 UTC, port 8080 had no listener, and both `/tmp/claude-1000/strip/run-prod.sh` and its Node child were absent. The narrow Terra/high browser delegate independently confirmed local HTTP failure. The task only permits restarting the existing Node child, so no supervisor/new server was started. No account was created/accessed, and no provider connected. The new build is not running. **No redesign screenshots or export PNG exist yet.** Evidence/blocker details: `docs/evidence/design-probe/VERIFICATION_BLOCKED.md`. Restore the existing service, then capture/inspect landing and Studio at 1440×900 and 390×844 plus the actual PNG before Opus's design gate. Earlier proof screenshots do not verify this design.
+
+---
+
+# Prior state — approved fixes complete; Builder.io connection gate
 
 ## Bounded mobile usability pass — 2026-11-08
 
@@ -100,6 +115,7 @@ Local server: `127.0.0.1:8080`; `pnpm test:proof` writes to `/tmp/strip-proof/` 
 **No real LLM generation or model-driven revision has run.** All stories remain hand-authored fixtures; scripted HTTP action calls do not count as agent creativity or instruction-following. Connect/authorize a provider and bounded calls, then run three genuinely fresh ordinary drafts, a real selection-aware revision around protected human work, and unfamiliar-reader understanding/unprompted-smile checks. Review the art and phone export with the human. The full proof is not declared passed. No new features, push, deploy or submission started.
 
 ## Phone access fix (2026-11-08, Claude)
+
 - Cause (likely): the public link at port 8080 was serving the Vite **dev** server. Dev mode sends hundreds of unbundled modules over the tunnel, which stalls on a phone after sign-in.
 - Change: port 8080 now serves the **production build** (`pnpm start`, NODE_ENV=production). Production refuses PGlite, so a private local Postgres runs in Docker:
   - container `strip-pg`, volume `strip-pg-data`, bound to 127.0.0.1:55432 only;

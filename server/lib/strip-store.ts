@@ -71,6 +71,22 @@ export async function createStrip(
           ? "prepared-example"
           : "human-authored",
     lastEditedBy: actor,
+    ...(actor === "agent"
+      ? {
+          pencils: Object.fromEntries(
+            draft.panels
+              .flatMap((panel) => [
+                panel.id,
+                ...panel.actors.map((a) => a.id),
+                ...panel.balloons.map((b) => b.id),
+              ])
+              .map((targetId) => [
+                `draft:${targetId}`,
+                { targetId, before: null },
+              ]),
+          ),
+        }
+      : {}),
     updatedAt: new Date().toISOString(),
   };
   await getDb()

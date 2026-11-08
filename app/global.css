@@ -1,5 +1,7 @@
-@import "@fontsource-variable/dm-sans";
-@import "@fontsource/bangers";
+@import "@fontsource/bricolage-grotesque/400.css";
+@import "@fontsource/bricolage-grotesque/500.css";
+@import "@fontsource/bricolage-grotesque/700.css";
+@import "@fontsource/bricolage-grotesque/800.css";
 
 @import "tailwindcss";
 @import "@agent-native/toolkit/styles.css";
@@ -172,12 +174,7 @@
 }
 
 .chat-sidebar-thread-title[data-overflow="true"] {
-  mask-image: linear-gradient(
-    to right,
-    hsl(var(--foreground)) 0,
-    hsl(var(--foreground)) calc(100% - var(--chat-sidebar-title-fade)),
-    hsl(var(--foreground) / 0) 100%
-  );
+  text-overflow: ellipsis;
 }
 
 .chat-sidebar-thread-title__content {
@@ -264,7 +261,7 @@
 @layer base {
   body {
     @apply bg-background text-foreground;
-    font-family: "DM Sans Variable", Arial, sans-serif;
+    font-family: "Bricolage Grotesque", Arial, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }

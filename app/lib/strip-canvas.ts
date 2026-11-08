@@ -1,6 +1,6 @@
 import { appPath } from "@agent-native/core/client/api-path";
-import uiFontUrl from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url";
-import titleFontUrl from "@fontsource/bangers/files/bangers-latin-400-normal.woff2?url";
+import uiFontUrl from "@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-500-normal.woff2?url";
+import titleFontUrl from "@fontsource/bricolage-grotesque/files/bricolage-grotesque-latin-800-normal.woff2?url";
 
 import "@fontsource/comic-neue/700.css";
 import textFontUrl from "@fontsource/comic-neue/files/comic-neue-latin-700-normal.woff2?url";
@@ -73,7 +73,7 @@ export function textMeasurer(): (
   return (text, size, comic = false) => {
     context.font = comic
       ? `700 ${size}px "Comic Neue", sans-serif`
-      : `500 ${size}px "DM Sans Variable", Arial, sans-serif`;
+      : `800 ${size}px "Bricolage Grotesque", Arial, sans-serif`;
     return context.measureText(text).width;
   };
 }

@@ -2,6 +2,9 @@ import {
   sendToAgentChat,
   requestAgentSidebarOpen,
   useAgentEngineConfigured,
+  useAgentChatRunningThreads,
+  getAgentChatSubmitTarget,
+  AGENT_CHAT_SUBMIT_TARGET_EVENT,
 } from "@agent-native/core/client/agent-chat";
 import {
   useActionMutation,
@@ -15,26 +18,36 @@ import {
 } from "@agent-native/toolkit/app/agent-select";
 import { useQueryClient } from "@tanstack/react-query";
 import {
+  ArrowRight,
   ArrowDownToLine,
-  ArrowUpRight,
   Check,
-  ChevronLeft,
-  LockKeyhole,
-  PencilLine,
-  UnlockKeyhole,
+  Copy,
   MessageSquare,
+  PencilLine,
+  Shield,
+  Smile,
+  PersonStanding,
+  Eraser,
 } from "lucide-react";
 import {
   useEffect,
   useMemo,
   useRef,
   useState,
-  type FormEvent,
-  type KeyboardEvent,
   type MouseEvent,
+  type KeyboardEvent,
 } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
 import { exportPng, loadSceneAssets, textMeasurer } from "@/lib/strip-canvas";
 
 import { preparedExamples } from "../../shared/examples";
@@ -53,99 +66,67 @@ export function meta() {
     { title: "Strip — One update. Four panels." },
     {
       name: "description",
-      content:
-        "Turn one product update into an editable four-panel comic, made with you.",
+      content: "A four-panel comic, pencilled by your agent. Inked by you.",
     },
   ];
 }
-
-function message(error: unknown): string {
-  return error instanceof Error
+const errorMessage = (error: unknown) =>
+  error instanceof Error
     ? error.message
     : "That change could not be saved. Try again.";
-}
-function sampleStrip(index: number): Strip {
-  return {
-    id: "unsaved-example",
-    revision: 0,
-    draft: preparedExamples[index]!,
-    protectedIds: [],
-    origin: "prepared-example",
-    lastEditedBy: "human",
-    updatedAt: "",
-  };
-}
-
-function BalloonEditor({
-  text,
-  busy,
-  onSave,
-}: {
-  text: string;
-  busy: boolean;
-  onSave: (text: string) => Promise<void>;
-}) {
-  const [value, setValue] = useState(text);
-  const [dirty, setDirty] = useState(false);
-  useEffect(() => {
-    if (!dirty) setValue(text);
-  }, [text, dirty]);
-  const words = value.trim().split(/\s+/u).filter(Boolean).length;
-  return (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        try {
-          await onSave(value);
-          setDirty(false);
-        } catch {
-          /* Parent keeps the error and unsaved text visible. */
-        }
-      }}
-    >
-      <label className="strip-field-label" htmlFor="balloon-text">
-        Your line
-      </label>
-      <textarea
-        id="balloon-text"
-        value={value}
-        maxLength={120}
-        onChange={(e) => {
-          setDirty(true);
-          setValue(e.target.value);
-        }}
-        rows={4}
-      />
-      <div className="strip-field-foot">
-        <span className={words > 12 ? "strip-error" : ""}>
-          {words}/12 words{dirty ? " · unsaved" : ""}
-        </span>
-        <button
-          className="strip-button strip-button-small"
-          disabled={busy || !dirty || words < 1 || words > 12}
-          type="submit"
-        >
-          <Check size={14} />
-          Save line
-        </button>
-      </div>
-    </form>
-  );
-}
+const sampleStrip = (): Strip => ({
+  id: "unsaved-example",
+  revision: 0,
+  draft: preparedExamples[0]!,
+  protectedIds: [],
+  origin: "prepared-example",
+  lastEditedBy: "human",
+  updatedAt: "",
+});
 
 export default function Home() {
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
   const engine = useAgentEngineConfigured();
   const id = params.get("id") ?? "";
-  const [sample, setSample] = useState(0);
-  const [source, setSource] = useState(preparedExamples[0]!.source);
-  const [illustrative, setIllustrative] = useState(true);
   const [assets, setAssets] = useState<SceneAssets>();
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [exporting, setExporting] = useState(false);
-  const [pngUrl, setPngUrl] = useState("");
+  const [source, setSource] = useState("");
+  const [illustrative, setIllustrative] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [line, setLine] = useState("");
+  const [phoneTab, setPhoneTab] = useState("edit");
+  const [agentRequest, setAgentRequest] = useState<{
+    submitId: string;
+    stripId: string;
+    panelId: string;
+    threadId?: string;
+  }>();
+  const { workingThreadIds } = useAgentChatRunningThreads();
+  const workingPanelId =
+    agentRequest?.stripId === id &&
+    agentRequest.threadId &&
+    workingThreadIds.has(agentRequest.threadId)
+      ? agentRequest.panelId
+      : undefined;
+  useEffect(() => {
+    if (!agentRequest) return;
+    const resolve = () => {
+      const target = getAgentChatSubmitTarget(agentRequest.submitId);
+      if (target?.threadId)
+        setAgentRequest((current) =>
+          current?.submitId === agentRequest.submitId
+            ? { ...current, threadId: target.threadId! }
+            : current,
+        );
+    };
+    resolve();
+    window.addEventListener(AGENT_CHAT_SUBMIT_TARGET_EVENT, resolve);
+    return () =>
+      window.removeEventListener(AGENT_CHAT_SUBMIT_TARGET_EVENT, resolve);
+  }, [agentRequest?.submitId]);
   const canvasRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
   async function observeScene(scene: Strip) {
@@ -161,9 +142,8 @@ export default function Home() {
     onSuccess: observeScene,
   });
   const query = useActionQuery("get-strip", { id }, { enabled: Boolean(id) });
-  const saved = query.data;
-  const strip: Strip = saved ?? sampleStrip(sample);
-  const isSaved = Boolean(id && saved);
+  const strip = query.data ?? sampleStrip();
+  const isSaved = Boolean(id && query.data);
   const selectedId =
     params.get("object") ?? params.get("panel") ?? strip.draft.panels[0]!.id;
   const selectedPanel =
@@ -195,30 +175,42 @@ export default function Home() {
             assets,
             measure,
             isSaved ? selectedId : undefined,
+            workingPanelId,
           )
         : undefined,
-    [strip, assets, measure, selectedId, isSaved],
+    [strip, assets, measure, selectedId, isSaved, workingPanelId],
   );
-  const label = (objectId: string) =>
-    objectId === selectedPanel.id
-      ? `Panel ${strip.draft.panels.indexOf(selectedPanel) + 1}`
-      : selectedBalloon
-        ? `${cast[selectedBalloon.speaker].name}'s line`
-        : selectedActor
-          ? `${cast[selectedActor.character].name}'s character`
-          : "Character";
-
+  const endings = useMemo(
+    () =>
+      assets && measure
+        ? strip.draft.endings.map((text) => {
+            const preview = structuredClone(strip);
+            preview.draft.panels[3]!.balloons.slice(-1)[0]!.text = text;
+            // Same renderer, cropped to the actual alternative fourth panel.
+            return renderStripSvg(preview, assets, measure).svg.replace(
+              'viewBox="0 0 1200 1200"',
+              'viewBox="600 640 570 510"',
+            );
+          })
+        : [],
+    [strip, assets, measure],
+  );
+  const panelNumber = strip.draft.panels.indexOf(selectedPanel) + 1;
+  const selectionLabel = selectedBalloon
+    ? `${cast[selectedBalloon.speaker].name}'s line`
+    : selectedActor
+      ? cast[selectedActor.character].name
+      : `Panel ${panelNumber}`;
+  const pencils = Object.entries(strip.pencils ?? {});
   useEffect(() => {
     loadSceneAssets()
       .then(setAssets)
-      .catch((e) => setError(message(e)));
+      .catch((e) => setError(errorMessage(e)));
   }, []);
-  useEffect(
-    () => () => {
-      if (pngUrl) URL.revokeObjectURL(pngUrl);
-    },
-    [pngUrl],
-  );
+  useEffect(() => {
+    setEditing(false);
+    setLine(selectedBalloon?.text ?? "");
+  }, [selectedId, selectedBalloon?.text]);
   useAgentSelectable(
     isSaved
       ? {
@@ -226,7 +218,7 @@ export default function Home() {
           id: strip.id,
           title: strip.draft.title,
           getContext: () =>
-            `Strip ${strip.id}, revision ${strip.revision}. Use get-strip then update-strip. Source kind: ${strip.draft.inputKind}.`,
+            `Strip ${strip.id}, revision ${strip.revision}. Read get-strip then update-strip.`,
           getElement: () => canvasRef.current,
         }
       : null,
@@ -242,7 +234,7 @@ export default function Home() {
             id: objectId,
             title: `Comic object: ${objectId}`,
             getContext: () =>
-              `Selected object ${objectId} in strip ${strip.id}. Read current revision; use update-strip only for this selection.`,
+              `Object ${objectId} in strip ${strip.id}. Read current revision; use focused update-strip.`,
             getElement: () =>
               Array.from(
                 canvasRef.current?.querySelectorAll("[data-object]") ?? [],
@@ -253,7 +245,6 @@ export default function Home() {
         }
       : null,
   );
-
   function select(objectId: string) {
     const panel = strip.draft.panels.find(
       (p) =>
@@ -270,12 +261,9 @@ export default function Home() {
       {
         kind: "comic-object",
         id: objectId,
-        title:
-          objectId === panel.id
-            ? `Panel ${strip.draft.panels.indexOf(panel) + 1}`
-            : `Comic object: ${objectId}`,
+        title: `Panel ${strip.draft.panels.indexOf(panel) + 1}: ${objectId}`,
         getContext: () =>
-          `Selected object ${objectId}, panel ${panel.id}, strip ${strip.id}. Read current revision with get-strip, then update only this object/panel unless asked otherwise.`,
+          `Selected ${objectId}, panel ${panel.id}, strip ${strip.id}. Read get-strip and update only this selection.`,
       },
       { exclusive: true, openSidebar: false, focus: false },
     );
@@ -301,45 +289,58 @@ export default function Home() {
         expectedRevision: strip.revision,
         edits,
       });
-      setNotice("Change saved.");
+      setNotice("Saved in ink.");
     } catch (e) {
-      setError(message(e));
+      setError(errorMessage(e));
+      await query.refetch();
       throw e;
     }
+  }
+  function safeEdit(edits: Edit[]) {
+    void edit(edits).catch(() => {});
   }
   async function openExample() {
     setError("");
     try {
-      const result = await create.mutateAsync(preparedExamples[sample]!);
+      const result = await create.mutateAsync(preparedExamples[0]!);
       navigate(`/home?id=${result.id}`);
     } catch (e) {
-      setError(message(e));
+      setError(errorMessage(e));
     }
   }
-  function draftWithAgent(e: FormEvent) {
-    e.preventDefault();
+  function askAgent(request: string) {
+    setPhoneTab("agent");
+    const submitId = crypto.randomUUID();
+    if (isSaved && engine.canChat)
+      setAgentRequest({
+        submitId,
+        stripId: strip.id,
+        panelId: selectedPanel.id,
+      });
     sendToAgentChat({
-      message: `Make a four-panel comic from this ${illustrative ? "illustrative" : "user-provided"} product update. Compose it with create-strip and show it in the editor. Keep every claim within this source, distinguish fictional dialogue and include one wordless visual beat.\n\nSOURCE:\n${source}`,
+      submitMessageId: submitId,
+      message: request,
+      context: isSaved
+        ? JSON.stringify({
+            stripId: strip.id,
+            selectedId,
+            panelId: selectedPanel.id,
+            expectedRevision: strip.revision,
+          })
+        : "New strip",
       openSidebar: true,
       submit: engine.canChat,
     });
   }
-  function revise() {
-    sendToAgentChat({
-      message: `Improve the comic's selected ${selectedBalloon ? "line" : selectedActor ? "character" : "panel"}: ${selectedId}, in strip ${strip.id}. Make it clearer and more charming. Read get-strip for the current revision. Preserve all protected human contributions and use focused update-strip edits, not a replacement comic.`,
-      openSidebar: true,
-      context: JSON.stringify({
-        stripId: strip.id,
-        selectedId,
-        panelId: selectedPanel.id,
-        expectedRevision: strip.revision,
-      }),
-      submit: engine.canChat,
-    });
+  function revise(
+    instruction = "Make this selection clearer and more charming.",
+  ) {
+    askAgent(
+      `${instruction} Selected ${selectionLabel}: ${selectedId}, strip ${strip.id}. Read get-strip for the current revision, preserve protected contributions and use focused update-strip edits. Do not replace the comic.`,
+    );
   }
   async function toggleProtection() {
     setError("");
-    setNotice("");
     try {
       await protect.mutateAsync({
         id: strip.id,
@@ -349,11 +350,12 @@ export default function Home() {
       });
       setNotice(
         directProtection
-          ? "Protection removed by you."
-          : "Protected from agent edits.",
+          ? "Back on the drawing board. Protection removed."
+          : "Stamped MINE. The agent cannot change this.",
       );
     } catch (e) {
-      setError(message(e));
+      setError(errorMessage(e));
+      await query.refetch();
     }
   }
   async function download() {
@@ -368,452 +370,610 @@ export default function Home() {
         );
       const blob = await exportPng(output.svg);
       const url = URL.createObjectURL(blob);
-      setPngUrl(url);
       const link = document.createElement("a");
       link.href = url;
       link.download = "strip-comic.png";
       link.click();
-      setNotice("PNG created from the current comic. Open it below to check.");
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      setNotice("Your 1200 × 1200 PNG is ready.");
     } catch (e) {
-      setError(message(e));
+      setError(errorMessage(e));
     } finally {
       setExporting(false);
     }
   }
-
+  async function copyCaption() {
+    try {
+      await navigator.clipboard.writeText(
+        `${strip.draft.title}\n\n${strip.draft.source}${strip.draft.sourceUrl ? `\n${strip.draft.sourceUrl}` : ""}\n\n${strip.draft.inputKind === "illustrative" ? "Illustrative product update. " : ""}Fictional dialogue. Made with Strip.`,
+      );
+      setNotice("Post caption copied.");
+    } catch {
+      setError("Clipboard unavailable. Allow clipboard access and try again.");
+    }
+  }
+  const script = (
+    <section className="script-content">
+      <div className="rail-heading">
+        <span>Script</span>
+        <PencilLine size={18} />
+      </div>
+      <p className="eyebrow">THE SOURCE UPDATE</p>
+      <p className="source-quote">{strip.draft.source}</p>
+      {strip.draft.sourceUrl && (
+        <a href={strip.draft.sourceUrl} target="_blank" rel="noreferrer">
+          Read source ↗
+        </a>
+      )}
+      <span className="source-kind">
+        {strip.draft.inputKind === "illustrative"
+          ? "Illustrative / seeded"
+          : "Your source"}
+      </span>
+      <div className="rail-rule" />
+      <p className="eyebrow">FACTS → PANELS</p>
+      <ol className="claims-list">
+        {strip.draft.panels.map((p, i) => (
+          <li key={p.id}>
+            <button onClick={() => select(p.id)}>
+              <span className="panel-number">0{i + 1}</span>
+              <span>{p.sourceQuote || "Fictional dialogue / visual beat"}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+      <div className="rail-rule" />
+      <p className="eyebrow">THE CAST</p>
+      {Object.entries(cast).map(([key, person]) => (
+        <div className="cast-person" key={key}>
+          <img src={`/peeps/${key}-happy-standing.svg`} alt="" />
+          <div>
+            <b>{person.name}</b>
+            <p>{person.role}</p>
+          </div>
+        </div>
+      ))}
+      <p className="rail-footnote">
+        Facts stay in the script.
+        <br />
+        The characters get to be fictional.
+      </p>
+    </section>
+  );
+  const contextBar = (
+    <div className="context-bar" aria-label="Selection actions">
+      <span className="selection-label">{selectionLabel}</span>
+      <Button
+        variant="ghost"
+        size="sm"
+        disabled={!selectedBalloon || busy}
+        onClick={() => {
+          setEditing(!editing);
+          setPhoneTab("edit");
+        }}
+      >
+        <PencilLine size={16} />
+        Edit
+      </Button>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="ghost" size="sm" disabled={!selectedActor || busy}>
+            <Smile size={16} />
+            Face
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <p className="eyebrow">EXPRESSION</p>
+          <div className="option-list">
+            {expressionSchema.options.map((expression) => (
+              <Button
+                key={expression}
+                variant={
+                  selectedActor?.expression === expression
+                    ? "secondary"
+                    : "ghost"
+                }
+                onClick={() =>
+                  safeEdit([{ kind: "expression", id: selectedId, expression }])
+                }
+              >
+                {expression}
+              </Button>
+            ))}
+          </div>
+        </PopoverContent>
+      </Popover>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="ghost" size="sm" disabled={!selectedActor || busy}>
+            <PersonStanding size={16} />
+            Pose
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <p className="eyebrow">BODY LANGUAGE</p>
+          <div className="option-list">
+            {poseSchema.options.map((pose) => (
+              <Button
+                key={pose}
+                variant={selectedActor?.pose === pose ? "secondary" : "ghost"}
+                onClick={() =>
+                  safeEdit([{ kind: "pose", id: selectedId, pose }])
+                }
+              >
+                {pose}
+              </Button>
+            ))}
+          </div>
+        </PopoverContent>
+      </Popover>
+      <Button
+        variant="ghost"
+        size="sm"
+        disabled={busy || inheritedProtection}
+        onClick={toggleProtection}
+      >
+        <Shield size={16} />
+        {directProtection ? "Unprotect" : "Protect"}
+      </Button>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="ghost" size="sm" className="agent-action">
+            <MessageSquare size={16} />
+            Ask agent
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="ask-popover">
+          <p className="eyebrow">A NOTE FOR THE AGENT</p>
+          <div className="option-list">
+            {["Funnier", "Shorter", "More innocent", "Show the feature"].map(
+              (chip) => (
+                <Button
+                  variant="outline"
+                  key={chip}
+                  onClick={() => revise(chip)}
+                >
+                  {chip}
+                </Button>
+              ),
+            )}
+          </div>
+          <Button
+            variant="ghost"
+            onClick={() => {
+              setPhoneTab("agent");
+              sendToAgentChat({
+                message: `Revise ${selectionLabel}: `,
+                context: JSON.stringify({
+                  stripId: strip.id,
+                  selectedId,
+                  expectedRevision: strip.revision,
+                }),
+                submit: false,
+                openSidebar: true,
+              });
+            }}
+          >
+            Write your own note <ArrowRight size={16} />
+          </Button>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+  const editControls = (
+    <div className="selection-details">
+      <p className="eyebrow">
+        PANEL {panelNumber} / {selectionLabel}
+      </p>
+      {(directProtection || inheritedProtection) && (
+        <p className="mine-note">
+          <span className="mine-stamp">MINE</span>
+          {inheritedProtection
+            ? "The whole panel is protected."
+            : "This contribution is protected."}
+        </p>
+      )}
+      {selectedBalloon ? (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            void edit([{ kind: "balloon", id: selectedId, text: line }])
+              .then(() => setEditing(false))
+              .catch(() => {});
+          }}
+        >
+          <label htmlFor="phone-line">Lettering · 12 words max</label>
+          <Textarea
+            id="phone-line"
+            value={line}
+            onChange={(e) => setLine(e.target.value)}
+            maxLength={120}
+          />
+          <Button type="submit" disabled={busy || !line.trim()}>
+            <Check size={16} />
+            Save line
+          </Button>
+        </form>
+      ) : selectedActor ? (
+        <p>Choose Face or Pose to change {selectionLabel}.</p>
+      ) : (
+        <>
+          <p>
+            Tap a balloon to rewrite it, or a character to change their
+            expression.
+          </p>
+          <label htmlFor="screen-state">Feature on screen</label>
+          <select
+            id="screen-state"
+            value={selectedPanel.screenState}
+            disabled={busy}
+            onChange={(e) =>
+              safeEdit([
+                {
+                  kind: "screen-state",
+                  id: selectedPanel.id,
+                  screenState: screenStateSchema.parse(e.target.value),
+                },
+              ])
+            }
+          >
+            {screenStateSchema.options.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
+      {pencils
+        .filter(([, p]) => p.targetId === selectedId)
+        .map(([key, proposal]) => (
+          <div className="review-actions" key={key}>
+            <span>
+              <PencilLine size={15} /> In blue pencil
+            </span>
+            <Button
+              size="sm"
+              disabled={busy}
+              onClick={() =>
+                safeEdit([{ kind: "review", key, decision: "ink" }])
+              }
+            >
+              Ink
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={busy || !proposal.before}
+              title={
+                !proposal.before
+                  ? "New draft item: no earlier value to restore"
+                  : "Restore the previous value"
+              }
+              onClick={() =>
+                safeEdit([{ kind: "review", key, decision: "erase" }])
+              }
+            >
+              <Eraser size={14} />
+              Erase
+            </Button>
+          </div>
+        ))}
+    </div>
+  );
   if (id && query.isLoading)
     return (
-      <main className="strip-page">
-        <p role="status">Opening your saved comic…</p>
+      <main className="studio-loading" role="status">
+        Opening your drawing board…
       </main>
     );
   if (id && query.error)
     return (
-      <main className="strip-page">
+      <main className="studio-loading">
         <h1>We couldn’t open this strip.</h1>
-        <p role="alert">{message(query.error)}</p>
+        <p role="alert">{errorMessage(query.error)}</p>
         <Link to="/home">Back to Strip</Link>
       </main>
     );
+  if (!isSaved)
+    return (
+      <main className="new-strip">
+        <header className="studio-topbar">
+          <Link className="strip-wordmark" to="/">
+            Strip<span>.</span>
+          </Link>
+          <span>THE DRAWING BOARD</span>
+          <Button variant="ghost" onClick={requestAgentSidebarOpen}>
+            <MessageSquare size={16} />
+            Agent
+          </Button>
+        </header>
+        <section className="new-strip-body">
+          <p className="eyebrow">START WITH SOMETHING REAL.</p>
+          <h1>What’s the update?</h1>
+          <p>
+            Bring one small product change. We’ll give it a little character.
+          </p>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              askAgent(
+                `Make a four-panel comic from this ${illustrative ? "illustrative" : "user-provided"} product update. Use create-strip, then show it in Studio. Keep claims within this source, distinguish fictional dialogue, include a wordless visual beat.\nSOURCE:\n${source}`,
+              );
+            }}
+          >
+            <label htmlFor="new-source">Product update</label>
+            <Textarea
+              id="new-source"
+              value={source}
+              onChange={(e) => setSource(e.target.value)}
+              maxLength={4000}
+              rows={5}
+              placeholder="We added Undo. Deleted files can now be restored…"
+              required
+            />
+            <label className="illustrative-check">
+              <input
+                type="checkbox"
+                checked={illustrative}
+                onChange={(e) => setIllustrative(e.target.checked)}
+              />
+              This is an illustrative update
+            </label>
+            <Button
+              className="print-button"
+              disabled={!source.trim()}
+              type="submit"
+            >
+              Let’s pencil it <ArrowRight size={18} />
+            </Button>
+          </form>
+          {engine.missing && (
+            <p className="setup-note">
+              No AI connected yet. Your request will open in the real agent
+              composer.{" "}
+              <Link to={buildSettingsRoute("model")}>Connect AI →</Link>
+            </p>
+          )}
+          <div className="try-example">
+            <span>Just looking around?</span>
+            <Button variant="outline" disabled={busy} onClick={openExample}>
+              Open illustrative Undo strip <ArrowRight size={16} />
+            </Button>
+          </div>
+          {error && <p role="alert">{error}</p>}
+        </section>
+      </main>
+    );
   return (
-    <main
-      className={`strip-page ${isSaved ? "strip-workspace" : "strip-entry"}`}
-    >
-      <header className="strip-masthead">
-        <Link to="/home" className="strip-wordmark" aria-label="Strip home">
+    <main className="studio">
+      <header className="studio-topbar">
+        <Link className="strip-wordmark" to="/home">
           Strip<span>.</span>
         </Link>
-        <span className="strip-edition">ONE UPDATE. FOUR PANELS.</span>
-        <button
-          type="button"
-          className="strip-text-button"
-          onClick={requestAgentSidebarOpen}
-          aria-label="Open agent chat"
-        >
-          <MessageSquare size={16} /> Agent
-        </button>
-        <span className="strip-proof-tag">PROOF / 001</span>
-      </header>
-      {engine.missing ? (
-        <p className="strip-engine-state" role="status">
-          Connect an AI engine to draft or revise.{" "}
-          <Link to={buildSettingsRoute("model")}>Open AI setup →</Link> Choose
-          “Use Builder.io” or connect a provider. Prepared examples remain
-          editable without AI.
-        </p>
-      ) : null}
-      {error ? (
-        <div className="strip-alert" role="alert">
-          {error}
+        <div className="title-field">
+          <Input
+            key={strip.id + strip.draft.title}
+            aria-label="Strip title"
+            defaultValue={strip.draft.title}
+            maxLength={70}
+            onBlur={(e) => {
+              if (e.target.value.trim() && e.target.value !== strip.draft.title)
+                safeEdit([{ kind: "title", text: e.target.value }]);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.currentTarget.blur();
+            }}
+          />
+          <span>
+            {strip.origin === "prepared-example"
+              ? "ILLUSTRATIVE / SEEDED"
+              : "YOUR STRIP"}{" "}
+            · REV {strip.revision}
+          </span>
         </div>
-      ) : null}
-      {notice ? (
-        <p className="strip-notice" role="status">
-          {notice}
-          {pngUrl ? (
-            <>
-              {" "}
-              <a href={pngUrl} target="_blank" rel="noreferrer">
-                Open actual PNG ↗
-              </a>
-            </>
-          ) : null}
-        </p>
-      ) : null}
-      {!isSaved ? (
-        <div className="strip-entry-grid">
-          <section className="strip-intro">
-            <p className="strip-eyebrow">A LITTLE LESS CHANGELOG.</p>
-            <h1>
-              Make your update
-              <br />
-              worth a<br />
-              <span>second look.</span>
-            </h1>
-            <p className="strip-deck">
-              A four-panel comic, made with you.
-              <br />
-              Bring the update. Give it a little character.
-            </p>
-            <form className="strip-source-form" onSubmit={draftWithAgent}>
-              <label htmlFor="source" className="strip-field-label">
-                What changed?
-              </label>
-              <textarea
-                id="source"
-                value={source}
-                onChange={(e) => setSource(e.target.value)}
-                maxLength={4000}
-                rows={3}
-                required
-                placeholder="One specific product update. Nothing invented."
-              />
-              <label className="strip-check">
-                <input
-                  type="checkbox"
-                  checked={illustrative}
-                  onChange={(e) => setIllustrative(e.target.checked)}
-                />
-                This is an illustrative update
-              </label>
-              <button
-                className="strip-button strip-button-primary"
-                type="submit"
-                disabled={!source.trim()}
-              >
-                <MessageSquare size={17} />
-                Ask agent for a new comic
-                <ArrowUpRight size={17} />
-              </button>
-              <p className="strip-fine">
-                Opens the agent for a new comic from your update. The example
-                below will not change.
-              </p>
-            </form>
-            <div className="strip-how">
-              <span>01 / BRING A CHANGE</span>
-              <span>02 / MAKE IT YOURS</span>
-              <span>03 / TAKE IT WITH YOU</span>
+        <div className="topbar-actions">
+          <Button
+            variant="ghost"
+            className="caption-button"
+            onClick={copyCaption}
+          >
+            <Copy size={16} />
+            Copy caption
+          </Button>
+          <Button
+            className="print-button"
+            onClick={download}
+            disabled={
+              !assets || exporting || Boolean(rendered?.overflow.length)
+            }
+          >
+            <ArrowDownToLine size={16} />
+            <span>{exporting ? "Exporting…" : "Export PNG"}</span>
+          </Button>
+        </div>
+      </header>
+      {(error || notice) && (
+        <div
+          className={error ? "studio-alert" : "studio-notice"}
+          role={error ? "alert" : "status"}
+        >
+          {error || notice}
+        </div>
+      )}
+      <div className="studio-grid">
+        <aside className="script-rail">{script}</aside>
+        <section className="drawing-desk">
+          <div className="desk-heading">
+            <span>THE PAGE</span>
+            <div>
+              <span className="ink-key">━ Your ink</span>
+              <span className="pencil-key">┄ Agent pencil</span>
             </div>
-          </section>
-          <section className="strip-example">
-            <div className="strip-preview-label">
-              <span>PREPARED EXAMPLE</span>
-              <span>HAND-AUTHORED · NOT YOUR RESULT</span>
-            </div>
+          </div>
+          <div className="desktop-context">{contextBar}</div>
+          <div className="artboard-wrap">
             <div
-              className="strip-canvas"
+              className="strip-canvas artboard"
               ref={canvasRef}
               data-testid="comic-canvas"
+              onClick={canvasClick}
+              onKeyDown={canvasClick}
               dangerouslySetInnerHTML={{ __html: rendered?.svg ?? "" }}
             />
-            {!assets ? <p role="status">Loading local artwork…</p> : null}
-            <div className="strip-sample-tabs" aria-label="Prepared examples">
-              {["Undo", "Smarter search", "Scheduled send"].map((name, i) => (
-                <button
-                  key={name}
-                  aria-pressed={sample === i}
-                  onClick={() => {
-                    setSample(i);
-                  }}
+            {editing && selectedBalloon && (
+              <form
+                className="inline-lettering"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  void edit([{ kind: "balloon", id: selectedId, text: line }])
+                    .then(() => setEditing(false))
+                    .catch(() => {});
+                }}
+                style={{
+                  top: panelNumber < 3 ? "14%" : "57%",
+                  left: panelNumber % 2 ? "5%" : "51%",
+                }}
+              >
+                <Textarea
+                  aria-label="Edit balloon inline"
+                  autoFocus
+                  value={line}
+                  maxLength={120}
+                  onChange={(e) => setLine(e.target.value)}
+                />
+                <Button size="sm" disabled={busy} type="submit">
+                  <Check size={14} />
+                  Ink line
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => setEditing(false)}
                 >
-                  {name}
+                  Cancel
+                </Button>
+              </form>
+            )}
+          </div>
+          <div className="page-foot">
+            <span>TAP THE PAGE TO MAKE IT YOURS.</span>
+            <span>1200 × 1200</span>
+          </div>
+          <section className="endings-tray">
+            <div className="endings-heading">
+              <h2>Stick the landing.</h2>
+              <span>THREE WAYS TO END IT. PICK YOURS.</span>
+            </div>
+            <div className="ending-options">
+              {strip.draft.endings.map((ending, index) => (
+                <button
+                  className="ending-choice"
+                  aria-pressed={
+                    strip.draft.panels[3]!.balloons.slice(-1)[0]!.text ===
+                    ending
+                  }
+                  key={index}
+                  disabled={busy}
+                  onClick={() => safeEdit([{ kind: "choose-ending", index }])}
+                >
+                  <div
+                    className="ending-thumbnail"
+                    dangerouslySetInnerHTML={{ __html: endings[index] ?? "" }}
+                  />
+                  <span>
+                    <b>0{index + 1}</b>
+                    {index === 0
+                      ? "The callback"
+                      : index === 1
+                        ? "The dry one"
+                        : "The left turn"}
+                    {strip.draft.panels[3]!.balloons.slice(-1)[0]!.text ===
+                      ending && <Check size={14} />}
+                  </span>
                 </button>
               ))}
             </div>
-            <div className="strip-preview-foot">
-              <p>This illustrative example is separate from your new comic.</p>
-              <button
-                className="strip-text-button"
-                onClick={openExample}
-                disabled={busy}
-              >
-                Try editing this example <ArrowUpRight size={16} />
-              </button>
-            </div>
           </section>
-        </div>
-      ) : (
-        <>
-          <div className="strip-workspace-heading">
-            <div>
-              <button className="strip-back" onClick={() => navigate("/home")}>
-                <ChevronLeft size={15} />
-                New strip
+          <div className="desktop-selection">{editControls}</div>
+        </section>
+      </div>
+      <section className="phone-sheet">
+        <Tabs
+          value={phoneTab}
+          onValueChange={(value) => {
+            setPhoneTab(value);
+            if (value === "agent") requestAgentSidebarOpen();
+          }}
+        >
+          <TabsList>
+            <TabsTrigger value="edit">
+              <PencilLine size={16} />
+              Edit
+            </TabsTrigger>
+            <TabsTrigger value="agent">
+              <MessageSquare size={16} />
+              Agent
+            </TabsTrigger>
+            <TabsTrigger value="script">Script</TabsTrigger>
+          </TabsList>
+          <TabsContent value="edit">
+            {contextBar}
+            {editControls}
+          </TabsContent>
+          <TabsContent value="agent">
+            <Button variant="outline" onClick={requestAgentSidebarOpen}>
+              Open agent’s desk <ArrowRight size={16} />
+            </Button>
+          </TabsContent>
+          <TabsContent value="script">{script}</TabsContent>
+        </Tabs>
+      </section>
+      <section className="agent-change-log">
+        <h2>From the agent’s pencil</h2>
+        {pencils.length ? (
+          pencils.map(([key, proposal]) => (
+            <div className="change-entry" key={key}>
+              <button onClick={() => select(proposal.targetId)}>
+                <PencilLine size={14} />
+                {proposal.before?.kind ?? "New draft"} · {proposal.targetId}
               </button>
-              <h1>{strip.draft.title}</h1>
-              <p>
-                <span className="strip-origin">
-                  {strip.origin === "prepared-example"
-                    ? "Prepared example"
-                    : strip.origin === "agent-draft"
-                      ? "Agent draft"
-                      : "Human-authored"}
-                </span>{" "}
-                · Revision {strip.revision} · Last edit: {strip.lastEditedBy}
-              </p>
+              <Button
+                size="sm"
+                disabled={busy}
+                onClick={() =>
+                  safeEdit([{ kind: "review", key, decision: "ink" }])
+                }
+              >
+                Ink
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                disabled={busy || !proposal.before}
+                title={
+                  !proposal.before
+                    ? "New draft item: no earlier value to restore"
+                    : "Restore the previous value"
+                }
+                onClick={() =>
+                  safeEdit([{ kind: "review", key, decision: "erase" }])
+                }
+              >
+                Erase
+              </Button>
             </div>
-            <button
-              className="strip-button strip-button-primary"
-              onClick={download}
-              disabled={
-                exporting || !assets || Boolean(rendered?.overflow.length)
-              }
-            >
-              <ArrowDownToLine size={17} />
-              {exporting ? "Creating PNG…" : "Export PNG"}
-            </button>
-          </div>
-          <div className="strip-workspace-grid">
-            <section>
-              <div
-                className="strip-canvas"
-                ref={canvasRef}
-                data-testid="comic-canvas"
-                onClick={canvasClick}
-                onKeyDown={canvasClick}
-                dangerouslySetInnerHTML={{ __html: rendered?.svg ?? "" }}
-              />
-              <p className="strip-canvas-note">
-                Tap or click a line, character or panel to select it.
-              </p>
-              {rendered?.overflow.length ? (
-                <p role="alert" className="strip-error">
-                  Text needs more room: {rendered.overflow.join(", ")}. Shorten
-                  it before exporting.
-                </p>
-              ) : null}
-            </section>
-            <aside className="strip-inspector">
-              <div className="strip-inspector-heading">
-                <span className="strip-eyebrow">MAKE IT YOURS</span>
-                <PencilLine size={17} />
-              </div>
-              <div className="strip-panel-tabs" aria-label="Select panel">
-                {strip.draft.panels.map((panel, i) => (
-                  <button
-                    key={panel.id}
-                    aria-pressed={panel.id === selectedPanel.id}
-                    onClick={() => select(panel.id)}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </button>
-                ))}
-              </div>
-              <h2>
-                Editing panel {strip.draft.panels.indexOf(selectedPanel) + 1} →{" "}
-                {label(selectedId)}
-              </h2>
-              <p className="strip-muted">
-                {selectedBalloon
-                  ? "Keep the good line. Change the rest."
-                  : "Direct the moment, then let the agent work around it."}
-              </p>
-              {selectedPanel.balloons.length ? (
-                <div className="strip-lines">
-                  {selectedPanel.balloons.map((balloon) => (
-                    <button
-                      key={balloon.id}
-                      className={selectedId === balloon.id ? "is-selected" : ""}
-                      onClick={() => select(balloon.id)}
-                    >
-                      <span>{cast[balloon.speaker].name}</span>“{balloon.text}”
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <p className="strip-wordless">
-                  A wordless beat. Let the picture do the talking.
-                </p>
-              )}
-              {selectedBalloon ? (
-                <BalloonEditor
-                  key={selectedBalloon.id}
-                  text={selectedBalloon.text}
-                  busy={busy}
-                  onSave={(text) =>
-                    edit([{ kind: "balloon", id: selectedBalloon.id, text }])
-                  }
-                />
-              ) : null}
-              {!selectedBalloon && !selectedActor ? (
-                <div className="strip-lines" aria-label="Select a character">
-                  {selectedPanel.actors.map((actor) => (
-                    <button key={actor.id} onClick={() => select(actor.id)}>
-                      Edit {cast[actor.character].name}'s expression or pose
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-              {selectedActor ? (
-                <div className="strip-characters">
-                  {selectedPanel.actors
-                    .filter((actor) => actor.id === selectedActor.id)
-                    .map((actor) => (
-                      <div key={actor.id}>
-                        <label
-                          className="strip-field-label"
-                          htmlFor={`${actor.id}-expression`}
-                        >
-                          {cast[actor.character].name}'s expression
-                        </label>
-                        <select
-                          id={`${actor.id}-expression`}
-                          value={actor.expression}
-                          disabled={busy}
-                          onChange={(e) => {
-                            void edit([
-                              {
-                                kind: "expression",
-                                id: actor.id,
-                                expression: expressionSchema.parse(
-                                  e.target.value,
-                                ),
-                              },
-                            ]).catch(() => {});
-                          }}
-                        >
-                          {expressionSchema.options.map((expression) => (
-                            <option key={expression} value={expression}>
-                              {expression}
-                            </option>
-                          ))}
-                        </select>
-                        <label
-                          className="strip-field-label"
-                          htmlFor={`${actor.id}-pose`}
-                        >
-                          {cast[actor.character].name}'s pose
-                        </label>
-                        <select
-                          id={`${actor.id}-pose`}
-                          value={
-                            actor.pose ??
-                            (actor.character === "ari"
-                              ? "standing"
-                              : "arms-crossed")
-                          }
-                          disabled={busy}
-                          onChange={(e) => {
-                            void edit([
-                              {
-                                kind: "pose",
-                                id: actor.id,
-                                pose: poseSchema.parse(e.target.value),
-                              },
-                            ]).catch(() => {});
-                          }}
-                        >
-                          {poseSchema.options.map((pose) => (
-                            <option key={pose} value={pose}>
-                              {pose}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    ))}
-                </div>
-              ) : null}
-              {!selectedBalloon && !selectedActor ? (
-                <label className="strip-field-label">
-                  What appears on the laptop
-                  <select
-                    value={selectedPanel.screenState}
-                    disabled={busy}
-                    onChange={(e) => {
-                      void edit([
-                        {
-                          kind: "screen-state",
-                          id: selectedPanel.id,
-                          screenState: screenStateSchema.parse(e.target.value),
-                        },
-                        { kind: "prop", id: selectedPanel.id, prop: "laptop" },
-                      ]).catch(() => {});
-                    }}
-                  >
-                    {screenStateSchema.options.map((state) => (
-                      <option key={state} value={state}>
-                        {state}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              ) : null}
-              <button
-                className={`strip-protection ${directProtection ? "is-protected" : ""}`}
-                onClick={toggleProtection}
-                disabled={busy}
-              >
-                {directProtection ? (
-                  <LockKeyhole size={17} />
-                ) : (
-                  <UnlockKeyhole size={17} />
-                )}
-                <span>
-                  {directProtection
-                    ? "Remove protection from this selection"
-                    : inheritedProtection
-                      ? "Protected by the panel · protect this item separately"
-                      : `Protect this ${selectedBalloon ? "line" : selectedActor ? "character" : "panel"}`}
-                  <small>
-                    {inheritedProtection
-                      ? "This panel is protected too; removing this item's protection will not unprotect the panel."
-                      : directProtection
-                        ? "You can still edit. Only you can remove protection."
-                        : "Stops agent edits; you can still edit."}
-                  </small>
-                </span>
-              </button>
-              <button
-                className="strip-button strip-button-outline"
-                onClick={revise}
-                disabled={busy}
-              >
-                <MessageSquare size={16} />
-                Ask agent about this selection
-                <ArrowUpRight size={16} />
-              </button>
-              <p className="strip-fine">
-                Opens the agent with this selection. Protected work stays
-                unchanged.
-              </p>
-              <details className="strip-endings">
-                <summary>Three ways to end it</summary>
-                {strip.draft.endings.map((ending, i) => (
-                  <button
-                    key={`${i}-${ending}`}
-                    disabled={busy}
-                    onClick={() => {
-                      void edit([{ kind: "choose-ending", index: i }]).catch(
-                        () => {},
-                      );
-                    }}
-                  >
-                    <span>{String(i + 1).padStart(2, "0")}</span>
-                    {ending}
-                    <ArrowUpRight size={14} />
-                  </button>
-                ))}
-              </details>
-              <details className="strip-source-note">
-                <summary>Source & fictional dialogue</summary>
-                <p>{strip.draft.source}</p>
-                <small>
-                  {strip.draft.inputKind === "illustrative"
-                    ? "Illustrative product update, not a claimed real release."
-                    : "User-provided statement, not independently verified by Strip."}{" "}
-                  All character dialogue is fictional.
-                </small>
-              </details>
-            </aside>
-          </div>
-        </>
-      )}
-      <footer className="strip-footer">
-        <span>BUILT WITH AGENT-NATIVE</span>
-        <span>HUMAN TASTE. SHARED TOOLS.</span>
-        <span>ART: OPEN PEEPS</span>
-      </footer>
+          ))
+        ) : (
+          <p>No unreviewed revisions. Your ink, your call.</p>
+        )}
+        {engine.missing && (
+          <p>
+            No AI connected.{" "}
+            <Link to={buildSettingsRoute("model")}>Connect AI →</Link>
+          </p>
+        )}
+      </section>
     </main>
   );
 }

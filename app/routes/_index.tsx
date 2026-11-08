@@ -1,1 +1,2 @@
-export { signInLandingLoader as loader } from "@agent-native/core/client/sign-in-landing";
+export { default } from "@/components/home/Poster";
+export { meta } from "./home";

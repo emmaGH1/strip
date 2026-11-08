@@ -89,6 +89,7 @@ function LayoutShell({ children }: LayoutProps) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const isChatRoute = isChatPathname(location.pathname);
+  const isStudioRoute = location.pathname === "/home";
   // Settings brings its own navigation, header, and agent toggle, so it
   // renders full width.
   const settingsOwnsChrome = isSettingsPathname(location.pathname);
@@ -153,7 +154,7 @@ function LayoutShell({ children }: LayoutProps) {
           title={pageTitle ?? APP_TITLE}
           actions={pageActions}
         />
-      ) : ownsToolbar ? (
+      ) : isStudioRoute ? null : ownsToolbar ? (
         <MobileAppBar
           className="md:hidden"
           onOpenNavigation={openMobileSidebar}
@@ -172,7 +173,7 @@ function LayoutShell({ children }: LayoutProps) {
   return (
     <HeaderActionsProvider>
       <div className="agent-layout-shell chat-layout-shell flex h-screen w-full overflow-hidden bg-background text-foreground">
-        {settingsOwnsChrome ? null : (
+        {settingsOwnsChrome || isStudioRoute ? null : (
           <div
             data-collapsed={sidebarCollapsed ? "true" : "false"}
             className="agent-layout-left-drawer hidden md:block"

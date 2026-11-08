@@ -2,7 +2,6 @@ import {
   navigateWithAgentChatViewTransition,
   requestAgentSidebarOpen,
 } from "@agent-native/core/client/agent-chat";
-import { useT } from "@agent-native/core/client/i18n";
 import { focusAgentChat } from "@agent-native/toolkit/app/chat";
 import { AgentSidebar } from "@agent-native/toolkit/app/chat";
 import { useEffect, type ReactNode } from "react";
@@ -25,7 +24,6 @@ export function AgentInspector({
   chatHomeHandoffPending,
 }: AgentInspectorProps) {
   const navigate = useNavigate();
-  const t = useT();
   const { pathname, search } = useLocation();
   const editing = pathname === "/home" && new URLSearchParams(search).has("id");
   useEffect(() => {
@@ -42,19 +40,19 @@ export function AgentInspector({
     <AgentSidebar
       composerContextProvider={ChatComposerContextProvider}
       position="right"
-      defaultSidebarWidth={350}
+      defaultSidebarWidth={320}
       chatViewTransition
       chatViewTransitionHandoff={chatHomeHandoffPending}
       storageKey="chat"
       browserTabId={TAB_ID}
       openOnChatRunning={chatHomeHandoffActive}
       onFullscreenRequest={openAskAgentFullscreen}
-      emptyStateText={t("chat.inspectEmptyState")}
+      emptyStateText="The agent’s desk. A little back-and-forth makes it yours."
       agentPageHref="/settings/agent"
       suggestions={[
-        t("chat.inspectSuggestionCapabilities"),
-        t("chat.inspectSuggestionHello"),
-        t("chat.inspectSuggestionAction"),
+        "Help me sharpen this strip",
+        "Make the selected panel funnier",
+        "What can we change without touching MINE?",
       ]}
     >
       {children}

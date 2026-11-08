@@ -11,7 +11,7 @@ import { applyEdits, editSchema, stripSchema } from "../shared/strip.js";
 
 export default defineAction({
   description:
-    "Apply 1–16 focused balloon, expression, pose, screen-state, prop or ending edits atomically to the current comic revision. UI and agent share this action. Protected human contributions cannot be changed by the agent. On stale_revision re-read; on protected_element leave it unchanged. No full-scene replacement or unlock bypass exists.",
+    "Apply 1–16 focused title, balloon, expression, pose, screen-state, prop or ending edits atomically to the current comic revision. UI and agent share this action. Real agent changes retain server-derived prior values in pencils until a HUMAN inks or erases them with a review edit; agents cannot review their own work. New draft items have no prior value and can only be inked or edited directly. Protected human contributions cannot be changed by the agent. On stale_revision re-read; on protected_element leave it unchanged. No full-scene replacement or unlock bypass exists.",
   schema: z.object({
     id: z.string().describe("Strip id to edit."),
     expectedRevision: z

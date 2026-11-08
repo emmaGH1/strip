@@ -168,9 +168,13 @@ function AppContent() {
           <ThemeToggleItem />
         </CommandMenu.Group>
       </CommandMenu>
-      <AppLayout>
+      {location.pathname === "/" ? (
         <Outlet />
-      </AppLayout>
+      ) : (
+        <AppLayout>
+          <Outlet />
+        </AppLayout>
+      )}
     </>
   );
 }
@@ -184,10 +188,12 @@ export default function Root() {
     <AppToolkitProvider>
       <AppProviders
         queryClient={queryClient}
+        isPublicPath={pathname === "/"}
+        defaultTheme="light"
         skeletonLayout={skeletonLayoutForPath(pathname)}
         i18n={{ catalog: i18nCatalog }}
       >
-        <DbSyncSetup />
+        {pathname !== "/" ? <DbSyncSetup /> : null}
         <AppContent />
       </AppProviders>
     </AppToolkitProvider>

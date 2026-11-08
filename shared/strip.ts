@@ -179,15 +179,6 @@ export const composedDraftSchema = draftSchema.safeExtend({
     )
     .length(4),
 });
-export const stripSchema = z.object({
-  id: z.string(),
-  revision: z.number().int().nonnegative(),
-  draft: draftSchema,
-  protectedIds: z.array(z.string()),
-  origin: z.enum(["prepared-example", "human-authored", "agent-draft"]),
-  lastEditedBy: z.enum(["human", "agent"]),
-  updatedAt: z.string(),
-});
 export type Draft = z.infer<typeof draftSchema>;
 export type ComposedDraft = z.infer<typeof composedDraftSchema>;
 export type Strip = z.infer<typeof stripSchema>;
@@ -195,7 +186,11 @@ export type Panel = z.infer<typeof panelSchema>;
 export type Expression = z.infer<typeof expressionSchema>;
 export type Actor = "human" | "agent";
 
-export const editSchema = z.discriminatedUnion("kind", [
+export const valueEditSchema = z.discriminatedUnion("kind", [
+  z.object({
+    kind: z.literal("title"),
+    text: z.string().trim().min(1).max(70),
+  }),
   z.object({
     kind: z.literal("balloon"),
     id: z.string(),
@@ -226,7 +221,98 @@ export const editSchema = z.discriminatedUnion("kind", [
     index: z.number().int().min(0).max(2),
   }),
 ]);
+export const editSchema = z.union([
+  valueEditSchema,
+  z.object({
+    kind: z.literal("review"),
+    key: z.string(),
+    decision: z.enum(["ink", "erase"]),
+  }),
+]);
+export const stripSchema = z.object({
+  id: z.string(),
+  revision: z.number().int().nonnegative(),
+  draft: draftSchema,
+  protectedIds: z.array(z.string()),
+  origin: z.enum(["prepared-example", "human-authored", "agent-draft"]),
+  lastEditedBy: z.enum(["human", "agent"]),
+  updatedAt: z.string(),
+  // Optional for historical records. Inverses are server-derived, never supplied by the agent.
+  pencils: z
+    .record(
+      z.string(),
+      z.object({
+        targetId: z.string(),
+        before: valueEditSchema.nullable(),
+        missingPose: z.boolean().optional(),
+      }),
+    )
+    .optional(),
+});
 export type Edit = z.infer<typeof editSchema>;
+type ValueEdit = z.infer<typeof valueEditSchema>;
+function inverse(
+  strip: Strip,
+  edit: ValueEdit,
+): { targetId: string; before: ValueEdit; missingPose?: boolean } {
+  if (edit.kind === "title")
+    return {
+      targetId: "$title",
+      before: { kind: "title", text: strip.draft.title },
+    };
+  if (edit.kind === "endings")
+    return {
+      targetId: "$endings",
+      before: { kind: "endings", choices: strip.draft.endings },
+    };
+  if (edit.kind === "choose-ending") {
+    const balloon = strip.draft.panels[3]!.balloons.slice(-1)[0]!;
+    return {
+      targetId: balloon.id,
+      before: { kind: "balloon", id: balloon.id, text: balloon.text },
+    };
+  }
+  const panel = panelForObject(strip, edit.id);
+  if (!panel)
+    throw new StripError("not_found", "That scene object no longer exists.");
+  if (edit.kind === "balloon" && !panel.balloons.some((b) => b.id === edit.id))
+    throw new StripError("not_found", "Choose a balloon to edit its text.");
+  if (
+    (edit.kind === "expression" || edit.kind === "pose") &&
+    !panel.actors.some((a) => a.id === edit.id)
+  )
+    throw new StripError(
+      "not_found",
+      "Choose a character to change its expression or pose.",
+    );
+  let before: ValueEdit;
+  if (edit.kind === "balloon")
+    before = {
+      ...edit,
+      text: panel.balloons.find((b) => b.id === edit.id)!.text,
+    };
+  else if (edit.kind === "expression")
+    before = {
+      ...edit,
+      expression: panel.actors.find((a) => a.id === edit.id)!.expression,
+    };
+  else if (edit.kind === "pose")
+    before = {
+      ...edit,
+      pose: panel.actors.find((a) => a.id === edit.id)!.pose ?? "standing",
+    };
+  else if (edit.kind === "screen-state")
+    before = { ...edit, screenState: panel.screenState };
+  else before = { ...edit, prop: panel.prop };
+  return {
+    targetId: edit.id,
+    before,
+    ...(edit.kind === "pose" &&
+    panel.actors.find((a) => a.id === edit.id)?.pose === undefined
+      ? { missingPose: true }
+      : {}),
+  };
+}
 export class StripError extends Error {
   constructor(
     public code:
@@ -285,7 +371,58 @@ export function applyEdits(
     );
   const next = structuredClone(current);
   for (const raw of edits) {
-    const edit = editSchema.parse(raw);
+    let edit = editSchema.parse(raw);
+    let eraseMissingPose = false;
+    if (edit.kind === "review") {
+      if (actor !== "human")
+        throw new StripError(
+          "human_only",
+          "Only a person can ink or erase agent changes.",
+        );
+      const pencil = next.pencils?.[edit.key];
+      if (!pencil)
+        throw new StripError(
+          "not_found",
+          "This proposal has already been reviewed.",
+        );
+      delete next.pencils![edit.key];
+      if (edit.decision === "ink") continue;
+      if (!pencil.before)
+        throw new StripError(
+          "invalid_scene",
+          "This is a new draft item, with no previous value to restore. Edit it directly or ink it.",
+        );
+      edit = pencil.before;
+      eraseMissingPose = pencil.missingPose === true;
+    }
+    // Capture the actual prior value before applying any change. Repeated agent edits
+    // keep the original human value; human edits accept/replace that field only.
+    const previous = inverse(next, edit);
+    const key = `${previous.before.kind}:${previous.targetId}`;
+    const proposed =
+      edit.kind === "choose-ending"
+        ? {
+            kind: "balloon",
+            id: previous.targetId,
+            text: next.draft.endings[edit.index],
+          }
+        : edit;
+    const valueChanged =
+      previous.missingPose ||
+      JSON.stringify(previous.before) !== JSON.stringify(proposed);
+    if (actor === "agent") {
+      if (valueChanged) {
+        next.pencils ??= {};
+        next.pencils[key] ??= previous;
+      }
+    } else if (next.pencils) {
+      delete next.pencils[key];
+      delete next.pencils[`draft:${previous.targetId}`];
+    }
+    if (edit.kind === "title") {
+      next.draft.title = edit.text;
+      continue;
+    }
     if (edit.kind === "endings") {
       next.draft.endings = edit.choices;
       continue;
@@ -321,7 +458,8 @@ export function applyEdits(
           "not_found",
           "Choose a character to change its pose.",
         );
-      character.pose = edit.pose;
+      if (eraseMissingPose) delete character.pose;
+      else character.pose = edit.pose;
     } else {
       if (edit.id !== targetPanel.id)
         throw new StripError("not_found", "Choose a panel to change its prop.");
