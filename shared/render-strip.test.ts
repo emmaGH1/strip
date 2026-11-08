@@ -32,6 +32,14 @@ describe("shared canvas/export renderer", () => {
         renderStripSvg({ ...scene(), draft }, assets, measure).overflow,
       ).toEqual([]);
   });
+  it("renders the feature on the laptop and uses comic lettering only in balloons", () => {
+    const svg = renderStripSvg(scene(), assets, measure).svg;
+    expect(svg).toContain("Restored ✓");
+    expect(svg).toContain("↶ Undo");
+    expect(svg).toContain('font-family="StripDialogue, sans-serif"');
+    expect(svg).not.toContain("PHEW.");
+    expect(svg).not.toContain("UNDO. EXHALE.");
+  });
   it("escapes model/user text instead of accepting arbitrary SVG/HTML", () => {
     const strip = scene();
     strip.draft.panels[0]!.balloons[0]!.text = '<script>alert("x")</script>';
@@ -52,7 +60,7 @@ describe("shared canvas/export renderer", () => {
     strip.protectedIds = ["balloon-1"];
     const screen = renderStripSvg(strip, assets, measure, "balloon-1").svg;
     const exported = renderStripSvg(strip, assets, measure).svg;
-    expect(screen).toContain('<circle cx="503"');
-    expect(exported).not.toContain('<circle cx="503"');
+    expect(screen).toContain('<circle cx="356"');
+    expect(exported).not.toContain('<circle cx="356"');
   });
 });

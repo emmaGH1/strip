@@ -1,0 +1,23 @@
+Strip approved follow-up verification — 2026-11-08 (local proof/strip)
+
+PASS pnpm test: 27 tests across 3 files
+PASS pnpm typecheck
+PASS changed-task-file pnpm exec oxfmt --check (21 matched files)
+FAIL whole-repository pnpm exec oxfmt --check: 26 inherited formatting issues in untouched files; exact output in format-baseline.txt
+PASS pnpm agent-native:doctor: Clean — no findings
+PASS pnpm build: Nitro node production bundle; not a deployment/runtime proof
+PASS pnpm test:proof: system Chromium, ordinary local-dev sign-in, local SQL/action transport
+PASS git diff --check
+PASS original staged README.md / assets/icon.svg index blob hashes unchanged
+PASS historical protected-record read: HTTP 200, revision 3, original missing-pose representation retained; no mutation
+
+Browser: 0 page errors; phone page width 390 / viewport 390.
+PNG: clean prepared example downloaded; protected-edited export downloaded and decoded at 1200 x 1200; original ending selected after concurrency test.
+Protected balloon, pose and screen writes rejected. Agent unlock denied. Stale writes rejected. Concurrent same-revision writes yield one success and one conflict. Human can edit their protected panel.
+Missing-provider draft and selection-aware revision each dispatch a real framework composer prefill with openSidebar=true and submit=false. No model output was generated or simulated.
+
+The implementation agent opened the rendered entry, desktop editor, clean/edited PNGs, actual export at phone width, and phone agent setup captures. This is not human comprehension/humour/readability approval.
+
+Warnings/limits: no separate lint command configured; inherited vendor source-map/chunk-size/peer-dependency warnings; screenshots of an inner-scrolling app do not capture the full inspector; no connected-provider callback or actual model turn tested. Earlier exploratory setup inspection hit a navigation race and a selector timeout; no credential entry or provider authorization occurred.
+
+No provider keys requested, entered or committed. No .env files/local database staged. No push, merge, deployment or submission.

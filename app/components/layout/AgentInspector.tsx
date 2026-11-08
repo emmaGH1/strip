@@ -1,9 +1,12 @@
-import { navigateWithAgentChatViewTransition } from "@agent-native/core/client/agent-chat";
+import {
+  navigateWithAgentChatViewTransition,
+  requestAgentSidebarOpen,
+} from "@agent-native/core/client/agent-chat";
 import { useT } from "@agent-native/core/client/i18n";
 import { focusAgentChat } from "@agent-native/toolkit/app/chat";
 import { AgentSidebar } from "@agent-native/toolkit/app/chat";
-import { type ReactNode } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, type ReactNode } from "react";
+import { useLocation, useNavigate } from "react-router";
 
 import { ChatComposerContextProvider } from "@/components/ChatComposerContext";
 import { chatThreadPath } from "@/lib/chat-paths";
@@ -23,6 +26,12 @@ export function AgentInspector({
 }: AgentInspectorProps) {
   const navigate = useNavigate();
   const t = useT();
+  const { pathname, search } = useLocation();
+  const editing = pathname === "/home" && new URLSearchParams(search).has("id");
+  useEffect(() => {
+    if (editing && window.matchMedia("(min-width: 1024px)").matches)
+      requestAgentSidebarOpen();
+  }, [editing]);
 
   function openAskAgentFullscreen(threadId?: string) {
     focusAgentChat();
@@ -33,6 +42,7 @@ export function AgentInspector({
     <AgentSidebar
       composerContextProvider={ChatComposerContextProvider}
       position="right"
+      defaultSidebarWidth={350}
       chatViewTransition
       chatViewTransitionHandoff={chatHomeHandoffPending}
       storageKey="chat"

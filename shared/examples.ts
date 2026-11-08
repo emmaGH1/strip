@@ -1,14 +1,17 @@
-import { draftSchema, type Draft, type Expression } from "./strip.js";
+import {
+  composedDraftSchema,
+  type ComposedDraft,
+  type Expression,
+} from "./strip.js";
 
 function prepared(
   title: string,
   source: string,
-  captions: string[],
   dialogue: string[],
   expressions: Expression[],
   endings: string[],
-): Draft {
-  return draftSchema.parse({
+): ComposedDraft {
+  return composedDraftSchema.parse({
     title,
     source,
     sourceUrl: "",
@@ -17,15 +20,32 @@ function prepared(
     panels: ["setup", "trouble", "turn", "payoff"].map((beat, i) => ({
       id: `panel-${i + 1}`,
       beat,
-      caption: captions[i],
-      prop: i === 1 ? "files" : i === 2 ? "coffee" : "laptop",
+      caption: "",
+      prop: "laptop",
+      screenState: title.startsWith("A small undo")
+        ? ["files", "deleted", "restored", "restored"][i]
+        : title.startsWith("Search")
+          ? ["files", "files", "search-results", "search-results"][i]
+          : ["files", "files", "scheduled", "scheduled"][i],
       actors: [
         {
           id: `actor-${i + 1}`,
           character: i === 3 ? "sam" : "ari",
           expression: expressions[i],
-          side: i === 3 ? "right" : "left",
+          pose: ["leaning", "panic", "relieved", "arms-crossed"][i],
+          side: "left",
         },
+        ...(i === 0
+          ? [
+              {
+                id: "sam-intro",
+                character: "sam",
+                expression: "neutral",
+                pose: "standing",
+                side: "right",
+              },
+            ]
+          : []),
       ],
       balloons: dialogue[i]
         ? [
@@ -42,16 +62,10 @@ function prepared(
 }
 
 // Hand-authored fixtures for art/interaction testing. NEVER call these generated.
-export const preparedExamples: Draft[] = [
+export const preparedExamples: ComposedDraft[] = [
   prepared(
     "A small undo. A large relief.",
     "Deleted files can now be restored with Undo.",
-    [
-      "A QUICK CLEANUP",
-      "ONE CLICK LATER",
-      "UNDO. EXHALE.",
-      "ONE FEATURE REQUEST",
-    ],
     [
       "Just clearing the old drafts.",
       "That was the launch plan.",
@@ -69,12 +83,6 @@ export const preparedExamples: Draft[] = [
     "Search gets the hint.",
     "Search now understands common spelling mistakes and returns matching files.",
     [
-      "CONFIDENT TYPING",
-      "QAURTERLY REPROT",
-      "IT FOUND THE FILE",
-      "PERSONAL GROWTH",
-    ],
-    [
       "I know exactly what it's called.",
       "My fingers have a different opinion.",
       "",
@@ -90,12 +98,6 @@ export const preparedExamples: Draft[] = [
   prepared(
     "Tomorrow, handled.",
     "You can now schedule a message to send at a time you choose.",
-    [
-      "FRIDAY. 11:58 PM.",
-      "THE OLD PLAN",
-      "SCHEDULED FOR MONDAY",
-      "OUT OF OFFICE",
-    ],
     [
       "I'll send it Monday morning.",
       "Future me will definitely remember.",

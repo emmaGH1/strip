@@ -1,0 +1,31 @@
+Checking formatting...
+
+.agents/skills/actions/SKILL.md (101ms)
+.agents/skills/adding-a-feature/SKILL.md (244ms)
+.agents/skills/agent-native-docs/SKILL.md (76ms)
+.agents/skills/agent-native-toolkit/SKILL.md (66ms)
+.agents/skills/build-an-app/SKILL.md (38ms)
+.agents/skills/context-awareness/SKILL.md (221ms)
+.agents/skills/real-time-sync/SKILL.md (70ms)
+.agents/skills/reliable-mutations/SKILL.md (16ms)
+.agents/skills/security/SKILL.md (32ms)
+.agents/skills/sharing/SKILL.md (110ms)
+.agents/skills/storing-data/SKILL.md (328ms)
+.claude/skills/actions/SKILL.md (60ms)
+.claude/skills/adding-a-feature/SKILL.md (64ms)
+.claude/skills/agent-native-docs/SKILL.md (30ms)
+.claude/skills/agent-native-toolkit/SKILL.md (111ms)
+.claude/skills/build-an-app/SKILL.md (44ms)
+.claude/skills/context-awareness/SKILL.md (117ms)
+.claude/skills/real-time-sync/SKILL.md (100ms)
+.claude/skills/reliable-mutations/SKILL.md (8ms)
+.claude/skills/security/SKILL.md (37ms)
+.claude/skills/sharing/SKILL.md (55ms)
+.claude/skills/storing-data/SKILL.md (127ms)
+AGENTS.md (6ms)
+docs/IDEATION.md (236ms)
+docs/PROJECT.md (11ms)
+tsconfig.json (0ms)
+
+Format issues found in above 26 files. Run without `--check` to fix.
+Finished in 1348ms on 182 files using 4 threads.

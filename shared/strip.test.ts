@@ -4,6 +4,8 @@ import { preparedExamples } from "./examples.js";
 import {
   applyEdits,
   draftSchema,
+  composedDraftSchema,
+  stripSchema,
   setProtection,
   type Draft,
   type Strip,
@@ -45,8 +47,80 @@ describe("structured scene validation", () => {
     sample.panels[0]!.id = sample.panels[1]!.id;
     expect(draftSchema.safeParse(sample).success).toBe(false);
     sample.panels[0]!.id = "unique";
-    sample.panels[0]!.balloons[0]!.speaker = "sam";
+    sample.panels[1]!.balloons[0]!.speaker = "sam";
     expect(draftSchema.safeParse(sample).success).toBe(false);
+  });
+});
+describe("approved scene direction", () => {
+  it("preserves historical saved scenes without silently adding poses or cast", () => {
+    const legacy = fixture();
+    legacy.draft.panels[0]!.actors = legacy.draft.panels[0]!.actors.filter(
+      (a) => a.character !== "sam",
+    );
+    for (const panel of legacy.draft.panels)
+      for (const actor of panel.actors) delete actor.pose;
+    const read = stripSchema.parse(legacy);
+    expect(read.draft.panels[0]!.actors).toEqual(
+      legacy.draft.panels[0]!.actors,
+    );
+    expect(read.draft.panels[0]!.actors[0]!.pose).toBeUndefined();
+    expect(
+      applyEdits(
+        read,
+        0,
+        [{ kind: "balloon", id: "balloon-1", text: "My existing work." }],
+        "human",
+      ).revision,
+    ).toBe(1);
+    expect(composedDraftSchema.safeParse(legacy.draft).success).toBe(false);
+  });
+  it("shows Undo happening without an explanatory caption and introduces Sam", () => {
+    const sample = draft();
+    expect(sample.panels[2]!.screenState).toBe("restored");
+    expect(sample.panels[2]!.prop).toBe("laptop");
+    expect(sample.panels.every((p) => !p.caption)).toBe(true);
+    expect(sample.panels[0]!.actors.some((a) => a.character === "sam")).toBe(
+      true,
+    );
+    expect(
+      new Set(sample.panels.slice(0, 3).map((p) => p.actors[0]!.pose)).size,
+    ).toBe(3);
+    sample.panels[0]!.actors = sample.panels[0]!.actors.filter(
+      (a) => a.character !== "sam",
+    );
+    expect(draftSchema.safeParse(sample).success).toBe(false);
+  });
+  it("rejects three identical consecutive bodies", () => {
+    const sample = draft();
+    for (const panel of sample.panels.slice(0, 3))
+      panel.actors[0]!.pose = "standing";
+    expect(draftSchema.safeParse(sample).success).toBe(false);
+  });
+  it("enforces protection and stale revisions on pose and screen writes", () => {
+    const locked = setProtection(fixture(), 0, "panel-3", true, "human");
+    for (const edit of [
+      { kind: "pose", id: "actor-3", pose: "standing" },
+      { kind: "screen-state", id: "panel-3", screenState: "deleted" },
+    ] as const) {
+      expect(() => applyEdits(locked, 1, [edit], "agent")).toThrow("protected");
+      expect(() => applyEdits(locked, 0, [edit], "human")).toThrow("changed");
+      expect(applyEdits(locked, 1, [edit], "human").revision).toBe(2);
+    }
+    const characterLocked = setProtection(
+      fixture(),
+      0,
+      "actor-3",
+      true,
+      "human",
+    );
+    expect(() =>
+      applyEdits(
+        characterLocked,
+        1,
+        [{ kind: "pose", id: "actor-3", pose: "standing" }],
+        "agent",
+      ),
+    ).toThrow("protected");
   });
 });
 describe("shared edit and protection reducer", () => {

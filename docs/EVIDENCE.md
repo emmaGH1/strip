@@ -1,5 +1,23 @@
 # Strip proof evidence — 2026-11-08
 
+## Approved art/agent follow-up — current evidence
+
+Current status and connection steps are in `docs/CURRENT_STATE.md`. The seven approved fixes are implemented; real generation/revision remains blocked on provider authorization, not replaced with fixture output.
+
+- 27 unit tests pass; typecheck, framework doctor and production build pass. Changed-task-file Oxfmt check passes. Whole-repository Oxfmt check still reports inherited issues in untouched framework/research/governance/config files (exact output: `docs/evidence/proof/format-baseline.txt`). No separate lint command exists.
+- The browser/database smoke now also checks protected pose/screen writes, human editing of a protected panel, actual missing-engine draft/revision handoff payloads, desktop sidebar loading and the phone Agent toggle. It checks real shared actions, not model creativity. No page errors; 390px page width remains within the viewport.
+- `strip-comic.png` is now the **clean prepared example with the original Friday punchline**. `protected-strip-comic.png` is the persisted human-edited export with that ending selected after the scripted concurrency test. The export is decoded at 1200 × 1200; `export-phone.png` shows the actual clean PNG at phone width.
+- `workspace-desktop.png`, `workspace-phone.png`, `protected-workspace.png`, `draft-agent-setup.png` and `phone-agent-setup.png` show the real local UI. Setup captures show real framework composer prefills, not model responses. `http-boundary.json` and `smoke-result.json` record the new run.
+- Images were opened and visually inspected by the implementation agent. Wider Open Peeps crops expose the pointing/open/relaxed/crossed hands, the turn shows Restored/Undo, Sam is present early, captions are off, and dialogue uses smaller Comic Neue balloons. Human phone readability, comprehension, humour and overall taste remain review gates.
+- New compositions require explicit poses and continuity. Historical saved scenes remain readable/editable without silently restaging protected actors; a compatibility test covers this boundary.
+- Work was saved before changes in `0cddfb6`, excluding the original user-staged README/icon. They remain staged and untouched. No push, merge or deployment.
+
+---
+
+## Historical initial-pass record (superseded where noted above)
+
+The sections below preserve the earlier proof observations, including its original 22-test count, fixed-pose artwork and pre-commit state; these are historical, not current claims.
+
 ## Scope/status
 
 Technical vertical slice implemented and exercised locally on `proof/strip`. **The full three-hour proof has NOT passed:** model generation, contextual model revision, creative quality and human design approval remain outstanding. All prepared stories are hand-authored illustrative fixtures.
@@ -18,6 +36,7 @@ Technical vertical slice implemented and exercised locally on `proof/strip`. **T
 Run `pnpm test:proof` against the local dev server at `127.0.0.1:8080`. System Chromium, Playwright. Uses ordinary local-dev sign-in; no production login bypass. The script creates a fresh prepared-example record and leaves it in the local database.
 
 Observed:
+
 1. Prepared four-panel comic opens through the real `create-strip` action.
 2. Direct human line edit persists through `update-strip`.
 3. Human protection persists through `set-strip-protection` and reload.
@@ -34,6 +53,7 @@ Observed:
 ## Saved artifacts
 
 `docs/evidence/proof/`:
+
 - `entry-desktop.png`: actual provisional entry/workbench probe.
 - `workspace-desktop.png`: actual saved editor.
 - `workspace-phone.png`: actual phone viewport of editor.

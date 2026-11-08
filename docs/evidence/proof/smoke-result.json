@@ -1,5 +1,5 @@
 {
-  "url": "http://127.0.0.1:8080/home?id=b1b3a504-b229-42b7-b111-23533dcf4f10&panel=panel-1&object=balloon-1",
+  "url": "http://127.0.0.1:8080/home?id=0ebc5b0b-038a-462a-8f22-ccc360348c7b&panel=panel-1&object=balloon-1",
   "pageErrors": [],
   "width": {
     "page": 390,
@@ -12,5 +12,12 @@
   },
   "httpBoundaryPassed": true,
   "persistedEdit": true,
-  "persistedProtection": true
+  "persistedProtection": true,
+  "missingEngineDraftPrefill": true,
+  "selectionAwareRevisionPrefill": true,
+  "desktopAgentVisible": true,
+  "phoneAgentToggle": true,
+  "protectedPoseAndScreen": true,
+  "humanCanEditProtectedPanel": true,
+  "realModelRun": false
 }

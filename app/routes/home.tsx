@@ -1,8 +1,13 @@
-import { sendToAgentChat } from "@agent-native/core/client/agent-chat";
+import {
+  sendToAgentChat,
+  requestAgentSidebarOpen,
+  useAgentEngineConfigured,
+} from "@agent-native/core/client/agent-chat";
 import {
   useActionMutation,
   useActionQuery,
 } from "@agent-native/core/client/hooks";
+import { buildSettingsRoute } from "@agent-native/core/client/navigation";
 import {
   selectAgentSelectable,
   useAgentSelectable,
@@ -17,7 +22,7 @@ import {
   LockKeyhole,
   PencilLine,
   UnlockKeyhole,
-  WandSparkles,
+  MessageSquare,
 } from "lucide-react";
 import {
   useEffect,
@@ -37,6 +42,8 @@ import { renderStripSvg, type SceneAssets } from "../../shared/render-strip";
 import {
   cast,
   expressionSchema,
+  poseSchema,
+  screenStateSchema,
   type Edit,
   type Strip,
 } from "../../shared/strip";
@@ -129,6 +136,7 @@ function BalloonEditor({
 export default function Home() {
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
+  const engine = useAgentEngineConfigured();
   const id = params.get("id") ?? "";
   const [sample, setSample] = useState(0);
   const [source, setSource] = useState(preparedExamples[0]!.source);
@@ -307,14 +315,20 @@ export default function Home() {
     sendToAgentChat({
       message: `Make a four-panel comic from this ${illustrative ? "illustrative" : "user-provided"} product update. Compose it with create-strip and show it in the editor. Keep every claim within this source, distinguish fictional dialogue and include one wordless visual beat.\n\nSOURCE:\n${source}`,
       openSidebar: true,
-      submit: true,
+      submit: engine.canChat,
     });
   }
   function revise() {
     sendToAgentChat({
       message: `Improve the comic's selected ${selectedBalloon ? "balloon" : "panel"}: ${selectedId}, in strip ${strip.id}. Make it clearer and more charming. Read get-strip for the current revision. Preserve all protected human contributions and use focused update-strip edits, not a replacement comic.`,
       openSidebar: true,
-      submit: true,
+      context: JSON.stringify({
+        stripId: strip.id,
+        selectedId,
+        panelId: selectedPanel.id,
+        expectedRevision: strip.revision,
+      }),
+      submit: engine.canChat,
     });
   }
   async function toggleProtection() {
@@ -384,8 +398,24 @@ export default function Home() {
           Strip<span>.</span>
         </Link>
         <span className="strip-edition">ONE UPDATE. FOUR PANELS.</span>
+        <button
+          type="button"
+          className="strip-text-button"
+          onClick={requestAgentSidebarOpen}
+          aria-label="Open agent chat"
+        >
+          <MessageSquare size={16} /> Agent
+        </button>
         <span className="strip-proof-tag">PROOF / 001</span>
       </header>
+      {engine.missing ? (
+        <p className="strip-engine-state" role="status">
+          Connect an AI engine to draft or revise.{" "}
+          <Link to={buildSettingsRoute("model")}>Open AI setup →</Link> Choose
+          “Use Builder.io” or connect a provider. Prepared examples remain
+          editable without AI.
+        </p>
+      ) : null}
       {error ? (
         <div className="strip-alert" role="alert">
           {error}
@@ -445,7 +475,7 @@ export default function Home() {
                 type="submit"
                 disabled={!source.trim()}
               >
-                <WandSparkles size={17} />
+                <MessageSquare size={17} />
                 Draft with agent
                 <ArrowUpRight size={17} />
               </button>
@@ -605,11 +635,15 @@ export default function Home() {
               ) : null}
               <div className="strip-characters">
                 {selectedPanel.actors.map((actor) => (
-                  <label key={actor.id}>
-                    <span className="strip-field-label">
+                  <div key={actor.id}>
+                    <label
+                      className="strip-field-label"
+                      htmlFor={`${actor.id}-expression`}
+                    >
                       {cast[actor.character].name}'s expression
-                    </span>
+                    </label>
                     <select
+                      id={`${actor.id}-expression`}
                       value={actor.expression}
                       disabled={busy}
                       onChange={(e) => {
@@ -628,9 +662,63 @@ export default function Home() {
                         </option>
                       ))}
                     </select>
-                  </label>
+                    <label
+                      className="strip-field-label"
+                      htmlFor={`${actor.id}-pose`}
+                    >
+                      {cast[actor.character].name}'s pose
+                    </label>
+                    <select
+                      id={`${actor.id}-pose`}
+                      value={
+                        actor.pose ??
+                        (actor.character === "ari"
+                          ? "standing"
+                          : "arms-crossed")
+                      }
+                      disabled={busy}
+                      onChange={(e) => {
+                        void edit([
+                          {
+                            kind: "pose",
+                            id: actor.id,
+                            pose: poseSchema.parse(e.target.value),
+                          },
+                        ]).catch(() => {});
+                      }}
+                    >
+                      {poseSchema.options.map((pose) => (
+                        <option key={pose} value={pose}>
+                          {pose}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 ))}
               </div>
+              <label className="strip-field-label">
+                On-screen feature moment
+                <select
+                  value={selectedPanel.screenState}
+                  disabled={busy}
+                  onChange={(e) => {
+                    void edit([
+                      {
+                        kind: "screen-state",
+                        id: selectedPanel.id,
+                        screenState: screenStateSchema.parse(e.target.value),
+                      },
+                      { kind: "prop", id: selectedPanel.id, prop: "laptop" },
+                    ]).catch(() => {});
+                  }}
+                >
+                  {screenStateSchema.options.map((state) => (
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <button
                 className={`strip-protection ${directProtection ? "is-protected" : ""}`}
                 onClick={toggleProtection}
@@ -657,7 +745,7 @@ export default function Home() {
                 onClick={revise}
                 disabled={busy}
               >
-                <WandSparkles size={16} />
+                <MessageSquare size={16} />
                 Revise this selection
                 <ArrowUpRight size={16} />
               </button>

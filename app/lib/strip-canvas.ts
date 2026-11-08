@@ -1,6 +1,9 @@
 import { appPath } from "@agent-native/core/client/api-path";
-import textFontUrl from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url";
+import uiFontUrl from "@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2?url";
 import titleFontUrl from "@fontsource/bangers/files/bangers-latin-400-normal.woff2?url";
+
+import "@fontsource/comic-neue/700.css";
+import textFontUrl from "@fontsource/comic-neue/files/comic-neue-latin-700-normal.woff2?url";
 
 import type { SceneAssets } from "../../shared/render-strip";
 
@@ -21,8 +24,20 @@ let assetsPromise: Promise<SceneAssets> | undefined;
 export function loadSceneAssets(): Promise<SceneAssets> {
   return (assetsPromise ??= (async () => {
     const names = ["ari", "sam"].flatMap((name) =>
-      ["neutral", "happy", "panic", "skeptical", "thinking"].map(
-        (expression) => `${name}-${expression}`,
+      ["neutral", "happy", "panic", "skeptical", "thinking"]
+        .map((expression) =>
+          ["standing", "leaning", "panic", "relieved", "arms-crossed"].map(
+            (pose) => `${name}-${expression}-${pose}`,
+          ),
+        )
+        .flat(),
+    );
+    // Historical records retain the original fixed-body assets; never restage a lock on read.
+    names.push(
+      ...["ari", "sam"].flatMap((name) =>
+        ["neutral", "happy", "panic", "skeptical", "thinking"].map(
+          (expression) => `${name}-${expression}`,
+        ),
       ),
     );
     const peeps = Object.fromEntries(
@@ -33,19 +48,32 @@ export function loadSceneAssets(): Promise<SceneAssets> {
         ]),
       ),
     );
-    const [textFont, titleFont] = await Promise.all([
+    const [textFont, titleFont, uiFont] = await Promise.all([
       dataUrl(textFontUrl),
       dataUrl(titleFontUrl),
+      dataUrl(uiFontUrl),
+      document.fonts.load('700 28px "Comic Neue"'),
       document.fonts.ready,
     ]);
-    return { peeps, textFont: textFont!, titleFont: titleFont! };
+    return {
+      peeps,
+      textFont: textFont!,
+      titleFont: titleFont!,
+      uiFont: uiFont!,
+    };
   })());
 }
-export function textMeasurer(): (text: string, size: number) => number {
+export function textMeasurer(): (
+  text: string,
+  size: number,
+  comic?: boolean,
+) => number {
   const context = document.createElement("canvas").getContext("2d");
   if (!context) throw new Error("This browser cannot measure comic text.");
-  return (text, size) => {
-    context.font = `500 ${size}px "DM Sans Variable", Arial, sans-serif`;
+  return (text, size, comic = false) => {
+    context.font = comic
+      ? `700 ${size}px "Comic Neue", sans-serif`
+      : `500 ${size}px "DM Sans Variable", Arial, sans-serif`;
     return context.measureText(text).width;
   };
 }

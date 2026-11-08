@@ -7,6 +7,22 @@ export const expressionSchema = z.enum([
   "skeptical",
   "thinking",
 ]);
+export const poseSchema = z.enum([
+  "standing",
+  "leaning",
+  "panic",
+  "relieved",
+  "arms-crossed",
+]);
+export const screenStateSchema = z.enum([
+  "none",
+  "files",
+  "deleted",
+  "undo",
+  "restored",
+  "search-results",
+  "scheduled",
+]);
 export const cast = {
   ari: {
     name: "Ari",
@@ -33,7 +49,8 @@ export const balloonSchema = z.object({
 export const panelSchema = z.object({
   id: z.string().min(1).max(60),
   beat: z.enum(["setup", "trouble", "turn", "payoff"]),
-  caption: z.string().trim().max(65),
+  caption: z.string().trim().max(65).default(""),
+  screenState: screenStateSchema.default("none"),
   prop: z.enum(["laptop", "files", "coffee", "none"]),
   actors: z
     .array(
@@ -41,6 +58,8 @@ export const panelSchema = z.object({
         id: z.string().min(1).max(60),
         character: z.enum(["ari", "sam"]),
         expression: expressionSchema,
+        // Missing only on records saved before editable poses existed.
+        pose: poseSchema.optional(),
         side: z.enum(["left", "right"]),
       }),
     )
@@ -103,6 +122,35 @@ export const draftSchema = z
           message: "A balloon's speaker must be in the panel.",
         });
     }
+    // Do not silently restage historical/protected records on read.
+    // New compositions require every pose via composedDraftSchema below.
+    const fullyStaged = draft.panels.every((p) =>
+      p.actors.every((a) => a.pose !== undefined),
+    );
+    const introduced = new Set(
+      draft.panels.slice(0, 2).flatMap((p) => p.actors.map((a) => a.character)),
+    );
+    if (
+      fullyStaged &&
+      draft.panels[3]?.balloons.some((b) => !introduced.has(b.speaker))
+    )
+      ctx.addIssue({
+        code: "custom",
+        message: "Introduce every payoff speaker in panel 1 or 2.",
+      });
+    for (const character of Object.keys(cast)) {
+      for (let i = 0; i < 2; i++) {
+        const poses = draft.panels
+          .slice(i, i + 3)
+          .map((p) => p.actors.find((a) => a.character === character)?.pose);
+        if (fullyStaged && poses[0] && poses.every((pose) => pose === poses[0]))
+          ctx.addIssue({
+            code: "custom",
+            message:
+              "Vary character poses; no identical body three panels in a row.",
+          });
+      }
+    }
     if (!draft.panels.some((panel) => panel.balloons.length === 0))
       ctx.addIssue({
         code: "custom",
@@ -119,6 +167,18 @@ export const draftSchema = z
         message: "The payoff needs a balloon to accept an ending.",
       });
   });
+export const composedDraftSchema = draftSchema.safeExtend({
+  panels: z
+    .array(
+      panelSchema.extend({
+        actors: z
+          .array(panelSchema.shape.actors.element.extend({ pose: poseSchema }))
+          .min(1)
+          .max(2),
+      }),
+    )
+    .length(4),
+});
 export const stripSchema = z.object({
   id: z.string(),
   revision: z.number().int().nonnegative(),
@@ -129,6 +189,7 @@ export const stripSchema = z.object({
   updatedAt: z.string(),
 });
 export type Draft = z.infer<typeof draftSchema>;
+export type ComposedDraft = z.infer<typeof composedDraftSchema>;
 export type Strip = z.infer<typeof stripSchema>;
 export type Panel = z.infer<typeof panelSchema>;
 export type Expression = z.infer<typeof expressionSchema>;
@@ -144,6 +205,12 @@ export const editSchema = z.discriminatedUnion("kind", [
     kind: z.literal("expression"),
     id: z.string(),
     expression: expressionSchema,
+  }),
+  z.object({ kind: z.literal("pose"), id: z.string(), pose: poseSchema }),
+  z.object({
+    kind: z.literal("screen-state"),
+    id: z.string(),
+    screenState: screenStateSchema,
   }),
   z.object({
     kind: z.literal("prop"),
@@ -247,11 +314,21 @@ export function applyEdits(
           "Choose a character to edit its expression.",
         );
       character.expression = edit.expression;
+    } else if (edit.kind === "pose") {
+      const character = targetPanel.actors.find((a) => a.id === edit.id);
+      if (!character)
+        throw new StripError(
+          "not_found",
+          "Choose a character to change its pose.",
+        );
+      character.pose = edit.pose;
     } else {
       if (edit.id !== targetPanel.id)
         throw new StripError("not_found", "Choose a panel to change its prop.");
       // A prop edit cannot modify any protected character or balloon.
-      targetPanel.prop = edit.prop;
+      if (edit.kind === "screen-state")
+        targetPanel.screenState = edit.screenState;
+      else targetPanel.prop = edit.prop;
     }
   }
   draftSchema.parse(next.draft);

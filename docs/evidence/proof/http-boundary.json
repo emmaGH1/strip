@@ -3,6 +3,14 @@
     "status": 400,
     "body": "{\"error\":\"This contribution is protected by the human. Leave it unchanged and revise other objects.\",\"errorCode\":\"protected_element\"}"
   },
+  "protectedPose": {
+    "status": 400,
+    "body": "{\"error\":\"This contribution is protected by the human. Leave it unchanged and revise other objects.\",\"errorCode\":\"protected_element\"}"
+  },
+  "protectedScreen": {
+    "status": 400,
+    "body": "{\"error\":\"This contribution is protected by the human. Leave it unchanged and revise other objects.\",\"errorCode\":\"protected_element\"}"
+  },
   "unlock": {
     "status": 403,
     "body": "{\"error\":\"Only a person in the editor may change protection.\",\"errorCode\":\"human_only\"}"
@@ -14,15 +22,15 @@
   "contenders": [
     {
       "status": 200,
-      "body": "{\"id\":\"b1b3a504-b229-42b7-b111-23533dcf4f10\",\"revision\":3,\"draft\":{\"title\":\"A small undo. A large relief.\",\"source\":\"Deleted files can now be restored with Undo.\",\"sourceUrl\":\"\",\"inputKind\":\"illustrative\",\"panels\":[{\"id\":\"panel-1\",\"beat\":\"setup\",\"caption\":\"A QUICK CLEANUP\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-1\",\"character\":\"ari\",\"expression\":\"happy\",\"side\":\"left\"}],\"balloons\":[{\"id\":\"balloon-1\",\"speaker\":\"ari\",\"text\":\"I meant to delete literally anything else.\"}],\"sourceQuote\":\"\"},{\"id\":\"panel-2\",\"beat\":\"trouble\",\"caption\":\"ONE CLICK LATER\",\"prop\":\"files\",\"actors\":[{\"id\":\"actor-2\",\"character\":\"ari\",\"expression\":\"panic\",\"side\":\"left\"}],\"balloons\":[{\"id\":\"balloon-2\",\"speaker\":\"ari\",\"text\":\"That was the launch plan.\"}],\"sourceQuote\":\"\"},{\"id\":\"panel-3\",\"beat\":\"turn\",\"caption\":\"UNDO. EXHALE.\",\"prop\":\"coffee\",\"actors\":[{\"id\":\"actor-3\",\"character\":\"ari\",\"expression\":\"happy\",\"side\":\"left\"}],\"balloons\":[],\"sourceQuote\":\"Deleted files can now be restored with Undo.\"},{\"id\":\"panel-4\",\"beat\":\"payoff\",\"caption\":\"ONE FEATURE REQUEST\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-4\",\"character\":\"sam\",\"expression\":\"skeptical\",\"side\":\"right\"}],\"balloons\":[{\"id\":\"balloon-4\",\"speaker\":\"sam\",\"text\":\"Finally, a feature for my decision-making process.\"}],\"sourceQuote\":\"\"}],\"endings\":[\"Now add Undo to ‘Sure, Friday works.’\",\"Great. Can it restore my weekend?\",\"Finally, a feature for my decision-making process.\"]},\"protectedIds\":[\"balloon-1\"],\"origin\":\"prepared-example\",\"lastEditedBy\":\"agent\",\"updatedAt\":\"2026-11-08T10:36:48.051Z\"}"
+      "body": "{\"id\":\"0ebc5b0b-038a-462a-8f22-ccc360348c7b\",\"revision\":8,\"draft\":{\"title\":\"A small undo. A large relief.\",\"source\":\"Deleted files can now be restored with Undo.\",\"sourceUrl\":\"\",\"inputKind\":\"illustrative\",\"panels\":[{\"id\":\"panel-1\",\"beat\":\"setup\",\"caption\":\"\",\"screenState\":\"files\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-1\",\"character\":\"ari\",\"expression\":\"happy\",\"pose\":\"leaning\",\"side\":\"left\"},{\"id\":\"sam-intro\",\"character\":\"sam\",\"expression\":\"neutral\",\"pose\":\"standing\",\"side\":\"right\"}],\"balloons\":[{\"id\":\"balloon-1\",\"speaker\":\"ari\",\"text\":\"I meant to delete literally anything else.\"}],\"sourceQuote\":\"\"},{\"id\":\"panel-2\",\"beat\":\"trouble\",\"caption\":\"\",\"screenState\":\"deleted\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-2\",\"character\":\"ari\",\"expression\":\"panic\",\"pose\":\"panic\",\"side\":\"left\"}],\"balloons\":[{\"id\":\"balloon-2\",\"speaker\":\"ari\",\"text\":\"That was the launch plan.\"}],\"sourceQuote\":\"\"},{\"id\":\"panel-3\",\"beat\":\"turn\",\"caption\":\"\",\"screenState\":\"restored\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-3\",\"character\":\"ari\",\"expression\":\"happy\",\"pose\":\"relieved\",\"side\":\"left\"}],\"balloons\":[],\"sourceQuote\":\"Deleted files can now be restored with Undo.\"},{\"id\":\"panel-4\",\"beat\":\"payoff\",\"caption\":\"\",\"screenState\":\"restored\",\"prop\":\"laptop\",\"actors\":[{\"id\":\"actor-4\",\"character\":\"sam\",\"expression\":\"skeptical\",\"pose\":\"arms-crossed\",\"side\":\"left\"}],\"balloons\":[{\"id\":\"balloon-4\",\"speaker\":\"sam\",\"text\":\"Finally, a feature for my decision-making process.\"}],\"sourceQuote\":\"\"}],\"endings\":[\"Now add Undo to ‘Sure, Friday works.’\",\"Great. Can it restore my weekend?\",\"Finally, a feature for my decision-making process.\"]},\"protectedIds\":[\"balloon-1\",\"panel-3\"],\"origin\":\"prepared-example\",\"lastEditedBy\":\"agent\",\"updatedAt\":\"2026-11-08T11:45:38.846Z\"}"
     },
     {
       "status": 409,
       "body": "{\"error\":\"This strip changed. Read the latest revision before applying your edit.\",\"errorCode\":\"stale_revision\"}"
     }
   ],
-  "beforeRevision": 2,
-  "afterRevision": 3,
+  "beforeRevision": 7,
+  "afterRevision": 8,
   "protectedText": "I meant to delete literally anything else.",
   "lastEditedBy": "agent"
 }
