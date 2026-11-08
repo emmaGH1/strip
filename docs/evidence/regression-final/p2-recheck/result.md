@@ -1,0 +1,7 @@
+# P2 public recheck — PASS
+
+On the approved public URL, Chromium at 1440×900 and a resized 390×844 viewport used one new disposable account and its illustrative, seeded Undo strip. At each size, filled a distinct source and cast, clicked Pencil it, navigated through Library to the example, selected Ari’s first balloon and handed off Ask agent → Funnier. The disabled no-AI composer showed exactly `Funnier` and one visible `Ari's line` target chip; neither the prior source text nor `Cast & source type` remained. See `02-desktop-compose-after.png`, `04-desktop-ask-after.png`, `05-phone-compose-after.png` and `09-phone-verify-after.png`. Inspected these captures. Phone is viewport resizing, not a physical device or touch emulation.
+
+No message was submitted or AI connected; a chat POST guard observed zero attempts. Initial phone automation timed out because the Agent tab was selected rather than Edit (`07-phone-ask-after.png`); the browser and same session stayed open. Recovery selected Edit and performed the handoff. An immediate text assertion raced the prefill; the subsequent settled check passed (`08-phone-recovery-after.png`, `09-phone-verify-after.png`). A hidden Studio selection label was not a composer chip.
+
+The browser cookies and in-memory session were cleared and the browser context closed; no password or storage state was saved. An attempted server sign-out returned 404, so server-side session revocation is not verified; the disposable account and its strip remain server-side. No app changes or push.
