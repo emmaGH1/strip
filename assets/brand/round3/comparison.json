@@ -1,0 +1,20 @@
+{
+  "method": "176px alpha masks; independently tight-trimmed bounding boxes; contain, centered; no rotation or optimized alignment. IoU is descriptive, not an originality or legal test.",
+  "metrics": [
+    {
+      "variant": 1,
+      "fullMarkIoU": 0.457,
+      "bodyOnlyIoU": 0.485
+    },
+    {
+      "variant": 2,
+      "fullMarkIoU": 0.364,
+      "bodyOnlyIoU": 0.425
+    },
+    {
+      "variant": 3,
+      "fullMarkIoU": 0.414,
+      "bodyOnlyIoU": 0.466
+    }
+  ]
+}
