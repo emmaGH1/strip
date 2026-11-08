@@ -1,0 +1,115 @@
+import { randomUUID } from "node:crypto";
+
+import { fail, type ActionRunContext } from "@agent-native/core/action";
+import { and, eq, isNull } from "drizzle-orm";
+
+import {
+  StripError,
+  stripSchema,
+  type Actor,
+  type Draft,
+  type Strip,
+} from "../../shared/strip.js";
+import { getDb } from "../db/index.js";
+import { strips } from "../db/schema.js";
+
+export function owner(ctx?: ActionRunContext) {
+  if (!ctx?.userEmail)
+    fail("Sign in to work on a strip.", {
+      statusCode: 401,
+      errorCode: "sign_in_required",
+    });
+  return ctx!.userEmail!;
+}
+export function callerActor(ctx?: ActionRunContext): Actor {
+  // The server dispatcher sets caller; there is deliberately no actor/force input.
+  return ctx?.caller === "frontend" &&
+    !ctx.automation &&
+    !ctx.networkProtocol &&
+    !ctx.mcpDirectoryWidgetWrite &&
+    !ctx.mcpDirectoryWidgetReadOnly
+    ? "human"
+    : "agent";
+}
+function scope(id: string, ctx?: ActionRunContext) {
+  return and(
+    eq(strips.id, id),
+    eq(strips.ownerEmail, owner(ctx)),
+    ctx?.orgId ? eq(strips.orgId, ctx.orgId) : isNull(strips.orgId),
+  );
+}
+export async function getStrip(
+  id: string,
+  ctx?: ActionRunContext,
+): Promise<Strip> {
+  const [row] = await getDb()
+    .select({ scene: strips.scene })
+    .from(strips)
+    .where(scope(id, ctx))
+    .limit(1);
+  if (!row)
+    fail("Strip not found in your workspace.", {
+      statusCode: 404,
+      errorCode: "not_found",
+    });
+  return stripSchema.parse(row!.scene);
+}
+export async function createStrip(
+  draft: Draft,
+  ctx?: ActionRunContext,
+): Promise<Strip> {
+  const actor = callerActor(ctx);
+  const scene: Strip = {
+    id: randomUUID(),
+    revision: 0,
+    draft,
+    protectedIds: [],
+    origin:
+      actor === "agent"
+        ? "agent-draft"
+        : draft.inputKind === "illustrative"
+          ? "prepared-example"
+          : "human-authored",
+    lastEditedBy: actor,
+    updatedAt: new Date().toISOString(),
+  };
+  await getDb()
+    .insert(strips)
+    .values({
+      id: scene.id,
+      ownerEmail: owner(ctx),
+      orgId: ctx?.orgId ?? null,
+      scene,
+    });
+  return getStrip(scene.id, ctx);
+}
+export async function saveStrip(
+  previous: Strip,
+  next: Strip,
+  ctx?: ActionRunContext,
+): Promise<Strip> {
+  const changed = await getDb()
+    .update(strips)
+    .set({ scene: next, revision: next.revision, updatedAt: new Date() })
+    .where(and(scope(previous.id, ctx), eq(strips.revision, previous.revision)))
+    .returning({ id: strips.id });
+  if (changed.length !== 1)
+    fail(
+      "A newer edit arrived while this change was being saved. Read the strip and try again.",
+      { statusCode: 409, errorCode: "stale_revision" },
+    );
+  return getStrip(previous.id, ctx);
+}
+export function domainError(error: unknown): never {
+  if (error instanceof StripError)
+    fail(error.message, {
+      errorCode: error.code,
+      statusCode:
+        error.code === "stale_revision"
+          ? 409
+          : error.code === "human_only"
+            ? 403
+            : 400,
+    });
+  throw error;
+}

@@ -1,0 +1,16 @@
+{
+  "url": "http://127.0.0.1:8080/home?id=b1b3a504-b229-42b7-b111-23533dcf4f10&panel=panel-1&object=balloon-1",
+  "pageErrors": [],
+  "width": {
+    "page": 390,
+    "viewport": 390
+  },
+  "exported": true,
+  "reopenedPng": {
+    "width": 1200,
+    "height": 1200
+  },
+  "httpBoundaryPassed": true,
+  "persistedEdit": true,
+  "persistedProtection": true
+}
