@@ -41,6 +41,9 @@ import { i18nCatalog } from "./i18n";
 import stylesheet from "./global.css?url";
 
 configureTracking({
+  // Telemetry must not probe a protected engine endpoint on public pages.
+  // Authenticated AppProviders/Home still use the real readiness gate.
+  llmConnectionStatus: false,
   getDefaultProps: (_name, properties) => ({
     ...properties,
     app: "strip-proof-scaffold",
@@ -181,6 +184,9 @@ function AppContent() {
   const location = useLocation();
   const isChatThread = threadIdFromPath(location.pathname) !== null;
   useCommandMenuShortcut(useCallback(() => setCmdkOpen(true), []));
+  // CommandMenu includes authenticated model/readiness queries even when closed.
+  // Public entry pages must stay outside the workspace's authenticated surfaces.
+  if (isPublicEntry(location.pathname)) return <Outlet />;
   return (
     <>
       <CommandMenu

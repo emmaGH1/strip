@@ -64,6 +64,10 @@ import {
 } from "@/components/ui/sheet";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  clearStripHandoff,
+  stripHandoffTarget,
+} from "@/lib/strip-agent-context";
 import { exportPng, loadSceneAssets, textMeasurer } from "@/lib/strip-canvas";
 
 import { preparedExamples } from "../../shared/examples";
@@ -203,6 +207,12 @@ export default function Home() {
   const isSaved = Boolean(id && query.data);
   const selectedId =
     params.get("object") ?? params.get("panel") ?? strip.draft.panels[0]!.id;
+  const stagedHandoff = useRef<string | undefined>(undefined);
+  const handoffTarget = stripHandoffTarget(id, selectedId);
+  useEffect(() => {
+    if (clearStripHandoff(stagedHandoff.current, handoffTarget))
+      stagedHandoff.current = undefined;
+  }, [handoffTarget]);
   const selectedPanel =
     strip.draft.panels.find(
       (p) =>
@@ -402,6 +412,10 @@ export default function Home() {
     }
   }
   function askAgent(request: string) {
+    // The handoff already carries the complete target/revision. Do not also
+    // stage a picked-object chip describing that same target.
+    deselectAgentSelectable("comic-object", selectedId);
+    stagedHandoff.current = engine.canChat ? undefined : handoffTarget;
     setPhoneTab("agent");
     const submitId = crypto.randomUUID();
     if (engine.canChat)

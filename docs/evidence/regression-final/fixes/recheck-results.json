@@ -1,0 +1,3792 @@
+[
+  {
+    "name": "desktop",
+    "documentStatus": 200,
+    "finalPath": "/",
+    "dimensions": {
+      "documentWidth": 1440,
+      "viewportWidth": 1440
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/",
+        "resourceType": "document",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/speculation-rules.json",
+        "resourceType": "other",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/logo.svg",
+        "resourceType": "image",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/manifest-34da6704.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/entry.client-CTzPsTxC.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/rolldown-runtime-QTnfLwEv.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/api-path-B2lbfohF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/client-Bfwhx7K1.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/react-BZp3cxIm.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/react-dom-p4cawJsS.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/hooks-BClnbfsI.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/components-HkfIGfyB.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/components-CRwlx9Ul.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/jsx-runtime-By8HlURe.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/preload-helper-CZgWQFsJ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/root-B7XEwic-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/lib-XToWdLpn.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/analytics-BqOekkdS.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/session-replay-endpoint--dcEB6NB.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/browser-tab-id-SgAu3a7O.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/application-state-BtYwFivN.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/browser-state-Dr3o-2yp.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/AgentSidebar-zCpXZhL9.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-action-CK1hMPCF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCoin-C3eS57Dj.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-session-CIdS1QPM.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-changelog-seen-DTjWwsKM.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-avatar-Bq5Bn65-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/i18n-DTYRa9Cp.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/shared-COVykg8U.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/theme-family-ChLR5luz.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/theme-DPfas7OP.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-agent-engine-configured-pUVKBgHF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/navigation-D-GYPwun.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/CommandMenu-CgbZk6nk.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/document-title-CzMPNFct.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-CfEEHQU6.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/utils-4jUIYOBc.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-Dd-RzH2B.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/tooltip-1nvBJLEQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/button-CF_w-KZ0.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/createReactComponent-BRAdeDEb.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconAlertCircle-C3r9xukw.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconAlertTriangle-B0vFVJj5.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconArrowUpRight-DgZe1Ae1.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/app-identity-Bsr4QFWt.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/ownership-history-DUIR_iy_.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCheck-CvtON7H2.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChevronDown-YbJ6a6IQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChevronLeft-Be3UJo_e.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChevronRight-blObIVE_.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChevronUp-DWu7gU13.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCircleCheck-BCtHAL96.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCircleX-CLOZwpGG.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dropdown-menu-DOiTzWXg.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPresentation-Bjbpb5Dz.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/ResourcesPanel-CZZ8zggG.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCopy-DxbvJEK0.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconExternalLink-BQbLcQPY.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconKey-DCHSmGjR.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconLoader2-B6mtz_Bu.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconSearch-CRCSM4Xj.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconSelector-DKXYjnit.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/components-D9Ifk_WW.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/popover-5AD-5ExK.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/skeleton-BeSUrvmx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/spinner-CRKgdv-p.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-onboarding-CXq4Jedy.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-preview-mode-kLduo9Ct.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/first-run-startup-gate-context-DjYYiddo.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/AgentSuggestionBar-58CL3yTq.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/header-actions-DpPrTJCX.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/collapsible-DnxZbUdt.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/alert-BlQDhvCy.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/label-eEMKyEvd.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/clipboard-DEMmGB08.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-chat-threads-DNy18TaQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/chat-view-transition-Bl1-IRdG.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/agent-sidebar-state-AhEOig0D.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-agent-chat-running-threads-DZc-Wn3K.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/useRealtimeVoiceMode-3sE2sjAQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/wired-components-DGq2xBfl.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/ResourceIcon-DjvmJtNQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/builder-link-tracking-BIrT6HvB.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/hooks-BGlJPd0z.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/routing-C-z8xNzL.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/sheet-Bz4r_BEt.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/app-config-DseLBbcS.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/chat-paths-DIivAWVV.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/ChatComposerContext-CDzxV-gk.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/MobileAppBar-Be9E7cuF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/en-US-B9Onhute.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/optional-peer-B8odKaDF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-change-version-yAoc-2-M.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/frame-s1aQjOJ4.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconLayoutSidebarRight-8PxvH-K0.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/agent-chat-B7Giwht-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/runtime-adapters-B7Ezx36e.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/LazyChunkErrorBoundary-B6U8WZgN.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/LazyChunkRetryFallback-D6gzdNQu.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/auth-page-helpers-DMaU1Cog.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/return-path-g0gn3Wgh.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/en-US-Dbc-9QW-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-CUewU10I.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconX-C9MX4HQa.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/badge-B_fNQi45.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/input-Dn_E10Gx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/select-CCa4UCB8.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/textarea-tLwX7KY4.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-lddqa7-2.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/es2015-fSoRYlKi.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-DO9F8e0O.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/types-BQ7fiNpT.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/schemas-DEpTwMdG.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/mcp-app-host-CqdRHmAk.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/agent-sidebar-url-CWGJdPGx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/provider-env-vars-DLWavbWo.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/w3c-keyname-cajq6SLg.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/TiptapComposer-D4eYzBZ_.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/command-DBkncblO.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconArrowLeft-Davqq8av.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPlugConnected-D2ykTP-h.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconClock-Db1q5tfk.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconFileText-nV129g7z.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconFile-COgubuIK.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconHistory-fFPEWK00.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconMail-me2hRozW.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPencil-Dh67FbeN.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPlus-DrkXFdyz.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconRefresh-XpOYIKbW.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconTool-BWfikeRt.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconTrash-CJlAP2na.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/radio-group-e3SXPJbD.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/context-items-BCsfyYMr.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconMessageCircle-1WzSxxJH.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconApps-DvrPkqsR.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChartBar-e-BKkplH.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChecklist-B2tEYyjX.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPalette-DK84_W-j.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPhoto-CXqec28w.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPlayerPlay-BpY1gPmx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/templates-meta-BplL9wvx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconDots-CP4Uc3TI.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/app-status-BQ6Kvm2b.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/is-builder-io-employee-BURpQ-Kn.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/chat-unread-state-C4a5raXQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/BuilderConnectCard-DX7eMgCz.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/PromptComposer-B2-VkKoW.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCloudUpload-DNXnprgx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconDownload-DFDRHDTi.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconEye-DlHQG_Q7.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconFileImport-C1tswO0q.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconHelpCircle--9oVq47i.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconLock-CMR465oL.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/deferred-builder-connect-popover-3-Z8d4y-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-resources-DIHldP4W.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/mcp-integration-catalog-DpfeevE0.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/McpIntegrationDialog-B7A6zaSq.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/default-DMI-Tsal.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/workspace-app-links-DmIdTeoI.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/alert-dialog-DkJOXW6D.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/empty-BSB00Yvx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconDotsVertical-WMSEt7_S.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/useBuilderStatus-FpE9BNP6.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-poll-loop-AdlxZA2S.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/oauth-popup-LyUM4zl5.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconUsersGroup-Dh7jzXPo.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/input-group-HGIA2RLf.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/toggle-group-DEcPjtdj.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/runtime-adapters-Cc8w7Bro.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/run-recovery-C49QZtUw.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconArrowRight-Bf8ie1kD.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconSettings-CwMo2PFu.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/error-format-BQNsolva.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/BuilderReferralInviteRow-DFSsj0WX.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-feature-flag-Dwoy1rQl.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/session-replay-privacy-BZBZwMzw.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/SharePrimitives-CmJTpId8.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/settings-redirects-BeP5xRkf.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconMessages-C8P9Vpyu.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconMenu2-C7DZuNFV.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/_index-BDlNey7R.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/studio-DCYXvqbm.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/global-CuJNpSgR.css",
+        "resourceType": "stylesheet",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/_index-CzqH48Yb.css",
+        "resourceType": "stylesheet",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/studio-Dv2f4ToX.css",
+        "resourceType": "stylesheet",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/auth/session",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/logo.svg",
+        "resourceType": "image",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-400-normal-A6LyuA6R.woff2",
+        "resourceType": "font",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-700-normal-gtcctNPv.woff2",
+        "resourceType": "font",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-800-normal-J50vIsBe.woff2",
+        "resourceType": "font",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/auth/attribution",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/auth/consent-region",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/auth/session",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/favicon.svg",
+        "resourceType": "other",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/ping",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_.data",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/home-B0VA3fNx.js",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/home-CFm6F95P.js",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-agent-select-DeK98b64.js",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/home.data",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/home.data",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/comic-neue-latin-700-normal-NE4Vcoll.woff2",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-800-normal-J50vIsBe.woff2",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-500-normal-DEDBoLFO.woff2",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/comic-neue-latin-700-normal-NE4Vcoll.woff2",
+        "resourceType": "font",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/home-B0VA3fNx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/home-CFm6F95P.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-agent-select-DeK98b64.js",
+        "resourceType": "script",
+        "status": 200
+      }
+    ],
+    "errors": []
+  },
+  {
+    "name": "phone",
+    "documentStatus": 200,
+    "finalPath": "/",
+    "dimensions": {
+      "documentWidth": 390,
+      "viewportWidth": 390
+    },
+    "requests": [
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/",
+        "resourceType": "document",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/speculation-rules.json",
+        "resourceType": "other",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/logo.svg",
+        "resourceType": "image",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/manifest-34da6704.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/entry.client-CTzPsTxC.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/rolldown-runtime-QTnfLwEv.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/api-path-B2lbfohF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/client-Bfwhx7K1.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/react-BZp3cxIm.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/react-dom-p4cawJsS.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/hooks-BClnbfsI.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/components-HkfIGfyB.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/components-CRwlx9Ul.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/jsx-runtime-By8HlURe.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/preload-helper-CZgWQFsJ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/root-B7XEwic-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/lib-XToWdLpn.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/analytics-BqOekkdS.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/session-replay-endpoint--dcEB6NB.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/browser-tab-id-SgAu3a7O.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/application-state-BtYwFivN.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/browser-state-Dr3o-2yp.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/AgentSidebar-zCpXZhL9.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-action-CK1hMPCF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCoin-C3eS57Dj.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-session-CIdS1QPM.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-changelog-seen-DTjWwsKM.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-avatar-Bq5Bn65-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/i18n-DTYRa9Cp.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/shared-COVykg8U.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/theme-family-ChLR5luz.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/theme-DPfas7OP.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-agent-engine-configured-pUVKBgHF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/navigation-D-GYPwun.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/CommandMenu-CgbZk6nk.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/document-title-CzMPNFct.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-CfEEHQU6.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/utils-4jUIYOBc.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-Dd-RzH2B.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/tooltip-1nvBJLEQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/button-CF_w-KZ0.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/createReactComponent-BRAdeDEb.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconAlertCircle-C3r9xukw.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconAlertTriangle-B0vFVJj5.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconArrowUpRight-DgZe1Ae1.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/app-identity-Bsr4QFWt.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/ownership-history-DUIR_iy_.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCheck-CvtON7H2.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChevronDown-YbJ6a6IQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChevronLeft-Be3UJo_e.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChevronRight-blObIVE_.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChevronUp-DWu7gU13.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCircleCheck-BCtHAL96.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCircleX-CLOZwpGG.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dropdown-menu-DOiTzWXg.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPresentation-Bjbpb5Dz.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/ResourcesPanel-CZZ8zggG.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCopy-DxbvJEK0.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconExternalLink-BQbLcQPY.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconKey-DCHSmGjR.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconLoader2-B6mtz_Bu.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconSearch-CRCSM4Xj.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconSelector-DKXYjnit.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/components-D9Ifk_WW.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/popover-5AD-5ExK.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/skeleton-BeSUrvmx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/spinner-CRKgdv-p.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-onboarding-CXq4Jedy.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-preview-mode-kLduo9Ct.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/first-run-startup-gate-context-DjYYiddo.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/AgentSuggestionBar-58CL3yTq.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/header-actions-DpPrTJCX.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/collapsible-DnxZbUdt.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/alert-BlQDhvCy.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/label-eEMKyEvd.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/clipboard-DEMmGB08.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-chat-threads-DNy18TaQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/chat-view-transition-Bl1-IRdG.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/agent-sidebar-state-AhEOig0D.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-agent-chat-running-threads-DZc-Wn3K.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/useRealtimeVoiceMode-3sE2sjAQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/wired-components-DGq2xBfl.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/ResourceIcon-DjvmJtNQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/builder-link-tracking-BIrT6HvB.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/hooks-BGlJPd0z.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/routing-C-z8xNzL.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/sheet-Bz4r_BEt.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/app-config-DseLBbcS.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/chat-paths-DIivAWVV.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/ChatComposerContext-CDzxV-gk.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/MobileAppBar-Be9E7cuF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/en-US-B9Onhute.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/optional-peer-B8odKaDF.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-change-version-yAoc-2-M.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/frame-s1aQjOJ4.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconLayoutSidebarRight-8PxvH-K0.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/agent-chat-B7Giwht-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/runtime-adapters-B7Ezx36e.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/LazyChunkErrorBoundary-B6U8WZgN.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/LazyChunkRetryFallback-D6gzdNQu.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/auth-page-helpers-DMaU1Cog.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/return-path-g0gn3Wgh.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/en-US-Dbc-9QW-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-CUewU10I.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconX-C9MX4HQa.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/badge-B_fNQi45.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/input-Dn_E10Gx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/select-CCa4UCB8.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/textarea-tLwX7KY4.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-lddqa7-2.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/es2015-fSoRYlKi.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/dist-DO9F8e0O.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/types-BQ7fiNpT.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/schemas-DEpTwMdG.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/mcp-app-host-CqdRHmAk.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/agent-sidebar-url-CWGJdPGx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/provider-env-vars-DLWavbWo.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/w3c-keyname-cajq6SLg.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/TiptapComposer-D4eYzBZ_.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/command-DBkncblO.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconArrowLeft-Davqq8av.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPlugConnected-D2ykTP-h.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconClock-Db1q5tfk.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconFileText-nV129g7z.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconFile-COgubuIK.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconHistory-fFPEWK00.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconMail-me2hRozW.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPencil-Dh67FbeN.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPlus-DrkXFdyz.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconRefresh-XpOYIKbW.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconTool-BWfikeRt.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconTrash-CJlAP2na.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/radio-group-e3SXPJbD.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/context-items-BCsfyYMr.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconMessageCircle-1WzSxxJH.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconApps-DvrPkqsR.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChartBar-e-BKkplH.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconChecklist-B2tEYyjX.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPalette-DK84_W-j.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPhoto-CXqec28w.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconPlayerPlay-BpY1gPmx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/templates-meta-BplL9wvx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconDots-CP4Uc3TI.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/app-status-BQ6Kvm2b.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/is-builder-io-employee-BURpQ-Kn.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/chat-unread-state-C4a5raXQ.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/BuilderConnectCard-DX7eMgCz.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/PromptComposer-B2-VkKoW.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconCloudUpload-DNXnprgx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconDownload-DFDRHDTi.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconEye-DlHQG_Q7.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconFileImport-C1tswO0q.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconHelpCircle--9oVq47i.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconLock-CMR465oL.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/deferred-builder-connect-popover-3-Z8d4y-.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-resources-DIHldP4W.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/mcp-integration-catalog-DpfeevE0.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/McpIntegrationDialog-B7A6zaSq.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/default-DMI-Tsal.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/workspace-app-links-DmIdTeoI.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/alert-dialog-DkJOXW6D.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/empty-BSB00Yvx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconDotsVertical-WMSEt7_S.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/useBuilderStatus-FpE9BNP6.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-poll-loop-AdlxZA2S.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/oauth-popup-LyUM4zl5.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconUsersGroup-Dh7jzXPo.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/input-group-HGIA2RLf.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/toggle-group-DEcPjtdj.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/runtime-adapters-Cc8w7Bro.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/run-recovery-C49QZtUw.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconArrowRight-Bf8ie1kD.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconSettings-CwMo2PFu.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/error-format-BQNsolva.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/BuilderReferralInviteRow-DFSsj0WX.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-feature-flag-Dwoy1rQl.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/session-replay-privacy-BZBZwMzw.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/SharePrimitives-CmJTpId8.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/settings-redirects-BeP5xRkf.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconMessages-C8P9Vpyu.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/IconMenu2-C7DZuNFV.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/_index-BDlNey7R.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/studio-DCYXvqbm.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/global-CuJNpSgR.css",
+        "resourceType": "stylesheet",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/_index-CzqH48Yb.css",
+        "resourceType": "stylesheet",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/studio-Dv2f4ToX.css",
+        "resourceType": "stylesheet",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/auth/session",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/logo.svg",
+        "resourceType": "image",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-400-normal-A6LyuA6R.woff2",
+        "resourceType": "font",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-700-normal-gtcctNPv.woff2",
+        "resourceType": "font",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-800-normal-J50vIsBe.woff2",
+        "resourceType": "font",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/auth/attribution",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/auth/consent-region",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/auth/session",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/favicon.svg",
+        "resourceType": "other",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-standing.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-leaning.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-relieved.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking-arms-crossed.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-neutral.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-happy.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-skeptical.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/ari-thinking.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-neutral.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-happy.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-panic.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-skeptical.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/peeps/sam-thinking.svg",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_agent-native/ping",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/_.data",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/home-B0VA3fNx.js",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/home-CFm6F95P.js",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-agent-select-DeK98b64.js",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/home.data",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/home.data",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/comic-neue-latin-700-normal-NE4Vcoll.woff2",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-800-normal-J50vIsBe.woff2",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/bricolage-grotesque-latin-500-normal-DEDBoLFO.woff2",
+        "resourceType": "fetch",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/comic-neue-latin-700-normal-NE4Vcoll.woff2",
+        "resourceType": "font",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/home-B0VA3fNx.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/home-CFm6F95P.js",
+        "resourceType": "script",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "origin": "https://8080-agq3ndu665es5t4nn6gjyv7wca.instabox.tech",
+        "path": "/assets/use-agent-select-DeK98b64.js",
+        "resourceType": "script",
+        "status": 200
+      }
+    ],
+    "errors": []
+  }
+]

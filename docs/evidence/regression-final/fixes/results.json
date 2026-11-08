@@ -1,0 +1,227 @@
+{
+  "results": [
+    {
+      "name": "anon-desktop",
+      "status": "FAIL",
+      "error": "[{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/speculation-rules.json\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/session-replay-endpoint--dcEB6NB.js\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/use-session-CIdS1QPM.js\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/auth-page-helpers-DMaU1Cog.js\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/oauth-popup-LyUM4zl5.js\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/session-replay-privacy-BZBZwMzw.js\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/auth/session\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"POST\",\"path\":\"/_agent-native/auth/attribution\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/auth/consent-region\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/auth/session\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/ping\"},{\"label\":\"anon-desktop\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/agent-engine/status\"},{\"label\":\"anon-desktop\",\"type\":\"http-error\",\"status\":401,\"path\":\"/_agent-native/agent-engine/status\"},{\"label\":\"anon-desktop\",\"type\":\"console-error\",\"text\":\"Failed to load resource: the server responded with a status of 401 ()\"}]"
+    },
+    {
+      "name": "anon-phone",
+      "status": "FAIL",
+      "error": "[{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/speculation-rules.json\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/session-replay-endpoint--dcEB6NB.js\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/use-session-CIdS1QPM.js\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/auth-page-helpers-DMaU1Cog.js\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/oauth-popup-LyUM4zl5.js\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/assets/session-replay-privacy-BZBZwMzw.js\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/auth/session\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"POST\",\"path\":\"/_agent-native/auth/attribution\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/auth/consent-region\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/auth/session\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/ping\"},{\"label\":\"anon-phone\",\"type\":\"auth-related-request\",\"method\":\"GET\",\"path\":\"/_agent-native/agent-engine/status\"},{\"label\":\"anon-phone\",\"type\":\"http-error\",\"status\":401,\"path\":\"/_agent-native/agent-engine/status\"},{\"label\":\"anon-phone\",\"type\":\"console-error\",\"text\":\"Failed to load resource: the server responded with a status of 401 ()\"}]"
+    },
+    {
+      "name": "signup-and-example",
+      "status": "PASS"
+    },
+    {
+      "name": "compose-then-same-studio-current-context",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 12000ms exceeded."
+    },
+    {
+      "name": "selection-change-clears-prefill",
+      "status": "FAIL",
+      "error": "expect(locator).toContainText(expected) failed"
+    },
+    {
+      "name": "phone-back-control",
+      "status": "PASS"
+    },
+    {
+      "name": "phone-inline-one-chip",
+      "status": "PASS"
+    }
+  ],
+  "events": [
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/speculation-rules.json"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/session-replay-endpoint--dcEB6NB.js"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/use-session-CIdS1QPM.js"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/auth-page-helpers-DMaU1Cog.js"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/oauth-popup-LyUM4zl5.js"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/session-replay-privacy-BZBZwMzw.js"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/auth/session"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "POST",
+      "path": "/_agent-native/auth/attribution"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/auth/consent-region"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/auth/session"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/ping"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/agent-engine/status"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "http-error",
+      "status": 401,
+      "path": "/_agent-native/agent-engine/status"
+    },
+    {
+      "label": "anon-desktop",
+      "type": "console-error",
+      "text": "Failed to load resource: the server responded with a status of 401 ()"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/speculation-rules.json"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/session-replay-endpoint--dcEB6NB.js"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/use-session-CIdS1QPM.js"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/auth-page-helpers-DMaU1Cog.js"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/oauth-popup-LyUM4zl5.js"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/assets/session-replay-privacy-BZBZwMzw.js"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/auth/session"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "POST",
+      "path": "/_agent-native/auth/attribution"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/auth/consent-region"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/auth/session"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/ping"
+    },
+    {
+      "label": "anon-phone",
+      "type": "auth-related-request",
+      "method": "GET",
+      "path": "/_agent-native/agent-engine/status"
+    },
+    {
+      "label": "anon-phone",
+      "type": "http-error",
+      "status": 401,
+      "path": "/_agent-native/agent-engine/status"
+    },
+    {
+      "label": "anon-phone",
+      "type": "console-error",
+      "text": "Failed to load resource: the server responded with a status of 401 ()"
+    },
+    {
+      "label": "desktop",
+      "type": "http-error",
+      "status": 401,
+      "path": "/_agent-native/agent-engine/status"
+    },
+    {
+      "label": "desktop",
+      "type": "console-error",
+      "text": "Failed to load resource: the server responded with a status of 401 ()"
+    },
+    {
+      "label": "desktop",
+      "type": "http-error",
+      "status": 401,
+      "path": "/_agent-native/agent-engine/status"
+    },
+    {
+      "label": "desktop",
+      "type": "console-error",
+      "text": "Failed to load resource: the server responded with a status of 401 ()"
+    }
+  ],
+  "blocked": []
+}

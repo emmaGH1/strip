@@ -1,3 +1,24 @@
+# Regression fix lane — implementation and bounded verification
+
+- **P2 implemented, final browser acceptance OPEN:** setup-only Strip handoffs track their compose/strip/selection target. Changing target removes thread-scoped framework prefill chips and replaces the old prefill with a blank (non-submitting, non-opening) framework composer handoff. The first browser pass confirmed old text cleared but exposed a missed thread suffix; that suffix is now covered by tests and corrected. The only disposable session was destroyed before the correction, so no authenticated visual recheck or selection-change verification is claimed.
+- **P3a/P3b browser PASS:** the framework's existing phone header dismiss button has a visible, touch-sized “Back to strip” label and restores the tabs; inline Ask deselects its duplicate picked-object chip before staging the selection/revision handoff. Terra/high inspected the screenshots in `docs/evidence/regression-final/fixes/`.
+- **Signed-out 401 fix PASS:** public pages no longer mount the authenticated CommandMenu, and framework telemetry's optional `llmConnectionStatus` probe is disabled. Real authenticated `AppProviders` / Home readiness is unchanged, not faked. A second signed-out desktop/phone public recheck observed no readiness request, protected API request or HTTP error; ordinary public session/attribution/consent/ping calls remain. See `recheck-report.md` and retained original failures.
+- **Checks/service:** 61 tests, typecheck, changed-file oxfmt, clean framework doctor and production build passed; restarted the existing `strip-app` after each build. Existing bundler warnings remain. No AI/provider call, push, new deployment or submission. One new disposable account only; no saved session/password remains. Preserved pre-staged icon, concurrent judge story and untracked `.env.example`.
+
+---
+
+# Signed-out landing recheck
+
+- **PASS, bounded:** public landing in fresh desktop and touch-emulated phone Chromium contexts, 10 seconds after load, made no `/_agent-native/agent-engine/status` request, protected API call, 401 or other HTTP error. Public framework endpoint paths and exact full network log, inspected screenshots and limits: `docs/evidence/regression-final/fixes/recheck-report.md`. No account or model/provider request; browser closed. **Authenticated stale-context-chip fix remains unverified**, as the sole disposable session was destroyed; no replacement account was created.
+
+---
+
+# Focused fix recheck — 2026-11-08
+
+- Public Chromium recheck found signed-out readiness 401s on desktop and phone, and the old `Cast & source type` chip persisted after compose → saved Studio although the old prefill text cleared. Phone Back to strip and the single inline Funnier target chip passed. Selection-change clearing remains untested due to an automation error, not a product failure. One disposable account, no AI requests, no app changes. Detailed diagnostics and inspected screenshots: `docs/evidence/regression-final/fixes/verification.md`.
+
+---
+
 # Final public judge-path regression — 2026-11-08 · bounded pass
 
 - Terra/high Chromium ran the public judge path with **one** disposable account; the original signup/example opening and a retained-session recheck together cover desktop and touch-emulated phone. The final script passed **29/29** individually caught/screenshot steps: prepared landing click/tap, illustrative Studio edit/reload/MINE/ending, actual 1200×1200 PNG download/open/clipboard, restore/reload, honest no-AI compose prefill, phone focused panel/tabs/inline Ask and touch endings. `scripts/qa/regression.mjs` and `docs/evidence/regression-final/{verification.md,final-results.json,final-*.png}` retain evidence; the preceding incomplete report is `verification-run1.md`. Private storageState was deleted. No provider connection or AI submission.

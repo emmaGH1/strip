@@ -280,3 +280,23 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.34);
 }
+
+/* Keep the framework's real dismiss control, but make the phone escape route
+   a labelled, touch-sized header action rather than a tiny unexplained icon. */
+@media (max-width: 700px) {
+  .agent-sidebar-panel button[aria-label="Collapse sidebar"] {
+    width: auto;
+    min-height: 44px;
+    padding: 0 8px;
+    gap: 4px;
+    border: 1px solid var(--ink, #1a1714);
+    color: #1a1714;
+    background: #f4efe6;
+  }
+  .agent-sidebar-panel button[aria-label="Collapse sidebar"]::after {
+    content: "Back to strip";
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+}
