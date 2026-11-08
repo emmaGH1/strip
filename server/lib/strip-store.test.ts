@@ -11,6 +11,7 @@ import {
   owner,
   saveStrip,
   revisionWho,
+  recordProtectedRejection,
 } from "./strip-store.js";
 
 const mocks = vi.hoisted(() => ({
@@ -136,6 +137,22 @@ describe("trusted caller and scoped store boundary", () => {
     expect(sql.sql).toContain('"org_id" is null');
     await expect(listStrips()).rejects.toThrow("Sign in");
   });
+  it("records only scoped agent rejection metadata without modifying comic revision or content", async () => {
+    await recordProtectedRejection("one", context);
+    expect(Object.keys(mocks.set.mock.lastCall![0])).toEqual(["scene"]);
+    const expression = new PgDialect().sqlToQuery(
+      mocks.set.mock.lastCall![0].scene,
+    );
+    expect(expression.sql).toContain("jsonb_set");
+    expect(Object.keys(JSON.parse(expression.params[0] as string))).toEqual([
+      "at",
+    ]);
+    const predicate = new PgDialect().sqlToQuery(mocks.where.mock.lastCall![0]);
+    expect(predicate.params).toEqual(["one", "one@example.test", "org-one"]);
+    const count = mocks.set.mock.calls.length;
+    await recordProtectedRejection("one", { ...context, caller: "frontend" });
+    expect(mocks.set.mock.calls.length).toBe(count);
+  });
   it("rejects a lost compare-and-swap and includes the revision predicate", async () => {
     await expect(
       saveStrip(scene, { ...scene, revision: 3 }, context),
@@ -143,7 +160,12 @@ describe("trusted caller and scoped store boundary", () => {
     const sql = new PgDialect().sqlToQuery(mocks.where.mock.lastCall![0]);
     expect(sql.sql).toContain("revision");
     expect(sql.params).toEqual(["one", "one@example.test", "org-one", 2]);
-    const written = mocks.set.mock.lastCall![0].scene as Strip;
+    const expression = new PgDialect().sqlToQuery(
+      mocks.set.mock.lastCall![0].scene,
+    );
+    expect(expression.sql).toContain("jsonb_set");
+    expect(expression.sql).toContain("agentRejection");
+    const written = JSON.parse(expression.params[0] as string) as Strip;
     expect(written.history?.map((entry) => entry.revision)).toEqual([2, 3]);
     expect(written.history?.[1]?.who).toBe("agent");
     expect(scene.history).toBeUndefined();

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { textMeasurer } from "@/lib/strip-canvas";
 
 import { renderStripSvg, type SceneAssets } from "../../../shared/render-strip";
+import { posterSpecimen } from "./Poster";
 
 export function Library({ assets }: { assets: SceneAssets | undefined }) {
   const query = useActionQuery("list-strips", {});
@@ -42,9 +43,24 @@ export function Library({ assets }: { assets: SceneAssets | undefined }) {
             </p>
             <Button asChild className="print-button">
               <Link to="/home?new=1">
-                Make a strip <ArrowRight size={18} />
+                New strip <ArrowRight size={18} />
               </Link>
             </Button>
+            <figure className="library-example">
+              <div
+                className="library-thumbnail"
+                aria-label="Prepared illustrative Undo comic"
+                dangerouslySetInnerHTML={{
+                  __html: assets
+                    ? renderStripSvg(posterSpecimen(), assets, textMeasurer())
+                        .svg
+                    : "",
+                }}
+              />
+              <figcaption>
+                ONE PREPARED EXAMPLE · ILLUSTRATIVE, NOT GENERATED
+              </figcaption>
+            </figure>
           </div>
         )}
         <div className="library-grid">

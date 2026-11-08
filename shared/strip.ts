@@ -260,6 +260,8 @@ export const stripSchema = z.object({
   lastEditedBy: z.enum(["human", "agent"]),
   updatedAt: z.string(),
   history: z.array(revisionSnapshotSchema).optional(),
+  // Latest rejected agent attempt, not a scene revision or a proposed edit.
+  agentRejection: z.object({ at: z.string() }).optional(),
   // Optional for historical records. Inverses are server-derived, never supplied by the agent.
   pencils: z
     .record(

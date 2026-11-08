@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 
 import { fail, type ActionRunContext } from "@agent-native/core/action";
-import { and, desc, eq, isNull } from "drizzle-orm";
+import { and, desc, eq, isNull, sql } from "drizzle-orm";
 
 import { changedSummary } from "../../shared/history.js";
 import {
@@ -164,7 +164,12 @@ export async function saveStrip(
   };
   const changed = await getDb()
     .update(strips)
-    .set({ scene: next, revision: next.revision, updatedAt: new Date() })
+    .set({
+      // Keep rejection bookkeeping even if it arrived after this editor read.
+      scene: sql`CASE WHEN ${strips.scene}->'agentRejection' IS NULL THEN ${JSON.stringify(next)}::jsonb - 'agentRejection' ELSE jsonb_set(${JSON.stringify(next)}::jsonb, '{agentRejection}', ${strips.scene}->'agentRejection') END`,
+      revision: next.revision,
+      updatedAt: new Date(),
+    })
     .where(and(scope(previous.id, ctx), eq(strips.revision, previous.revision)))
     .returning({ id: strips.id });
   if (changed.length !== 1)
@@ -173,6 +178,21 @@ export async function saveStrip(
       { statusCode: 409, errorCode: "stale_revision" },
     );
   return getStrip(previous.id, ctx);
+}
+export async function recordProtectedRejection(
+  id: string,
+  ctx?: ActionRunContext,
+) {
+  if (callerActor(ctx) !== "agent") return;
+  // Audit-only write leaves draft/protection/history/revision untouched.
+  // Keep it observed so the framework publishes its normal failed-write change
+  // event and an already-open agent desk can read the rejection.
+  await getDb()
+    .update(strips)
+    .set({
+      scene: sql`jsonb_set(${strips.scene}, '{agentRejection}', ${JSON.stringify({ at: new Date().toISOString() })}::jsonb)`,
+    })
+    .where(scope(id, ctx));
 }
 export function domainError(error: unknown): never {
   if (error instanceof StripError)

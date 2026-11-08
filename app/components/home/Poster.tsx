@@ -7,6 +7,7 @@ import { loadSceneAssets, textMeasurer } from "@/lib/strip-canvas";
 import { preparedExamples } from "../../../shared/examples";
 import { renderStripSvg } from "../../../shared/render-strip";
 import { applyEdits, type Strip } from "../../../shared/strip";
+import { cropPanel } from "../../../shared/studio";
 
 // A labelled illustrative specimen, using the same attribution and rendering as Studio.
 export function posterSpecimen(): Strip {
@@ -81,18 +82,28 @@ export default function Poster() {
           </p>
         </section>
       </div>
-      <footer className="poster-loop">
-        <span>
-          <b>01</b> Paste an update
-        </span>
-        <ArrowRight />
-        <span>
-          <b>02</b> The agent pencils it
-        </span>
-        <ArrowRight />
-        <span>
-          <b>03</b> You ink it
-        </span>
+      <section className="poster-loop" aria-label="How Strip works">
+        {["Paste an update", "The agent pencils it", "You ink it"].map(
+          (step, index) => (
+            <div className="loop-step" key={step}>
+              <div
+                className="loop-crop"
+                aria-hidden="true"
+                dangerouslySetInnerHTML={{
+                  __html: svg ? cropPanel(svg, [0, 2, 3][index]!) : "",
+                }}
+              />
+              <span>
+                <b>0{index + 1}</b> {step}
+              </span>
+              {index < 2 && <ArrowRight className="loop-arrow" size={18} />}
+            </div>
+          ),
+        )}
+      </section>
+      <footer className="poster-credits">
+        Built with Agent-Native · Open Peeps (CC0) · Bricolage Grotesque &amp;
+        Comic Neue (OFL)
       </footer>
     </main>
   );

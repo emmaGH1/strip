@@ -6,9 +6,15 @@ import {
   domainError,
   getStrip,
   saveStrip,
+  recordProtectedRejection,
 } from "../server/lib/strip-store.js";
 import { restoreRevision } from "../shared/history.js";
-import { applyEdits, editSchema, stripSchema } from "../shared/strip.js";
+import {
+  applyEdits,
+  editSchema,
+  stripSchema,
+  StripError,
+} from "../shared/strip.js";
 
 export default defineAction({
   description:
@@ -65,6 +71,8 @@ export default defineAction({
         restore !== undefined ? `Restored revision ${restore}` : undefined,
       );
     } catch (error) {
+      if (error instanceof StripError && error.code === "protected_element")
+        await recordProtectedRejection(id, ctx);
       return domainError(error);
     }
   },

@@ -10,6 +10,8 @@ import {
   useActionMutation,
   useActionQuery,
   useReconciledState,
+  actionErrorCode,
+  actionErrorMessage,
 } from "@agent-native/core/client/hooks";
 import { buildSettingsRoute } from "@agent-native/core/client/navigation";
 import {
@@ -45,6 +47,7 @@ import {
 import { Link, useNavigate, useSearchParams } from "react-router";
 
 import { Library } from "@/components/home/Library";
+import { SelectionNote } from "@/components/home/SelectionNote";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -53,11 +56,18 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { exportPng, loadSceneAssets, textMeasurer } from "@/lib/strip-canvas";
 
 import { preparedExamples } from "../../shared/examples";
+import { launchCaption, exportFilename } from "../../shared/launch-post";
 import { renderStripSvg, type SceneAssets } from "../../shared/render-strip";
 import {
   cast,
@@ -84,9 +94,7 @@ export function meta() {
   ];
 }
 const errorMessage = (error: unknown) =>
-  error instanceof Error
-    ? error.message
-    : "That change could not be saved. Try again.";
+  actionErrorMessage(error) ?? "That change could not be saved. Try again.";
 const sampleStrip = (): Strip => ({
   id: "unsaved-example",
   revision: 0,
@@ -106,6 +114,17 @@ export default function Home() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [exporting, setExporting] = useState(false);
+  const [exportOpen, setExportOpen] = useState(false);
+  const [exportPreview, setExportPreview] = useState("");
+  const [exportName, setExportName] = useState("");
+  const [caption, setCaption] = useState("");
+  const [exportNotice, setExportNotice] = useState("");
+  useEffect(
+    () => () => {
+      if (exportPreview) URL.revokeObjectURL(exportPreview);
+    },
+    [exportPreview],
+  );
   const [source, setSource] = useState("");
   const [illustrative, setIllustrative] = useState(false);
   const [castDraft, setCastDraft] = useState({
@@ -127,6 +146,16 @@ export default function Home() {
     threadId?: string;
   }>();
   const { workingThreadIds } = useAgentChatRunningThreads();
+  const seenWorking = useRef<string | undefined>(undefined);
+  useEffect(() => {
+    if (!agentRequest?.threadId) return;
+    if (workingThreadIds.has(agentRequest.threadId))
+      seenWorking.current = agentRequest.submitId;
+    else if (seenWorking.current === agentRequest.submitId) {
+      setAgentRequest(undefined);
+      seenWorking.current = undefined;
+    }
+  }, [agentRequest, workingThreadIds]);
   const drafting =
     !id &&
     agentRequest?.stripId === "" &&
@@ -342,8 +371,21 @@ export default function Home() {
       });
       setNotice("Saved in ink.");
     } catch (e) {
-      setError(errorMessage(e));
-      await query.refetch();
+      if (actionErrorCode(e) === "stale_revision") {
+        setNotice("This strip changed elsewhere — showing the latest");
+        // A rejected save must reveal the latest canvas, not leave a stale
+        // textarea above it or retain its editing-base revision for the next edit.
+        setEditing(false);
+        setLineDirty(false);
+        const latest = await query.refetch();
+        const balloon = latest.data?.draft.panels
+          .flatMap((p) => p.balloons)
+          .find((b) => b.id === selectedId);
+        setLine(balloon?.text ?? "");
+      } else {
+        setError(errorMessage(e));
+        await query.refetch();
+      }
       throw e;
     }
   }
@@ -407,11 +449,13 @@ export default function Home() {
           : "Stamped MINE. The agent cannot change this.",
       );
     } catch (e) {
-      setError(errorMessage(e));
+      if (actionErrorCode(e) === "stale_revision")
+        setNotice("This strip changed elsewhere — showing the latest");
+      else setError(errorMessage(e));
       await query.refetch();
     }
   }
-  async function download() {
+  async function openExport() {
     if (!assets || !measure) return;
     setExporting(true);
     setError("");
@@ -422,27 +466,29 @@ export default function Home() {
           "Some text does not fit. Shorten the highlighted lines before exporting.",
         );
       const blob = await exportPng(output.svg);
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "strip-comic.png";
-      link.click();
-      setTimeout(() => URL.revokeObjectURL(url), 60000);
-      setNotice("Your 1200 × 1200 PNG is ready.");
+      setExportPreview(URL.createObjectURL(blob));
+      setExportName(exportFilename(strip.draft.title));
+      setCaption(launchCaption(strip.draft));
+      setExportNotice("");
+      setExportOpen(true);
     } catch (e) {
-      setError(errorMessage(e));
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Could not prepare the PNG. Try again.",
+      );
     } finally {
       setExporting(false);
     }
   }
   async function copyCaption() {
     try {
-      await navigator.clipboard.writeText(
-        `${strip.draft.title}\n\n${strip.draft.source}${strip.draft.sourceUrl ? `\n${strip.draft.sourceUrl}` : ""}\n\n${strip.draft.inputKind === "illustrative" ? "Illustrative product update. " : ""}Fictional dialogue. Made with Strip.`,
-      );
-      setNotice("Post caption copied.");
+      await navigator.clipboard.writeText(caption);
+      setExportNotice("Post caption copied.");
     } catch {
-      setError("Clipboard unavailable. Allow clipboard access and try again.");
+      setExportNotice(
+        "Clipboard unavailable. Select and copy the caption below.",
+      );
     }
   }
   const script = (
@@ -582,94 +628,65 @@ export default function Home() {
         <Shield size={16} />
         {directProtection ? "Unprotect" : "Protect"}
       </Button>
-      <Popover
-        open={phone ? phoneAskOpen : askOpen}
-        onOpenChange={phone ? setPhoneAskOpen : setAskOpen}
-      >
-        {!phone && (
-          <PopoverAnchor
-            virtualRef={{
-              current: {
-                getBoundingClientRect: () => {
-                  const panel = Array.from(
-                    canvasRef.current?.querySelectorAll<SVGGraphicsElement>(
-                      "[data-object]",
-                    ) ?? [],
-                  ).find(
-                    (el) => el.getAttribute("data-object") === selectedPanel.id,
-                  );
-                  return (
-                    panel?.getBoundingClientRect() ??
-                    canvasRef.current?.getBoundingClientRect() ??
-                    new DOMRect()
-                  );
-                },
-              },
-            }}
-          />
-        )}
-        <PopoverTrigger asChild>
-          <Button variant="ghost" size="sm" className="agent-action">
-            <MessageSquare size={16} />
-            Ask agent
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent
-          className="ask-popover"
-          side={phone ? "top" : panelNumber % 2 ? "right" : "left"}
-          align={phone ? "center" : "start"}
-          sideOffset={10}
+      {phone ? (
+        <Button
+          variant="ghost"
+          size="sm"
+          className="agent-action"
+          onClick={() => setPhoneAskOpen(!phoneAskOpen)}
         >
-          <p className="eyebrow">A NOTE FOR THE AGENT</p>
-          <div className="option-list">
-            {["Funnier", "Shorter", "More innocent", "Show the feature"].map(
-              (chip) => (
-                <Button
-                  variant="outline"
-                  key={chip}
-                  onClick={() => setAskText(chip)}
-                >
-                  {chip}
-                </Button>
-              ),
-            )}
-          </div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!askText.trim()) return;
-              revise(askText.trim());
-              setAskOpen(false);
-              setPhoneAskOpen(false);
-            }}
-          >
-            <label htmlFor={phone ? "phone-selection-ask" : "selection-ask"}>
-              About {selectionLabel}
-            </label>
-            <Textarea
-              id={phone ? "phone-selection-ask" : "selection-ask"}
-              value={askText}
-              onChange={(e) => setAskText(e.target.value)}
-              maxLength={600}
-              placeholder="Keep my line, but make the reaction drier…"
-              rows={3}
-              required
+          <MessageSquare size={16} />
+          Ask agent
+        </Button>
+      ) : (
+        <Popover open={askOpen} onOpenChange={setAskOpen}>
+          {!phone && (
+            <PopoverAnchor
+              virtualRef={{
+                current: {
+                  getBoundingClientRect: () => {
+                    const panel = Array.from(
+                      canvasRef.current?.querySelectorAll<SVGGraphicsElement>(
+                        "[data-object]",
+                      ) ?? [],
+                    ).find(
+                      (el) =>
+                        el.getAttribute("data-object") === selectedPanel.id,
+                    );
+                    return (
+                      panel?.getBoundingClientRect() ??
+                      canvasRef.current?.getBoundingClientRect() ??
+                      new DOMRect()
+                    );
+                  },
+                },
+              }}
             />
-            <Button
-              type="submit"
-              disabled={!askText.trim() || Boolean(workingPanelId)}
-            >
-              Send to agent <ArrowRight size={16} />
+          )}
+          <PopoverTrigger asChild>
+            <Button variant="ghost" size="sm" className="agent-action">
+              <MessageSquare size={16} />
+              Ask agent
             </Button>
-            {!engine.canChat && (
-              <p className="setup-note">
-                No AI connected. Opens your note in the real desk without
-                submitting.
-              </p>
-            )}
-          </form>
-        </PopoverContent>
-      </Popover>
+          </PopoverTrigger>
+          <PopoverContent
+            className="ask-popover"
+            side={phone ? "top" : panelNumber % 2 ? "right" : "left"}
+            align={phone ? "center" : "start"}
+            sideOffset={10}
+          >
+            <SelectionNote
+              label={selectionLabel}
+              value={askText}
+              onChange={setAskText}
+              onSend={revise}
+              onClose={() => setAskOpen(false)}
+              working={Boolean(workingPanelId)}
+              canChat={engine.canChat}
+            />
+          </PopoverContent>
+        </Popover>
+      )}
     </div>
   );
   const editControls = (
@@ -697,6 +714,16 @@ export default function Home() {
             id="phone-line"
             value={line}
             onChange={(e) => changeLine(e.target.value)}
+            onKeyDown={(e) => {
+              if (
+                e.key === "Enter" &&
+                !e.shiftKey &&
+                !e.nativeEvent.isComposing
+              ) {
+                e.preventDefault();
+                void saveLine().catch(() => {});
+              }
+            }}
             maxLength={120}
           />
           <Button type="submit" disabled={busy || !line.trim()}>
@@ -963,25 +990,64 @@ export default function Home() {
             </Link>
           </Button>
           <Button
-            variant="ghost"
-            className="caption-button"
-            onClick={copyCaption}
-          >
-            <Copy size={16} />
-            Copy caption
-          </Button>
-          <Button
             className="print-button"
-            onClick={download}
+            onClick={openExport}
             disabled={
               !assets || exporting || Boolean(rendered?.overflow.length)
             }
           >
             <ArrowDownToLine size={16} />
-            <span>{exporting ? "Exporting…" : "Export PNG"}</span>
+            <span>{exporting ? "Preparing…" : "Export"}</span>
           </Button>
         </div>
       </header>
+      <Sheet open={exportOpen} onOpenChange={setExportOpen}>
+        <SheetContent className="launch-export" showClose={false}>
+          <div className="export-heading">
+            <SheetTitle>Your launch post</SheetTitle>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setExportOpen(false)}
+            >
+              <X size={16} /> Close
+            </Button>
+          </div>
+          <SheetDescription>
+            The page, ready to share. Caption from your source update — no AI.
+          </SheetDescription>
+          <img
+            className="export-preview"
+            src={exportPreview || undefined}
+            alt="PNG preview of your four-panel strip"
+          />
+          <p className="export-filename">{exportName} · 1200 × 1200</p>
+          <label htmlFor="post-caption">Post caption · editable</label>
+          <Textarea
+            id="post-caption"
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+            rows={5}
+          />
+          <div className="export-actions">
+            <Button className="print-button" asChild>
+              <a
+                href={exportPreview}
+                download={exportName}
+                onClick={() => setExportNotice(`Downloaded ${exportName}`)}
+              >
+                <ArrowDownToLine size={16} />
+                Download PNG
+              </a>
+            </Button>
+            <Button variant="outline" onClick={copyCaption}>
+              <Copy size={16} />
+              Copy caption
+            </Button>
+          </div>
+          <p role="status">{exportNotice}</p>
+        </SheetContent>
+      </Sheet>
       {(error || notice) && (
         <div
           className={error ? "studio-alert" : "studio-notice"}
@@ -1061,6 +1127,21 @@ export default function Home() {
                   value={line}
                   maxLength={120}
                   onChange={(e) => changeLine(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Escape") {
+                      setEditing(false);
+                      setLineDirty(false);
+                      setLine(selectedBalloon?.text ?? "");
+                    }
+                    if (
+                      e.key === "Enter" &&
+                      !e.shiftKey &&
+                      !e.nativeEvent.isComposing
+                    ) {
+                      e.preventDefault();
+                      void saveLine().catch(() => {});
+                    }
+                  }}
                 />
                 <Button size="sm" disabled={busy} type="submit">
                   <Check size={14} />
@@ -1069,7 +1150,12 @@ export default function Home() {
                 <Button
                   size="sm"
                   variant="ghost"
-                  onClick={() => setEditing(false)}
+                  type="button"
+                  onClick={() => {
+                    setEditing(false);
+                    setLineDirty(false);
+                    setLine(selectedBalloon?.text ?? "");
+                  }}
                 >
                   Cancel
                 </Button>
@@ -1139,6 +1225,18 @@ export default function Home() {
           </TabsList>
           <TabsContent value="edit">
             {contextBar(true)}
+            {phoneAskOpen && (
+              <SelectionNote
+                phone
+                label={selectionLabel}
+                value={askText}
+                onChange={setAskText}
+                onSend={revise}
+                onClose={() => setPhoneAskOpen(false)}
+                working={Boolean(workingPanelId)}
+                canChat={engine.canChat}
+              />
+            )}
             {editControls}
           </TabsContent>
           <TabsContent value="agent">

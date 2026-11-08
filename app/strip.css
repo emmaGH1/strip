@@ -56,7 +56,9 @@ button:disabled {
 }
 button:focus-visible,
 a:focus-visible,
-select:focus-visible {
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
   outline: 2px solid var(--pencil);
   outline-offset: 4px;
 }
@@ -186,7 +188,7 @@ svg.lucide {
   padding-top: 26px;
   gap: 24px;
 }
-.poster-loop > span {
+.loop-step > span {
   font-size: 16px;
   display: flex;
   align-items: center;
@@ -196,8 +198,37 @@ svg.lucide {
   color: var(--signal);
   font-size: 12px;
 }
-.poster-loop > svg {
-  width: 20px;
+.loop-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+.loop-crop {
+  width: 84px;
+  height: 84px;
+  flex: 0 0 84px;
+  border: 2px solid var(--ink);
+  overflow: hidden;
+}
+.loop-crop svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.loop-step > span {
+  line-height: 1.25;
+}
+.loop-arrow {
+  margin-left: auto;
+  color: var(--quiet);
+}
+.poster-credits {
+  margin-top: 32px;
+  border-top: 1px solid hsl(var(--border));
+  padding-top: 16px;
+  font-size: 12px;
   color: var(--quiet);
 }
 .studio {
@@ -1286,5 +1317,118 @@ svg.lucide {
   .studio-alert,
   .studio-notice {
     padding: 10px 16px;
+  }
+}
+
+/* M2: small, honest states and the source-based launch post. */
+.launch-export {
+  background: var(--paper);
+  border-left: 2px solid var(--ink);
+  box-shadow: none;
+  width: min(480px, 100vw);
+  max-width: 100vw;
+  overflow-y: auto;
+  padding: 24px;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+.export-heading,
+.export-actions,
+.note-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.export-heading {
+  margin-bottom: 8px;
+}
+.export-preview {
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--ink);
+  margin-top: 20px;
+}
+.export-filename {
+  font-size: 12px;
+  color: var(--quiet);
+  margin: 8px 0 20px;
+  overflow-wrap: anywhere;
+}
+.launch-export label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.export-actions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.launch-export [role="status"] {
+  font-size: 14px;
+  color: var(--pencil);
+  min-height: 24px;
+}
+.library-example {
+  width: min(480px, 100%);
+  margin: 32px auto 0;
+}
+.library-example figcaption {
+  font-size: 12px;
+  color: var(--quiet);
+  margin-top: 12px;
+}
+.kept-mine {
+  border-left: 3px solid var(--signal);
+  padding-left: 12px;
+}
+.selection-label {
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.desktop-context {
+  min-height: 44px;
+}
+.phone-sheet .selection-note {
+  border-top: 2px solid var(--pencil);
+  padding: 16px 0;
+}
+.selection-note form {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+.note-heading .eyebrow {
+  margin: 0;
+}
+@media (max-width: 700px) {
+  .poster-loop {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .loop-step {
+    flex: none;
+    width: 100%;
+    gap: 16px;
+  }
+  .loop-crop {
+    width: 76px;
+    height: 76px;
+    flex-basis: 76px;
+  }
+  .loop-step > span {
+    font-size: 16px;
+  }
+  .loop-arrow {
+    transform: rotate(90deg);
+  }
+  .poster-credits {
+    line-height: 1.6;
+  }
+  .launch-export {
+    padding: 20px;
   }
 }

@@ -1,6 +1,8 @@
 import {
   useActionMutation,
   useActionQuery,
+  actionErrorCode,
+  actionErrorMessage,
 } from "@agent-native/core/client/hooks";
 import { useState } from "react";
 import { useSearchParams } from "react-router";
@@ -27,9 +29,10 @@ export function AgentChanges() {
       });
     } catch (e) {
       setError(
-        e instanceof Error
-          ? e.message
-          : "Could not save. Reloading the latest strip.",
+        actionErrorCode(e) === "stale_revision"
+          ? "This strip changed elsewhere — showing the latest"
+          : (actionErrorMessage(e) ??
+              "Could not save. Reloading the latest strip."),
       );
       await query.refetch();
     }
@@ -52,6 +55,11 @@ export function AgentChanges() {
           History
         </Button>
       </div>
+      {strip.agentRejection && (
+        <p className="kept-mine" role="status">
+          Kept your line — the agent tried to change a MINE item
+        </p>
+      )}
       {historyOpen ? (
         <div className="history-list" aria-label="Revision history">
           {[...(strip.history ?? [])].reverse().map((entry) => (
@@ -84,9 +92,10 @@ export function AgentChanges() {
                     });
                   } catch (e) {
                     setError(
-                      e instanceof Error
-                        ? e.message
-                        : "Restore failed. Reloading.",
+                      actionErrorCode(e) === "stale_revision"
+                        ? "This strip changed elsewhere — showing the latest"
+                        : (actionErrorMessage(e) ??
+                            "Restore failed. Reloading."),
                     );
                     await query.refetch();
                   }
