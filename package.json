@@ -8,6 +8,7 @@
     "migrate:production": "tsx scripts/migrate-production.ts",
     "dev": "agent-native dev --open",
     "build": "agent-native build",
+    "build:vercel": "bash scripts/build-vercel.sh",
     "start": "agent-native start",
     "typecheck": "agent-native typecheck",
     "action": "agent-native action",
@@ -111,7 +112,7 @@
     "vitest": "^4.1.5"
   },
   "engines": {
-    "node": ">=22.22.0"
+    "node": "22.x"
   },
   "packageManager": "pnpm@10.29.1",
   "agent-native": {
