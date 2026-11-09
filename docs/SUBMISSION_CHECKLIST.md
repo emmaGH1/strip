@@ -2,7 +2,7 @@
 
 **Deadline: November 9, 2026, 11:59 PM PT = November 10, 2026, 07:59 UTC.** Internal target: November 10, 03:00 UTC. Recheck the [official rules](https://www.builder.io/hackathon/rules) and [event page](https://www.builder.io/hackathon) before submission.
 
-Nothing has been submitted. Spending, public production deployment and submission still require explicit human approval. A checked technical test is not proof of humour, usability or a real AI turn.
+Nothing has been submitted. The human explicitly approved the Vercel + Neon production deploy: <https://strip-kappa.vercel.app>. Spending and submission still require explicit human approval. A checked technical test is not proof of humour, usability or a real AI turn.
 
 ## AI / acceptance gates — still blocking demo readiness
 
@@ -25,7 +25,7 @@ Nothing has been submitted. Spending, public production deployment and submissio
 ## Links, access and final checks
 
 - [ ] **Repository visibility:** decide public/private intentionally (public source is encouraged, not recorded as mandatory in the local rules summary). Approve any visibility change/push separately, verify the final commit/link is accessible as intended, and exclude `.env`, databases and build output. This task does not authorize publishing.
-- [ ] **Live demo link:** choose and approve the host/access plan; verify signed-out landing, own-account sign-in and the actual intended judge workflow. Public deployment is encouraged, not recorded as mandatory. The currently approved sandbox port in [MCP_DEMO.md](MCP_DEMO.md) is a development-access link, not a reliable production/judging promise; the sandbox must remain awake. No new deployment is authorized.
+- [ ] **Live demo link:** <https://strip-kappa.vercel.app> — human-approved Vercel + Neon production deployment. Hosted smoke results and remaining judge/AI gates are in [DEPLOY.md](DEPLOY.md). Verify the exact intended recording/judge workflow before submission; this deployment does not authorize submission or AI spending.
 - [ ] If judges should try AI themselves, verify intended account/workspace/model availability and approve costs/limits; do not assume the human's personal connection is app-wide. **Judge-side AI readiness is unresolved.**
 - [ ] Re-run final tests, typecheck, changed-file formatter, framework doctor and production build on the exact submission commit; document warnings and failures in [CURRENT_STATE.md](CURRENT_STATE.md). Scripted protection/stale-write/MCP/PNG checks already have bounded evidence; additional cross-user DB and OAuth read-only denial integration remain unverified.
 - [ ] Re-run a redacted secret scan after final changes, including staged files and any assets/evidence added later. The documentation-lane scan found no credential-like values; false-positive markers are recorded in CURRENT_STATE.md. Ignored files are not automatically safe if previously tracked.

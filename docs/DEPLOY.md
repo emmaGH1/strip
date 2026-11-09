@@ -1,6 +1,6 @@
 # Strip → Vercel + Neon
 
-**Deploy preparation only. No project, account, database or public deployment was created by this lane.** The human approved this hosting target; run the release only after the secure inputs arrive. Deadline: November 10, 2026, 07:59 UTC. No push or submission is part of this procedure.
+**Production deployed with explicit human approval on November 9, 2026:** <https://strip-kappa.vercel.app> (Vercel project `strip`, Neon Postgres). `APP_URL` and `BETTER_AUTH_URL` are pinned to that stable alias. No push or submission was performed. Deadline: November 10, 2026, 07:59 UTC. No push or submission is part of this procedure.
 
 ## Build contract (installed Agent-Native 0.226.0)
 
@@ -34,7 +34,7 @@ Sources: `node_modules/@agent-native/core/docs/content/{deploy-an-app,deployment
 | Builder relay env vars                                                | Conditional corporate/isolated-preview relay only; not configured for standalone Vercel.                                                                                                                                                                                                 |
 | `PORT`, `APP_BASE_PATH`, keep-warm flags, unsafe auth/webhook flags   | Not needed. Leave unset; no relaxed security defaults.                                                                                                                                                                                                                                   |
 
-The two inputs must be plain UTF-8 files containing only their respective value (a terminal newline is acceptable), mode 600, outside the checkout. Obtain them through the secure secret prompt, **never chat, command-line literals, git or screenshots**. No secrets exist yet; do not run the release command until they do.
+The two inputs must be plain UTF-8 files containing only their respective value (a terminal newline is acceptable), mode 600, outside the checkout. Obtain them through the secure secret prompt, **never chat, command-line literals, git or screenshots**. The approved inputs and generated state are private under `/data/home/.strip-secrets/`; never display or commit them.
 
 ## One-shot release
 
@@ -47,7 +47,7 @@ bash scripts/deploy-vercel.sh /secure/strip-database-url /secure/strip-vercel-to
 What it does:
 
 1. Validates the DB URL without displaying it; takes a local exclusive release lock.
-2. Generates missing stable secrets under gitignored `.vercel/deploy-state/` (directory 700, files 600). Reuses them on retries.
+2. Generates missing stable secrets under `deploy-state/` beside the supplied database file (for this release, `/data/home/.strip-secrets/deploy-state/`, outside the checkout) (directory 700, files 600). Reuses them on retries.
 3. Uses pinned **`npx --yes vercel@65.14.0`**, token read from the file, to inspect/create project **`strip`**, then `link --project strip --yes`. A project creation/access error stops the run; it never falls back to another name.
 4. Uploads production env values using stdin, `env add --environment production --force --yes --sensitive`. Existing same-name production variables are replaced intentionally; run against this app's project only.
 5. Runs **`pnpm migrate:production` from this machine, before the upload**, inside the isolated source copy with a clean environment and the supplied Neon URL. This avoids `.env` or per-app DB variables accidentally targeting Docker's Postgres. The runner applies both framework and registered Strip release migrations (including angle plans); reruns are migration-tracked. It is schema setup, **not** a copy of local accounts or strips. Never use `drizzle-kit push` against Neon.
@@ -55,7 +55,7 @@ What it does:
 7. Inspects production aliases, chooses the shortest non-branch `vercel.app` alias, pins `APP_URL`/`BETTER_AUTH_URL`, then uploads the same build again with `--force` if the canonical origin changed. Env is attached at upload/runtime. The first bootstrap deployment may be reachable briefly: **do not connect OAuth or share it until the command finishes**.
 8. Prints the canonical URL. On error, prints only the failed step and private diagnostic path. Nothing deploys merely by running tests or `pnpm build:vercel`.
 
-**Retry:** run the same command with the same `.vercel` directory and team. Keep a private backup of `deploy-state` before moving machines: losing it and regenerating keys invalidates sessions and can strand encrypted connections. Do not delete it or rerun against an unrelated existing `strip` project. Do not copy the state into source control. The last-run log redacts supplied/generated credential values and the DB password, but the log and provider JSON are still private diagnostics that may contain account metadata; review before sharing and never commit them. The mandated CLI `--token` argument can be seen by local process inspection: use a trusted machine, never shell tracing. Input files are never sourced or echoed.
+**Retry:** run the same command with the same input directory, `.vercel` link and team. Keep a private backup of `/data/home/.strip-secrets/deploy-state` before moving machines: losing it and regenerating keys invalidates sessions and can strand encrypted connections. Do not delete it or rerun against an unrelated existing `strip` project. Do not copy the state into source control. The last-run log redacts supplied/generated credential values and the DB password, but the log and provider JSON are still private diagnostics that may contain account metadata; review before sharing and never commit them. The mandated CLI `--token` argument can be seen by local process inspection: use a trusted machine, never shell tracing. Input files are never sourced or echoed.
 
 For local build-only rehearsal (no credentials/network deployment):
 
@@ -82,6 +82,23 @@ MCP URL is **`https://<production-alias>/mcp`**. Installed `dist/mcp/oauth-route
 - [ ] Signed-in Agent → Connect AI → **Use Builder.io** opens the real connect page at Builder.io; callback target resolves to the final public origin, not localhost. Opening the page is not permission to accept spending or make model calls. Complete/rehearse only with human approval.
 - [ ] Confirm final Vercel function logs show no missing schema/auth secret errors and the daily sweep authenticates. Review Neon connection limits/cold start and function duration (framework default 300 s). Public signup is open; no deployment-wide paid LLM fallback is installed.
 
+## Live release results — November 9, 2026
+
+Production: **<https://strip-kappa.vercel.app>**. Human-approved Vercel project `strip` and Neon migration completed. `APP_URL` = `BETTER_AUTH_URL` = final alias above. Release completed on attempt 2: attempt 1 uploaded but the parser rejected CLI JSON stdout; the script now accepts JSON and legacy plain URL output. Both attempts reused the same private generated keys. `.vercel/` is gitignored; keys live outside the checkout beside the database input under `/data/home/.strip-secrets/deploy-state/` (700 directory / 600 key files).
+
+| Live check                             | Result                                                                                                                                                                             |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Signed-out landing, logo, favicon, OG  | PASS: HTTP 200; rendered branding and 1200×630 OG inspected                                                                                                                        |
+| One disposable signup → Library        | PASS: rendered Library                                                                                                                                                             |
+| Prepared illustrative example → Studio | PASS                                                                                                                                                                               |
+| Balloon edit/save/reload persistence   | PASS                                                                                                                                                                               |
+| Actual PNG export                      | PASS: 1200×1200, preview/download bytes match, visually inspected                                                                                                                  |
+| GET `/mcp`                             | PASS: 401; OAuth discovery uses final public issuer/resource                                                                                                                       |
+| Use Builder.io connection entry        | INCONCLUSIVE: visible control clicked, no Builder URL observed; test guard may have blocked an intermediate/subdomain. Not an established product failure; acceptance remains open |
+| Function logs                          | PASS with warnings: no error/fatal entries in final five-minute / 113-record query; four engine-status slow lookups, 2.5–6.6 seconds                                               |
+
+Evidence: [live browser report](evidence/deploy-live/verification.md). No HTTP/page errors observed during the bounded browser run. One disposable account/example remain server-side; browser/session closed and no credentials saved in the checkout. No model call or completed Builder authorization. A one-hour logs query exceeded Hobby retention; five-minute queries succeeded. Cron execution was not awaited. Local checks: 88 tests, typecheck, framework doctor and isolated Vercel production builds pass. Docker `strip-app` was untouched. No git push or submission.
+
 ## Limits / rollback
 
-No hosted smoke, Neon migration, CLI account mutation or Builder authorization has been run during preparation. New-origin OAuth, provider account permissions, Vercel protection/limits/alias response and Neon network access remain release gates. Inspect the linked project/team and plan if upload fails; do not pay or change the hosting concept automatically. Mock CLI tests cover order/retries/error redaction, not Vercel's live API. Daily cron delays interrupted-run recovery versus a minute-level scheduler. A rollback to a previous Vercel deployment does not roll back SQL; preserve additive migrations and back up production data before later schema changes. The existing instabox Docker app remains available and unchanged.
+Preparation alone did not perform hosted checks. The approved November 9 release migrated Neon and deployed Vercel; see the live results below. Builder authorization completion remains untested. New-origin OAuth, provider account permissions, Vercel protection/limits/alias response and Neon network access remain release gates. Inspect the linked project/team and plan if upload fails; do not pay or change the hosting concept automatically. Mock CLI tests cover order/retries/error redaction, not Vercel's live API. Daily cron delays interrupted-run recovery versus a minute-level scheduler. A rollback to a previous Vercel deployment does not roll back SQL; preserve additive migrations and back up production data before later schema changes. The existing instabox Docker app remains available and unchanged.

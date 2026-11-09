@@ -50,7 +50,7 @@ case "$1 \${2:-}" in
   'project create') :;;
   'link --project') mkdir -p .vercel; printf '{"projectName":"strip","projectId":"fixture"}' > .vercel/project.json;;
   'env add') value=$(< /dev/stdin); [[ -n "$value" ]] || exit 31;;
-  'deploy --prebuilt') if [[ -f fail-upload ]]; then printf 'fixture-password fixture-token-not-a-real-secret\\n' >&2; exit 32; fi; printf 'https://strip-deployment-fixture.vercel.app\\n';;
+  'deploy --prebuilt') if [[ -f fail-upload ]]; then printf 'fixture-password fixture-token-not-a-real-secret\\n' >&2; exit 32; fi; printf '{"status":"ok","deployment":{"url":"https://strip-deployment-fixture.vercel.app"}}\\n';;
   'inspect https://strip-deployment-fixture.vercel.app') printf '{"alias":["strip-fixture.vercel.app"]}';;
   *) exit 33;;
 esac
@@ -98,8 +98,8 @@ describe("Vercel deploy preparation (mock CLI, no network)", () => {
     );
     expect(calls.match(/deploy --prebuilt/g)).toHaveLength(2);
     const secretFile = path.join(
-      root,
-      ".vercel/deploy-state/BETTER_AUTH_SECRET",
+      path.dirname(root),
+      "deploy-state/BETTER_AUTH_SECRET",
     );
     const secret = fs.readFileSync(secretFile, "utf8");
     expect(secret.trim()).toHaveLength(64);
@@ -120,7 +120,7 @@ describe("Vercel deploy preparation (mock CLI, no network)", () => {
     expect(result.status).not.toBe(0);
     expect(result.stderr).toContain("first production upload");
     const log = fs.readFileSync(
-      path.join(root, ".vercel/deploy-state/last-run.log"),
+      path.join(path.dirname(root), "deploy-state/last-run.log"),
       "utf8",
     );
     expect(log).toContain("[REDACTED]");

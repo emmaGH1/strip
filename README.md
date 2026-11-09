@@ -10,6 +10,10 @@ Strip is a studio for turning one product update into an editable four-panel com
 
 **Demo loop:** Paste what shipped → agent pencils a draft → edit and protect a line → ask for a focused revision → ink or erase changes → choose an ending → export PNG.
 
+### Live demo
+
+**[Open Strip →](https://strip-kappa.vercel.app)** — public Vercel deployment with persistent Neon Postgres. Sign up with your own account; prepared examples are illustrative. AI requires your own approved Builder.io/provider connection. See [`docs/DEPLOY.md`](docs/DEPLOY.md) for hosted verification and limits.
+
 ### Built on Agent-Native
 
 The standalone Chat scaffold uses Agent-Native **0.226.0**, React Router, React, TypeScript and Tailwind, with the framework's real UI primitives and agent desk.
@@ -44,7 +48,7 @@ pnpm build
 pnpm start
 ```
 
-Migration applies framework and app schemas to the configured database: use your own database and back up existing data first. Production mode requires PostgreSQL; it does not silently fall back to the development PGlite store. `/` is the public landing page; signed-in `/home` is the Library, `/home?new=1` is compose, and `/home?id=<id>` is Studio. Hosting/deployment is a separate human decision.
+Migration applies framework and app schemas to the configured database: use your own database and back up existing data first. Production mode requires PostgreSQL; it does not silently fall back to the development PGlite store. `/` is the public landing page; signed-in `/home` is the Library, `/home?new=1` is compose, and `/home?id=<id>` is Studio. The human-approved public deployment uses Vercel + Neon; see the Live demo above.
 
 ### Connect AI
 

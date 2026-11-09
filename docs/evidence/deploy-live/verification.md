@@ -1,0 +1,13 @@
+# Public production smoke — bounded verification
+
+Target: https://strip-kappa.vercel.app. Headless Chromium, desktop 1440 × 900. One disposable signup only; credentials were generated in memory, never saved. Browser contexts closed; no session storage was written. No deploy, Docker restart, product edit, model call or Builder authentication.
+
+- **PASS — landing and brand:** visible Strip logo; `/favicon.ico` HTTP 200 with 16/32/48 entries; `og:image` points to this origin's `/og.png`, HTTP 200 and 1200 × 630. Visually inspected `og.png`; it includes the illustrative/fictional disclosure. `landing.png` was captured before the example finished loading; `landing-settled.png` is the subsequent settled signed-out capture.
+- **PASS — signup and Library:** one new disposable account reached rendered Your strips and the explicit prepared-example disclosure (`library.png`).
+- **PASS — illustrative Studio:** opened the prepared Undo strip through New strip and verified the illustrative/seeded label (`studio.png`).
+- **PASS — direct edit:** changed the first balloon to “I just cleared the launch plan.”, inked it, reloaded and saw the same line (`balloon-reloaded.png`).
+- **PASS — actual export:** downloaded `export.png`; verified 1200 × 1200 and byte-for-byte SHA-256 equality with the export-sheet preview. Visually inspected the real file: four panels, complete lettering, no selection outline in the exported comic (`export-sheet.png`, `export.png`). This is not a judgement of humour or usability.
+- **INCONCLUSIVE — Builder handoff:** signed-in Agent desk displayed Connect AI / Use Builder.io (`connect-ai.png`), and the control was clicked. The test observed no Builder URL within five seconds. The network guard allowed only the exact builder.io and www.builder.io hosts outside Strip, so a redirect to another Builder subdomain or an intermediate host could have been blocked; no blocked URL or post-click state was captured. The context was closed, so this is not proof of a product failure and cannot be retried with this disposable session. Real Builder page and authorization remain unverified. No auth was completed.
+- **Diagnostics:** no HTTP >=400 responses or page errors were observed by the scripted page listener; model-chat POSTs were explicitly blocked and none were attempted. A first local helper execution failed JavaScript parsing before opening a browser or creating an account; corrected before the run. `results.json` records the observed steps and sanitized URL paths.
+
+No live AI generation, physical-phone check or broader regression was performed. The disposable account and saved example remain server-side; only the local browser session was discarded.

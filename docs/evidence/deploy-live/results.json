@@ -1,0 +1,59 @@
+{
+  "base": "https://strip-kappa.vercel.app",
+  "results": [
+    {
+      "name": "brand metadata",
+      "icon": "https://strip-kappa.vercel.app/favicon.ico",
+      "og": "https://strip-kappa.vercel.app/og.png",
+      "logo": "https://strip-kappa.vercel.app/logo.svg",
+      "iconSizes": [16, 32, 48],
+      "ogDimensions": [1200, 630]
+    },
+    {
+      "name": "landing logo favicon and OG",
+      "status": "PASS"
+    },
+    {
+      "name": "single disposable signup and Library",
+      "status": "PASS"
+    },
+    {
+      "name": "prepared illustrative example Studio",
+      "status": "PASS"
+    },
+    {
+      "name": "edit balloon save reload",
+      "status": "PASS"
+    },
+    {
+      "name": "export details",
+      "dimensions": "1200x1200",
+      "previewMatchesDownload": true
+    },
+    {
+      "name": "actual PNG export",
+      "status": "PASS"
+    },
+    {
+      "name": "Builder control",
+      "href": null,
+      "target": null
+    },
+    {
+      "name": "Builder navigation observed",
+      "url": "https://strip-kappa.vercel.app/home"
+    },
+    {
+      "name": "Agent Connect AI Builder handoff",
+      "status": "FAIL",
+      "error": "No Builder page/redirect observed: https://strip-kappa.vercel.app/home"
+    }
+  ],
+  "errors": [],
+  "blocked": [],
+  "notes": [
+    "One disposable signup attempted, credentials held only in memory.",
+    "Browser closed; no session storage persisted.",
+    "No Builder authentication completed or model request authorized."
+  ]
+}

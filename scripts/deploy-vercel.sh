@@ -19,7 +19,8 @@ for file in "$database_file" "$token_file"; do
 done
 node -e 'const fs=require("fs"); try { const u=new URL(fs.readFileSync(process.argv[1],"utf8").trim()); if(!["postgres:","postgresql:"].includes(u.protocol)||!u.hostname.endsWith(".neon.tech")||!u.hostname.includes("-pooler.")||u.searchParams.get("sslmode")!=="require") throw Error(); } catch { console.error("Expected a Neon pooled PostgreSQL URL with sslmode=require."); process.exit(2); }' "$database_file"
 command -v flock >/dev/null || { printf 'Install util-linux (flock) before deploying.\n' >&2; exit 2; }
-state="$PWD/.vercel/deploy-state"
+# Private stable keys survive relinking/redeploying and never enter the checkout.
+state="$(dirname "$database_file")/deploy-state"
 mkdir -p "$state"
 chmod 700 "$state"
 exec 9>"$state/lock"
@@ -27,7 +28,7 @@ flock -n 9 || { printf 'Another deployment is running.\n' >&2; exit 1; }
 log="$state/last-run.log"
 : >"$log"
 step='initialization'
-trap 'printf "Deployment stopped during: %s. Private redacted diagnostics: .vercel/deploy-state/last-run.log (review before sharing; do not commit). Rerun with the same state directory.\n" "$step" >&3' ERR
+trap 'printf "Deployment stopped during: %s. Private redacted diagnostics: %s (review before sharing; do not commit). Rerun with the same state directory.\n" "$step" "$log" >&3' ERR
 vc() {
   # Token is deliberately read from a file; never enable shell tracing.
   # --scope is optional, non-secret, and disambiguates a team-owned project.
@@ -44,6 +45,7 @@ for name in BETTER_AUTH_SECRET OAUTH_STATE_SECRET A2A_SECRET WORKSPACE_SECRETS_E
     openssl rand -hex 32 >"$state/$name"
   fi
   [[ -s "$state/$name" ]] || { printf 'Stored secret file is empty; refusing rotation.\n' >&2; exit 1; }
+  chmod 600 "$state/$name"
 done
 # Redact supplied/generated values and DB password even if a provider echoes
 # them in an error. Never send raw command output to the persistent log.
@@ -69,7 +71,7 @@ step='isolated Neon migrations and Vercel build'
 bash scripts/build-vercel.sh --migrate "$database_file" >&4 2>&1
 step='first production upload'
 vc deploy --prebuilt --prod --yes >"$state/deployment-url" 2>&4
-deployment=$(node -e 'const s=require("fs").readFileSync(process.argv[1],"utf8").trim(); if(!/^https:\/\/[a-z0-9.-]+\.vercel\.app$/.test(s)) throw Error("Expected Vercel deployment URL"); process.stdout.write(s)' "$state/deployment-url" 2>&4)
+deployment=$(node -e 'const raw=require("fs").readFileSync(process.argv[1],"utf8").trim(); let s=raw; if(raw.startsWith("{")) { const d=JSON.parse(raw); s=d.deployment?.url; if(s&&!s.startsWith("https://")) s="https://"+s; } if(!/^https:\/\/[a-z0-9.-]+\.vercel\.app$/.test(s)) throw Error("Expected Vercel deployment URL"); process.stdout.write(s)' "$state/deployment-url" 2>&4)
 step='discovering stable production alias'
 vc inspect "$deployment" --json >"$state/deployment.json" 2>&4
 node --input-type=module - "$state/deployment.json" "$state/canonical-url.next" <<'NODE' 2>&4
