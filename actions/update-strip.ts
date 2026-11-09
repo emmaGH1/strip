@@ -18,7 +18,7 @@ import {
 
 export default defineAction({
   description:
-    "Apply 1–16 focused title, balloon, expression, pose, screen-state, prop or ending edits atomically to the current comic revision. UI and agent share this action. Real agent changes retain server-derived prior values in pencils until a HUMAN inks or erases them with a review edit; agents cannot review their own work. New draft items have no prior value and can only be inked or edited directly. Protected human contributions cannot be changed by the agent. On stale_revision re-read; on protected_element leave it unchanged. restoreRevision re-applies a retained draft as a NEW revision, preserving current protection; agents cannot restore over MINE contributions. Supply either edits or restoreRevision, never both.",
+    "Apply 1–16 focused title, balloon, cast, angles/angle, expression, pose, screen, sfx, prop or ending/ending-art edits atomically. Dialogue REACTS to facts, never recites them; put facts on props or at most one short spoken line. Panel 4 is a reaction/reversal, not a summary. Target 8 words (hard cap 12); measured-fit rejection means shorten the line. Recast adaptation changes ONLY the affected character's unprotected balloon lines. New art uses structured screen, not legacy screen-state. UI and agent share this action. Real agent changes retain server-derived prior values in pencils until a HUMAN inks or erases them with a review edit; agents cannot review their own work. New draft items have no prior value and can only be inked or edited directly. Protected human contributions cannot be changed by the agent. On stale_revision re-read; on protected_element leave it unchanged. restoreRevision re-applies a retained draft as a NEW revision, preserving current protection; agents cannot restore over MINE contributions. Supply either edits or restoreRevision, never both.",
   schema: z
     .object({
       id: z.string().describe("Strip id to edit."),
@@ -35,7 +35,7 @@ export default defineAction({
         .max(16)
         .optional()
         .describe(
-          "Focused edits to existing object ids. Ending proposals change choices only; choose-ending applies a choice to the final balloon.",
+          "Focused edits to existing object ids. Ending proposals change choices only; choose-ending applies text and optional ending-art staging through ordinary protected edits. Cast replaces the cast cards (null restores legacy defaults); angle chooses a stored angle id. Screen/sfx target panel ids.",
         ),
       restoreRevision: z
         .number()

@@ -19,6 +19,7 @@ export interface NavigationState {
   publicPath?: string;
   threadId?: string;
   stripId?: string | undefined;
+  planId?: string | undefined;
   selectedPanelId?: string | undefined;
   selectedObjectId?: string | undefined;
 }
@@ -37,6 +38,7 @@ export function useNavigationState() {
                 ? "compose"
                 : "library",
             stripId: searchParams.get("id") ?? undefined,
+            planId: searchParams.get("plan") ?? undefined,
             selectedPanelId: searchParams.get("panel") ?? undefined,
             selectedObjectId: searchParams.get("object") ?? undefined,
           }

@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+import { anglesSchema } from "./angles.js";
+import { castSchema, characterIdSchema, legacyCast } from "./casting.js";
+import { fitBalloon, balloonFitError } from "./text-fit.js";
+
 export const expressionSchema = z.enum([
   "neutral",
   "happy",
@@ -13,6 +17,7 @@ export const poseSchema = z.enum([
   "panic",
   "relieved",
   "arms-crossed",
+  "sitting",
 ]);
 export const screenStateSchema = z.enum([
   "none",
@@ -23,15 +28,29 @@ export const screenStateSchema = z.enum([
   "search-results",
   "scheduled",
 ]);
-export const cast = {
-  ari: {
-    name: "Ari",
-    role: "the optimistic maker",
-    hair: "ShortVolumed",
-    color: "#E6BA67",
-  },
-  sam: { name: "Sam", role: "the dry realist", hair: "Bun", color: "#A9B9A5" },
-} as const;
+export const cast = legacyCast;
+export const screenSchema = z.object({
+  kind: z.enum(["chat", "dialog", "toast", "doc", "none"]),
+  title: z.string().trim().max(24).default(""),
+  lines: z.array(z.string().trim().max(28)).max(2).default([]),
+  button: z.string().trim().max(14).optional(),
+  tone: z.enum(["normal", "error", "success"]).default("normal"),
+});
+export const sfxSchema = z
+  .string()
+  .trim()
+  .max(14)
+  .refine(
+    (v) => v.split(/\s+/u).filter(Boolean).length <= 3,
+    "SFX: at most three short words.",
+  );
+export const endingArtSchema = z.object({
+  expression: expressionSchema.optional(),
+  pose: poseSchema.optional(),
+  screen: screenSchema.optional(),
+  sfx: sfxSchema.optional(),
+  prop: z.enum(["laptop", "phone", "files", "coffee", "none"]).optional(),
+});
 export const dialogueSchema = z
   .string()
   .trim()
@@ -43,28 +62,32 @@ export const dialogueSchema = z
   );
 export const balloonSchema = z.object({
   id: z.string().min(1).max(60),
-  speaker: z.enum(["ari", "sam"]),
+  speaker: characterIdSchema,
   text: dialogueSchema,
 });
 export const panelSchema = z.object({
   id: z.string().min(1).max(60),
   beat: z.enum(["setup", "trouble", "turn", "payoff"]),
   caption: z.string().trim().max(65).default(""),
-  screenState: screenStateSchema.default("none"),
-  prop: z.enum(["laptop", "files", "coffee", "none"]),
+  screenState: screenStateSchema
+    .default("none")
+    .describe("Legacy only. New strips use screen."),
+  screen: screenSchema.optional(),
+  sfx: sfxSchema.optional(),
+  prop: z.enum(["laptop", "phone", "files", "coffee", "none"]),
   actors: z
     .array(
       z.object({
         id: z.string().min(1).max(60),
-        character: z.enum(["ari", "sam"]),
+        character: characterIdSchema,
         expression: expressionSchema,
         // Missing only on records saved before editable poses existed.
         pose: poseSchema.optional(),
-        side: z.enum(["left", "right"]),
+        side: z.enum(["left", "center", "right"]),
       }),
     )
     .min(1)
-    .max(2),
+    .max(3),
   balloons: z.array(balloonSchema).max(2),
   sourceQuote: z
     .string()
@@ -81,21 +104,14 @@ export const draftSchema = z
       .union([z.url().refine((v) => /^https?:\/\//u.test(v)), z.literal("")])
       .default(""),
     inputKind: z.enum(["illustrative", "user-provided"]),
-    cast: z
-      .object({
-        ari: z.object({
-          name: z.string().trim().min(1).max(30),
-          role: z.string().trim().min(1).max(120),
-        }),
-        sam: z.object({
-          name: z.string().trim().min(1).max(30),
-          role: z.string().trim().min(1).max(120),
-        }),
-      })
+    cast: castSchema
       .optional()
       .describe(
-        "Optional names and fictional traits for the two stable character ids; preserve the user's supplied cast.",
+        "1–3 story-specific characters, chosen for the joke. Preserve the chosen angle's cast.",
       ),
+    angles: anglesSchema.optional(),
+    selectedAngleId: z.string().optional(),
+    endingArt: z.array(endingArtSchema).length(3).optional(),
     panels: z.array(panelSchema).length(4),
     endings: z.array(dialogueSchema).length(3),
   })
@@ -110,7 +126,25 @@ export const draftSchema = z
         code: "custom",
         message: "Every scene object needs a unique id.",
       });
+    if (
+      draft.selectedAngleId &&
+      !draft.angles?.some((a) => a.id === draft.selectedAngleId)
+    )
+      ctx.addIssue({ code: "custom", message: "Choose an existing angle." });
     for (const [i, panel] of draft.panels.entries()) {
+      if (draft.cast && panel.actors.some((a) => !draft.cast?.[a.character]))
+        ctx.addIssue({
+          code: "custom",
+          message: "Every staged character needs a cast card.",
+        });
+      if (
+        new Set(panel.actors.map((a) => a.character)).size !==
+        panel.actors.length
+      )
+        ctx.addIssue({
+          code: "custom",
+          message: "Stage each character only once per panel.",
+        });
       if (panel.beat !== ["setup", "trouble", "turn", "payoff"][i])
         ctx.addIssue({
           code: "custom",
@@ -153,7 +187,7 @@ export const draftSchema = z
         code: "custom",
         message: "Introduce every payoff speaker in panel 1 or 2.",
       });
-    for (const character of Object.keys(cast)) {
+    for (const character of characterIdSchema.options) {
       for (let i = 0; i < 2; i++) {
         const poses = draft.panels
           .slice(i, i + 3)
@@ -182,18 +216,25 @@ export const draftSchema = z
         message: "The payoff needs a balloon to accept an ending.",
       });
   });
-export const composedDraftSchema = draftSchema.safeExtend({
-  panels: z
-    .array(
-      panelSchema.extend({
-        actors: z
-          .array(panelSchema.shape.actors.element.extend({ pose: poseSchema }))
-          .min(1)
-          .max(2),
-      }),
-    )
-    .length(4),
-});
+export const composedDraftSchema = draftSchema
+  .safeExtend({
+    panels: z
+      .array(
+        panelSchema.extend({
+          actors: z
+            .array(
+              panelSchema.shape.actors.element.extend({ pose: poseSchema }),
+            )
+            .min(1)
+            .max(3),
+        }),
+      )
+      .length(4),
+  })
+  .superRefine((draft, ctx) => {
+    for (const message of textFitErrors(draft))
+      ctx.addIssue({ code: "custom", message });
+  });
 export type Draft = z.infer<typeof draftSchema>;
 export type ComposedDraft = z.infer<typeof composedDraftSchema>;
 export type Strip = z.infer<typeof stripSchema>;
@@ -201,7 +242,43 @@ export type Panel = z.infer<typeof panelSchema>;
 export type Expression = z.infer<typeof expressionSchema>;
 export type Actor = "human" | "agent";
 
+/** Read old invalid lettering without rewriting it; every scene write still validates fit. */
+export function textFitErrors(draft: Draft): string[] {
+  const errors = draft.panels.flatMap((panel) =>
+    panel.balloons
+      .filter(
+        (balloon) => !fitBalloon(balloon.text, panel.balloons.length === 2),
+      )
+      .map((balloon) => balloonFitError(balloon.id)),
+  );
+  for (const ending of draft.endings)
+    if (!fitBalloon(ending, draft.panels[3]?.balloons.length === 2))
+      errors.push(balloonFitError("ending"));
+  return errors;
+}
+export function assertTextFits(draft: Draft) {
+  const errors = textFitErrors(draft);
+  if (errors.length) throw new StripError("invalid_scene", errors.join(" "));
+}
+
 export const valueEditSchema = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("cast"), cast: castSchema.nullable() }),
+  z.object({ kind: z.literal("angles"), choices: anglesSchema.nullable() }),
+  z.object({ kind: z.literal("angle"), angleId: z.string().nullable() }),
+  z.object({
+    kind: z.literal("screen"),
+    id: z.string(),
+    screen: screenSchema.nullable(),
+  }),
+  z.object({
+    kind: z.literal("sfx"),
+    id: z.string(),
+    sfx: sfxSchema.nullable(),
+  }),
+  z.object({
+    kind: z.literal("ending-art"),
+    choices: z.array(endingArtSchema).length(3).nullable(),
+  }),
   z.object({
     kind: z.literal("title"),
     text: z.string().trim().min(1).max(70),
@@ -262,6 +339,8 @@ export const stripSchema = z.object({
   history: z.array(revisionSnapshotSchema).optional(),
   // Latest rejected agent attempt, not a scene revision or a proposed edit.
   agentRejection: z.object({ at: z.string() }).optional(),
+  // Server-derived reference staging for alternative endings, never an action input.
+  endingBase: panelSchema.optional(),
   // Optional for historical records. Inverses are server-derived, never supplied by the agent.
   pencils: z
     .record(
@@ -280,6 +359,26 @@ function inverse(
   strip: Strip,
   edit: ValueEdit,
 ): { targetId: string; before: ValueEdit; missingPose?: boolean } {
+  if (edit.kind === "angles")
+    return {
+      targetId: "$angles",
+      before: { kind: "angles", choices: strip.draft.angles ?? null },
+    };
+  if (edit.kind === "cast")
+    return {
+      targetId: "$cast",
+      before: { kind: "cast", cast: strip.draft.cast ?? null },
+    };
+  if (edit.kind === "angle")
+    return {
+      targetId: "$angle",
+      before: { kind: "angle", angleId: strip.draft.selectedAngleId ?? null },
+    };
+  if (edit.kind === "ending-art")
+    return {
+      targetId: "$ending-art",
+      before: { kind: "ending-art", choices: strip.draft.endingArt ?? null },
+    };
   if (edit.kind === "title")
     return {
       targetId: "$title",
@@ -326,6 +425,9 @@ function inverse(
       ...edit,
       pose: panel.actors.find((a) => a.id === edit.id)!.pose ?? "standing",
     };
+  else if (edit.kind === "screen")
+    before = { ...edit, screen: panel.screen ?? null };
+  else if (edit.kind === "sfx") before = { ...edit, sfx: panel.sfx ?? null };
   else if (edit.kind === "screen-state")
     before = { ...edit, screenState: panel.screenState };
   else before = { ...edit, prop: panel.prop };
@@ -395,7 +497,21 @@ export function applyEdits(
       "Submit between 1 and 16 focused edits.",
     );
   const next = structuredClone(current);
-  for (const raw of edits) {
+  // Expand alternative staging into ordinary focused edits, so every affected
+  // field uses exactly the same protection, inverse and review logic.
+  if (
+    edits.some((edit) => edit.kind === "choose-ending") &&
+    current.draft.endingArt &&
+    !next.endingBase
+  )
+    next.endingBase = structuredClone(
+      current.history?.find((entry) => entry.draft.endingArt)?.draft
+        .panels[3] ?? current.draft.panels[3]!,
+    );
+  const focused = edits.flatMap((edit): Edit[] =>
+    edit.kind === "choose-ending" ? endingEdits(next, edit.index) : [edit],
+  );
+  for (const raw of focused) {
     let edit = editSchema.parse(raw);
     let eraseMissingPose = false;
     if (edit.kind === "review") {
@@ -444,6 +560,44 @@ export function applyEdits(
       delete next.pencils[key];
       delete next.pencils[`draft:${previous.targetId}`];
     }
+    if (edit.kind === "angles") {
+      if (actor === "agent" && current.protectedIds.length)
+        throw new StripError(
+          "protected_element",
+          "Angle proposals could reinterpret MINE work. Ask the human before changing story direction.",
+        );
+      if (edit.choices) next.draft.angles = edit.choices;
+      else {
+        delete next.draft.angles;
+        delete next.draft.selectedAngleId;
+      }
+      continue;
+    }
+    if (edit.kind === "cast" || edit.kind === "angle") {
+      if (actor === "agent" && current.protectedIds.length)
+        throw new StripError(
+          "protected_element",
+          "Casting or angle changes could reinterpret MINE work. Leave them unchanged; adapt only unprotected lines.",
+        );
+      if (edit.kind === "cast") {
+        if (edit.cast) next.draft.cast = edit.cast;
+        else delete next.draft.cast;
+      } else {
+        if (edit.angleId === null) delete next.draft.selectedAngleId;
+        else {
+          const angle = next.draft.angles?.find((a) => a.id === edit.angleId);
+          if (!angle)
+            throw new StripError("not_found", "Choose an existing angle.");
+          next.draft.selectedAngleId = angle.id;
+        }
+      }
+      continue;
+    }
+    if (edit.kind === "ending-art") {
+      if (edit.choices) next.draft.endingArt = edit.choices;
+      else delete next.draft.endingArt;
+      continue;
+    }
     if (edit.kind === "title") {
       next.draft.title = edit.text;
       continue;
@@ -489,16 +643,59 @@ export function applyEdits(
       if (edit.id !== targetPanel.id)
         throw new StripError("not_found", "Choose a panel to change its prop.");
       // A prop edit cannot modify any protected character or balloon.
-      if (edit.kind === "screen-state")
+      if (edit.kind === "screen") {
+        if (edit.screen) targetPanel.screen = edit.screen;
+        else delete targetPanel.screen;
+      } else if (edit.kind === "sfx") {
+        if (edit.sfx !== null) targetPanel.sfx = edit.sfx;
+        else delete targetPanel.sfx;
+      } else if (edit.kind === "screen-state")
         targetPanel.screenState = edit.screenState;
       else targetPanel.prop = edit.prop;
     }
   }
-  draftSchema.parse(next.draft);
+  const validated = draftSchema.safeParse(next.draft);
+  if (!validated.success)
+    throw new StripError(
+      "invalid_scene",
+      validated.error.issues.map((issue) => issue.message).join(" "),
+    );
+  assertTextFits(next.draft);
   next.revision += 1;
   next.lastEditedBy = actor;
   next.updatedAt = new Date().toISOString();
   return next;
+}
+export function endingEdits(strip: Strip, index: number): Edit[] {
+  const panel = strip.draft.panels[3]!;
+  const balloon = panel.balloons[panel.balloons.length - 1]!;
+  const actor = panel.actors.find((a) => a.character === balloon.speaker)!;
+  const art = strip.draft.endingArt?.[index];
+  const text: Edit = {
+    kind: "balloon",
+    id: balloon.id,
+    text: strip.draft.endings[index]!,
+  };
+  if (!art) return [text];
+  // Alternatives are patches over REFERENCE staging, not over the previous
+  // selected choice. Otherwise phone/SFX/poses leak between choices.
+  const base = strip.endingBase ?? panel;
+  const baseActor =
+    base.actors.find((a) => a.character === balloon.speaker) ?? actor;
+  const pose = art.pose ?? baseActor.pose;
+  return [
+    text,
+    {
+      kind: "expression",
+      id: actor.id,
+      expression: art.expression ?? baseActor.expression,
+    },
+    ...(pose ? [{ kind: "pose" as const, id: actor.id, pose }] : []),
+    { kind: "screen", id: panel.id, screen: art.screen ?? base.screen ?? null },
+    { kind: "screen-state", id: panel.id, screenState: base.screenState },
+    { kind: "sfx", id: panel.id, sfx: art.sfx ?? base.sfx ?? null },
+    { kind: "prop", id: panel.id, prop: art.prop ?? base.prop },
+  ];
 }
 export function setProtection(
   current: Strip,

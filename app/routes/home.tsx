@@ -46,8 +46,13 @@ import {
 } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 
+import "../strip-v2.css";
+
+import { AngleComposer, AngleCards } from "@/components/home/AngleComposer";
+import { CastCards } from "@/components/home/CastCards";
 import { Library } from "@/components/home/Library";
 import { SelectionNote } from "@/components/home/SelectionNote";
+import { StageEditor } from "@/components/home/StageEditor";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -70,6 +75,7 @@ import {
 } from "@/lib/strip-agent-context";
 import { exportPng, loadSceneAssets, textMeasurer } from "@/lib/strip-canvas";
 
+import { personFor, type Cast, type CharacterId } from "../../shared/casting";
 import { preparedExamples } from "../../shared/examples";
 import { launchCaption, exportFilename } from "../../shared/launch-post";
 import { renderStripSvg, type SceneAssets } from "../../shared/render-strip";
@@ -77,16 +83,12 @@ import {
   cast,
   expressionSchema,
   poseSchema,
-  screenStateSchema,
+  applyEdits,
   type Edit,
   type Strip,
 } from "../../shared/strip";
-import {
-  cropPanel,
-  draftRequest,
-  objectLabel,
-  sourceCoverage,
-} from "../../shared/studio";
+import { cropPanel, objectLabel, sourceCoverage } from "../../shared/studio";
+import { illustrativeSlack } from "../../shared/v2-fixture";
 
 export function meta() {
   return [
@@ -131,10 +133,7 @@ export default function Home() {
   );
   const [source, setSource] = useState("");
   const [illustrative, setIllustrative] = useState(false);
-  const [castDraft, setCastDraft] = useState({
-    ari: { name: cast.ari.name as string, role: cast.ari.role as string },
-    sam: { name: cast.sam.name as string, role: cast.sam.role as string },
-  });
+  const [angleOpen, setAngleOpen] = useState(false);
   const [askText, setAskText] = useState("");
   const [askOpen, setAskOpen] = useState(false);
   const [phoneAskOpen, setPhoneAskOpen] = useState(false);
@@ -147,6 +146,7 @@ export default function Home() {
     submitId: string;
     stripId: string;
     panelId: string;
+    phase: "angles" | "draft" | "revision";
     threadId?: string;
   }>();
   const { workingThreadIds } = useAgentChatRunningThreads();
@@ -163,6 +163,12 @@ export default function Home() {
   const drafting =
     !id &&
     agentRequest?.stripId === "" &&
+    agentRequest.phase === "draft" &&
+    Boolean(
+      agentRequest.threadId && workingThreadIds.has(agentRequest.threadId),
+    );
+  const findingAngles =
+    agentRequest?.phase === "angles" &&
     Boolean(
       agentRequest.threadId && workingThreadIds.has(agentRequest.threadId),
     );
@@ -208,7 +214,9 @@ export default function Home() {
   const selectedId =
     params.get("object") ?? params.get("panel") ?? strip.draft.panels[0]!.id;
   const stagedHandoff = useRef<string | undefined>(undefined);
-  const handoffTarget = stripHandoffTarget(id, selectedId);
+  const handoffTarget = params.get("plan")
+    ? `plan:${params.get("plan")}`
+    : stripHandoffTarget(id, selectedId);
   useEffect(() => {
     if (clearStripHandoff(stagedHandoff.current, handoffTarget))
       stagedHandoff.current = undefined;
@@ -266,9 +274,13 @@ export default function Home() {
   const endings = useMemo(
     () =>
       assets && measure
-        ? strip.draft.endings.map((text) => {
-            const preview = structuredClone(strip);
-            preview.draft.panels[3]!.balloons.slice(-1)[0]!.text = text;
+        ? strip.draft.endings.map((_, index) => {
+            const preview = applyEdits(
+              strip,
+              strip.revision,
+              [{ kind: "choose-ending", index }],
+              "human",
+            );
             // Same renderer, cropped to the actual alternative fourth panel.
             return cropPanel(renderStripSvg(preview, assets, measure).svg, 3);
           })
@@ -277,19 +289,27 @@ export default function Home() {
   );
   const panelNumber = strip.draft.panels.indexOf(selectedPanel) + 1;
   const selectionLabel = selectedBalloon
-    ? `${(strip.draft.cast ?? cast)[selectedBalloon.speaker].name}'s line`
+    ? `${personFor(strip.draft, selectedBalloon.speaker).name}'s line`
     : selectedActor
-      ? (strip.draft.cast ?? cast)[selectedActor.character].name
+      ? personFor(strip.draft, selectedActor.character).name
       : `Panel ${panelNumber}`;
   const pencils = Object.entries(strip.pencils ?? {});
   const coverage = sourceCoverage(strip.draft);
   const people = strip.draft.cast ?? cast;
   const focusedSvg = rendered ? cropPanel(rendered.svg, panelNumber - 1) : "";
   useEffect(() => {
-    loadSceneAssets()
-      .then(setAssets)
-      .catch((e) => setError(errorMessage(e)));
-  }, []);
+    let active = true;
+    loadSceneAssets(strip.draft)
+      .then((loaded) => {
+        if (active) setAssets(loaded);
+      })
+      .catch((e) => {
+        if (active) setError(errorMessage(e));
+      });
+    return () => {
+      active = false;
+    };
+  }, [strip.id, strip.revision]);
   useEffect(() => {
     setEditing(false);
     setLine(selectedBalloon?.text ?? "");
@@ -374,12 +394,13 @@ export default function Home() {
     setError("");
     setNotice("");
     try {
-      await update.mutateAsync({
+      const saved = await update.mutateAsync({
         id: strip.id,
         expectedRevision,
         edits,
       });
       setNotice("Saved in ink.");
+      return saved;
     } catch (e) {
       if (actionErrorCode(e) === "stale_revision") {
         setNotice("This strip changed elsewhere — showing the latest");
@@ -402,16 +423,18 @@ export default function Home() {
   function safeEdit(edits: Edit[]) {
     void edit(edits).catch(() => {});
   }
-  async function openExample() {
+  async function openExample(slack = false) {
     setError("");
     try {
-      const result = await create.mutateAsync(preparedExamples[0]!);
+      const result = await create.mutateAsync(
+        slack ? illustrativeSlack : preparedExamples[0]!,
+      );
       navigate(`/home?id=${result.id}`);
     } catch (e) {
       setError(errorMessage(e));
     }
   }
-  function askAgent(request: string) {
+  function askAgent(request: string, context?: Record<string, unknown>) {
     // The handoff already carries the complete target/revision. Do not also
     // stage a picked-object chip describing that same target.
     deselectAgentSelectable("comic-object", selectedId);
@@ -423,25 +446,72 @@ export default function Home() {
         submitId,
         stripId: isSaved ? strip.id : "",
         panelId: isSaved ? selectedPanel.id : "",
+        phase: isSaved ? "revision" : context?.planId ? "draft" : "angles",
       });
     sendToAgentChat({
       submitMessageId: submitId,
       message: request,
-      contextLabel: isSaved ? selectionLabel : "Cast & source type",
-      context: isSaved
-        ? JSON.stringify({
-            stripId: strip.id,
-            selectedId,
-            panelId: selectedPanel.id,
-            expectedRevision: strip.revision,
-          })
-        : JSON.stringify({
-            inputKind: illustrative ? "illustrative" : "user-provided",
-            cast: castDraft,
-          }),
+      contextLabel: context
+        ? isSaved
+          ? "Story direction"
+          : "Angle & source"
+        : isSaved
+          ? selectionLabel
+          : "Cast & source type",
+      context: context
+        ? JSON.stringify(context)
+        : isSaved
+          ? JSON.stringify({
+              stripId: strip.id,
+              selectedId,
+              panelId: selectedPanel.id,
+              expectedRevision: strip.revision,
+            })
+          : JSON.stringify({
+              inputKind: illustrative ? "illustrative" : "user-provided",
+              workflow: "angles-first",
+            }),
       openSidebar: true,
       submit: engine.canChat,
     });
+  }
+  async function recast(people: Cast, character: CharacterId) {
+    try {
+      const saved = await edit([{ kind: "cast", cast: people }]);
+      askAgent(
+        `Adapt only ${people[character]?.name}'s affected, unprotected dialogue for this recast. Leave all other lines, art and MINE contributions untouched.`,
+        {
+          stripId: saved.id,
+          expectedRevision: saved.revision,
+          recastCharacterId: character,
+          scope: "affected-unprotected-balloons-only",
+        },
+      );
+    } catch {
+      /* Shared edit handler reports the error. */
+    }
+  }
+  async function changeAngle(angleId: string) {
+    const angle = strip.draft.angles?.find((a) => a.id === angleId);
+    if (!angle) return;
+    try {
+      const saved = await edit([
+        { kind: "angle", angleId },
+        { kind: "cast", cast: { ...people, ...angle.cast } },
+      ]);
+      setAngleOpen(false);
+      askAgent(
+        "Adapt this strip to my chosen angle. Keep protected work untouched; use focused update-strip edits, never replace this strip.",
+        {
+          stripId: saved.id,
+          expectedRevision: saved.revision,
+          selectedAngleId: angleId,
+          scope: "angle-revision",
+        },
+      );
+    } catch {
+      /* Shared edit handler reports the error. */
+    }
   }
   function revise(
     instruction = "Make this selection clearer and more charming.",
@@ -474,7 +544,15 @@ export default function Home() {
     setExporting(true);
     setError("");
     try {
-      const output = renderStripSvg(strip, assets, measure);
+      const exportAssets = await loadSceneAssets(strip.draft);
+      const output = renderStripSvg(
+        strip,
+        exportAssets,
+        measure,
+        undefined,
+        undefined,
+        false,
+      );
       if (output.overflow.length)
         throw new Error(
           "Some text does not fit. Shorten the highlighted lines before exporting.",
@@ -549,16 +627,37 @@ export default function Home() {
         </p>
       )}
       <div className="rail-rule" />
-      <p className="eyebrow">THE CAST</p>
-      {Object.entries(people).map(([key, person]) => (
-        <div className="cast-person" key={key}>
-          <img src={`/peeps/${key}-happy-standing.svg`} alt="" />
-          <div>
-            <b>{person.name}</b>
-            <p>{person.role}</p>
-          </div>
-        </div>
-      ))}
+      <p className="eyebrow">THE ANGLE</p>
+      <p>
+        {strip.draft.angles?.find((a) => a.id === strip.draft.selectedAngleId)
+          ?.premise ?? "A new way to find the funny."}
+      </p>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() =>
+          strip.draft.angles
+            ? setAngleOpen(!angleOpen)
+            : askAgent(
+                "Propose three story-specific angles for this existing strip through update-strip's angles edit. Do not draft or replace it; let me choose.",
+                {
+                  stripId: strip.id,
+                  expectedRevision: strip.revision,
+                  workflow: "change-angle",
+                },
+              )
+        }
+      >
+        Change angle
+      </Button>
+      <div className="rail-rule" />
+      <p className="eyebrow">CAST FOR THIS STORY</p>
+      <CastCards
+        people={people}
+        editable
+        saved
+        onSave={(people, character) => void recast(people, character)}
+      />
       <p className="rail-footnote">
         Facts stay in the script.
         <br />
@@ -753,27 +852,12 @@ export default function Home() {
             Tap a balloon to rewrite it, or a character to change their
             expression.
           </p>
-          <label htmlFor="screen-state">Feature on screen</label>
-          <select
-            id="screen-state"
-            value={selectedPanel.screenState}
-            disabled={busy}
-            onChange={(e) =>
-              safeEdit([
-                {
-                  kind: "screen-state",
-                  id: selectedPanel.id,
-                  screenState: screenStateSchema.parse(e.target.value),
-                },
-              ])
-            }
-          >
-            {screenStateSchema.options.map((state) => (
-              <option key={state} value={state}>
-                {state}
-              </option>
-            ))}
-          </select>
+          <StageEditor
+            key={`${selectedPanel.id}:${strip.revision}`}
+            panel={selectedPanel}
+            busy={busy}
+            onSave={safeEdit}
+          />
         </>
       )}
       {pencils
@@ -781,7 +865,7 @@ export default function Home() {
         .map(([key, proposal]) => (
           <div className="review-actions" key={key}>
             <span>
-              <PencilLine size={15} /> In blue pencil
+              <PencilLine size={15} /> Agent proposal
             </span>
             <Button
               size="sm"
@@ -845,6 +929,11 @@ export default function Home() {
             Agent
           </Button>
         </header>
+        {findingAngles && (
+          <p className="studio-notice" role="status">
+            The agent is finding three angles for your update…
+          </p>
+        )}
         {drafting && (
           <section
             className="drafting-page"
@@ -868,84 +957,13 @@ export default function Home() {
           </section>
         )}
         <section className="new-strip-body" hidden={drafting}>
-          <p className="eyebrow">START WITH SOMETHING REAL.</p>
-          <h1>What shipped?</h1>
-          <p>
-            Bring one small product change. We’ll give it a little character.
-          </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              askAgent(draftRequest(source));
-            }}
-          >
-            <label htmlFor="new-source">
-              What shipped? · The source update
-            </label>
-            <Textarea
-              id="new-source"
-              value={source}
-              onChange={(e) => setSource(e.target.value)}
-              maxLength={4000}
-              rows={5}
-              placeholder="We added Undo. Deleted files can now be restored…"
-              required
-            />
-            <label className="illustrative-check">
-              <input
-                type="checkbox"
-                checked={illustrative}
-                onChange={(e) => setIllustrative(e.target.checked)}
-              />
-              This is an illustrative update
-            </label>
-            <fieldset className="compose-cast">
-              <legend>The cast</legend>
-              <p>Two fictional characters. Give them your kind of chemistry.</p>
-              <div className="compose-cast-grid">
-                {(["ari", "sam"] as const).map((key) => (
-                  <div className="compose-person" key={key}>
-                    <img src={`/peeps/${key}-happy-standing.svg`} alt="" />
-                    <div>
-                      <label htmlFor={`${key}-name`}>Name</label>
-                      <Input
-                        id={`${key}-name`}
-                        value={castDraft[key].name}
-                        maxLength={30}
-                        required
-                        onChange={(e) =>
-                          setCastDraft({
-                            ...castDraft,
-                            [key]: { ...castDraft[key], name: e.target.value },
-                          })
-                        }
-                      />
-                      <label htmlFor={`${key}-trait`}>Trait</label>
-                      <Input
-                        id={`${key}-trait`}
-                        value={castDraft[key].role}
-                        maxLength={120}
-                        required
-                        onChange={(e) =>
-                          setCastDraft({
-                            ...castDraft,
-                            [key]: { ...castDraft[key], role: e.target.value },
-                          })
-                        }
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </fieldset>
-            <Button
-              className="print-button"
-              disabled={source.trim().length < 5 || drafting}
-              type="submit"
-            >
-              Pencil it <PencilLine size={18} />
-            </Button>
-          </form>
+          <AngleComposer
+            source={source}
+            onSource={setSource}
+            illustrative={illustrative}
+            onIllustrative={setIllustrative}
+            onAsk={askAgent}
+          />
           {engine.missing && (
             <p className="setup-note">
               No AI connected yet. Your request will open in the real agent
@@ -955,8 +973,19 @@ export default function Home() {
           )}
           <div className="try-example">
             <span>Just looking around?</span>
-            <Button variant="outline" disabled={busy} onClick={openExample}>
+            <Button
+              variant="outline"
+              disabled={busy}
+              onClick={() => void openExample()}
+            >
               Open illustrative Undo strip <ArrowRight size={16} />
+            </Button>
+            <Button
+              variant="outline"
+              disabled={busy}
+              onClick={() => void openExample(true)}
+            >
+              Open illustrative Slack strip
             </Button>
           </div>
           {error && <p role="alert">{error}</p>}
@@ -1015,6 +1044,31 @@ export default function Home() {
           </Button>
         </div>
       </header>
+      {angleOpen && strip.draft.angles && (
+        <section className="studio-angle-picker">
+          <div className="endings-heading">
+            <h2>Change the angle.</h2>
+            <Button variant="ghost" onClick={() => setAngleOpen(false)}>
+              Close
+            </Button>
+          </div>
+          <p>
+            Revisions respect MINE. Choose the cast for this story; the agent
+            adapts the unprotected scene.
+          </p>
+          <AngleCards
+            angles={strip.draft.angles}
+            selectedId={strip.draft.selectedAngleId}
+            onChoose={(id) => void changeAngle(id)}
+          />
+        </section>
+      )}
+      {Boolean(rendered?.overflow.length) && (
+        <p className="studio-alert" role="alert">
+          Some lettering cannot fit and has been hidden. Shorten{" "}
+          {rendered?.overflow.join(", ")} before exporting.
+        </p>
+      )}
       <Sheet open={exportOpen} onOpenChange={setExportOpen}>
         <SheetContent className="launch-export" showClose={false}>
           <div className="export-heading">
@@ -1110,7 +1164,7 @@ export default function Home() {
             <span>THE PAGE</span>
             <div>
               <span className="ink-key">━ Your ink</span>
-              <span className="pencil-key">┄ Agent pencil</span>
+              <span className="pencil-key">✎ Agent proposal</span>
             </div>
           </div>
           <div className="artboard-wrap">

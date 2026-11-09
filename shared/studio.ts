@@ -1,4 +1,5 @@
-import { cast, type Draft } from "./strip.js";
+import { personFor } from "./casting.js";
+import { type Draft } from "./strip.js";
 
 /** Human labels for context chips; machine ids belong only in hidden context. */
 export function objectLabel(draft: Draft, objectId: string) {
@@ -12,11 +13,10 @@ export function objectLabel(draft: Draft, objectId: string) {
   const prefix = `Panel ${draft.panels.indexOf(panel) + 1}`;
   const balloon = panel.balloons.find((b) => b.id === objectId);
   const actor = panel.actors.find((a) => a.id === objectId);
-  const people = draft.cast ?? cast;
   return balloon
-    ? `${prefix} · ${people[balloon.speaker].name}'s line`
+    ? `${prefix} · ${personFor(draft, balloon.speaker).name}'s line`
     : actor
-      ? `${prefix} · ${people[actor.character].name}`
+      ? `${prefix} · ${personFor(draft, actor.character).name}`
       : prefix;
 }
 

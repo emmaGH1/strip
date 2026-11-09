@@ -5,7 +5,9 @@ import titleFontUrl from "@fontsource/bricolage-grotesque/files/bricolage-grotes
 import "@fontsource/comic-neue/700.css";
 import textFontUrl from "@fontsource/comic-neue/files/comic-neue-latin-700-normal.woff2?url";
 
+import { archetypeFor } from "../../shared/casting";
 import type { SceneAssets } from "../../shared/render-strip";
+import type { Draft } from "../../shared/strip";
 
 async function dataUrl(url: string): Promise<string> {
   const response = await fetch(url);
@@ -20,8 +22,35 @@ async function dataUrl(url: string): Promise<string> {
     reader.readAsDataURL(blob);
   });
 }
+const peepCache = new Map<string, Promise<string>>();
 let assetsPromise: Promise<SceneAssets> | undefined;
-export function loadSceneAssets(): Promise<SceneAssets> {
+export async function loadSceneAssets(draft?: Draft): Promise<SceneAssets> {
+  const base = await baseAssets();
+  if (!draft) return base;
+  const names = [
+    ...new Set(
+      draft.panels.flatMap((panel) =>
+        panel.actors.map((actor) => {
+          const name = draft.cast?.[actor.character]?.archetype
+            ? archetypeFor(draft, actor.character)
+            : actor.character;
+          return `${name}-${actor.expression}${actor.pose ? `-${actor.pose}` : ""}`;
+        }),
+      ),
+    ),
+  ];
+  const peeps = Object.fromEntries(
+    await Promise.all(
+      names.map(async (name) => {
+        if (!peepCache.has(name))
+          peepCache.set(name, dataUrl(appPath(`/peeps/${name}.svg`)));
+        return [name, await peepCache.get(name)!];
+      }),
+    ),
+  );
+  return { ...base, peeps: { ...base.peeps, ...peeps } };
+}
+function baseAssets(): Promise<SceneAssets> {
   return (assetsPromise ??= (async () => {
     const names = ["ari", "sam"].flatMap((name) =>
       ["neutral", "happy", "panic", "skeptical", "thinking"]

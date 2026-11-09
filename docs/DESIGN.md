@@ -9,15 +9,15 @@ The proof UI was a 3-hour feasibility test, not a design. This document replaces
 - **Density:** medium. The comic is always the hero and the controls stay out of its way.
 - **Must not feel like:** an AI chat app with a picture attached, a kids' comic maker, a dark neon dev tool, or a generic SaaS template.
 
-## 2. Signature motif: pencils vs inks
+## 2. Signature motif: pencils vs inks (v2: finished ink, visible review)
 
 This comes from real comics production: an artist **pencils** in non-photo blue, then the inker commits in black. Our mapping:
 
-- **Agent = blue pencil.** Anything the agent proposed or changed renders with a blue-pencil treatment (blue `#3B6FD8` sketch outline, slight hand-drawn dash, a small ✎ mark).
+- **Finished art by default.** Agent-authored characters, props, screens, SFX and lettering render in ink, not an all-blue wireframe. Agent proposals keep a blue `#3B6FD8` balloon outline, a small ✎ tag on each changed scene element and a blue panel corner. No whole-art color filter.
 - **Human = ink.** Anything the person wrote or confirmed is solid black ink.
 - **Protected = a red "MINE" stamp.** A small rotated stamp on the protected element, the agent cannot touch it, and it's enforced in code.
 - **Agent working = panel being pencilled.** While a request runs, the target panel(s) show blue sketch lines over a light halftone fill. This is real state, not decoration: it shows only while a real agent request is in flight.
-- **Review = "ink it or erase it."** After an agent revision, each changed item keeps its blue-pencil look with two small actions, **Ink** (accept) and **Erase** (revert to before). Once inked, it turns black.
+- **Review = "ink it or erase it."** Each changed item appears in Agent changes with **Ink** (accept) and **Erase** (restore the prior field). Ink removes its blue review marks; the art itself was already finished. PNG export contains no selection, MINE stamps, pencil tags, blue outlines or review corners.
 
 Attribution data already exists (`lastEditedBy`, actor from framework context). The motif simply shows it.
 
@@ -57,13 +57,25 @@ Attribution data already exists (`lastEditedBy`, actor from framework context). 
   - **Pose**;
   - **Protect / Unprotect** (MINE);
   - **Ask agent**: opens an inline prompt anchored to the selection, with quick chips (_Funnier · Shorter · More innocent · Show the feature_) plus free text. It sends through the real agent with the selection and revision context.
-- **Left rail, "Script":** the source update (the facts), a claims list showing which panel covers which fact, and the cast (2–3 characters with a name and trait).
+- **Left rail, "Script":** the source update (the facts), exact-excerpt coverage, the selected premise with **Change angle**, and story-specific cast cards (portrait, name, comic trait). **Recast** swaps archetype/name/trait and hands only the affected character's unprotected dialogue to the real agent through `update-strip`.
 - **Right: the agent's desk.** The real Agent-Native sidebar, restyled to the palette. It shows the conversation, plus a compact log of what the agent changed (each entry links to the element).
 - **Endings tray (after a draft):** three alternative panel-4 thumbnails side by side. Tap one to swap it in.
 - **Top bar:** strip title (editable), Export (PNG + "post caption" copy), library link.
 - **Phone:** the strip on top, a bottom sheet with tabs **Edit · Agent · Script**, and the context bar as a bottom action row.
 
-### C. Library (later, M2)
+### C. Compose — angles before panels (v2)
+
+Paste → **Find the joke** → three angle cards → choose/edit a premise and cast → **Draft this angle**. Each angle states one premise, its specific irony/reversal, and its proposed cast. No draft before a choice. Angle plans are scoped SQL records with CAS selection; all three angles and the chosen id are copied into the saved strip. Prepared Slack cards and strip are explicitly hand-authored / illustrative, separate from generation.
+
+**Writing:** dialogue reacts to facts, never recites the release note. Facts live on props/screens or in at most one short factual line. Setup → trouble → turn → payoff; panel 4 is a reaction/reversal, not a summary. Target eight words per balloon, hard cap twelve. A wordless beat must show meaningful action, not a blank laptop.
+
+**Casting library:** ten distinct bundled Open Peeps silhouettes: power user, on-call engineer, product manager, support agent, designer, new hire, CEO, customer, QA tester, intern. Each has a suggested name/trait, five expressions and six poses (including sitting); no generated images. `ari` / `sam` / `kit` are stable slots, not fixed personalities. Cast 1–3 characters for the joke, usually two. Old Ari/Sam records preserve their original assets until explicitly recast; logical archetype defaults are power user/product manager.
+
+**Show, don't tell:** `screen` is `{ kind: chat | dialog | toast | doc | none, title (≤24 chars), lines (0–2, ≤28 chars each), button? (≤14 chars), tone: normal | error | success }`. It renders clean bounded UI inside a laptop or phone; old `screenState` records remain readable. Props also include files, coffee and none. One optional `sfx` per panel (≤14 chars / three words), positioned by code, in the title face. The three `endingArt` entries can vary payoff expression, pose, screen, SFX and prop; each choice applies through ordinary protected field edits. Ending thumbnails are 280px, horizontally scrollable rather than tiny repeated portraits.
+
+**Lettering guarantee:** use measured Comic Neue Bold advances for server validation; wrap and shrink only to a 22px minimum. If it still does not fit, reject the write with the balloon id and an instruction to shorten it. The browser measures the loaded font again, never slices the last lines, hides any invalid legacy lettering and blocks export until corrected. No missing punchline may be exported.
+
+### D. Library
 
 A grid of saved strips as small comic thumbnails, with "New strip".
 

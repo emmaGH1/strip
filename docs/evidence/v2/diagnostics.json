@@ -1,0 +1,15 @@
+{
+  "results": [
+    "FAIL signup: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8080/home?new=1",
+    "FAIL angle-plan: locator.click: Timeout 30000ms exceeded.",
+    "FAIL choose-recast: locator.click: Timeout 30000ms exceeded.",
+    "FAIL slack-studio: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8080/home?new=1",
+    "FAIL endings: locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.",
+    "FAIL export: locator.click: Timeout 30000ms exceeded.",
+    "FAIL studio-recast: locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.",
+    "FAIL protection: page.reload: net::ERR_CONNECTION_REFUSED",
+    "FAIL phone: page.goto: Protocol error (Page.navigate): Cannot navigate to invalid URL"
+  ],
+  "errors": [],
+  "traffic": []
+}

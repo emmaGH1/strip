@@ -7,6 +7,8 @@ import { changedSummary } from "../../shared/history.js";
 import {
   StripError,
   stripSchema,
+  draftSchema,
+  assertTextFits,
   type Actor,
   type Draft,
   type Strip,
@@ -67,8 +69,9 @@ export async function listStrips(ctx?: ActionRunContext): Promise<Strip[]> {
 export async function getStrip(
   id: string,
   ctx?: ActionRunContext,
+  db = getDb(),
 ): Promise<Strip> {
-  const [row] = await getDb()
+  const [row] = await db
     .select({ scene: strips.scene })
     .from(strips)
     .where(scope(id, ctx))
@@ -83,7 +86,10 @@ export async function getStrip(
 export async function createStrip(
   draft: Draft,
   ctx?: ActionRunContext,
+  db = getDb(),
 ): Promise<Strip> {
+  draft = draftSchema.parse(draft);
+  assertTextFits(draft);
   const actor = callerActor(ctx);
   const scene: Strip = {
     id: randomUUID(),
@@ -97,6 +103,9 @@ export async function createStrip(
           ? "prepared-example"
           : "human-authored",
     lastEditedBy: actor,
+    ...(draft.endingArt
+      ? { endingBase: structuredClone(draft.panels[3]!) }
+      : {}),
     ...(actor === "agent"
       ? {
           pencils: Object.fromEntries(
@@ -124,15 +133,13 @@ export async function createStrip(
       at: scene.updatedAt,
     },
   ];
-  await getDb()
-    .insert(strips)
-    .values({
-      id: scene.id,
-      ownerEmail: owner(ctx),
-      orgId: ctx?.orgId ?? null,
-      scene,
-    });
-  return getStrip(scene.id, ctx);
+  await db.insert(strips).values({
+    id: scene.id,
+    ownerEmail: owner(ctx),
+    orgId: ctx?.orgId ?? null,
+    scene,
+  });
+  return getStrip(scene.id, ctx, db);
 }
 export async function saveStrip(
   previous: Strip,

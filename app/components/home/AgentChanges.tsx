@@ -137,7 +137,10 @@ export function AgentChanges() {
                     )
                   }
                 >
-                  P{strip.draft.panels.indexOf(panel!) + 1} · {label}
+                  {panel
+                    ? `P${strip.draft.panels.indexOf(panel) + 1}`
+                    : "Story"}{" "}
+                  · {label}
                 </button>
                 <Button
                   size="sm"

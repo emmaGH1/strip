@@ -1,0 +1,262 @@
+.new-strip .new-strip-body {
+  max-width: 1120px;
+  padding: 40px 32px 64px;
+}
+.angle-composer {
+  min-width: 0;
+}
+.angle-composer > h1 {
+  font-size: clamp(32px, 4vw, 52px);
+  margin: 8px 0 16px;
+  letter-spacing: -1.5px;
+}
+.angle-composer > p {
+  margin: 12px 0 20px;
+}
+.angle-composer > form {
+  max-width: 720px;
+}
+.angle-composer details {
+  margin: 16px 0;
+  max-width: 760px;
+}
+.angle-composer summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.angle-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+.angle-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: #fcf9f2;
+  min-width: 0;
+}
+.angle-card[data-selected="true"] {
+  box-shadow: 4px 4px 0 var(--ink);
+  border-color: var(--signal);
+}
+.angle-card h3 {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin: 12px 0;
+}
+.angle-card > p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+.angle-card > button {
+  margin-top: auto;
+  min-height: 44px;
+  white-space: normal;
+}
+.angle-cast-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: auto 0 20px;
+}
+.angle-cast-preview > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.angle-cast-preview img {
+  width: 44px;
+  height: 62px;
+  object-fit: cover;
+  object-position: top;
+}
+.angle-cast-preview span {
+  font-size: 13px;
+  font-weight: 700;
+}
+.angle-cast-preview small {
+  display: block;
+  max-width: 100px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--quiet);
+}
+.chosen-angle {
+  margin: 32px 0;
+  padding-top: 24px;
+  border-top: 2px solid var(--ink);
+}
+.chosen-angle h2 {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 24px 0 16px;
+}
+.chosen-angle > label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.chosen-angle > textarea {
+  max-width: 720px;
+}
+.cast-cards {
+  display: grid;
+  gap: 16px;
+  margin: 16px 0 24px;
+}
+.chosen-angle .cast-cards {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.cast-card {
+  min-width: 0;
+  padding: 12px 0 16px;
+  border-bottom: 1px solid #c9c0b2;
+}
+.cast-card-summary {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.cast-card-summary img {
+  flex-shrink: 0;
+  width: 72px;
+  height: 98px;
+  object-fit: cover;
+  object-position: top;
+}
+.cast-card h3 {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 4px 0;
+}
+.cast-card p {
+  font-size: 13px;
+  line-height: 1.4;
+}
+.cast-card .eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.6px;
+}
+.script-rail .cast-card-summary {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.script-rail .cast-card-summary img {
+  width: 92px;
+  height: 120px;
+}
+.recast-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+.recast-form label,
+.selection-details .stage-editor label {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 0;
+}
+.recast-form select,
+.stage-editor select {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  background: #fcf9f2;
+  border: 1px solid #bcb2a2;
+  border-radius: 4px;
+  padding: 6px;
+}
+.recast-form input {
+  width: 100%;
+  min-width: 0;
+}
+.recast-form button {
+  white-space: normal;
+  height: auto;
+  min-height: 44px;
+}
+.studio-angle-picker {
+  padding: 24px;
+  border-bottom: 2px solid var(--ink);
+}
+.selection-details .stage-editor {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.stage-editor h3,
+.stage-editor > button,
+.stage-editor > p {
+  grid-column: 1 / -1;
+}
+.stage-editor h3 {
+  font-size: 18px;
+  font-weight: 800;
+}
+.studio .ending-options {
+  display: grid;
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: 280px;
+  overflow-x: auto;
+  padding: 0 4px 10px 0;
+  scroll-snap-type: x proximity;
+}
+.studio .ending-choice {
+  scroll-snap-align: start;
+}
+.studio .ending-thumbnail {
+  aspect-ratio: 550 / 490;
+}
+.studio .ending-choice > span {
+  font-size: 12px;
+}
+@media (max-width: 1000px) {
+  .angle-cards {
+    grid-template-columns: 1fr;
+  }
+  .angle-card h3 {
+    font-size: 25px;
+  }
+  .angle-cast-preview {
+    margin-top: 8px;
+  }
+  .script-rail .cast-card-summary {
+    flex-direction: row;
+  }
+}
+@media (max-width: 700px) {
+  .new-strip .new-strip-body {
+    padding: 28px 20px 48px;
+  }
+  .angle-card {
+    padding: 20px;
+  }
+  .angle-composer > h1 {
+    font-size: 36px;
+  }
+  .studio-angle-picker {
+    padding: 20px;
+  }
+  .selection-details .stage-editor {
+    grid-template-columns: 1fr;
+  }
+  .cast-card-summary img {
+    width: 84px;
+    height: 114px;
+  }
+}

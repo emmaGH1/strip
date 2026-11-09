@@ -1,5 +1,6 @@
 import {
   assertRevision,
+  assertTextFits,
   draftSchema,
   panelForObject,
   StripError,
@@ -24,6 +25,7 @@ export function restoreRevision(
       "That revision is not available in this strip's history.",
     );
   const draft = draftSchema.parse(structuredClone(snapshot.draft));
+  assertTextFits(draft);
   if (actor === "agent") {
     for (const id of current.protectedIds) {
       const beforePanel = panelForObject(current, id);
@@ -44,7 +46,9 @@ export function restoreRevision(
         JSON.stringify(current.draft.cast) !== JSON.stringify(draft.cast) ||
         current.draft.source !== draft.source ||
         current.draft.sourceUrl !== draft.sourceUrl ||
-        current.draft.inputKind !== draft.inputKind
+        current.draft.inputKind !== draft.inputKind ||
+        current.draft.selectedAngleId !== draft.selectedAngleId ||
+        JSON.stringify(current.draft.angles) !== JSON.stringify(draft.angles)
       )
         throw new StripError(
           "protected_element",
@@ -65,6 +69,35 @@ export function restoreRevision(
   const pencils =
     actor === "agent" ? structuredClone(current.pencils ?? {}) : {};
   if (actor === "agent") {
+    if (JSON.stringify(current.draft.cast) !== JSON.stringify(draft.cast))
+      pencils["cast:$cast"] ??= {
+        targetId: "$cast",
+        before: { kind: "cast", cast: current.draft.cast ?? null },
+      };
+    if (JSON.stringify(current.draft.angles) !== JSON.stringify(draft.angles))
+      pencils["angles:$angles"] ??= {
+        targetId: "$angles",
+        before: { kind: "angles", choices: current.draft.angles ?? null },
+      };
+    if (current.draft.selectedAngleId !== draft.selectedAngleId)
+      pencils["angle:$angle"] ??= {
+        targetId: "$angle",
+        before: {
+          kind: "angle",
+          angleId: current.draft.selectedAngleId ?? null,
+        },
+      };
+    if (
+      JSON.stringify(current.draft.endingArt) !==
+      JSON.stringify(draft.endingArt)
+    )
+      pencils["ending-art:$ending-art"] ??= {
+        targetId: "$ending-art",
+        before: {
+          kind: "ending-art",
+          choices: current.draft.endingArt ?? null,
+        },
+      };
     if (current.draft.title !== draft.title)
       pencils["title:$title"] ??= {
         targetId: "$title",
@@ -104,6 +137,19 @@ export function restoreRevision(
 export function changedSummary(previous: Strip, next: Strip): string {
   const changes: string[] = [];
   if (previous.draft.title !== next.draft.title) changes.push("Title");
+  if (JSON.stringify(previous.draft.cast) !== JSON.stringify(next.draft.cast))
+    changes.push("Cast");
+  if (
+    JSON.stringify(previous.draft.angles) !==
+      JSON.stringify(next.draft.angles) ||
+    previous.draft.selectedAngleId !== next.draft.selectedAngleId
+  )
+    changes.push("Angle");
+  if (
+    JSON.stringify(previous.draft.endingArt) !==
+    JSON.stringify(next.draft.endingArt)
+  )
+    changes.push("Ending staging");
   next.draft.panels.forEach((panel, index) => {
     if (JSON.stringify(panel) !== JSON.stringify(previous.draft.panels[index]))
       changes.push(`Panel ${index + 1}`);

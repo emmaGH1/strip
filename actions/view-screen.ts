@@ -6,7 +6,9 @@ import {
 import { AGENT_SELECTION_STATE_KEY } from "@agent-native/core/shared";
 import { z } from "zod";
 
+import { getPlan } from "../server/lib/angle-store.js";
 import { getStrip } from "../server/lib/strip-store.js";
+import { archetypes } from "../shared/casting.js";
 
 export default defineAction({
   description:
@@ -16,12 +18,15 @@ export default defineAction({
     navigation: z.unknown(),
     selection: z.unknown(),
     comic: z.unknown(),
+    anglePlan: z.unknown(),
+    castingLibrary: z.unknown(),
   }),
   http: false,
   readOnly: true,
   run: async (_args, ctx) => {
     const navigation = (await readAppState("navigation")) as {
       stripId?: string;
+      planId?: string;
       selectedPanelId?: string;
     } | null;
     const selection = await readAppStateForCurrentTab(
@@ -37,6 +42,9 @@ export default defineAction({
           revision: current.revision,
           title: current.draft.title,
           protectedIds: current.protectedIds,
+          angles: current.draft.angles ?? null,
+          selectedAngleId: current.draft.selectedAngleId ?? null,
+          cast: current.draft.cast ?? null,
           panels: current.draft.panels.map((panel) => ({
             id: panel.id,
             beat: panel.beat,
@@ -54,6 +62,15 @@ export default defineAction({
       navigation: navigation ?? null,
       selection: selection ?? null,
       comic,
+      anglePlan: navigation?.planId
+        ? await getPlan(navigation.planId, ctx)
+        : null,
+      castingLibrary: Object.fromEntries(
+        Object.entries(archetypes).map(([id, member]) => [
+          id,
+          { name: member.name, role: member.role },
+        ]),
+      ),
     };
   },
 });
