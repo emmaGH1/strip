@@ -7,6 +7,7 @@ import {
 import { useState } from "react";
 import { useSearchParams } from "react-router";
 
+import { HistoryList } from "@/components/home/HistoryList";
 import { Button } from "@/components/ui/button";
 
 export function AgentChanges() {
@@ -61,56 +62,7 @@ export function AgentChanges() {
         </p>
       )}
       {historyOpen ? (
-        <div className="history-list" aria-label="Revision history">
-          {[...(strip.history ?? [])].reverse().map((entry) => (
-            <div className="history-entry" key={entry.revision}>
-              <div>
-                <b>
-                  Rev {entry.revision} ·{" "}
-                  {entry.who === "human"
-                    ? "You"
-                    : entry.who === "external-agent"
-                      ? "External agent"
-                      : "Agent"}
-                </b>
-                <p>{entry.summary}</p>
-                <time dateTime={entry.at}>
-                  {new Date(entry.at).toLocaleString()}
-                </time>
-              </div>
-              <Button
-                size="sm"
-                variant="outline"
-                disabled={update.isPending || entry.revision === strip.revision}
-                onClick={async () => {
-                  setError("");
-                  try {
-                    await update.mutateAsync({
-                      id,
-                      expectedRevision: strip.revision,
-                      restoreRevision: entry.revision,
-                    });
-                  } catch (e) {
-                    setError(
-                      actionErrorCode(e) === "stale_revision"
-                        ? "This strip changed elsewhere — showing the latest"
-                        : (actionErrorMessage(e) ??
-                            "Restore failed. Reloading."),
-                    );
-                    await query.refetch();
-                  }
-                }}
-              >
-                {entry.revision === strip.revision ? "Current" : "Restore"}
-              </Button>
-            </div>
-          ))}
-          {!strip.history?.length && (
-            <p>
-              Earlier revisions were not retained. The next save starts history.
-            </p>
-          )}
-        </div>
+        <HistoryList id={id} />
       ) : pencils.length ? (
         <div className="change-list">
           {pencils.map(([key, proposal]) => {

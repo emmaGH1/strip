@@ -34,6 +34,8 @@ import {
   Eraser,
   Plus,
   LibraryBig,
+  History as HistoryIcon,
+  ChevronLeft,
   X,
 } from "lucide-react";
 import {
@@ -50,6 +52,7 @@ import "../strip-v2.css";
 
 import { AngleComposer, AngleCards } from "@/components/home/AngleComposer";
 import { CastCards } from "@/components/home/CastCards";
+import { HistoryList } from "@/components/home/HistoryList";
 import { Library } from "@/components/home/Library";
 import { SelectionNote } from "@/components/home/SelectionNote";
 import { StageEditor } from "@/components/home/StageEditor";
@@ -142,6 +145,7 @@ export default function Home() {
   const [lineDirty, setLineDirty] = useState(false);
   const lineRevision = useRef(0);
   const [phoneTab, setPhoneTab] = useState("edit");
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [agentRequest, setAgentRequest] = useState<{
     submitId: string;
     stripId: string;
@@ -995,10 +999,30 @@ export default function Home() {
   return (
     <main className="studio" data-phone-focus={phoneFocus ? "true" : undefined}>
       <header className="studio-topbar">
-        <Link className="strip-wordmark" to="/home">
-          <img src="/logo.svg" width="253" height="95" alt="Strip" />
+        <Link
+          className="strip-wordmark"
+          to="/home"
+          aria-label="Strip — Library"
+        >
+          <img
+            className="logo-full"
+            src="/logo.svg"
+            width="253"
+            height="95"
+            alt="Strip"
+          />
+          <img
+            className="logo-mark"
+            src="/logo-mark.svg"
+            width="40"
+            height="40"
+            alt="Strip"
+          />
         </Link>
         <div className="title-field">
+          <Link className="back-library" to="/home">
+            <ChevronLeft size={14} /> Library
+          </Link>
           <Input
             key={strip.id + strip.draft.title}
             aria-label="Strip title"
@@ -1020,21 +1044,44 @@ export default function Home() {
           </span>
         </div>
         <div className="topbar-actions">
-          <Button variant="ghost" size="sm" asChild aria-label="Library">
+          <Button
+            variant="ghost"
+            size="sm"
+            asChild
+            aria-label="Library"
+            className="nav-library"
+          >
             <Link to="/home">
               <LibraryBig size={16} />
               <span className="nav-label">Library</span>
             </Link>
           </Button>
-          <Button variant="ghost" size="sm" asChild aria-label="New strip">
+          <Button
+            variant="ghost"
+            size="sm"
+            asChild
+            aria-label="New strip"
+            className="nav-new"
+          >
             <Link to="/home?new=1">
               <Plus size={16} />
               <span className="nav-label">New strip</span>
             </Link>
           </Button>
           <Button
+            variant="ghost"
+            size="sm"
+            className="history-button"
+            aria-label="History"
+            onClick={() => setHistoryOpen(true)}
+          >
+            <HistoryIcon size={16} />
+            <span className="nav-label">History</span>
+          </Button>
+          <Button
             className="print-button"
             onClick={openExport}
+            aria-label="Export"
             disabled={
               !assets || exporting || Boolean(rendered?.overflow.length)
             }
@@ -1044,6 +1091,25 @@ export default function Home() {
           </Button>
         </div>
       </header>
+      <Sheet open={historyOpen} onOpenChange={setHistoryOpen}>
+        <SheetContent className="history-sheet" showClose={false}>
+          <div className="export-heading">
+            <SheetTitle>History</SheetTitle>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setHistoryOpen(false)}
+            >
+              <X size={16} /> Close
+            </Button>
+          </div>
+          <SheetDescription>
+            Every saved revision of this strip. Restore adds a new revision and
+            keeps your protection.
+          </SheetDescription>
+          <HistoryList id={strip.id} />
+        </SheetContent>
+      </Sheet>
       {angleOpen && strip.draft.angles && (
         <section className="studio-angle-picker">
           <div className="endings-heading">

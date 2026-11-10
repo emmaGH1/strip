@@ -854,23 +854,6 @@ svg.lucide {
   .new-strip-body form {
     margin-top: 20px;
   }
-  .studio .studio-topbar {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .studio .title-field {
-    min-width: 200px;
-  }
-  .studio .topbar-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-  .studio .topbar-actions a {
-    margin-right: auto;
-  }
-  .studio .nav-label {
-    font-size: 11px;
-  }
   .studio .ending-options {
     display: flex;
     overflow-x: auto;
@@ -1207,5 +1190,87 @@ svg.lucide {
 @media (max-width: 700px) {
   .launch-export {
     padding: 20px;
+  }
+}
+
+/* Studio top bar: History everywhere, one compact row on phone. */
+.strip-wordmark img.logo-mark,
+.back-library {
+  display: none;
+}
+.history-sheet {
+  overflow-y: auto;
+}
+.history-sheet .history-list {
+  max-height: none;
+}
+.library-edited {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--quiet);
+  margin-top: 2px;
+}
+@media (max-width: 700px) {
+  .studio .studio-topbar {
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding: 8px 12px;
+    min-height: 64px;
+  }
+  .studio .strip-wordmark img.logo-full {
+    display: none;
+  }
+  .studio .strip-wordmark img.logo-mark {
+    display: block;
+    width: 40px;
+    height: 40px;
+  }
+  .studio .title-field {
+    min-width: 0;
+    flex: 1;
+  }
+  .studio .title-field input {
+    font-size: 15px;
+    height: 24px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .studio .title-field > span {
+    display: block;
+    font-size: 8px;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .studio .back-library {
+    display: inline-flex;
+    align-items: center;
+    min-height: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .studio .topbar-actions {
+    width: auto;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .studio .nav-library,
+  .studio .nav-label {
+    display: none;
+  }
+  .studio .topbar-actions .history-button,
+  .studio .topbar-actions .nav-new,
+  .studio .topbar-actions .print-button {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    justify-content: center;
   }
 }

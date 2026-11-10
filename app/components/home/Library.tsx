@@ -86,6 +86,15 @@ export function Library({ assets }: { assets: SceneAssets | undefined }) {
                   : "Your strip"}{" "}
                 · Rev {strip.revision}
               </p>
+              <time className="library-edited" dateTime={strip.updatedAt}>
+                Edited{" "}
+                {new Date(strip.updatedAt).toLocaleString(undefined, {
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "2-digit",
+                })}
+              </time>
             </Link>
           ))}
         </div>
