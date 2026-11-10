@@ -156,6 +156,11 @@ function DbSyncSetup() {
             reason:
               "External MCP agents and other tabs can change this owner's Library or open Studio",
           },
+          // Serverless uses the framework poll, not local SSE. Both values
+          // override the default minute-scale idle base; empty polls still
+          // back off 1×/2×/5× (at most 5 s while visible and healthy).
+          interval: 1_000,
+          fallbackInterval: 1_000,
         }
       : {}),
     pauseWhenHidden: true,

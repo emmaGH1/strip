@@ -20,7 +20,7 @@ The standalone Chat scaffold uses Agent-Native **0.226.0**, React Router, React,
 
 - **Shared actions:** the UI's action hooks, in-app agent and framework MCP use `list-strips`, `get-strip`, `create-strip` and `update-strip`. `set-strip-protection` is human-only, not an agent unlock tool. Structured scenes live in SQL; writes validate protection and atomically compare the expected revision.
 - **Context awareness:** the screen and selected panel/balloon/character are registered with the framework; `view-screen` and `sendToAgentChat` provide bounded scene, selection, cast/source and revision context.
-- **Live sync:** `/home` uses framework `useDbSync` and action-query invalidation so external MCP changes reach the open Library/Studio without a custom poller.
+- **Shared Library sync:** `/home` uses framework `useDbSync` and action-query invalidation so external MCP changes reach the open Library/Studio without a custom poller. The hosted Vercel demo uses polling, not an always-open SSE stream: healthy visible tabs poll every 1–5 seconds; hidden tabs pause and network failures can delay updates.
 - **Attributed history:** SQL revision snapshots distinguish You, Agent and External agent from trusted caller context. Restoring appends a new revision and preserves current protection; older records have history only from their first retained save.
 - **OAuth-scoped MCP:** the installed framework handles MCP OAuth, audience validation and `mcp:read`/`mcp:write` enforcement. Domain queries additionally scope every record to its owner and workspace.
 

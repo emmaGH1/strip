@@ -1,0 +1,200 @@
+{
+  "start": "2026-11-10T05:23:58.619Z",
+  "target": "https://strip-kappa.vercel.app",
+  "polls": [
+    {
+      "request": "2026-11-10T05:28:05.030Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:05.494Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:06.543Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:06.986Z",
+      "eventCount": 1
+    },
+    {
+      "request": "2026-11-10T05:28:07.988Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:08.301Z",
+      "eventCount": 1
+    },
+    {
+      "request": "2026-11-10T05:28:09.940Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:10.158Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:12.160Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:12.381Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:18.139Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:18.333Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:26.332Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:26.537Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:31.539Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:31.744Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:36.746Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:36.941Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:42.606Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:43.136Z",
+      "eventCount": 2
+    },
+    {
+      "request": "2026-11-10T05:28:44.138Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:44.402Z",
+      "eventCount": 2
+    },
+    {
+      "request": "2026-11-10T05:28:44.933Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:45.137Z",
+      "eventCount": 4
+    },
+    {
+      "request": "2026-11-10T05:28:46.243Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:46.505Z",
+      "eventCount": 6
+    },
+    {
+      "request": "2026-11-10T05:28:47.507Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:47.707Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:50.633Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:50.832Z",
+      "eventCount": 0
+    },
+    {
+      "request": "2026-11-10T05:28:57.918Z",
+      "status": 200,
+      "response": "2026-11-10T05:28:58.135Z",
+      "eventCount": 0
+    }
+  ],
+  "events": [
+    {
+      "name": "landing-visible",
+      "time": "2026-11-10T05:28:01.901Z"
+    },
+    {
+      "name": "library-visible",
+      "time": "2026-11-10T05:28:05.954Z"
+    },
+    {
+      "name": "independent-ui-capability",
+      "time": "2026-11-10T05:28:06.241Z",
+      "status": 200
+    },
+    {
+      "name": "library-idle-start",
+      "time": "2026-11-10T05:28:06.268Z"
+    },
+    {
+      "name": "library-idle-end",
+      "time": "2026-11-10T05:28:41.268Z",
+      "elapsedMs": 35000
+    },
+    {
+      "name": "create-request",
+      "time": "2026-11-10T05:28:41.269Z"
+    },
+    {
+      "name": "create-response",
+      "time": "2026-11-10T05:28:41.632Z",
+      "status": 200,
+      "durationMs": 363,
+      "revision": 0,
+      "hasId": true,
+      "bodyKeys": [
+        "id",
+        "revision",
+        "draft",
+        "protectedIds",
+        "origin",
+        "lastEditedBy",
+        "updatedAt",
+        "history"
+      ]
+    },
+    {
+      "name": "library-appearance",
+      "time": "2026-11-10T05:28:43.942Z",
+      "msAfterResponse": 2306,
+      "msAfterRequest": 2669,
+      "docNavigations": 0,
+      "svgCount": 1
+    }
+  ],
+  "errors": [
+    {
+      "time": "2026-11-10T05:28:59.829Z",
+      "message": "locator.waitFor: Timeout 15000ms exceeded."
+    }
+  ],
+  "assets": [
+    {
+      "path": "/assets/root-DzrRO24z.js",
+      "sha256": "ee76648ba3a98b6f2fb38ae572af092f57921711953abe1bd911847e1478833d",
+      "excerpt": "{})]})]})}function Wl(){let e=Ze(),t=w();return ll(),Ge({queryClient:e,ignoreSource:Nr,...t.pathname===`/home`?{realtime:{reason:`External MCP agents and other tabs can change this owner's Library or open Studio`},interval:1e3,fallbackInterval:1e3}:{},pauseWhenHidden:!0}),null}function Gl(){let{resolvedTheme:e,setTheme:t}=Yi(),n=A(),r=e===`dark`;re"
+    },
+    {
+      "path": "/assets/root-DzrRO24z.js",
+      "sha256": "ee76648ba3a98b6f2fb38ae572af092f57921711953abe1bd911847e1478833d",
+      "excerpt": "{})]})]})}function Wl(){let e=Ze(),t=w();return ll(),Ge({queryClient:e,ignoreSource:Nr,...t.pathname===`/home`?{realtime:{reason:`External MCP agents and other tabs can change this owner's Library or open Studio`},interval:1e3,fallbackInterval:1e3}:{},pauseWhenHidden:!0}),null}function Gl(){let{resolvedTheme:e,setTheme:t}=Yi(),n=A(),r=e===`dark`;re"
+    },
+    {
+      "path": "/assets/root-DzrRO24z.js",
+      "sha256": "ee76648ba3a98b6f2fb38ae572af092f57921711953abe1bd911847e1478833d",
+      "excerpt": "{})]})]})}function Wl(){let e=Ze(),t=w();return ll(),Ge({queryClient:e,ignoreSource:Nr,...t.pathname===`/home`?{realtime:{reason:`External MCP agents and other tabs can change this owner's Library or open Studio`},interval:1e3,fallbackInterval:1e3}:{},pauseWhenHidden:!0}),null}function Gl(){let{resolvedTheme:e,setTheme:t}=Yi(),n=A(),r=e===`dark`;re"
+    }
+  ],
+  "documentNavigations": [
+    {
+      "time": "2026-11-10T05:28:00.310Z",
+      "path": "/"
+    },
+    {
+      "time": "2026-11-10T05:28:01.982Z",
+      "path": "/home"
+    },
+    {
+      "time": "2026-11-10T05:28:02.804Z",
+      "path": "/sign-in"
+    },
+    {
+      "time": "2026-11-10T05:28:04.557Z",
+      "path": "/home"
+    }
+  ],
+  "modelBlocked": 11,
+  "startedAfterGate": "2026-11-10T05:28:00.094Z",
+  "end": "2026-11-10T05:28:59.829Z"
+}
