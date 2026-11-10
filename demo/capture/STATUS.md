@@ -1,0 +1,1 @@
+BLOCKED — no usable complete Take A. On two attempts, the signed-in app reported “No AI connected yet”; Find the joke opened a Connect AI setup prefill rather than generating angles. Partial capture and 2× stills are available; do not present them as a completed AI walkthrough. Human needs to check the account/workspace connection before another attempt.

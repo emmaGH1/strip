@@ -1,0 +1,7 @@
+[
+  {"t_start":0,"t_end":7.485,"step":"initial load","note":"Approximate; marker clock began after navigation","waiting":true},
+  {"t_start":7.485,"t_end":18.304,"step":"library","note":"Prepared example, not generated","waiting":false},
+  {"t_start":18.304,"t_end":48.378,"step":"compose","note":"Includes idle time","waiting":false},
+  {"t_start":48.378,"t_end":97.135,"step":"find-joke","note":"Setup prefill only; no observed generation; includes idle time and reload","waiting":false},
+  {"t_start":97.135,"t_end":98.634,"step":"blocked","note":"No AI connected; request remained a setup prefill","waiting":false}
+]
