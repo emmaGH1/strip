@@ -224,7 +224,7 @@ describe("visible story props", () => {
         {
           kind: "screen",
           id: "slack-1",
-          screen: { kind: "none", title: "", lines: [], tone: "normal" },
+          screen: { kind: "doc", title: "Draft", lines: [], tone: "normal" },
         },
       ],
       "agent",

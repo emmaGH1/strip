@@ -10,7 +10,7 @@ import { composedDraftSchema, stripSchema } from "../shared/strip.js";
 
 export default defineAction({
   description:
-    "Save the comic YOU authored for the human's chosen angle (planId + expectedPlanRevision). First propose-strip-angles and wait for a choice. REACT to facts, never recite the note. Put facts on a structured screen/prop or at most one short line. Setup → turn → payoff: panel 4 is a reaction/reversal, not a summary. Target 8 words per balloon, hard cap 12; shorten on text-fit rejection. Include a meaningful wordless beat, varied poses, and three endings with different endingArt. Choose 1–3 story-specific cast archetypes. No simulated generation. Complete direct authored/illustrative imports without a plan remain supported.",
+    "Save the comic YOU authored for the human's chosen angle (planId + expectedPlanRevision). First propose-strip-angles and wait for a choice. REACT to facts, never recite the note. Put facts on a structured screen/prop or at most one short line. Setup → turn → payoff: panel 4 is a reaction/reversal, not a summary. Target 8 words per balloon, hard cap 12; shorten on text-fit rejection. Include a meaningful wordless beat, varied poses, and three endings with different endingArt. If a panel shows a laptop or phone, its screen must show something meaningful (title or a line), or use no prop at all. Choose 1–3 story-specific cast archetypes. No simulated generation. Complete direct authored/illustrative imports without a plan remain supported.",
   schema: composedDraftSchema
     .safeExtend({
       planId: z

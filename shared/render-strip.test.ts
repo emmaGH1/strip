@@ -64,3 +64,42 @@ describe("shared canvas/export renderer", () => {
     expect(exported).not.toContain('<circle cx="356"');
   });
 });
+
+describe("wordmark and blank device screens", () => {
+  it("renders the inlined Strip wordmark and no STRIP text tag", async () => {
+    const svg = renderStripSvg(scene(), assets, measure).svg;
+    expect(svg).toContain('aria-label="Strip"');
+    expect(svg).toContain('fill="#D2432F"');
+    expect(svg).not.toContain(">STRIP</text>");
+    expect(svg).toContain("MADE TOGETHER.");
+  });
+  it("rejects a laptop or phone with a blank screen on write", async () => {
+    const { blankScreenErrors } = await import("./strip.js");
+    const draft = structuredClone(preparedExamples[0]!);
+    expect(blankScreenErrors(draft)).toEqual([]);
+    draft.panels[3]!.prop = "phone";
+    draft.panels[3]!.screen = {
+      kind: "chat",
+      title: "",
+      lines: [],
+      tone: "normal",
+    };
+    expect(blankScreenErrors(draft)[0]).toMatch(/Panel 4.*blank screen/);
+    draft.panels[3]!.screen = {
+      kind: "none",
+      title: "x",
+      lines: [],
+      tone: "normal",
+    };
+    expect(blankScreenErrors(draft)).toHaveLength(1);
+    draft.panels[3]!.screen = {
+      kind: "chat",
+      title: "",
+      lines: ["Sent"],
+      tone: "normal",
+    };
+    expect(blankScreenErrors(draft)).toEqual([]);
+    draft.panels[3]!.prop = "none";
+    expect(blankScreenErrors(draft)).toEqual([]);
+  });
+});

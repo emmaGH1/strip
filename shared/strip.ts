@@ -256,8 +256,24 @@ export function textFitErrors(draft: Draft): string[] {
       errors.push(balloonFitError("ending"));
   return errors;
 }
+/** Write-path rule: a laptop/phone must show something. Old records are still readable. */
+export function blankScreenErrors(draft: Draft): string[] {
+  return draft.panels.flatMap((panel, i) => {
+    if (panel.prop !== "laptop" && panel.prop !== "phone") return [];
+    const blank = panel.screen
+      ? panel.screen.kind === "none" ||
+        (!panel.screen.title.trim() &&
+          !panel.screen.lines.some((l) => l.trim()))
+      : (panel.screenState ?? "none") === "none";
+    return blank
+      ? [
+          `Panel ${i + 1} shows a ${panel.prop} with a blank screen. Give its screen a kind other than none plus a title or a line, or use no prop at all.`,
+        ]
+      : [];
+  });
+}
 export function assertTextFits(draft: Draft) {
-  const errors = textFitErrors(draft);
+  const errors = [...textFitErrors(draft), ...blankScreenErrors(draft)];
   if (errors.length) throw new StripError("invalid_scene", errors.join(" "));
 }
 
