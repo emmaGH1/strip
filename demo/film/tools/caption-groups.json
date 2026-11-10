@@ -1,0 +1,2078 @@
+{
+ "groups": [
+  {
+   "mode": "hero-left",
+   "seg": 1,
+   "words": [
+    {
+     "text": "You",
+     "start": 0.6,
+     "end": 0.84,
+     "tag": "ink"
+    },
+    {
+     "text": "know",
+     "start": 0.84,
+     "end": 1.0,
+     "tag": "ink"
+    },
+    {
+     "text": "release",
+     "start": 1.16,
+     "end": 1.64,
+     "tag": "ink"
+    },
+    {
+     "text": "notes.",
+     "start": 1.64,
+     "end": 2.36,
+     "tag": "ink"
+    }
+   ],
+   "start": 0.54,
+   "end": 2.3
+  },
+  {
+   "mode": "hero-left",
+   "seg": 1,
+   "words": [
+    {
+     "text": "Your",
+     "start": 2.36,
+     "end": 2.6,
+     "tag": "ink"
+    },
+    {
+     "text": "team",
+     "start": 2.6,
+     "end": 3.0,
+     "tag": "ink"
+    },
+    {
+     "text": "ships",
+     "start": 3.0,
+     "end": 3.48,
+     "tag": "ink"
+    },
+    {
+     "text": "something",
+     "start": 3.48,
+     "end": 3.88,
+     "tag": "ink"
+    },
+    {
+     "text": "good,",
+     "start": 3.88,
+     "end": 4.2,
+     "tag": "ink"
+    }
+   ],
+   "start": 2.3,
+   "end": 4.3
+  },
+  {
+   "mode": "hero-left",
+   "seg": 1,
+   "words": [
+    {
+     "text": "somebody",
+     "start": 4.36,
+     "end": 4.84,
+     "tag": "ink"
+    },
+    {
+     "text": "writes",
+     "start": 4.84,
+     "end": 5.16,
+     "tag": "ink"
+    },
+    {
+     "text": "it",
+     "start": 5.16,
+     "end": 5.32,
+     "tag": "ink"
+    },
+    {
+     "text": "up",
+     "start": 5.32,
+     "end": 5.56,
+     "tag": "ink"
+    },
+    {
+     "text": "carefully,",
+     "start": 5.56,
+     "end": 6.28,
+     "tag": "ink"
+    }
+   ],
+   "start": 4.3,
+   "end": 6.22
+  },
+  {
+   "mode": "hero-left",
+   "seg": 1,
+   "words": [
+    {
+     "text": "and",
+     "start": 6.28,
+     "end": 6.52,
+     "tag": "ink"
+    },
+    {
+     "text": "then",
+     "start": 6.52,
+     "end": 6.76,
+     "tag": "ink"
+    },
+    {
+     "text": "almost",
+     "start": 6.76,
+     "end": 7.24,
+     "tag": "ink"
+    },
+    {
+     "text": "nobody",
+     "start": 7.24,
+     "end": 7.72,
+     "tag": "ink"
+    },
+    {
+     "text": "reads",
+     "start": 7.72,
+     "end": 8.2,
+     "tag": "ink"
+    },
+    {
+     "text": "it.",
+     "start": 8.2,
+     "end": 8.68,
+     "tag": "ink"
+    }
+   ],
+   "start": 6.22,
+   "end": 8.62
+  },
+  {
+   "mode": "hero-left",
+   "seg": 1,
+   "words": [
+    {
+     "text": "We",
+     "start": 8.68,
+     "end": 8.92,
+     "tag": "ink"
+    },
+    {
+     "text": "kept",
+     "start": 8.92,
+     "end": 9.24,
+     "tag": "ink"
+    },
+    {
+     "text": "thinking,",
+     "start": 9.24,
+     "end": 10.04,
+     "tag": "ink"
+    }
+   ],
+   "start": 8.62,
+   "end": 9.98
+  },
+  {
+   "mode": "hero-left",
+   "seg": 1,
+   "words": [
+    {
+     "text": "there",
+     "start": 10.04,
+     "end": 10.2,
+     "tag": "ink"
+    },
+    {
+     "text": "has",
+     "start": 10.28,
+     "end": 10.52,
+     "tag": "ink"
+    },
+    {
+     "text": "to",
+     "start": 10.52,
+     "end": 10.68,
+     "tag": "ink"
+    },
+    {
+     "text": "be",
+     "start": 10.68,
+     "end": 10.84,
+     "tag": "ink"
+    }
+   ],
+   "start": 9.98,
+   "end": 10.78
+  },
+  {
+   "mode": "hero-left",
+   "seg": 1,
+   "words": [
+    {
+     "text": "a",
+     "start": 10.84,
+     "end": 10.92,
+     "tag": "ink"
+    },
+    {
+     "text": "better",
+     "start": 10.92,
+     "end": 11.24,
+     "tag": "ink"
+    },
+    {
+     "text": "way",
+     "start": 11.24,
+     "end": 11.48,
+     "tag": "ink"
+    }
+   ],
+   "start": 10.78,
+   "end": 11.42
+  },
+  {
+   "mode": "hero-left",
+   "seg": 1,
+   "words": [
+    {
+     "text": "to",
+     "start": 11.48,
+     "end": 11.64,
+     "tag": "ink"
+    },
+    {
+     "text": "tell",
+     "start": 11.64,
+     "end": 11.96,
+     "tag": "ink"
+    },
+    {
+     "text": "people",
+     "start": 11.96,
+     "end": 12.2,
+     "tag": "ink"
+    },
+    {
+     "text": "what",
+     "start": 12.2,
+     "end": 12.44,
+     "tag": "ink"
+    },
+    {
+     "text": "you",
+     "start": 12.44,
+     "end": 12.68,
+     "tag": "ink"
+    },
+    {
+     "text": "built.",
+     "start": 12.68,
+     "end": 13.16,
+     "tag": "ink"
+    }
+   ],
+   "start": 11.42,
+   "end": 13.94
+  },
+  {
+   "mode": "band-ink",
+   "seg": 2,
+   "words": [
+    {
+     "text": "So",
+     "start": 14.0,
+     "end": 14.24,
+     "tag": "ink"
+    },
+    {
+     "text": "we",
+     "start": 14.24,
+     "end": 14.32,
+     "tag": "ink"
+    },
+    {
+     "text": "made",
+     "start": 14.32,
+     "end": 14.56,
+     "tag": "ink"
+    },
+    {
+     "text": "Strip.",
+     "start": 14.56,
+     "end": 15.44,
+     "tag": "ink"
+    }
+   ],
+   "start": 13.94,
+   "end": 15.38
+  },
+  {
+   "mode": "band-ink",
+   "seg": 2,
+   "words": [
+    {
+     "text": "It",
+     "start": 15.44,
+     "end": 15.68,
+     "tag": "ink"
+    },
+    {
+     "text": "turns",
+     "start": 15.68,
+     "end": 16.08,
+     "tag": "ink"
+    },
+    {
+     "text": "one",
+     "start": 16.08,
+     "end": 16.32,
+     "tag": "ink"
+    },
+    {
+     "text": "product",
+     "start": 16.4,
+     "end": 16.8,
+     "tag": "ink"
+    },
+    {
+     "text": "update",
+     "start": 16.88,
+     "end": 17.28,
+     "tag": "ink"
+    }
+   ],
+   "start": 15.38,
+   "end": 17.22
+  },
+  {
+   "mode": "band-ink",
+   "seg": 2,
+   "words": [
+    {
+     "text": "into",
+     "start": 17.28,
+     "end": 17.52,
+     "tag": "ink"
+    },
+    {
+     "text": "a",
+     "start": 17.52,
+     "end": 17.6,
+     "tag": "ink"
+    },
+    {
+     "text": "four-panel",
+     "start": 17.6,
+     "end": 18.56,
+     "tag": "ink"
+    },
+    {
+     "text": "comic,",
+     "start": 18.56,
+     "end": 19.12,
+     "tag": "ink"
+    }
+   ],
+   "start": 17.22,
+   "end": 19.06
+  },
+  {
+   "mode": "band-ink",
+   "seg": 2,
+   "words": [
+    {
+     "text": "and",
+     "start": 19.12,
+     "end": 19.36,
+     "tag": "ink"
+    },
+    {
+     "text": "you",
+     "start": 19.36,
+     "end": 19.52,
+     "tag": "ink"
+    },
+    {
+     "text": "make",
+     "start": 19.52,
+     "end": 19.76,
+     "tag": "ink"
+    },
+    {
+     "text": "it",
+     "start": 19.76,
+     "end": 19.92,
+     "tag": "ink"
+    },
+    {
+     "text": "together",
+     "start": 19.92,
+     "end": 20.24,
+     "tag": "blue"
+    },
+    {
+     "text": "with",
+     "start": 20.24,
+     "end": 20.4,
+     "tag": "blue"
+    },
+    {
+     "text": "an",
+     "start": 20.4,
+     "end": 20.56,
+     "tag": "blue"
+    },
+    {
+     "text": "agent.",
+     "start": 20.56,
+     "end": 21.12,
+     "tag": "blue"
+    }
+   ],
+   "start": 19.06,
+   "end": 21.94
+  },
+  {
+   "mode": "band",
+   "seg": 3,
+   "words": [
+    {
+     "text": "Let",
+     "start": 22.0,
+     "end": 22.32,
+     "tag": "ink"
+    },
+    {
+     "text": "me",
+     "start": 22.32,
+     "end": 22.48,
+     "tag": "ink"
+    },
+    {
+     "text": "show",
+     "start": 22.48,
+     "end": 22.72,
+     "tag": "ink"
+    },
+    {
+     "text": "you",
+     "start": 22.72,
+     "end": 22.88,
+     "tag": "ink"
+    },
+    {
+     "text": "with",
+     "start": 22.88,
+     "end": 23.12,
+     "tag": "ink"
+    },
+    {
+     "text": "a",
+     "start": 23.12,
+     "end": 23.28,
+     "tag": "ink"
+    },
+    {
+     "text": "real",
+     "start": 23.28,
+     "end": 23.6,
+     "tag": "ink"
+    },
+    {
+     "text": "one.",
+     "start": 23.6,
+     "end": 24.16,
+     "tag": "ink"
+    }
+   ],
+   "start": 21.94,
+   "end": 24.1
+  },
+  {
+   "mode": "band",
+   "seg": 3,
+   "words": [
+    {
+     "text": "I",
+     "start": 24.16,
+     "end": 24.4,
+     "tag": "ink"
+    },
+    {
+     "text": "paste",
+     "start": 24.4,
+     "end": 24.8,
+     "tag": "ink"
+    },
+    {
+     "text": "the",
+     "start": 24.8,
+     "end": 24.96,
+     "tag": "ink"
+    },
+    {
+     "text": "release",
+     "start": 24.96,
+     "end": 25.36,
+     "tag": "ink"
+    },
+    {
+     "text": "note,",
+     "start": 25.36,
+     "end": 25.84,
+     "tag": "ink"
+    }
+   ],
+   "start": 24.1,
+   "end": 25.78
+  },
+  {
+   "mode": "band",
+   "seg": 3,
+   "words": [
+    {
+     "text": "and",
+     "start": 25.84,
+     "end": 26.08,
+     "tag": "ink"
+    },
+    {
+     "text": "before",
+     "start": 26.08,
+     "end": 26.32,
+     "tag": "ink"
+    },
+    {
+     "text": "it",
+     "start": 26.32,
+     "end": 26.48,
+     "tag": "ink"
+    },
+    {
+     "text": "draws",
+     "start": 26.48,
+     "end": 26.96,
+     "tag": "ink"
+    },
+    {
+     "text": "anything,",
+     "start": 26.96,
+     "end": 27.44,
+     "tag": "ink"
+    }
+   ],
+   "start": 25.78,
+   "end": 27.38
+  },
+  {
+   "mode": "band",
+   "seg": 3,
+   "words": [
+    {
+     "text": "the",
+     "start": 27.44,
+     "end": 27.68,
+     "tag": "blue"
+    },
+    {
+     "text": "agent",
+     "start": 27.68,
+     "end": 28.08,
+     "tag": "blue"
+    },
+    {
+     "text": "pitches",
+     "start": 28.08,
+     "end": 28.56,
+     "tag": "blue"
+    },
+    {
+     "text": "me",
+     "start": 28.56,
+     "end": 28.8,
+     "tag": "blue"
+    },
+    {
+     "text": "three",
+     "start": 28.8,
+     "end": 29.04,
+     "tag": "ink"
+    },
+    {
+     "text": "different",
+     "start": 29.04,
+     "end": 29.36,
+     "tag": "ink"
+    }
+   ],
+   "start": 27.38,
+   "end": 29.3
+  },
+  {
+   "mode": "band",
+   "seg": 3,
+   "words": [
+    {
+     "text": "ways",
+     "start": 29.36,
+     "end": 29.76,
+     "tag": "ink"
+    },
+    {
+     "text": "to",
+     "start": 29.76,
+     "end": 29.92,
+     "tag": "ink"
+    },
+    {
+     "text": "tell",
+     "start": 29.92,
+     "end": 30.24,
+     "tag": "ink"
+    },
+    {
+     "text": "the",
+     "start": 30.24,
+     "end": 30.48,
+     "tag": "ink"
+    },
+    {
+     "text": "story,",
+     "start": 30.48,
+     "end": 31.12,
+     "tag": "ink"
+    }
+   ],
+   "start": 29.3,
+   "end": 31.06
+  },
+  {
+   "mode": "band",
+   "seg": 3,
+   "words": [
+    {
+     "text": "each",
+     "start": 31.12,
+     "end": 31.44,
+     "tag": "ink"
+    },
+    {
+     "text": "with",
+     "start": 31.44,
+     "end": 31.68,
+     "tag": "ink"
+    },
+    {
+     "text": "its",
+     "start": 31.68,
+     "end": 31.84,
+     "tag": "ink"
+    },
+    {
+     "text": "own",
+     "start": 31.84,
+     "end": 32.16,
+     "tag": "ink"
+    },
+    {
+     "text": "cast",
+     "start": 32.16,
+     "end": 32.693,
+     "tag": "ink"
+    },
+    {
+     "text": "of",
+     "start": 32.693,
+     "end": 33.227,
+     "tag": "ink"
+    },
+    {
+     "text": "characters.",
+     "start": 33.227,
+     "end": 33.76,
+     "tag": "ink"
+    }
+   ],
+   "start": 31.06,
+   "end": 33.7
+  },
+  {
+   "mode": "band",
+   "seg": 3,
+   "words": [
+    {
+     "text": "I",
+     "start": 33.76,
+     "end": 34.0,
+     "tag": "ink"
+    },
+    {
+     "text": "pick",
+     "start": 34.0,
+     "end": 34.32,
+     "tag": "ink"
+    },
+    {
+     "text": "the",
+     "start": 34.32,
+     "end": 34.48,
+     "tag": "ink"
+    },
+    {
+     "text": "one",
+     "start": 34.48,
+     "end": 34.72,
+     "tag": "ink"
+    },
+    {
+     "text": "I",
+     "start": 34.72,
+     "end": 34.96,
+     "tag": "ink"
+    },
+    {
+     "text": "like,",
+     "start": 34.96,
+     "end": 35.28,
+     "tag": "ink"
+    }
+   ],
+   "start": 33.7,
+   "end": 35.22
+  },
+  {
+   "mode": "band",
+   "seg": 3,
+   "words": [
+    {
+     "text": "and",
+     "start": 35.28,
+     "end": 35.52,
+     "tag": "ink"
+    },
+    {
+     "text": "it",
+     "start": 35.52,
+     "end": 35.68,
+     "tag": "blue"
+    },
+    {
+     "text": "drafts",
+     "start": 35.68,
+     "end": 36.24,
+     "tag": "blue"
+    },
+    {
+     "text": "the",
+     "start": 36.24,
+     "end": 36.32,
+     "tag": "blue"
+    },
+    {
+     "text": "whole",
+     "start": 36.32,
+     "end": 36.56,
+     "tag": "blue"
+    },
+    {
+     "text": "strip.",
+     "start": 36.56,
+     "end": 37.04,
+     "tag": "blue"
+    }
+   ],
+   "start": 35.22,
+   "end": 37.94
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "Anything",
+     "start": 38.0,
+     "end": 38.56,
+     "tag": "ink"
+    },
+    {
+     "text": "outlined",
+     "start": 38.56,
+     "end": 39.12,
+     "tag": "blue"
+    },
+    {
+     "text": "in",
+     "start": 39.12,
+     "end": 39.28,
+     "tag": "blue"
+    },
+    {
+     "text": "blue",
+     "start": 39.28,
+     "end": 39.68,
+     "tag": "blue"
+    },
+    {
+     "text": "is",
+     "start": 39.68,
+     "end": 39.84,
+     "tag": "ink"
+    },
+    {
+     "text": "the",
+     "start": 39.84,
+     "end": 40.08,
+     "tag": "blue"
+    },
+    {
+     "text": "agent's",
+     "start": 40.08,
+     "end": 40.64,
+     "tag": "blue"
+    },
+    {
+     "text": "proposal.",
+     "start": 40.64,
+     "end": 41.6,
+     "tag": "blue"
+    }
+   ],
+   "start": 37.94,
+   "end": 41.54
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "This",
+     "start": 41.6,
+     "end": 41.92,
+     "tag": "ink"
+    },
+    {
+     "text": "line,",
+     "start": 41.92,
+     "end": 42.24,
+     "tag": "ink"
+    }
+   ],
+   "start": 41.54,
+   "end": 42.34
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "I",
+     "start": 42.4,
+     "end": 42.64,
+     "tag": "ink"
+    },
+    {
+     "text": "want",
+     "start": 42.64,
+     "end": 42.88,
+     "tag": "ink"
+    },
+    {
+     "text": "to",
+     "start": 42.88,
+     "end": 43.04,
+     "tag": "ink"
+    },
+    {
+     "text": "write",
+     "start": 43.04,
+     "end": 43.36,
+     "tag": "ink"
+    },
+    {
+     "text": "myself.",
+     "start": 43.36,
+     "end": 44.16,
+     "tag": "ink"
+    }
+   ],
+   "start": 42.34,
+   "end": 44.1
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "So",
+     "start": 44.16,
+     "end": 44.4,
+     "tag": "ink"
+    },
+    {
+     "text": "I",
+     "start": 44.4,
+     "end": 44.56,
+     "tag": "ink"
+    },
+    {
+     "text": "change",
+     "start": 44.56,
+     "end": 44.96,
+     "tag": "ink"
+    },
+    {
+     "text": "it,",
+     "start": 44.96,
+     "end": 45.12,
+     "tag": "ink"
+    }
+   ],
+   "start": 44.1,
+   "end": 45.14
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "and",
+     "start": 45.2,
+     "end": 45.36,
+     "tag": "ink"
+    },
+    {
+     "text": "I",
+     "start": 45.36,
+     "end": 45.6,
+     "tag": "red"
+    },
+    {
+     "text": "stamp",
+     "start": 45.6,
+     "end": 46.0,
+     "tag": "red"
+    },
+    {
+     "text": "it",
+     "start": 46.0,
+     "end": 46.16,
+     "tag": "red"
+    },
+    {
+     "text": "as",
+     "start": 46.16,
+     "end": 46.48,
+     "tag": "red"
+    },
+    {
+     "text": "mine.",
+     "start": 46.48,
+     "end": 47.12,
+     "tag": "red"
+    }
+   ],
+   "start": 45.14,
+   "end": 47.06
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "Now",
+     "start": 47.12,
+     "end": 47.44,
+     "tag": "ink"
+    },
+    {
+     "text": "watch",
+     "start": 47.44,
+     "end": 47.84,
+     "tag": "ink"
+    },
+    {
+     "text": "what",
+     "start": 47.84,
+     "end": 48.08,
+     "tag": "ink"
+    },
+    {
+     "text": "happens",
+     "start": 48.08,
+     "end": 48.72,
+     "tag": "ink"
+    }
+   ],
+   "start": 47.06,
+   "end": 48.66
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "when",
+     "start": 48.72,
+     "end": 48.72,
+     "tag": "ink"
+    },
+    {
+     "text": "I",
+     "start": 48.72,
+     "end": 48.88,
+     "tag": "ink"
+    },
+    {
+     "text": "ask",
+     "start": 48.88,
+     "end": 49.2,
+     "tag": "ink"
+    },
+    {
+     "text": "for",
+     "start": 49.2,
+     "end": 49.36,
+     "tag": "ink"
+    },
+    {
+     "text": "something",
+     "start": 49.36,
+     "end": 49.68,
+     "tag": "ink"
+    },
+    {
+     "text": "funnier.",
+     "start": 49.68,
+     "end": 50.56,
+     "tag": "ink"
+    }
+   ],
+   "start": 48.66,
+   "end": 50.5
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "It",
+     "start": 50.56,
+     "end": 50.72,
+     "tag": "blue"
+    },
+    {
+     "text": "rewrites",
+     "start": 50.72,
+     "end": 51.36,
+     "tag": "blue"
+    },
+    {
+     "text": "the",
+     "start": 51.36,
+     "end": 51.52,
+     "tag": "blue"
+    },
+    {
+     "text": "panel",
+     "start": 51.52,
+     "end": 51.92,
+     "tag": "blue"
+    },
+    {
+     "text": "around",
+     "start": 51.92,
+     "end": 52.24,
+     "tag": "red"
+    },
+    {
+     "text": "my",
+     "start": 52.24,
+     "end": 52.48,
+     "tag": "red"
+    },
+    {
+     "text": "line,",
+     "start": 52.48,
+     "end": 52.72,
+     "tag": "red"
+    }
+   ],
+   "start": 50.5,
+   "end": 52.74
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "and",
+     "start": 52.8,
+     "end": 53.04,
+     "tag": "ink"
+    },
+    {
+     "text": "leaves",
+     "start": 53.04,
+     "end": 53.48,
+     "tag": "red"
+    },
+    {
+     "text": "mine",
+     "start": 53.48,
+     "end": 53.92,
+     "tag": "red"
+    },
+    {
+     "text": "exactly",
+     "start": 53.92,
+     "end": 54.4,
+     "tag": "red"
+    }
+   ],
+   "start": 52.74,
+   "end": 54.34
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "the",
+     "start": 54.4,
+     "end": 54.56,
+     "tag": "red"
+    },
+    {
+     "text": "way",
+     "start": 54.56,
+     "end": 54.8,
+     "tag": "red"
+    },
+    {
+     "text": "I",
+     "start": 54.8,
+     "end": 54.96,
+     "tag": "red"
+    },
+    {
+     "text": "wrote",
+     "start": 54.96,
+     "end": 55.36,
+     "tag": "red"
+    },
+    {
+     "text": "it.",
+     "start": 55.36,
+     "end": 55.76,
+     "tag": "red"
+    }
+   ],
+   "start": 54.34,
+   "end": 55.7
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "And",
+     "start": 55.76,
+     "end": 55.92,
+     "tag": "ink"
+    },
+    {
+     "text": "that's",
+     "start": 55.92,
+     "end": 56.32,
+     "tag": "ink"
+    },
+    {
+     "text": "not",
+     "start": 56.32,
+     "end": 56.48,
+     "tag": "ink"
+    },
+    {
+     "text": "a",
+     "start": 56.48,
+     "end": 56.64,
+     "tag": "ink"
+    },
+    {
+     "text": "polite",
+     "start": 56.64,
+     "end": 57.04,
+     "tag": "ink"
+    }
+   ],
+   "start": 55.7,
+   "end": 56.98
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "request",
+     "start": 57.04,
+     "end": 57.52,
+     "tag": "ink"
+    },
+    {
+     "text": "in",
+     "start": 57.52,
+     "end": 57.68,
+     "tag": "ink"
+    },
+    {
+     "text": "a",
+     "start": 57.68,
+     "end": 57.92,
+     "tag": "ink"
+    },
+    {
+     "text": "prompt.",
+     "start": 57.92,
+     "end": 58.64,
+     "tag": "ink"
+    }
+   ],
+   "start": 56.98,
+   "end": 58.58
+  },
+  {
+   "mode": "band",
+   "seg": 4,
+   "words": [
+    {
+     "text": "The",
+     "start": 58.64,
+     "end": 58.88,
+     "tag": "ink"
+    },
+    {
+     "text": "app",
+     "start": 58.88,
+     "end": 59.2,
+     "tag": "ink"
+    },
+    {
+     "text": "itself",
+     "start": 59.2,
+     "end": 59.6,
+     "tag": "ink"
+    },
+    {
+     "text": "refuses",
+     "start": 59.6,
+     "end": 60.16,
+     "tag": "red"
+    },
+    {
+     "text": "the",
+     "start": 60.16,
+     "end": 60.4,
+     "tag": "red"
+    },
+    {
+     "text": "edit.",
+     "start": 60.4,
+     "end": 60.88,
+     "tag": "red"
+    }
+   ],
+   "start": 58.58,
+   "end": 61.54
+  },
+  {
+   "mode": "band",
+   "seg": 5,
+   "words": [
+    {
+     "text": "From",
+     "start": 61.6,
+     "end": 61.92,
+     "tag": "ink"
+    },
+    {
+     "text": "here,",
+     "start": 61.92,
+     "end": 62.08,
+     "tag": "ink"
+    }
+   ],
+   "start": 61.54,
+   "end": 62.1
+  },
+  {
+   "mode": "band",
+   "seg": 5,
+   "words": [
+    {
+     "text": "I",
+     "start": 62.16,
+     "end": 62.4,
+     "tag": "ink"
+    },
+    {
+     "text": "keep",
+     "start": 62.4,
+     "end": 62.72,
+     "tag": "ink"
+    },
+    {
+     "text": "what",
+     "start": 62.72,
+     "end": 62.88,
+     "tag": "ink"
+    },
+    {
+     "text": "I",
+     "start": 62.88,
+     "end": 63.12,
+     "tag": "ink"
+    },
+    {
+     "text": "like,",
+     "start": 63.12,
+     "end": 63.68,
+     "tag": "ink"
+    }
+   ],
+   "start": 62.1,
+   "end": 63.62
+  },
+  {
+   "mode": "band",
+   "seg": 5,
+   "words": [
+    {
+     "text": "erase",
+     "start": 63.68,
+     "end": 64.24,
+     "tag": "ink"
+    },
+    {
+     "text": "what",
+     "start": 64.24,
+     "end": 64.4,
+     "tag": "ink"
+    },
+    {
+     "text": "I",
+     "start": 64.4,
+     "end": 64.56,
+     "tag": "ink"
+    },
+    {
+     "text": "don't,",
+     "start": 64.56,
+     "end": 65.04,
+     "tag": "ink"
+    }
+   ],
+   "start": 63.62,
+   "end": 64.98
+  },
+  {
+   "mode": "band",
+   "seg": 5,
+   "words": [
+    {
+     "text": "pick",
+     "start": 65.04,
+     "end": 65.28,
+     "tag": "ink"
+    },
+    {
+     "text": "an",
+     "start": 65.28,
+     "end": 65.44,
+     "tag": "ink"
+    },
+    {
+     "text": "ending,",
+     "start": 65.44,
+     "end": 65.92,
+     "tag": "ink"
+    }
+   ],
+   "start": 64.98,
+   "end": 65.86
+  },
+  {
+   "mode": "band",
+   "seg": 5,
+   "words": [
+    {
+     "text": "and",
+     "start": 65.92,
+     "end": 66.16,
+     "tag": "ink"
+    },
+    {
+     "text": "export",
+     "start": 66.16,
+     "end": 66.64,
+     "tag": "ink"
+    },
+    {
+     "text": "a",
+     "start": 66.64,
+     "end": 66.72,
+     "tag": "ink"
+    },
+    {
+     "text": "comic",
+     "start": 66.72,
+     "end": 67.12,
+     "tag": "ink"
+    },
+    {
+     "text": "that's",
+     "start": 67.12,
+     "end": 67.36,
+     "tag": "ink"
+    },
+    {
+     "text": "ready",
+     "start": 67.36,
+     "end": 67.68,
+     "tag": "ink"
+    },
+    {
+     "text": "to",
+     "start": 67.68,
+     "end": 67.84,
+     "tag": "ink"
+    },
+    {
+     "text": "post.",
+     "start": 67.84,
+     "end": 68.32,
+     "tag": "ink"
+    }
+   ],
+   "start": 65.86,
+   "end": 69.72
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "Strip",
+     "start": 70.68,
+     "end": 71.08,
+     "tag": "ink"
+    },
+    {
+     "text": "is",
+     "start": 71.08,
+     "end": 71.24,
+     "tag": "ink"
+    },
+    {
+     "text": "built",
+     "start": 71.24,
+     "end": 71.48,
+     "tag": "ink"
+    },
+    {
+     "text": "on",
+     "start": 71.48,
+     "end": 71.64,
+     "tag": "ink"
+    },
+    {
+     "text": "Agent-Native,",
+     "start": 71.64,
+     "end": 72.44,
+     "tag": "ink"
+    }
+   ],
+   "start": 70.62,
+   "end": 72.46
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "from",
+     "start": 72.52,
+     "end": 72.68,
+     "tag": "ink"
+    },
+    {
+     "text": "Builder.io,",
+     "start": 72.68,
+     "end": 74.36,
+     "tag": "ink"
+    }
+   ],
+   "start": 72.46,
+   "end": 74.3
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "and",
+     "start": 74.36,
+     "end": 74.6,
+     "tag": "ink"
+    },
+    {
+     "text": "that's",
+     "start": 74.6,
+     "end": 74.84,
+     "tag": "ink"
+    },
+    {
+     "text": "what",
+     "start": 74.84,
+     "end": 75.08,
+     "tag": "ink"
+    },
+    {
+     "text": "makes",
+     "start": 75.08,
+     "end": 75.4,
+     "tag": "ink"
+    },
+    {
+     "text": "all",
+     "start": 75.4,
+     "end": 75.56,
+     "tag": "ink"
+    },
+    {
+     "text": "of",
+     "start": 75.56,
+     "end": 75.8,
+     "tag": "ink"
+    },
+    {
+     "text": "this",
+     "start": 75.8,
+     "end": 76.04,
+     "tag": "ink"
+    },
+    {
+     "text": "possible.",
+     "start": 76.04,
+     "end": 76.84,
+     "tag": "ink"
+    }
+   ],
+   "start": 74.3,
+   "end": 76.78
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "Every",
+     "start": 76.84,
+     "end": 77.24,
+     "tag": "ink"
+    },
+    {
+     "text": "edit",
+     "start": 77.24,
+     "end": 77.72,
+     "tag": "ink"
+    },
+    {
+     "text": "is",
+     "start": 77.72,
+     "end": 77.96,
+     "tag": "ink"
+    },
+    {
+     "text": "one",
+     "start": 77.96,
+     "end": 78.2,
+     "tag": "ink"
+    },
+    {
+     "text": "shared",
+     "start": 78.2,
+     "end": 78.76,
+     "tag": "ink"
+    },
+    {
+     "text": "action,",
+     "start": 78.76,
+     "end": 79.4,
+     "tag": "ink"
+    }
+   ],
+   "start": 76.78,
+   "end": 79.34
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "so",
+     "start": 79.4,
+     "end": 79.64,
+     "tag": "ink"
+    },
+    {
+     "text": "the",
+     "start": 79.64,
+     "end": 79.8,
+     "tag": "ink"
+    },
+    {
+     "text": "buttons",
+     "start": 79.8,
+     "end": 80.28,
+     "tag": "ink"
+    },
+    {
+     "text": "I",
+     "start": 80.28,
+     "end": 80.44,
+     "tag": "ink"
+    },
+    {
+     "text": "press",
+     "start": 80.44,
+     "end": 80.84,
+     "tag": "ink"
+    },
+    {
+     "text": "and",
+     "start": 80.84,
+     "end": 81.08,
+     "tag": "ink"
+    },
+    {
+     "text": "the",
+     "start": 81.08,
+     "end": 81.24,
+     "tag": "blue"
+    },
+    {
+     "text": "tools",
+     "start": 81.24,
+     "end": 81.64,
+     "tag": "blue"
+    }
+   ],
+   "start": 79.34,
+   "end": 81.58
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "the",
+     "start": 81.64,
+     "end": 81.88,
+     "tag": "blue"
+    },
+    {
+     "text": "agent",
+     "start": 81.88,
+     "end": 82.28,
+     "tag": "blue"
+    },
+    {
+     "text": "uses",
+     "start": 82.28,
+     "end": 82.68,
+     "tag": "blue"
+    },
+    {
+     "text": "are",
+     "start": 82.84,
+     "end": 83.0,
+     "tag": "ink"
+    },
+    {
+     "text": "exactly",
+     "start": 83.0,
+     "end": 83.64,
+     "tag": "ink"
+    },
+    {
+     "text": "the",
+     "start": 83.64,
+     "end": 83.64,
+     "tag": "ink"
+    },
+    {
+     "text": "same",
+     "start": 83.64,
+     "end": 84.12,
+     "tag": "ink"
+    },
+    {
+     "text": "thing.",
+     "start": 84.12,
+     "end": 84.76,
+     "tag": "ink"
+    }
+   ],
+   "start": 81.58,
+   "end": 84.7
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "That",
+     "start": 84.76,
+     "end": 85.08,
+     "tag": "ink"
+    },
+    {
+     "text": "also",
+     "start": 85.08,
+     "end": 85.4,
+     "tag": "ink"
+    },
+    {
+     "text": "means",
+     "start": 85.4,
+     "end": 85.88,
+     "tag": "ink"
+    },
+    {
+     "text": "my",
+     "start": 85.88,
+     "end": 86.04,
+     "tag": "blue"
+    },
+    {
+     "text": "other",
+     "start": 86.04,
+     "end": 86.28,
+     "tag": "blue"
+    }
+   ],
+   "start": 84.7,
+   "end": 86.22
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "agents",
+     "start": 86.28,
+     "end": 86.84,
+     "tag": "blue"
+    },
+    {
+     "text": "can",
+     "start": 86.84,
+     "end": 87.08,
+     "tag": "ink"
+    },
+    {
+     "text": "join",
+     "start": 87.08,
+     "end": 87.56,
+     "tag": "ink"
+    },
+    {
+     "text": "in.",
+     "start": 87.56,
+     "end": 88.12,
+     "tag": "ink"
+    }
+   ],
+   "start": 86.22,
+   "end": 88.06
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "Here's",
+     "start": 88.12,
+     "end": 88.52,
+     "tag": "ink"
+    },
+    {
+     "text": "Claude",
+     "start": 88.52,
+     "end": 89.24,
+     "tag": "blue"
+    },
+    {
+     "text": "Code,",
+     "start": 89.24,
+     "end": 89.88,
+     "tag": "blue"
+    }
+   ],
+   "start": 88.06,
+   "end": 89.82
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "dropping",
+     "start": 89.88,
+     "end": 90.36,
+     "tag": "blue"
+    },
+    {
+     "text": "a",
+     "start": 90.36,
+     "end": 90.44,
+     "tag": "blue"
+    },
+    {
+     "text": "new",
+     "start": 90.44,
+     "end": 90.68,
+     "tag": "blue"
+    },
+    {
+     "text": "strip",
+     "start": 90.68,
+     "end": 91.16,
+     "tag": "blue"
+    },
+    {
+     "text": "straight",
+     "start": 91.16,
+     "end": 91.48,
+     "tag": "ink"
+    },
+    {
+     "text": "into",
+     "start": 91.48,
+     "end": 91.72,
+     "tag": "ink"
+    },
+    {
+     "text": "my",
+     "start": 91.72,
+     "end": 91.88,
+     "tag": "ink"
+    },
+    {
+     "text": "library,",
+     "start": 91.88,
+     "end": 92.68,
+     "tag": "ink"
+    }
+   ],
+   "start": 89.82,
+   "end": 92.62
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "and",
+     "start": 92.68,
+     "end": 92.92,
+     "tag": "ink"
+    },
+    {
+     "text": "still",
+     "start": 92.92,
+     "end": 93.24,
+     "tag": "ink"
+    },
+    {
+     "text": "being",
+     "start": 93.24,
+     "end": 93.56,
+     "tag": "red"
+    },
+    {
+     "text": "told",
+     "start": 93.56,
+     "end": 93.96,
+     "tag": "red"
+    },
+    {
+     "text": "no",
+     "start": 93.96,
+     "end": 94.12,
+     "tag": "red"
+    }
+   ],
+   "start": 92.62,
+   "end": 94.22
+  },
+  {
+   "mode": "band-ink",
+   "seg": 6,
+   "words": [
+    {
+     "text": "when",
+     "start": 94.28,
+     "end": 94.44,
+     "tag": "ink"
+    },
+    {
+     "text": "it",
+     "start": 94.44,
+     "end": 94.6,
+     "tag": "ink"
+    },
+    {
+     "text": "reaches",
+     "start": 94.6,
+     "end": 95.0,
+     "tag": "red"
+    },
+    {
+     "text": "for",
+     "start": 95.0,
+     "end": 95.16,
+     "tag": "red"
+    },
+    {
+     "text": "my",
+     "start": 95.16,
+     "end": 95.4,
+     "tag": "red"
+    },
+    {
+     "text": "line.",
+     "start": 95.4,
+     "end": 95.88,
+     "tag": "red"
+    }
+   ],
+   "start": 94.22,
+   "end": 97.28
+  },
+  {
+   "mode": "hero-center",
+   "seg": 7,
+   "words": [
+    {
+     "text": "Your",
+     "start": 97.4,
+     "end": 97.64,
+     "tag": "blue"
+    },
+    {
+     "text": "agent",
+     "start": 97.64,
+     "end": 98.12,
+     "tag": "blue"
+    },
+    {
+     "text": "pencils.",
+     "start": 98.12,
+     "end": 98.84,
+     "tag": "blue"
+    }
+   ],
+   "start": 97.34,
+   "end": 98.78
+  },
+  {
+   "mode": "hero-center",
+   "seg": 7,
+   "words": [
+    {
+     "text": "You",
+     "start": 98.84,
+     "end": 99.0,
+     "tag": "red"
+    },
+    {
+     "text": "hold",
+     "start": 99.0,
+     "end": 99.24,
+     "tag": "red"
+    },
+    {
+     "text": "the",
+     "start": 99.24,
+     "end": 99.32,
+     "tag": "red"
+    },
+    {
+     "text": "pen.",
+     "start": 99.32,
+     "end": 99.72,
+     "tag": "red"
+    }
+   ],
+   "start": 98.78,
+   "end": 99.66
+  },
+  {
+   "mode": "hero-center",
+   "seg": 7,
+   "words": [
+    {
+     "text": "That's",
+     "start": 99.72,
+     "end": 99.88,
+     "tag": "ink"
+    },
+    {
+     "text": "Strip.",
+     "start": 100.04,
+     "end": 100.52,
+     "tag": "ink"
+    }
+   ],
+   "start": 99.66,
+   "end": 101.92
+  }
+ ],
+ "placement": [
+  {
+   "seg": 1,
+   "start": 0.6
+  },
+  {
+   "seg": 2,
+   "start": 14.0
+  },
+  {
+   "seg": 3,
+   "start": 22.0
+  },
+  {
+   "seg": 4,
+   "start": 38.0
+  },
+  {
+   "seg": 5,
+   "start": 61.6
+  },
+  {
+   "seg": 6,
+   "start": 70.6
+  },
+  {
+   "seg": 7,
+   "start": 97.4
+  }
+ ]
+}

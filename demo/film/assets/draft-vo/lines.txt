@@ -1,0 +1,7 @@
+s1|You know release notes. Your team ships something good, somebody writes it up carefully, and then almost nobody reads it. We kept thinking, there has to be a better way to tell people what you built.
+s2|So we made Strip. It turns one product update into a four-panel comic, and you make it together with an agent.
+s3|Let me show you with a real one. I paste the release note, and before it draws anything, the agent pitches me three different ways to tell the story, each with its own cast of characters. I pick the one I like, and it drafts the whole strip.
+s4|Anything outlined in blue is the agent's proposal. This line, I want to write myself. So I change it, and I stamp it as mine. Now watch what happens when I ask for something funnier. It rewrites the panel around my line, and leaves mine exactly the way I wrote it. And that's not a polite request in a prompt. The app itself refuses the edit.
+s5|From here, I keep what I like, erase what I don't, pick an ending, and export a comic that's ready to post.
+s6|Strip is built on Agent-Native, from Builder dot I O, and that's what makes all of this possible. Every edit is one shared action, so the buttons I press and the tools the agent uses are exactly the same thing. That also means my other agents can join in. Here's Claude Code, dropping a new strip straight into my library, and still being told no when it reaches for my line.
+s7|Your agent pencils. You hold the pen. That's Strip.

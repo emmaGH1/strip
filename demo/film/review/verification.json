@@ -1,0 +1,219 @@
+{
+  "verifiedAtUtc": "2026-11-10T06:15:44.512327+00:00",
+  "hyperframes": "0.9.28",
+  "checks": {
+    "captions": {
+      "ok": true,
+      "lint": {
+        "errors": 0,
+        "warnings": 21,
+        "warningCodes": [
+          "duplicate_media_discovery_risk",
+          "nested_media_start_basis_ambiguous",
+          "timeline_track_too_dense"
+        ]
+      },
+      "runtime": {
+        "errors": 0,
+        "warnings": 0,
+        "warningCodes": []
+      },
+      "layout": {
+        "errors": 0,
+        "warnings": 1,
+        "warningCodes": [
+          "panel_out_of_canvas"
+        ]
+      },
+      "contrast": {
+        "errors": 0,
+        "warnings": 0,
+        "warningCodes": []
+      },
+      "craft": {
+        "errors": 0,
+        "warnings": 6,
+        "warningCodes": [
+          "line_unread",
+          "text_below_floor"
+        ]
+      },
+      "audio": {
+        "errors": 0,
+        "warnings": 0,
+        "warningCodes": []
+      }
+    },
+    "voice": {
+      "ok": true,
+      "lint": {
+        "errors": 0,
+        "warnings": 21,
+        "warningCodes": [
+          "duplicate_media_discovery_risk",
+          "nested_media_start_basis_ambiguous",
+          "timeline_track_too_dense"
+        ]
+      },
+      "runtime": {
+        "errors": 0,
+        "warnings": 0,
+        "warningCodes": []
+      },
+      "layout": {
+        "errors": 0,
+        "warnings": 1,
+        "warningCodes": [
+          "panel_out_of_canvas"
+        ]
+      },
+      "contrast": {
+        "errors": 0,
+        "warnings": 0,
+        "warningCodes": []
+      },
+      "craft": {
+        "errors": 0,
+        "warnings": 5,
+        "warningCodes": [
+          "line_unread",
+          "text_below_floor"
+        ]
+      },
+      "audio": {
+        "errors": 0,
+        "warnings": 0,
+        "warningCodes": []
+      }
+    }
+  },
+  "outputs": {
+    "captions": {
+      "file": "renders/final-captions.mp4",
+      "sha256": "c69f8ba784106e6b2315f921251c23fd7a9f5543cd368c5e4adf9d16199c80c9",
+      "videoPacketHash": "SHA256=630dae8bc1e9ca10ce2ca56453c2d5c4dc181b2690c473ac7e02f4be3eb4ab56",
+      "decode": "passed; no error output",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1",
+            "duration": "93.600000",
+            "nb_frames": "2808"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0",
+            "duration": "93.600000",
+            "nb_frames": "4385"
+          }
+        ],
+        "format": {
+          "duration": "93.600000",
+          "size": "35374452"
+        }
+      },
+      "loudness": {
+        "lufsIntegrated": -15.1,
+        "lufsShortTermMax": -11.9,
+        "samplePeakDb": -1.4,
+        "truePeakDb": -1.4,
+        "clipping": {
+          "count": 0,
+          "firstAt": null
+        }
+      },
+      "audioWarnings": []
+    },
+    "voice": {
+      "file": "renders/final-voice.mp4",
+      "sha256": "f90af6893eba893b1e442c72fa45933f4866bec285b4c2b7d8055e6d927741a0",
+      "videoPacketHash": "SHA256=630dae8bc1e9ca10ce2ca56453c2d5c4dc181b2690c473ac7e02f4be3eb4ab56",
+      "decode": "passed; no error output",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "r_frame_rate": "30/1",
+            "duration": "93.600000",
+            "nb_frames": "2808"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 2,
+            "r_frame_rate": "0/0",
+            "duration": "93.600000",
+            "nb_frames": "4385"
+          }
+        ],
+        "format": {
+          "duration": "93.600000",
+          "size": "35380521"
+        }
+      },
+      "loudness": {
+        "lufsIntegrated": -15.9,
+        "lufsShortTermMax": -12.9,
+        "samplePeakDb": -1.7,
+        "truePeakDb": -1.4,
+        "clipping": {
+          "count": 0,
+          "firstAt": null
+        }
+      },
+      "audioWarnings": []
+    }
+  },
+  "contactSheet": {
+    "file": "review/final-sheet.png",
+    "sampleSeconds": [
+      0,
+      3,
+      6,
+      9,
+      12,
+      15,
+      18,
+      21,
+      24,
+      27,
+      30,
+      33,
+      36,
+      39,
+      42,
+      45,
+      48,
+      51,
+      54,
+      57,
+      60,
+      63,
+      66,
+      69,
+      72,
+      75,
+      78,
+      81,
+      84,
+      87,
+      90,
+      93
+    ],
+    "grid": "4x8 row-major"
+  },
+  "identicalEncodedVisualStream": true
+}

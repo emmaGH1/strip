@@ -1,0 +1,173 @@
+[
+  {
+    "name": "library",
+    "filmStart": 19.8,
+    "filmEnd": 21.6,
+    "source": "takeA.mp4",
+    "sourceStart": 4,
+    "sourceEnd": 5.8,
+    "playbackRate": 1
+  },
+  {
+    "name": "source",
+    "filmStart": 21.6,
+    "filmEnd": 23.400000000000002,
+    "source": "takeA.mp4",
+    "sourceStart": 17,
+    "sourceEnd": 24.2,
+    "playbackRate": 4
+  },
+  {
+    "name": "find-joke",
+    "filmStart": 23.400000000000002,
+    "filmEnd": 24.75,
+    "source": "takeA.mp4",
+    "sourceStart": 22.55,
+    "sourceEnd": 23.900000000000002,
+    "playbackRate": 1
+  },
+  {
+    "name": "angles-wait",
+    "filmStart": 24.75,
+    "filmEnd": 27.0,
+    "source": "takeA.mp4",
+    "sourceStart": 25,
+    "sourceEnd": 34.0,
+    "playbackRate": 4
+  },
+  {
+    "name": "three-angles",
+    "filmStart": 27.0,
+    "filmEnd": 30.6,
+    "source": "takeA.mp4",
+    "sourceStart": 43,
+    "sourceEnd": 46.6,
+    "playbackRate": 1
+  },
+  {
+    "name": "choose",
+    "filmStart": 30.6,
+    "filmEnd": 32.04,
+    "source": "takeA.mp4",
+    "sourceStart": 49.5,
+    "sourceEnd": 55.260000000000005,
+    "playbackRate": 4
+  },
+  {
+    "name": "draft-request",
+    "filmStart": 32.04,
+    "filmEnd": 32.940000000000005,
+    "source": "takeA.mp4",
+    "sourceStart": 57,
+    "sourceEnd": 60.6,
+    "playbackRate": 4
+  },
+  {
+    "name": "draft-result",
+    "filmStart": 32.940000000000005,
+    "filmEnd": 34.2,
+    "source": "takeA.mp4",
+    "sourceStart": 130,
+    "sourceEnd": 131.26,
+    "playbackRate": 1
+  },
+  {
+    "name": "blue",
+    "filmStart": 34.2,
+    "filmEnd": 37.440000000000005,
+    "source": "takeA.mp4",
+    "sourceStart": 132,
+    "sourceEnd": 135.24,
+    "playbackRate": 1
+  },
+  {
+    "name": "edit",
+    "filmStart": 37.440000000000005,
+    "filmEnd": 40.68000000000001,
+    "source": "takeA.mp4",
+    "sourceStart": 143,
+    "sourceEnd": 155.96,
+    "playbackRate": 4
+  },
+  {
+    "name": "mine",
+    "filmStart": 40.68000000000001,
+    "filmEnd": 42.480000000000004,
+    "source": "takeA.mp4",
+    "sourceStart": 157.8,
+    "sourceEnd": 159.60000000000002,
+    "playbackRate": 1
+  },
+  {
+    "name": "funnier",
+    "filmStart": 42.480000000000004,
+    "filmEnd": 45.54,
+    "source": "takeA.mp4",
+    "sourceStart": 175,
+    "sourceEnd": 187.24,
+    "playbackRate": 4
+  },
+  {
+    "name": "revision-wait",
+    "filmStart": 45.54,
+    "filmEnd": 47.519999999999996,
+    "source": "takeA.mp4",
+    "sourceStart": 190,
+    "sourceEnd": 197.92,
+    "playbackRate": 4
+  },
+  {
+    "name": "revision-result",
+    "filmStart": 47.519999999999996,
+    "filmEnd": 50.4,
+    "source": "takeA.mp4",
+    "sourceStart": 218,
+    "sourceEnd": 220.88,
+    "playbackRate": 1
+  },
+  {
+    "name": "kept-line",
+    "filmStart": 50.4,
+    "filmEnd": 55.440000000000005,
+    "source": "takeA.mp4",
+    "sourceStart": 233,
+    "sourceEnd": 238.04,
+    "playbackRate": 1
+  },
+  {
+    "name": "ink",
+    "filmStart": 55.440000000000005,
+    "filmEnd": 57.312,
+    "source": "takeA.mp4",
+    "sourceStart": 250,
+    "sourceEnd": 252.808,
+    "playbackRate": 1.5
+  },
+  {
+    "name": "erase",
+    "filmStart": 57.312,
+    "filmEnd": 58.53600000000001,
+    "source": "takeA.mp4",
+    "sourceStart": 252.8,
+    "sourceEnd": 255.24800000000002,
+    "playbackRate": 2
+  },
+  {
+    "name": "ending",
+    "filmStart": 58.53600000000001,
+    "filmEnd": 59.85,
+    "source": "takeA.mp4",
+    "sourceStart": 267,
+    "sourceEnd": 268.971,
+    "playbackRate": 1.5
+  },
+  {
+    "name": "export",
+    "filmStart": 59.85,
+    "filmEnd": 61.48799999999999,
+    "source": "takeA.mp4",
+    "sourceStart": 329.7,
+    "sourceEnd": 336.25199999999995,
+    "playbackRate": 4
+  }
+]

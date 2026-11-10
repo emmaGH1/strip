@@ -1,0 +1,10 @@
+{
+  "compositions/components/browser-device-stage.html": "59b20814d38bf58ec1c6c7727ed954e89e9f38a7392eddf6d266ce586bad6764",
+  "compositions/components/caption-clip-wipe.html": "5675efd493c78d3a50a744ae4eb4b2b60fff97c231a5b756f8991581fbe569c8",
+  "compositions/components/halftone-dissolve.html": "46e08482e6c2a336ca1c82125f93bbeb09d74942b20cb68d457882e987bf7abd",
+  "compositions/components/iris-reveal.html": "977a7e068ebe7f547006794ee36ef4d30cd36d68edbd05acf60719e294de989e",
+  "compositions/components/yt-camera-move.html": "f58d4c2fc7165cf49a701f55f80fcd88eccab5c582cf8c2ae00259523810d58a",
+  "compositions/components/zoom-through-transition.html": "8201b6de2c2908e3c8d9ca8d36d1b55b8093484ec40bd37bdf7754ae7b61d97d",
+  "compositions/halftone-field.html": "09b28dd69dd42898c5b7b7a26beae40f9db6a8872804118347bb0fd6075975ed",
+  "compositions/mk-callout-highlight.html": "12d9f602852a4d5e57c6d0debe5966b562414a0e8a4e949fa6377abec9ca3e6e"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "film",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bash tools/hf.sh preview --background",
+    "check": "bash tools/hf.sh check",
+    "render": "bash tools/hf.sh render",
+    "render:final": "bash tools/render-film.sh",
+    "voice": "node tools/prepare-voice.mjs",
+    "verify:final": "python3 tools/verify-film.py"
+  },
+  "devDependencies": {
+    "@hyperframes/core": "0.9.28"
+  }
+}

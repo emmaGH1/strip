@@ -1,0 +1,410 @@
+[
+  {
+    "id": "w0",
+    "text": "Strip",
+    "start": 0.08,
+    "end": 0.48
+  },
+  {
+    "id": "w1",
+    "text": "is",
+    "start": 0.48,
+    "end": 0.64
+  },
+  {
+    "id": "w2",
+    "text": "built",
+    "start": 0.64,
+    "end": 0.88
+  },
+  {
+    "id": "w3",
+    "text": "on",
+    "start": 0.88,
+    "end": 1.04
+  },
+  {
+    "id": "w4",
+    "text": "agent",
+    "start": 1.04,
+    "end": 1.52
+  },
+  {
+    "id": "w5",
+    "text": "native",
+    "start": 1.52,
+    "end": 1.84
+  },
+  {
+    "id": "w6",
+    "text": "from",
+    "start": 1.92,
+    "end": 2.08
+  },
+  {
+    "id": "w7",
+    "text": "builder.io,",
+    "start": 2.08,
+    "end": 3.76
+  },
+  {
+    "id": "w8",
+    "text": "and",
+    "start": 3.76,
+    "end": 4
+  },
+  {
+    "id": "w9",
+    "text": "that's",
+    "start": 4,
+    "end": 4.24
+  },
+  {
+    "id": "w10",
+    "text": "what",
+    "start": 4.24,
+    "end": 4.48
+  },
+  {
+    "id": "w11",
+    "text": "makes",
+    "start": 4.48,
+    "end": 4.8
+  },
+  {
+    "id": "w12",
+    "text": "all",
+    "start": 4.8,
+    "end": 4.96
+  },
+  {
+    "id": "w13",
+    "text": "of",
+    "start": 4.96,
+    "end": 5.2
+  },
+  {
+    "id": "w14",
+    "text": "this",
+    "start": 5.2,
+    "end": 5.44
+  },
+  {
+    "id": "w15",
+    "text": "possible.",
+    "start": 5.44,
+    "end": 6.24
+  },
+  {
+    "id": "w16",
+    "text": "Every",
+    "start": 6.24,
+    "end": 6.64
+  },
+  {
+    "id": "w17",
+    "text": "edit",
+    "start": 6.64,
+    "end": 7.12
+  },
+  {
+    "id": "w18",
+    "text": "is",
+    "start": 7.12,
+    "end": 7.36
+  },
+  {
+    "id": "w19",
+    "text": "one",
+    "start": 7.36,
+    "end": 7.6
+  },
+  {
+    "id": "w20",
+    "text": "shared",
+    "start": 7.6,
+    "end": 8.16
+  },
+  {
+    "id": "w21",
+    "text": "action,",
+    "start": 8.16,
+    "end": 8.8
+  },
+  {
+    "id": "w22",
+    "text": "so",
+    "start": 8.8,
+    "end": 9.04
+  },
+  {
+    "id": "w23",
+    "text": "the",
+    "start": 9.04,
+    "end": 9.2
+  },
+  {
+    "id": "w24",
+    "text": "butt",
+    "start": 9.2,
+    "end": 9.68
+  },
+  {
+    "id": "w25",
+    "text": "I",
+    "start": 9.68,
+    "end": 9.84
+  },
+  {
+    "id": "w26",
+    "text": "press",
+    "start": 9.84,
+    "end": 10.24
+  },
+  {
+    "id": "w27",
+    "text": "and",
+    "start": 10.24,
+    "end": 10.48
+  },
+  {
+    "id": "w28",
+    "text": "the",
+    "start": 10.48,
+    "end": 10.64
+  },
+  {
+    "id": "w29",
+    "text": "tools",
+    "start": 10.64,
+    "end": 11.04
+  },
+  {
+    "id": "w30",
+    "text": "the",
+    "start": 11.04,
+    "end": 11.28
+  },
+  {
+    "id": "w31",
+    "text": "agent",
+    "start": 11.28,
+    "end": 11.68
+  },
+  {
+    "id": "w32",
+    "text": "uses",
+    "start": 11.68,
+    "end": 12.08
+  },
+  {
+    "id": "w33",
+    "text": "are",
+    "start": 12.24,
+    "end": 12.4
+  },
+  {
+    "id": "w34",
+    "text": "exactly",
+    "start": 12.4,
+    "end": 13.04
+  },
+  {
+    "id": "w35",
+    "text": "same",
+    "start": 13.04,
+    "end": 13.52
+  },
+  {
+    "id": "w36",
+    "text": "thing.",
+    "start": 13.52,
+    "end": 14.16
+  },
+  {
+    "id": "w37",
+    "text": "That",
+    "start": 14.16,
+    "end": 14.48
+  },
+  {
+    "id": "w38",
+    "text": "also",
+    "start": 14.48,
+    "end": 14.8
+  },
+  {
+    "id": "w39",
+    "text": "means",
+    "start": 14.8,
+    "end": 15.28
+  },
+  {
+    "id": "w40",
+    "text": "my",
+    "start": 15.28,
+    "end": 15.44
+  },
+  {
+    "id": "w41",
+    "text": "other",
+    "start": 15.44,
+    "end": 15.68
+  },
+  {
+    "id": "w42",
+    "text": "agents",
+    "start": 15.68,
+    "end": 16.24
+  },
+  {
+    "id": "w43",
+    "text": "can",
+    "start": 16.24,
+    "end": 16.48
+  },
+  {
+    "id": "w44",
+    "text": "join",
+    "start": 16.48,
+    "end": 16.96
+  },
+  {
+    "id": "w45",
+    "text": "in.",
+    "start": 16.96,
+    "end": 17.52
+  },
+  {
+    "id": "w46",
+    "text": "Here's",
+    "start": 17.52,
+    "end": 17.92
+  },
+  {
+    "id": "w47",
+    "text": "clawed",
+    "start": 17.92,
+    "end": 18.64
+  },
+  {
+    "id": "w48",
+    "text": "code,",
+    "start": 18.64,
+    "end": 19.28
+  },
+  {
+    "id": "w49",
+    "text": "dropping",
+    "start": 19.28,
+    "end": 19.76
+  },
+  {
+    "id": "w50",
+    "text": "a",
+    "start": 19.76,
+    "end": 19.84
+  },
+  {
+    "id": "w51",
+    "text": "new",
+    "start": 19.84,
+    "end": 20.08
+  },
+  {
+    "id": "w52",
+    "text": "strip",
+    "start": 20.08,
+    "end": 20.56
+  },
+  {
+    "id": "w53",
+    "text": "straight",
+    "start": 20.56,
+    "end": 20.88
+  },
+  {
+    "id": "w54",
+    "text": "into",
+    "start": 20.88,
+    "end": 21.12
+  },
+  {
+    "id": "w55",
+    "text": "my",
+    "start": 21.12,
+    "end": 21.28
+  },
+  {
+    "id": "w56",
+    "text": "library,",
+    "start": 21.28,
+    "end": 22.08
+  },
+  {
+    "id": "w57",
+    "text": "and",
+    "start": 22.08,
+    "end": 22.32
+  },
+  {
+    "id": "w58",
+    "text": "still",
+    "start": 22.32,
+    "end": 22.64
+  },
+  {
+    "id": "w59",
+    "text": "being",
+    "start": 22.64,
+    "end": 22.96
+  },
+  {
+    "id": "w60",
+    "text": "told",
+    "start": 22.96,
+    "end": 23.36
+  },
+  {
+    "id": "w61",
+    "text": "no",
+    "start": 23.36,
+    "end": 23.52
+  },
+  {
+    "id": "w62",
+    "text": "when",
+    "start": 23.68,
+    "end": 23.84
+  },
+  {
+    "id": "w63",
+    "text": "it",
+    "start": 23.84,
+    "end": 24
+  },
+  {
+    "id": "w64",
+    "text": "reach",
+    "start": 24,
+    "end": 24.4
+  },
+  {
+    "id": "w65",
+    "text": "for",
+    "start": 24.4,
+    "end": 24.56
+  },
+  {
+    "id": "w66",
+    "text": "my",
+    "start": 24.56,
+    "end": 24.8
+  },
+  {
+    "id": "w67",
+    "text": "line.",
+    "start": 24.8,
+    "end": 25.28
+  }
+]
