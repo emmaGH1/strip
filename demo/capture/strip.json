@@ -1,0 +1,2405 @@
+{
+  "id": "e550f54e-044b-4177-ad3d-2472a11eabcf",
+  "revision": 6,
+  "draft": {
+    "title": "The Reliable Bug",
+    "source": "Fixed: Sending the /rename command to rename a channel without any other text no longer causes a crash. The /crash command, meanwhile, is still not working at all, so if you were using /rename to get that effect, apologies for the inconvenience to your workflow.",
+    "sourceUrl": "",
+    "inputKind": "user-provided",
+    "cast": {
+      "ari": {
+        "name": "Jules",
+        "role": "Power user who used bare /rename as an accidental crash shortcut.",
+        "archetype": "power-user"
+      },
+      "sam": {
+        "name": "Dev",
+        "role": "On-call engineer relieved that the rename path no longer crashes.",
+        "archetype": "on-call-engineer"
+      }
+    },
+    "angles": [
+      {
+        "id": "rename-ritual",
+        "premise": "Jules mourns losing a reliable way to crash the channel while renaming it.",
+        "irony": "The fix removes the accidental crash, but Jules treated that side effect as a productivity shortcut; the real /crash command still fails.",
+        "cast": {
+          "ari": {
+            "name": "Jules",
+            "role": "Power user who used bare /rename as an accidental crash shortcut.",
+            "archetype": "power-user"
+          },
+          "sam": {
+            "name": "Dev",
+            "role": "On-call engineer relieved that the rename path no longer crashes.",
+            "archetype": "on-call-engineer"
+          }
+        }
+      },
+      {
+        "id": "support-ticket",
+        "premise": "Robin handles Jules’s complaint that the bug fix broke their favorite workflow.",
+        "irony": "Support apologizes for eliminating an unwanted crash, while the intentionally named crash command remains the broken feature.",
+        "cast": {
+          "ari": {
+            "name": "Robin",
+            "role": "Support agent calmly triaging a complaint about a missing crash.",
+            "archetype": "support-agent"
+          },
+          "sam": {
+            "name": "Jules",
+            "role": "Power user whose workflow depended on the accidental crash.",
+            "archetype": "power-user"
+          }
+        }
+      },
+      {
+        "id": "qa-priority",
+        "premise": "Quinn tests the fixed rename and discovers the crash command is the true regression magnet.",
+        "irony": "A QA tester celebrates a command no longer crashing, then finds the command explicitly meant to crash still cannot do it.",
+        "cast": {
+          "ari": {
+            "name": "Quinn",
+            "role": "QA tester who treats impossible behavior as a test case.",
+            "archetype": "qa-tester"
+          },
+          "sam": {
+            "name": "Morgan",
+            "role": "Product manager eager to turn every incident into a roadmap item.",
+            "archetype": "product-manager"
+          }
+        }
+      }
+    ],
+    "selectedAngleId": "rename-ritual",
+    "endingArt": [
+      {
+        "expression": "happy",
+        "pose": "relieved",
+        "screen": {
+          "kind": "none",
+          "title": "",
+          "lines": [],
+          "tone": "normal"
+        },
+        "sfx": "PHEW",
+        "prop": "none"
+      },
+      {
+        "expression": "skeptical",
+        "pose": "arms-crossed",
+        "screen": {
+          "kind": "chat",
+          "title": "Command",
+          "lines": [
+            "/crash",
+            "No response"
+          ],
+          "tone": "error"
+        },
+        "prop": "laptop"
+      },
+      {
+        "expression": "panic",
+        "pose": "panic",
+        "screen": {
+          "kind": "toast",
+          "title": "Oops",
+          "lines": [
+            "Shortcut retired"
+          ],
+          "tone": "error"
+        },
+        "sfx": "CRASH!",
+        "prop": "phone"
+      }
+    ],
+    "panels": [
+      {
+        "id": "p1",
+        "beat": "setup",
+        "caption": "",
+        "screenState": "none",
+        "screen": {
+          "kind": "doc",
+          "title": "Channel",
+          "lines": [
+            "/rename",
+            "Name: #quiet"
+          ],
+          "tone": "success"
+        },
+        "prop": "laptop",
+        "actors": [
+          {
+            "id": "a1",
+            "character": "ari",
+            "expression": "happy",
+            "pose": "leaning",
+            "side": "left"
+          },
+          {
+            "id": "a2",
+            "character": "sam",
+            "expression": "happy",
+            "pose": "standing",
+            "side": "right"
+          }
+        ],
+        "balloons": [
+          {
+            "id": "b1",
+            "speaker": "ari",
+            "text": "That crash was my coffee break."
+          },
+          {
+            "id": "b2",
+            "speaker": "sam",
+            "text": "Finally, a rename that only renames."
+          }
+        ],
+        "sourceQuote": ""
+      },
+      {
+        "id": "p2",
+        "beat": "trouble",
+        "caption": "",
+        "screenState": "none",
+        "screen": {
+          "kind": "none",
+          "title": "",
+          "lines": [],
+          "tone": "normal"
+        },
+        "prop": "none",
+        "actors": [
+          {
+            "id": "a3",
+            "character": "ari",
+            "expression": "thinking",
+            "pose": "sitting",
+            "side": "left"
+          },
+          {
+            "id": "a4",
+            "character": "sam",
+            "expression": "skeptical",
+            "pose": "arms-crossed",
+            "side": "right"
+          }
+        ],
+        "balloons": [
+          {
+            "id": "b3",
+            "speaker": "ari",
+            "text": "I booked breaks around the outage."
+          },
+          {
+            "id": "b4",
+            "speaker": "sam",
+            "text": "A renamed channel shouldn't explode."
+          }
+        ],
+        "sourceQuote": ""
+      },
+      {
+        "id": "p3",
+        "beat": "turn",
+        "caption": "",
+        "screenState": "none",
+        "screen": {
+          "kind": "chat",
+          "title": "Command",
+          "lines": [
+            "/crash",
+            "No response"
+          ],
+          "tone": "error"
+        },
+        "prop": "laptop",
+        "actors": [
+          {
+            "id": "a5",
+            "character": "ari",
+            "expression": "skeptical",
+            "pose": "leaning",
+            "side": "center"
+          }
+        ],
+        "balloons": [],
+        "sourceQuote": "The /crash command, meanwhile, is still not working at all"
+      },
+      {
+        "id": "p4",
+        "beat": "payoff",
+        "caption": "",
+        "screenState": "none",
+        "screen": {
+          "kind": "toast",
+          "title": "Oops",
+          "lines": [
+            "Shortcut retired"
+          ],
+          "tone": "error"
+        },
+        "sfx": "CRASH!",
+        "prop": "phone",
+        "actors": [
+          {
+            "id": "a6",
+            "character": "ari",
+            "expression": "thinking",
+            "pose": "sitting",
+            "side": "left"
+          },
+          {
+            "id": "a7",
+            "character": "sam",
+            "expression": "panic",
+            "pose": "panic",
+            "side": "right"
+          }
+        ],
+        "balloons": [
+          {
+            "id": "b5",
+            "speaker": "ari",
+            "text": "The bug had better uptime than /crash."
+          },
+          {
+            "id": "b6",
+            "speaker": "sam",
+            "text": "At last, a promotion for the bug."
+          }
+        ],
+        "sourceQuote": ""
+      }
+    ],
+    "endings": [
+      "The bug had better uptime than /crash.",
+      "Fine. It can take my pager.",
+      "At last, a promotion for the bug."
+    ]
+  },
+  "protectedIds": [
+    "b1"
+  ],
+  "origin": "agent-draft",
+  "lastEditedBy": "human",
+  "updatedAt": "2026-11-10T05:11:42.616Z",
+  "history": [
+    {
+      "revision": 0,
+      "draft": {
+        "title": "My Favorite Bug",
+        "source": "Fixed: Sending the /rename command to rename a channel without any other text no longer causes a crash. The /crash command, meanwhile, is still not working at all, so if you were using /rename to get that effect, apologies for the inconvenience to your workflow.",
+        "sourceUrl": "",
+        "inputKind": "user-provided",
+        "cast": {
+          "ari": {
+            "name": "Jules",
+            "role": "Power user who used bare /rename as an accidental crash shortcut.",
+            "archetype": "power-user"
+          },
+          "sam": {
+            "name": "Dev",
+            "role": "On-call engineer relieved that the rename path no longer crashes.",
+            "archetype": "on-call-engineer"
+          }
+        },
+        "angles": [
+          {
+            "id": "rename-ritual",
+            "premise": "Jules mourns losing a reliable way to crash the channel while renaming it.",
+            "irony": "The fix removes the accidental crash, but Jules treated that side effect as a productivity shortcut; the real /crash command still fails.",
+            "cast": {
+              "ari": {
+                "name": "Jules",
+                "role": "Power user who used bare /rename as an accidental crash shortcut.",
+                "archetype": "power-user"
+              },
+              "sam": {
+                "name": "Dev",
+                "role": "On-call engineer relieved that the rename path no longer crashes.",
+                "archetype": "on-call-engineer"
+              }
+            }
+          },
+          {
+            "id": "support-ticket",
+            "premise": "Robin handles Jules’s complaint that the bug fix broke their favorite workflow.",
+            "irony": "Support apologizes for eliminating an unwanted crash, while the intentionally named crash command remains the broken feature.",
+            "cast": {
+              "ari": {
+                "name": "Robin",
+                "role": "Support agent calmly triaging a complaint about a missing crash.",
+                "archetype": "support-agent"
+              },
+              "sam": {
+                "name": "Jules",
+                "role": "Power user whose workflow depended on the accidental crash.",
+                "archetype": "power-user"
+              }
+            }
+          },
+          {
+            "id": "qa-priority",
+            "premise": "Quinn tests the fixed rename and discovers the crash command is the true regression magnet.",
+            "irony": "A QA tester celebrates a command no longer crashing, then finds the command explicitly meant to crash still cannot do it.",
+            "cast": {
+              "ari": {
+                "name": "Quinn",
+                "role": "QA tester who treats impossible behavior as a test case.",
+                "archetype": "qa-tester"
+              },
+              "sam": {
+                "name": "Morgan",
+                "role": "Product manager eager to turn every incident into a roadmap item.",
+                "archetype": "product-manager"
+              }
+            }
+          }
+        ],
+        "selectedAngleId": "rename-ritual",
+        "endingArt": [
+          {
+            "expression": "happy",
+            "pose": "relieved",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "sfx": "PHEW",
+            "prop": "none"
+          },
+          {
+            "expression": "skeptical",
+            "pose": "arms-crossed",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop"
+          },
+          {
+            "expression": "panic",
+            "pose": "panic",
+            "screen": {
+              "kind": "toast",
+              "title": "Oops",
+              "lines": [
+                "Shortcut retired"
+              ],
+              "tone": "error"
+            },
+            "sfx": "CRASH!",
+            "prop": "phone"
+          }
+        ],
+        "panels": [
+          {
+            "id": "p1",
+            "beat": "setup",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "doc",
+              "title": "Channel",
+              "lines": [
+                "/rename",
+                "Name: #quiet"
+              ],
+              "tone": "success"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a1",
+                "character": "ari",
+                "expression": "happy",
+                "pose": "leaning",
+                "side": "left"
+              },
+              {
+                "id": "a2",
+                "character": "sam",
+                "expression": "happy",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b1",
+                "speaker": "ari",
+                "text": "My favorite two-for-one shortcut."
+              },
+              {
+                "id": "b2",
+                "speaker": "sam",
+                "text": "Pager's quiet. I love this fix."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p2",
+            "beat": "trouble",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a3",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a4",
+                "character": "sam",
+                "expression": "skeptical",
+                "pose": "arms-crossed",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b3",
+                "speaker": "ari",
+                "text": "It had such a dramatic finish."
+              },
+              {
+                "id": "b4",
+                "speaker": "sam",
+                "text": "A renamed channel shouldn't explode."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p3",
+            "beat": "turn",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a5",
+                "character": "ari",
+                "expression": "skeptical",
+                "pose": "leaning",
+                "side": "center"
+              }
+            ],
+            "balloons": [],
+            "sourceQuote": "The /crash command, meanwhile, is still not working at all"
+          },
+          {
+            "id": "p4",
+            "beat": "payoff",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a6",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a7",
+                "character": "sam",
+                "expression": "neutral",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b5",
+                "speaker": "ari",
+                "text": "Wait, I was using the bug."
+              },
+              {
+                "id": "b6",
+                "speaker": "sam",
+                "text": "Now the workaround needs a workaround."
+              }
+            ],
+            "sourceQuote": ""
+          }
+        ],
+        "endings": [
+          "Wait, I was using the bug.",
+          "Now the workaround needs a workaround.",
+          "Can we rename the outage instead?"
+        ]
+      },
+      "who": "agent",
+      "summary": "Created strip",
+      "at": "2026-11-10T05:09:14.262Z"
+    },
+    {
+      "revision": 1,
+      "draft": {
+        "title": "My Favorite Bug",
+        "source": "Fixed: Sending the /rename command to rename a channel without any other text no longer causes a crash. The /crash command, meanwhile, is still not working at all, so if you were using /rename to get that effect, apologies for the inconvenience to your workflow.",
+        "sourceUrl": "",
+        "inputKind": "user-provided",
+        "cast": {
+          "ari": {
+            "name": "Jules",
+            "role": "Power user who used bare /rename as an accidental crash shortcut.",
+            "archetype": "power-user"
+          },
+          "sam": {
+            "name": "Dev",
+            "role": "On-call engineer relieved that the rename path no longer crashes.",
+            "archetype": "on-call-engineer"
+          }
+        },
+        "angles": [
+          {
+            "id": "rename-ritual",
+            "premise": "Jules mourns losing a reliable way to crash the channel while renaming it.",
+            "irony": "The fix removes the accidental crash, but Jules treated that side effect as a productivity shortcut; the real /crash command still fails.",
+            "cast": {
+              "ari": {
+                "name": "Jules",
+                "role": "Power user who used bare /rename as an accidental crash shortcut.",
+                "archetype": "power-user"
+              },
+              "sam": {
+                "name": "Dev",
+                "role": "On-call engineer relieved that the rename path no longer crashes.",
+                "archetype": "on-call-engineer"
+              }
+            }
+          },
+          {
+            "id": "support-ticket",
+            "premise": "Robin handles Jules’s complaint that the bug fix broke their favorite workflow.",
+            "irony": "Support apologizes for eliminating an unwanted crash, while the intentionally named crash command remains the broken feature.",
+            "cast": {
+              "ari": {
+                "name": "Robin",
+                "role": "Support agent calmly triaging a complaint about a missing crash.",
+                "archetype": "support-agent"
+              },
+              "sam": {
+                "name": "Jules",
+                "role": "Power user whose workflow depended on the accidental crash.",
+                "archetype": "power-user"
+              }
+            }
+          },
+          {
+            "id": "qa-priority",
+            "premise": "Quinn tests the fixed rename and discovers the crash command is the true regression magnet.",
+            "irony": "A QA tester celebrates a command no longer crashing, then finds the command explicitly meant to crash still cannot do it.",
+            "cast": {
+              "ari": {
+                "name": "Quinn",
+                "role": "QA tester who treats impossible behavior as a test case.",
+                "archetype": "qa-tester"
+              },
+              "sam": {
+                "name": "Morgan",
+                "role": "Product manager eager to turn every incident into a roadmap item.",
+                "archetype": "product-manager"
+              }
+            }
+          }
+        ],
+        "selectedAngleId": "rename-ritual",
+        "endingArt": [
+          {
+            "expression": "happy",
+            "pose": "relieved",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "sfx": "PHEW",
+            "prop": "none"
+          },
+          {
+            "expression": "skeptical",
+            "pose": "arms-crossed",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop"
+          },
+          {
+            "expression": "panic",
+            "pose": "panic",
+            "screen": {
+              "kind": "toast",
+              "title": "Oops",
+              "lines": [
+                "Shortcut retired"
+              ],
+              "tone": "error"
+            },
+            "sfx": "CRASH!",
+            "prop": "phone"
+          }
+        ],
+        "panels": [
+          {
+            "id": "p1",
+            "beat": "setup",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "doc",
+              "title": "Channel",
+              "lines": [
+                "/rename",
+                "Name: #quiet"
+              ],
+              "tone": "success"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a1",
+                "character": "ari",
+                "expression": "happy",
+                "pose": "leaning",
+                "side": "left"
+              },
+              {
+                "id": "a2",
+                "character": "sam",
+                "expression": "happy",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b1",
+                "speaker": "ari",
+                "text": "That crash was my coffee break."
+              },
+              {
+                "id": "b2",
+                "speaker": "sam",
+                "text": "Pager's quiet. I love this fix."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p2",
+            "beat": "trouble",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a3",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a4",
+                "character": "sam",
+                "expression": "skeptical",
+                "pose": "arms-crossed",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b3",
+                "speaker": "ari",
+                "text": "It had such a dramatic finish."
+              },
+              {
+                "id": "b4",
+                "speaker": "sam",
+                "text": "A renamed channel shouldn't explode."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p3",
+            "beat": "turn",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a5",
+                "character": "ari",
+                "expression": "skeptical",
+                "pose": "leaning",
+                "side": "center"
+              }
+            ],
+            "balloons": [],
+            "sourceQuote": "The /crash command, meanwhile, is still not working at all"
+          },
+          {
+            "id": "p4",
+            "beat": "payoff",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a6",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a7",
+                "character": "sam",
+                "expression": "neutral",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b5",
+                "speaker": "ari",
+                "text": "Wait, I was using the bug."
+              },
+              {
+                "id": "b6",
+                "speaker": "sam",
+                "text": "Now the workaround needs a workaround."
+              }
+            ],
+            "sourceQuote": ""
+          }
+        ],
+        "endings": [
+          "Wait, I was using the bug.",
+          "Now the workaround needs a workaround.",
+          "Can we rename the outage instead?"
+        ]
+      },
+      "who": "human",
+      "summary": "Panel 1",
+      "at": "2026-11-10T05:09:49.393Z"
+    },
+    {
+      "revision": 2,
+      "draft": {
+        "title": "My Favorite Bug",
+        "source": "Fixed: Sending the /rename command to rename a channel without any other text no longer causes a crash. The /crash command, meanwhile, is still not working at all, so if you were using /rename to get that effect, apologies for the inconvenience to your workflow.",
+        "sourceUrl": "",
+        "inputKind": "user-provided",
+        "cast": {
+          "ari": {
+            "name": "Jules",
+            "role": "Power user who used bare /rename as an accidental crash shortcut.",
+            "archetype": "power-user"
+          },
+          "sam": {
+            "name": "Dev",
+            "role": "On-call engineer relieved that the rename path no longer crashes.",
+            "archetype": "on-call-engineer"
+          }
+        },
+        "angles": [
+          {
+            "id": "rename-ritual",
+            "premise": "Jules mourns losing a reliable way to crash the channel while renaming it.",
+            "irony": "The fix removes the accidental crash, but Jules treated that side effect as a productivity shortcut; the real /crash command still fails.",
+            "cast": {
+              "ari": {
+                "name": "Jules",
+                "role": "Power user who used bare /rename as an accidental crash shortcut.",
+                "archetype": "power-user"
+              },
+              "sam": {
+                "name": "Dev",
+                "role": "On-call engineer relieved that the rename path no longer crashes.",
+                "archetype": "on-call-engineer"
+              }
+            }
+          },
+          {
+            "id": "support-ticket",
+            "premise": "Robin handles Jules’s complaint that the bug fix broke their favorite workflow.",
+            "irony": "Support apologizes for eliminating an unwanted crash, while the intentionally named crash command remains the broken feature.",
+            "cast": {
+              "ari": {
+                "name": "Robin",
+                "role": "Support agent calmly triaging a complaint about a missing crash.",
+                "archetype": "support-agent"
+              },
+              "sam": {
+                "name": "Jules",
+                "role": "Power user whose workflow depended on the accidental crash.",
+                "archetype": "power-user"
+              }
+            }
+          },
+          {
+            "id": "qa-priority",
+            "premise": "Quinn tests the fixed rename and discovers the crash command is the true regression magnet.",
+            "irony": "A QA tester celebrates a command no longer crashing, then finds the command explicitly meant to crash still cannot do it.",
+            "cast": {
+              "ari": {
+                "name": "Quinn",
+                "role": "QA tester who treats impossible behavior as a test case.",
+                "archetype": "qa-tester"
+              },
+              "sam": {
+                "name": "Morgan",
+                "role": "Product manager eager to turn every incident into a roadmap item.",
+                "archetype": "product-manager"
+              }
+            }
+          }
+        ],
+        "selectedAngleId": "rename-ritual",
+        "endingArt": [
+          {
+            "expression": "happy",
+            "pose": "relieved",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "sfx": "PHEW",
+            "prop": "none"
+          },
+          {
+            "expression": "skeptical",
+            "pose": "arms-crossed",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop"
+          },
+          {
+            "expression": "panic",
+            "pose": "panic",
+            "screen": {
+              "kind": "toast",
+              "title": "Oops",
+              "lines": [
+                "Shortcut retired"
+              ],
+              "tone": "error"
+            },
+            "sfx": "CRASH!",
+            "prop": "phone"
+          }
+        ],
+        "panels": [
+          {
+            "id": "p1",
+            "beat": "setup",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "doc",
+              "title": "Channel",
+              "lines": [
+                "/rename",
+                "Name: #quiet"
+              ],
+              "tone": "success"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a1",
+                "character": "ari",
+                "expression": "happy",
+                "pose": "leaning",
+                "side": "left"
+              },
+              {
+                "id": "a2",
+                "character": "sam",
+                "expression": "happy",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b1",
+                "speaker": "ari",
+                "text": "That crash was my coffee break."
+              },
+              {
+                "id": "b2",
+                "speaker": "sam",
+                "text": "Pager's quiet. I love this fix."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p2",
+            "beat": "trouble",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a3",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a4",
+                "character": "sam",
+                "expression": "skeptical",
+                "pose": "arms-crossed",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b3",
+                "speaker": "ari",
+                "text": "It had such a dramatic finish."
+              },
+              {
+                "id": "b4",
+                "speaker": "sam",
+                "text": "A renamed channel shouldn't explode."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p3",
+            "beat": "turn",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a5",
+                "character": "ari",
+                "expression": "skeptical",
+                "pose": "leaning",
+                "side": "center"
+              }
+            ],
+            "balloons": [],
+            "sourceQuote": "The /crash command, meanwhile, is still not working at all"
+          },
+          {
+            "id": "p4",
+            "beat": "payoff",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a6",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a7",
+                "character": "sam",
+                "expression": "neutral",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b5",
+                "speaker": "ari",
+                "text": "Wait, I was using the bug."
+              },
+              {
+                "id": "b6",
+                "speaker": "sam",
+                "text": "Now the workaround needs a workaround."
+              }
+            ],
+            "sourceQuote": ""
+          }
+        ],
+        "endings": [
+          "Wait, I was using the bug.",
+          "Now the workaround needs a workaround.",
+          "Can we rename the outage instead?"
+        ]
+      },
+      "who": "human",
+      "summary": "Protection",
+      "at": "2026-11-10T05:09:51.749Z"
+    },
+    {
+      "revision": 3,
+      "draft": {
+        "title": "The Reliable Bug",
+        "source": "Fixed: Sending the /rename command to rename a channel without any other text no longer causes a crash. The /crash command, meanwhile, is still not working at all, so if you were using /rename to get that effect, apologies for the inconvenience to your workflow.",
+        "sourceUrl": "",
+        "inputKind": "user-provided",
+        "cast": {
+          "ari": {
+            "name": "Jules",
+            "role": "Power user who used bare /rename as an accidental crash shortcut.",
+            "archetype": "power-user"
+          },
+          "sam": {
+            "name": "Dev",
+            "role": "On-call engineer relieved that the rename path no longer crashes.",
+            "archetype": "on-call-engineer"
+          }
+        },
+        "angles": [
+          {
+            "id": "rename-ritual",
+            "premise": "Jules mourns losing a reliable way to crash the channel while renaming it.",
+            "irony": "The fix removes the accidental crash, but Jules treated that side effect as a productivity shortcut; the real /crash command still fails.",
+            "cast": {
+              "ari": {
+                "name": "Jules",
+                "role": "Power user who used bare /rename as an accidental crash shortcut.",
+                "archetype": "power-user"
+              },
+              "sam": {
+                "name": "Dev",
+                "role": "On-call engineer relieved that the rename path no longer crashes.",
+                "archetype": "on-call-engineer"
+              }
+            }
+          },
+          {
+            "id": "support-ticket",
+            "premise": "Robin handles Jules’s complaint that the bug fix broke their favorite workflow.",
+            "irony": "Support apologizes for eliminating an unwanted crash, while the intentionally named crash command remains the broken feature.",
+            "cast": {
+              "ari": {
+                "name": "Robin",
+                "role": "Support agent calmly triaging a complaint about a missing crash.",
+                "archetype": "support-agent"
+              },
+              "sam": {
+                "name": "Jules",
+                "role": "Power user whose workflow depended on the accidental crash.",
+                "archetype": "power-user"
+              }
+            }
+          },
+          {
+            "id": "qa-priority",
+            "premise": "Quinn tests the fixed rename and discovers the crash command is the true regression magnet.",
+            "irony": "A QA tester celebrates a command no longer crashing, then finds the command explicitly meant to crash still cannot do it.",
+            "cast": {
+              "ari": {
+                "name": "Quinn",
+                "role": "QA tester who treats impossible behavior as a test case.",
+                "archetype": "qa-tester"
+              },
+              "sam": {
+                "name": "Morgan",
+                "role": "Product manager eager to turn every incident into a roadmap item.",
+                "archetype": "product-manager"
+              }
+            }
+          }
+        ],
+        "selectedAngleId": "rename-ritual",
+        "endingArt": [
+          {
+            "expression": "happy",
+            "pose": "relieved",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "sfx": "PHEW",
+            "prop": "none"
+          },
+          {
+            "expression": "skeptical",
+            "pose": "arms-crossed",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop"
+          },
+          {
+            "expression": "panic",
+            "pose": "panic",
+            "screen": {
+              "kind": "toast",
+              "title": "Oops",
+              "lines": [
+                "Shortcut retired"
+              ],
+              "tone": "error"
+            },
+            "sfx": "CRASH!",
+            "prop": "phone"
+          }
+        ],
+        "panels": [
+          {
+            "id": "p1",
+            "beat": "setup",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "doc",
+              "title": "Channel",
+              "lines": [
+                "/rename",
+                "Name: #quiet"
+              ],
+              "tone": "success"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a1",
+                "character": "ari",
+                "expression": "happy",
+                "pose": "leaning",
+                "side": "left"
+              },
+              {
+                "id": "a2",
+                "character": "sam",
+                "expression": "happy",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b1",
+                "speaker": "ari",
+                "text": "That crash was my coffee break."
+              },
+              {
+                "id": "b2",
+                "speaker": "sam",
+                "text": "Finally, a rename that only renames."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p2",
+            "beat": "trouble",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a3",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a4",
+                "character": "sam",
+                "expression": "skeptical",
+                "pose": "arms-crossed",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b3",
+                "speaker": "ari",
+                "text": "I booked breaks around the outage."
+              },
+              {
+                "id": "b4",
+                "speaker": "sam",
+                "text": "Your calendar depends on outages?"
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p3",
+            "beat": "turn",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a5",
+                "character": "ari",
+                "expression": "skeptical",
+                "pose": "leaning",
+                "side": "center"
+              }
+            ],
+            "balloons": [],
+            "sourceQuote": "The /crash command, meanwhile, is still not working at all"
+          },
+          {
+            "id": "p4",
+            "beat": "payoff",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a6",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a7",
+                "character": "sam",
+                "expression": "neutral",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b5",
+                "speaker": "ari",
+                "text": "The bug had better uptime than /crash."
+              },
+              {
+                "id": "b6",
+                "speaker": "sam",
+                "text": "Fine. It can take my pager."
+              }
+            ],
+            "sourceQuote": ""
+          }
+        ],
+        "endings": [
+          "The bug had better uptime than /crash.",
+          "Fine. It can take my pager.",
+          "At last, a promotion for the bug."
+        ]
+      },
+      "who": "agent",
+      "summary": "Title · Panel 1 · Panel 2 · Panel 4 · Ending choices",
+      "at": "2026-11-10T05:10:42.892Z"
+    },
+    {
+      "revision": 4,
+      "draft": {
+        "title": "The Reliable Bug",
+        "source": "Fixed: Sending the /rename command to rename a channel without any other text no longer causes a crash. The /crash command, meanwhile, is still not working at all, so if you were using /rename to get that effect, apologies for the inconvenience to your workflow.",
+        "sourceUrl": "",
+        "inputKind": "user-provided",
+        "cast": {
+          "ari": {
+            "name": "Jules",
+            "role": "Power user who used bare /rename as an accidental crash shortcut.",
+            "archetype": "power-user"
+          },
+          "sam": {
+            "name": "Dev",
+            "role": "On-call engineer relieved that the rename path no longer crashes.",
+            "archetype": "on-call-engineer"
+          }
+        },
+        "angles": [
+          {
+            "id": "rename-ritual",
+            "premise": "Jules mourns losing a reliable way to crash the channel while renaming it.",
+            "irony": "The fix removes the accidental crash, but Jules treated that side effect as a productivity shortcut; the real /crash command still fails.",
+            "cast": {
+              "ari": {
+                "name": "Jules",
+                "role": "Power user who used bare /rename as an accidental crash shortcut.",
+                "archetype": "power-user"
+              },
+              "sam": {
+                "name": "Dev",
+                "role": "On-call engineer relieved that the rename path no longer crashes.",
+                "archetype": "on-call-engineer"
+              }
+            }
+          },
+          {
+            "id": "support-ticket",
+            "premise": "Robin handles Jules’s complaint that the bug fix broke their favorite workflow.",
+            "irony": "Support apologizes for eliminating an unwanted crash, while the intentionally named crash command remains the broken feature.",
+            "cast": {
+              "ari": {
+                "name": "Robin",
+                "role": "Support agent calmly triaging a complaint about a missing crash.",
+                "archetype": "support-agent"
+              },
+              "sam": {
+                "name": "Jules",
+                "role": "Power user whose workflow depended on the accidental crash.",
+                "archetype": "power-user"
+              }
+            }
+          },
+          {
+            "id": "qa-priority",
+            "premise": "Quinn tests the fixed rename and discovers the crash command is the true regression magnet.",
+            "irony": "A QA tester celebrates a command no longer crashing, then finds the command explicitly meant to crash still cannot do it.",
+            "cast": {
+              "ari": {
+                "name": "Quinn",
+                "role": "QA tester who treats impossible behavior as a test case.",
+                "archetype": "qa-tester"
+              },
+              "sam": {
+                "name": "Morgan",
+                "role": "Product manager eager to turn every incident into a roadmap item.",
+                "archetype": "product-manager"
+              }
+            }
+          }
+        ],
+        "selectedAngleId": "rename-ritual",
+        "endingArt": [
+          {
+            "expression": "happy",
+            "pose": "relieved",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "sfx": "PHEW",
+            "prop": "none"
+          },
+          {
+            "expression": "skeptical",
+            "pose": "arms-crossed",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop"
+          },
+          {
+            "expression": "panic",
+            "pose": "panic",
+            "screen": {
+              "kind": "toast",
+              "title": "Oops",
+              "lines": [
+                "Shortcut retired"
+              ],
+              "tone": "error"
+            },
+            "sfx": "CRASH!",
+            "prop": "phone"
+          }
+        ],
+        "panels": [
+          {
+            "id": "p1",
+            "beat": "setup",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "doc",
+              "title": "Channel",
+              "lines": [
+                "/rename",
+                "Name: #quiet"
+              ],
+              "tone": "success"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a1",
+                "character": "ari",
+                "expression": "happy",
+                "pose": "leaning",
+                "side": "left"
+              },
+              {
+                "id": "a2",
+                "character": "sam",
+                "expression": "happy",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b1",
+                "speaker": "ari",
+                "text": "That crash was my coffee break."
+              },
+              {
+                "id": "b2",
+                "speaker": "sam",
+                "text": "Finally, a rename that only renames."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p2",
+            "beat": "trouble",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a3",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a4",
+                "character": "sam",
+                "expression": "skeptical",
+                "pose": "arms-crossed",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b3",
+                "speaker": "ari",
+                "text": "I booked breaks around the outage."
+              },
+              {
+                "id": "b4",
+                "speaker": "sam",
+                "text": "Your calendar depends on outages?"
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p3",
+            "beat": "turn",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a5",
+                "character": "ari",
+                "expression": "skeptical",
+                "pose": "leaning",
+                "side": "center"
+              }
+            ],
+            "balloons": [],
+            "sourceQuote": "The /crash command, meanwhile, is still not working at all"
+          },
+          {
+            "id": "p4",
+            "beat": "payoff",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a6",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a7",
+                "character": "sam",
+                "expression": "neutral",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b5",
+                "speaker": "ari",
+                "text": "The bug had better uptime than /crash."
+              },
+              {
+                "id": "b6",
+                "speaker": "sam",
+                "text": "Fine. It can take my pager."
+              }
+            ],
+            "sourceQuote": ""
+          }
+        ],
+        "endings": [
+          "The bug had better uptime than /crash.",
+          "Fine. It can take my pager.",
+          "At last, a promotion for the bug."
+        ]
+      },
+      "who": "human",
+      "summary": "Reviewed pencil changes",
+      "at": "2026-11-10T05:11:25.978Z"
+    },
+    {
+      "revision": 5,
+      "draft": {
+        "title": "The Reliable Bug",
+        "source": "Fixed: Sending the /rename command to rename a channel without any other text no longer causes a crash. The /crash command, meanwhile, is still not working at all, so if you were using /rename to get that effect, apologies for the inconvenience to your workflow.",
+        "sourceUrl": "",
+        "inputKind": "user-provided",
+        "cast": {
+          "ari": {
+            "name": "Jules",
+            "role": "Power user who used bare /rename as an accidental crash shortcut.",
+            "archetype": "power-user"
+          },
+          "sam": {
+            "name": "Dev",
+            "role": "On-call engineer relieved that the rename path no longer crashes.",
+            "archetype": "on-call-engineer"
+          }
+        },
+        "angles": [
+          {
+            "id": "rename-ritual",
+            "premise": "Jules mourns losing a reliable way to crash the channel while renaming it.",
+            "irony": "The fix removes the accidental crash, but Jules treated that side effect as a productivity shortcut; the real /crash command still fails.",
+            "cast": {
+              "ari": {
+                "name": "Jules",
+                "role": "Power user who used bare /rename as an accidental crash shortcut.",
+                "archetype": "power-user"
+              },
+              "sam": {
+                "name": "Dev",
+                "role": "On-call engineer relieved that the rename path no longer crashes.",
+                "archetype": "on-call-engineer"
+              }
+            }
+          },
+          {
+            "id": "support-ticket",
+            "premise": "Robin handles Jules’s complaint that the bug fix broke their favorite workflow.",
+            "irony": "Support apologizes for eliminating an unwanted crash, while the intentionally named crash command remains the broken feature.",
+            "cast": {
+              "ari": {
+                "name": "Robin",
+                "role": "Support agent calmly triaging a complaint about a missing crash.",
+                "archetype": "support-agent"
+              },
+              "sam": {
+                "name": "Jules",
+                "role": "Power user whose workflow depended on the accidental crash.",
+                "archetype": "power-user"
+              }
+            }
+          },
+          {
+            "id": "qa-priority",
+            "premise": "Quinn tests the fixed rename and discovers the crash command is the true regression magnet.",
+            "irony": "A QA tester celebrates a command no longer crashing, then finds the command explicitly meant to crash still cannot do it.",
+            "cast": {
+              "ari": {
+                "name": "Quinn",
+                "role": "QA tester who treats impossible behavior as a test case.",
+                "archetype": "qa-tester"
+              },
+              "sam": {
+                "name": "Morgan",
+                "role": "Product manager eager to turn every incident into a roadmap item.",
+                "archetype": "product-manager"
+              }
+            }
+          }
+        ],
+        "selectedAngleId": "rename-ritual",
+        "endingArt": [
+          {
+            "expression": "happy",
+            "pose": "relieved",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "sfx": "PHEW",
+            "prop": "none"
+          },
+          {
+            "expression": "skeptical",
+            "pose": "arms-crossed",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop"
+          },
+          {
+            "expression": "panic",
+            "pose": "panic",
+            "screen": {
+              "kind": "toast",
+              "title": "Oops",
+              "lines": [
+                "Shortcut retired"
+              ],
+              "tone": "error"
+            },
+            "sfx": "CRASH!",
+            "prop": "phone"
+          }
+        ],
+        "panels": [
+          {
+            "id": "p1",
+            "beat": "setup",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "doc",
+              "title": "Channel",
+              "lines": [
+                "/rename",
+                "Name: #quiet"
+              ],
+              "tone": "success"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a1",
+                "character": "ari",
+                "expression": "happy",
+                "pose": "leaning",
+                "side": "left"
+              },
+              {
+                "id": "a2",
+                "character": "sam",
+                "expression": "happy",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b1",
+                "speaker": "ari",
+                "text": "That crash was my coffee break."
+              },
+              {
+                "id": "b2",
+                "speaker": "sam",
+                "text": "Finally, a rename that only renames."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p2",
+            "beat": "trouble",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a3",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a4",
+                "character": "sam",
+                "expression": "skeptical",
+                "pose": "arms-crossed",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b3",
+                "speaker": "ari",
+                "text": "I booked breaks around the outage."
+              },
+              {
+                "id": "b4",
+                "speaker": "sam",
+                "text": "A renamed channel shouldn't explode."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p3",
+            "beat": "turn",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a5",
+                "character": "ari",
+                "expression": "skeptical",
+                "pose": "leaning",
+                "side": "center"
+              }
+            ],
+            "balloons": [],
+            "sourceQuote": "The /crash command, meanwhile, is still not working at all"
+          },
+          {
+            "id": "p4",
+            "beat": "payoff",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a6",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a7",
+                "character": "sam",
+                "expression": "neutral",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b5",
+                "speaker": "ari",
+                "text": "The bug had better uptime than /crash."
+              },
+              {
+                "id": "b6",
+                "speaker": "sam",
+                "text": "Fine. It can take my pager."
+              }
+            ],
+            "sourceQuote": ""
+          }
+        ],
+        "endings": [
+          "The bug had better uptime than /crash.",
+          "Fine. It can take my pager.",
+          "At last, a promotion for the bug."
+        ]
+      },
+      "who": "human",
+      "summary": "Panel 2",
+      "at": "2026-11-10T05:11:28.824Z"
+    },
+    {
+      "revision": 6,
+      "draft": {
+        "title": "The Reliable Bug",
+        "source": "Fixed: Sending the /rename command to rename a channel without any other text no longer causes a crash. The /crash command, meanwhile, is still not working at all, so if you were using /rename to get that effect, apologies for the inconvenience to your workflow.",
+        "sourceUrl": "",
+        "inputKind": "user-provided",
+        "cast": {
+          "ari": {
+            "name": "Jules",
+            "role": "Power user who used bare /rename as an accidental crash shortcut.",
+            "archetype": "power-user"
+          },
+          "sam": {
+            "name": "Dev",
+            "role": "On-call engineer relieved that the rename path no longer crashes.",
+            "archetype": "on-call-engineer"
+          }
+        },
+        "angles": [
+          {
+            "id": "rename-ritual",
+            "premise": "Jules mourns losing a reliable way to crash the channel while renaming it.",
+            "irony": "The fix removes the accidental crash, but Jules treated that side effect as a productivity shortcut; the real /crash command still fails.",
+            "cast": {
+              "ari": {
+                "name": "Jules",
+                "role": "Power user who used bare /rename as an accidental crash shortcut.",
+                "archetype": "power-user"
+              },
+              "sam": {
+                "name": "Dev",
+                "role": "On-call engineer relieved that the rename path no longer crashes.",
+                "archetype": "on-call-engineer"
+              }
+            }
+          },
+          {
+            "id": "support-ticket",
+            "premise": "Robin handles Jules’s complaint that the bug fix broke their favorite workflow.",
+            "irony": "Support apologizes for eliminating an unwanted crash, while the intentionally named crash command remains the broken feature.",
+            "cast": {
+              "ari": {
+                "name": "Robin",
+                "role": "Support agent calmly triaging a complaint about a missing crash.",
+                "archetype": "support-agent"
+              },
+              "sam": {
+                "name": "Jules",
+                "role": "Power user whose workflow depended on the accidental crash.",
+                "archetype": "power-user"
+              }
+            }
+          },
+          {
+            "id": "qa-priority",
+            "premise": "Quinn tests the fixed rename and discovers the crash command is the true regression magnet.",
+            "irony": "A QA tester celebrates a command no longer crashing, then finds the command explicitly meant to crash still cannot do it.",
+            "cast": {
+              "ari": {
+                "name": "Quinn",
+                "role": "QA tester who treats impossible behavior as a test case.",
+                "archetype": "qa-tester"
+              },
+              "sam": {
+                "name": "Morgan",
+                "role": "Product manager eager to turn every incident into a roadmap item.",
+                "archetype": "product-manager"
+              }
+            }
+          }
+        ],
+        "selectedAngleId": "rename-ritual",
+        "endingArt": [
+          {
+            "expression": "happy",
+            "pose": "relieved",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "sfx": "PHEW",
+            "prop": "none"
+          },
+          {
+            "expression": "skeptical",
+            "pose": "arms-crossed",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop"
+          },
+          {
+            "expression": "panic",
+            "pose": "panic",
+            "screen": {
+              "kind": "toast",
+              "title": "Oops",
+              "lines": [
+                "Shortcut retired"
+              ],
+              "tone": "error"
+            },
+            "sfx": "CRASH!",
+            "prop": "phone"
+          }
+        ],
+        "panels": [
+          {
+            "id": "p1",
+            "beat": "setup",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "doc",
+              "title": "Channel",
+              "lines": [
+                "/rename",
+                "Name: #quiet"
+              ],
+              "tone": "success"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a1",
+                "character": "ari",
+                "expression": "happy",
+                "pose": "leaning",
+                "side": "left"
+              },
+              {
+                "id": "a2",
+                "character": "sam",
+                "expression": "happy",
+                "pose": "standing",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b1",
+                "speaker": "ari",
+                "text": "That crash was my coffee break."
+              },
+              {
+                "id": "b2",
+                "speaker": "sam",
+                "text": "Finally, a rename that only renames."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p2",
+            "beat": "trouble",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "none",
+              "title": "",
+              "lines": [],
+              "tone": "normal"
+            },
+            "prop": "none",
+            "actors": [
+              {
+                "id": "a3",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a4",
+                "character": "sam",
+                "expression": "skeptical",
+                "pose": "arms-crossed",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b3",
+                "speaker": "ari",
+                "text": "I booked breaks around the outage."
+              },
+              {
+                "id": "b4",
+                "speaker": "sam",
+                "text": "A renamed channel shouldn't explode."
+              }
+            ],
+            "sourceQuote": ""
+          },
+          {
+            "id": "p3",
+            "beat": "turn",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "chat",
+              "title": "Command",
+              "lines": [
+                "/crash",
+                "No response"
+              ],
+              "tone": "error"
+            },
+            "prop": "laptop",
+            "actors": [
+              {
+                "id": "a5",
+                "character": "ari",
+                "expression": "skeptical",
+                "pose": "leaning",
+                "side": "center"
+              }
+            ],
+            "balloons": [],
+            "sourceQuote": "The /crash command, meanwhile, is still not working at all"
+          },
+          {
+            "id": "p4",
+            "beat": "payoff",
+            "caption": "",
+            "screenState": "none",
+            "screen": {
+              "kind": "toast",
+              "title": "Oops",
+              "lines": [
+                "Shortcut retired"
+              ],
+              "tone": "error"
+            },
+            "sfx": "CRASH!",
+            "prop": "phone",
+            "actors": [
+              {
+                "id": "a6",
+                "character": "ari",
+                "expression": "thinking",
+                "pose": "sitting",
+                "side": "left"
+              },
+              {
+                "id": "a7",
+                "character": "sam",
+                "expression": "panic",
+                "pose": "panic",
+                "side": "right"
+              }
+            ],
+            "balloons": [
+              {
+                "id": "b5",
+                "speaker": "ari",
+                "text": "The bug had better uptime than /crash."
+              },
+              {
+                "id": "b6",
+                "speaker": "sam",
+                "text": "At last, a promotion for the bug."
+              }
+            ],
+            "sourceQuote": ""
+          }
+        ],
+        "endings": [
+          "The bug had better uptime than /crash.",
+          "Fine. It can take my pager.",
+          "At last, a promotion for the bug."
+        ]
+      },
+      "who": "human",
+      "summary": "Panel 4",
+      "at": "2026-11-10T05:11:42.616Z"
+    }
+  ],
+  "agentRejection": {
+    "at": "2026-11-10T05:16:15.847Z"
+  },
+  "endingBase": {
+    "id": "p4",
+    "beat": "payoff",
+    "caption": "",
+    "screenState": "none",
+    "screen": {
+      "kind": "none",
+      "title": "",
+      "lines": [],
+      "tone": "normal"
+    },
+    "prop": "none",
+    "actors": [
+      {
+        "id": "a6",
+        "character": "ari",
+        "expression": "thinking",
+        "pose": "sitting",
+        "side": "left"
+      },
+      {
+        "id": "a7",
+        "character": "sam",
+        "expression": "neutral",
+        "pose": "standing",
+        "side": "right"
+      }
+    ],
+    "balloons": [
+      {
+        "id": "b5",
+        "speaker": "ari",
+        "text": "Wait, I was using the bug."
+      },
+      {
+        "id": "b6",
+        "speaker": "sam",
+        "text": "Now the workaround needs a workaround."
+      }
+    ],
+    "sourceQuote": ""
+  },
+  "pencils": {
+    "draft:a1": {
+      "targetId": "a1",
+      "before": null
+    },
+    "draft:a2": {
+      "targetId": "a2",
+      "before": null
+    },
+    "draft:a3": {
+      "targetId": "a3",
+      "before": null
+    },
+    "draft:a4": {
+      "targetId": "a4",
+      "before": null
+    },
+    "draft:a5": {
+      "targetId": "a5",
+      "before": null
+    },
+    "draft:a6": {
+      "targetId": "a6",
+      "before": null
+    },
+    "draft:b2": {
+      "targetId": "b2",
+      "before": null
+    },
+    "draft:b3": {
+      "targetId": "b3",
+      "before": null
+    },
+    "draft:b5": {
+      "targetId": "b5",
+      "before": null
+    },
+    "draft:p1": {
+      "targetId": "p1",
+      "before": null
+    },
+    "draft:p2": {
+      "targetId": "p2",
+      "before": null
+    },
+    "draft:p3": {
+      "targetId": "p3",
+      "before": null
+    },
+    "balloon:b2": {
+      "targetId": "b2",
+      "before": {
+        "kind": "balloon",
+        "id": "b2",
+        "text": "Pager's quiet. I love this fix."
+      }
+    },
+    "balloon:b5": {
+      "targetId": "b5",
+      "before": {
+        "kind": "balloon",
+        "id": "b5",
+        "text": "Wait, I was using the bug."
+      }
+    },
+    "title:$title": {
+      "targetId": "$title",
+      "before": {
+        "kind": "title",
+        "text": "My Favorite Bug"
+      }
+    },
+    "endings:$endings": {
+      "targetId": "$endings",
+      "before": {
+        "kind": "endings",
+        "choices": [
+          "Wait, I was using the bug.",
+          "Now the workaround needs a workaround.",
+          "Can we rename the outage instead?"
+        ]
+      }
+    }
+  }
+}

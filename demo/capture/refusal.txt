@@ -1,0 +1,5 @@
+Claude Code attempted update-strip on the protected panel 1 balloon at expected revision 6. The actual MCP tool returned:
+
+Error: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)
+
+A separate subsequent get-strip action read confirmed revision 6, protectedIds ["b1"], and the unchanged text: “That crash was my coffee break.”

@@ -1,0 +1,114 @@
+[
+  {
+    "t_start": 0,
+    "t_end": 7.271,
+    "step": "Library",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 7.271,
+    "t_end": 12.814,
+    "step": "New strip",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 12.814,
+    "t_end": 22.551,
+    "step": "Paste source",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 22.551,
+    "t_end": 24.457,
+    "step": "Find the joke",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 24.457,
+    "t_end": 49.514,
+    "step": "Angle generation and hold",
+    "note": "Real agent returned three angles; includes hold for inspection",
+    "waiting": true
+  },
+  {
+    "t_start": 49.514,
+    "t_end": 57.029,
+    "step": "Choose angle 01",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 57.029,
+    "t_end": 64.91,
+    "step": "Draft this angle",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 64.91,
+    "t_end": 133.315,
+    "step": "Draft generation and hold",
+    "note": "Real agent draft; one internal action failed before successful create",
+    "waiting": true
+  },
+  {
+    "t_start": 133.315,
+    "t_end": 158.665,
+    "step": "Edit and protect line",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 158.665,
+    "t_end": 187.909,
+    "step": "Ask agent: Funnier on panel 2",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 187.909,
+    "t_end": 243.481,
+    "step": "Revision generation and hold",
+    "note": "Real Funnier request revised multiple fields; protected line unchanged",
+    "waiting": true
+  },
+  {
+    "t_start": 243.481,
+    "t_end": 255.498,
+    "step": "Ink one change and erase another",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 255.498,
+    "t_end": 269.48,
+    "step": "Choose different ending",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 269.48,
+    "t_end": 272.424,
+    "step": "History",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 272.424,
+    "t_end": 334.789,
+    "step": "Export and download PNG",
+    "note": "",
+    "waiting": false
+  },
+  {
+    "t_start": 334.789,
+    "t_end": 336.73,
+    "step": "Hold after download",
+    "note": "Uncut end of recording.",
+    "waiting": false
+  }
+]

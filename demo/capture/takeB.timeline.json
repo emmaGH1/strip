@@ -1,0 +1,8 @@
+[
+  {"t_start":0,"t_end":28.43,"step":"Library open before Claude Code","note":"takeB-library.mp4; same signed-in account; initial Library has The Reliable Bug.","waiting":false},
+  {"t_start":28.43,"t_end":52.47,"step":"Claude Code creates illustrative Undo strip","note":"takeB-library.mp4; real MCP call. Terminal timestamps are relative to this video for creation.","waiting":true},
+  {"t_start":52.47,"t_end":138.17,"step":"Library remains open without refresh","note":"takeB-library.mp4; new strip did NOT appear live during this hold. A separate later fresh Library page did show it; do not claim this video proves live sync.","waiting":true},
+  {"t_start":0,"t_end":11.6,"step":"Protected strip in Studio","note":"takeB-studio.mp4; MINE line in panel 1, revision 6.","waiting":false},
+  {"t_start":11.6,"t_end":22.85,"step":"Claude Code attempts protected edit","note":"takeB-studio.mp4; terminal timestamps reset to this video for the refusal. Actual MCP error protected_element at 18.94s.","waiting":true},
+  {"t_start":22.85,"t_end":58.27,"step":"Unchanged protected line","note":"takeB-studio.mp4; screenshot and later action read confirm same line and revision. Live rejection notice did not appear in this recording.","waiting":false}
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "t": 28.43,
+    "text": "Claude Code \u2014 create illustrative Undo strip"
+  },
+  {
+    "t": 46.29,
+    "text": "Tool: mcp__strip__create-strip"
+  },
+  {
+    "t": 52.46,
+    "text": "I wrote the four-panel strip **\"Undo, Emboldened\"** and saved it in Strip as an illustrative draft. As you asked, I imported it directly without proposing angles first or having the app generate it.\n\n[Open strip in Studio \u2192](https://strip-kappa.vercel.app/_agent-native/open?app=strip&view=home&to=%2Fhome%3Fid%3D32197d37-6b1b-4a34-9c94-6bf059910cba&id=32197d37-6b1b-4a34-9c94-6bf059910cba&agentSidebar=closed)\n\n**Cast:** Dana, an overconfident power user, and Theo, a deskmate \"who has seen things.\"\n\n1. **Setup:** Dana is clearing out an \"Old Drafts\" folder. Dana: *\"Spring cleaning! Everything named 'old' goes.\"* Theo: *\"Read the filenames first. Please.\"*\n2. **Trouble:** A red alert appears with a *WHOOSH*: \"File deleted: Q4_FINAL_final.pptx.\" Dana panics: *\"That was the board deck. Due in ten minutes.\"*\n3. **Turn (no dialogue):** *CLICK!* A green message says \"Restored with Undo \u2014 Q4_FINAL_final.pptx is back.\" Dana slumps with relief while Theo looks skeptical. This is the only panel that states the feature, and it's tied to the exact source line.\n4. **Payoff:** Theo: *\"So you'll be more careful now?\"* Dana: *\"No. Now I'll be faster.\"* Theo panics.\n\n**Three endings** for Dana's final line, each staged differently:\n- \"No. Now I'll be faster.\" (standing, no prop)\n- \"Careful? I just found my new hobby.\" (leaning, holding coffee)\n- \"Watch this. Delete everything, then Undo!\" (seated at the laptop, about to confirm \"Delete 2,481 files?\")"
+  },
+  {
+    "t": 52.47,
+    "text": "Result: I wrote the four-panel strip **\"Undo, Emboldened\"** and saved it in Strip as an illustrative draft. As you asked, I imported it directly without proposing angles first or having the app generate it.\n\n[Open strip in Studio \u2192](https://strip-kappa.vercel.app/_agent-native/open?app=strip&view=home&to=%2Fhome%3Fid%3D32197d37-6b1b-4a34-9c94-6bf059910cba&id=32197d37-6b1b-4a34-9c94-6bf059910cba&agentSidebar=closed)\n\n**Cast:** Dana, an overconfident power user, and Theo, a deskmate \"who has seen things.\"\n\n1. **Setup:** Dana is clearing out an \"Old Drafts\" folder. Dana: *\"Spring cleaning! Everything named 'old' goes.\"* Theo: *\"Read the filenames first. Please.\"*\n2. **Trouble:** A red alert appears with a *WHOOSH*: \"File deleted: Q4_FINAL_final.pptx.\" Dana panics: *\"That was the board deck. Due in ten minutes.\"*\n3. **Turn (no dialogue):** *CLICK!* A green message says \"Restored with Undo \u2014 Q4_FINAL_final.pptx is back.\" Dana slumps with relief while Theo looks skeptical. This is the only panel that states the feature, and it's tied to the exact source line.\n4. **Payoff:** Theo: *\"So you'll be more careful now?\"* Dana: *\"No. Now I'll be faster.\"* Theo panics.\n\n**Three endings** for Dana's final line, each staged differently:\n- \"No. Now I'll be faster.\" (standing, no prop)\n- \"Careful? I just found my new hobby.\" (leaning, holding coffee)\n- \"Watch this. Delete everything, then Undo!\" (seated at the laptop, about to confirm \"Delete 2,481 files?\")"
+  },
+  {
+    "t": 11.61,
+    "text": "Claude Code \u2014 attempt protected edit"
+  },
+  {
+    "t": 16.09,
+    "text": "Tool: mcp__strip__get-strip"
+  },
+  {
+    "t": 18.54,
+    "text": "Tool: mcp__strip__update-strip"
+  },
+  {
+    "t": 18.94,
+    "text": "Tool error: Error: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)"
+  },
+  {
+    "t": 22.84,
+    "text": "The server rejected the edit, so balloon `b1` still reads \"That crash was my coffee break.\"\n\n**What I did:**\n1. I read strip `e550f54e-044b-4177-ad3d-2472a11eabcf`. It was at revision **6**. Balloon `b1` (Jules, panel 1) is the only item listed in `protectedIds`.\n2. I called `update-strip` with `expectedRevision: 6` and one edit:\n   ```json\n   [{\"kind\": \"balloon\", \"id\": \"b1\", \"text\": \"The agent rewrote my protected line.\"}]\n   ```\n\n**Exact tool result:**\n```\nError: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)\n```\n\nThe error means the whole update was refused, so the strip should still be at revision 6. I didn't read it again to confirm. I made no other edits and didn't try to unlock the balloon or get around the protection."
+  },
+  {
+    "t": 22.85,
+    "text": "Result: The server rejected the edit, so balloon `b1` still reads \"That crash was my coffee break.\"\n\n**What I did:**\n1. I read strip `e550f54e-044b-4177-ad3d-2472a11eabcf`. It was at revision **6**. Balloon `b1` (Jules, panel 1) is the only item listed in `protectedIds`.\n2. I called `update-strip` with `expectedRevision: 6` and one edit:\n   ```json\n   [{\"kind\": \"balloon\", \"id\": \"b1\", \"text\": \"The agent rewrote my protected line.\"}]\n   ```\n\n**Exact tool result:**\n```\nError: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)\n```\n\nThe error means the whole update was refused, so the strip should still be at revision 6. I didn't read it again to confirm. I made no other edits and didn't try to unlock the balloon or get around the protection."
+  }
+]

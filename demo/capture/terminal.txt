@@ -1,0 +1,66 @@
+[28.43s] Claude Code — create illustrative Undo strip
+[46.29s] Tool: mcp__strip__create-strip
+[52.46s] I wrote the four-panel strip **"Undo, Emboldened"** and saved it in Strip as an illustrative draft. As you asked, I imported it directly without proposing angles first or having the app generate it.
+
+[Open strip in Studio →](https://strip-kappa.vercel.app/_agent-native/open?app=strip&view=home&to=%2Fhome%3Fid%3D32197d37-6b1b-4a34-9c94-6bf059910cba&id=32197d37-6b1b-4a34-9c94-6bf059910cba&agentSidebar=closed)
+
+**Cast:** Dana, an overconfident power user, and Theo, a deskmate "who has seen things."
+
+1. **Setup:** Dana is clearing out an "Old Drafts" folder. Dana: *"Spring cleaning! Everything named 'old' goes."* Theo: *"Read the filenames first. Please."*
+2. **Trouble:** A red alert appears with a *WHOOSH*: "File deleted: Q4_FINAL_final.pptx." Dana panics: *"That was the board deck. Due in ten minutes."*
+3. **Turn (no dialogue):** *CLICK!* A green message says "Restored with Undo — Q4_FINAL_final.pptx is back." Dana slumps with relief while Theo looks skeptical. This is the only panel that states the feature, and it's tied to the exact source line.
+4. **Payoff:** Theo: *"So you'll be more careful now?"* Dana: *"No. Now I'll be faster."* Theo panics.
+
+**Three endings** for Dana's final line, each staged differently:
+- "No. Now I'll be faster." (standing, no prop)
+- "Careful? I just found my new hobby." (leaning, holding coffee)
+- "Watch this. Delete everything, then Undo!" (seated at the laptop, about to confirm "Delete 2,481 files?")
+[52.47s] Result: I wrote the four-panel strip **"Undo, Emboldened"** and saved it in Strip as an illustrative draft. As you asked, I imported it directly without proposing angles first or having the app generate it.
+
+[Open strip in Studio →](https://strip-kappa.vercel.app/_agent-native/open?app=strip&view=home&to=%2Fhome%3Fid%3D32197d37-6b1b-4a34-9c94-6bf059910cba&id=32197d37-6b1b-4a34-9c94-6bf059910cba&agentSidebar=closed)
+
+**Cast:** Dana, an overconfident power user, and Theo, a deskmate "who has seen things."
+
+1. **Setup:** Dana is clearing out an "Old Drafts" folder. Dana: *"Spring cleaning! Everything named 'old' goes."* Theo: *"Read the filenames first. Please."*
+2. **Trouble:** A red alert appears with a *WHOOSH*: "File deleted: Q4_FINAL_final.pptx." Dana panics: *"That was the board deck. Due in ten minutes."*
+3. **Turn (no dialogue):** *CLICK!* A green message says "Restored with Undo — Q4_FINAL_final.pptx is back." Dana slumps with relief while Theo looks skeptical. This is the only panel that states the feature, and it's tied to the exact source line.
+4. **Payoff:** Theo: *"So you'll be more careful now?"* Dana: *"No. Now I'll be faster."* Theo panics.
+
+**Three endings** for Dana's final line, each staged differently:
+- "No. Now I'll be faster." (standing, no prop)
+- "Careful? I just found my new hobby." (leaning, holding coffee)
+- "Watch this. Delete everything, then Undo!" (seated at the laptop, about to confirm "Delete 2,481 files?")
+[11.61s] Claude Code — attempt protected edit
+[16.09s] Tool: mcp__strip__get-strip
+[18.54s] Tool: mcp__strip__update-strip
+[18.94s] Tool error: Error: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)
+[22.84s] The server rejected the edit, so balloon `b1` still reads "That crash was my coffee break."
+
+**What I did:**
+1. I read strip `e550f54e-044b-4177-ad3d-2472a11eabcf`. It was at revision **6**. Balloon `b1` (Jules, panel 1) is the only item listed in `protectedIds`.
+2. I called `update-strip` with `expectedRevision: 6` and one edit:
+   ```json
+   [{"kind": "balloon", "id": "b1", "text": "The agent rewrote my protected line."}]
+   ```
+
+**Exact tool result:**
+```
+Error: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)
+```
+
+The error means the whole update was refused, so the strip should still be at revision 6. I didn't read it again to confirm. I made no other edits and didn't try to unlock the balloon or get around the protection.
+[22.85s] Result: The server rejected the edit, so balloon `b1` still reads "That crash was my coffee break."
+
+**What I did:**
+1. I read strip `e550f54e-044b-4177-ad3d-2472a11eabcf`. It was at revision **6**. Balloon `b1` (Jules, panel 1) is the only item listed in `protectedIds`.
+2. I called `update-strip` with `expectedRevision: 6` and one edit:
+   ```json
+   [{"kind": "balloon", "id": "b1", "text": "The agent rewrote my protected line."}]
+   ```
+
+**Exact tool result:**
+```
+Error: This contribution is protected by the human. Leave it unchanged and revise other objects. (errorCode: protected_element)
+```
+
+The error means the whole update was refused, so the strip should still be at revision 6. I didn't read it again to confirm. I made no other edits and didn't try to unlock the balloon or get around the protection.
