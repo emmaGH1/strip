@@ -29,6 +29,8 @@ ln -s "$PWD/node_modules" "$stage/node_modules"
   AGENT_NATIVE_VERCEL_CRON_SCHEDULE='0 9 * * *' NITRO_PRESET=vercel pnpm build
 )
 test -f "$stage/.vercel/output/config.json"
+node scripts/verify-vercel-function.mjs \
+  "$stage/.vercel/output/functions/__server.func/.vc-config.json"
 mkdir -p .vercel
 rm -rf .vercel/output
 cp -a "$stage/.vercel/output" .vercel/output
